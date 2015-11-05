@@ -1,6 +1,7 @@
 module.exports = {
 	entry : {
 		home : "./entry/home",
+		info : "./entry/info",
 		product : "./entry/product"
 	},
 	output : {

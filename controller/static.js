@@ -18,8 +18,8 @@ module.exports = function(router, react, reactDOMServer, Util){
 		.route("/infocenter")
 		.get(function(req, res, next){
 			res.render("./index", {
-				style : ["/css/infocenter.css"],
-				script : ["/js/infocenter.js"],
+				style : ["/css/info.css"],
+				script : ["/js/info.js"],
 				title : "消息中心",
 				page : Util.getPage({
 					react : react,
