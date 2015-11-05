@@ -11,23 +11,23 @@ var Page  = React.createClass({
 				<Banner data={
 					[
 						{
-							href : "/",
+							href : "/activity/1",
 							imgSrc : "/images/banner/1.png"
 						},
 						{
-							href : "/",
+							href : "/activity/2",
 							imgSrc : "/images/banner/2.png"
 						},
 						{
-							href : "/",
+							href : "/activity/3",
 							imgSrc : "/images/banner/3.png"
 						},
 						{
-							href : "/",
+							href : "/activity/4",
 							imgSrc : "/images/banner/4.png"
 						},
 						{
-							href : "/",
+							href : "/activity/5",
 							imgSrc : "/images/banner/5.png"
 						}
 					]
