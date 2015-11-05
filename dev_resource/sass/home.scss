@@ -1,1 +1,31 @@
 @import "base";
+header{
+	overflow:hidden;
+	.container{
+		width:96rem;
+		-webkit-animation:banner 30s cubic-bezier(1, 0, .5, 0) infinite;
+		a{
+			float:left;
+			display:block;
+			width:16rem;
+			height:6rem;
+		}
+	}
+}
+@-webkit-keyframes banner{
+	0%{
+		-webkit-transform:translateX(0);
+	}
+	25%{
+		-webkit-transform:translateX(-16rem);
+	}
+	50%{
+		-webkit-transform:translateX(-32rem);
+	}
+	75%{
+		-webkit-transform:translateX(-48rem);
+	}
+	100%{
+		-webkit-transform:translateX(-64rem);
+	}
+}

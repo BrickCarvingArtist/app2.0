@@ -1,14 +1,37 @@
 @import "variable";
 @import "reset";
-body > div{
-	position:relative;
+body > div, header, footer{
 	float:left;
 	width:16rem;
 }
-.shortcut{
+.icon48{
+	display:block;
+	width:1.2rem;
+	height:1.2rem;
+}
+footer{
 	position:fixed;
 	bottom:0;
 	height:3rem;
 	background-color:white;
 	border-top:.025rem solid $grey;
+	a{
+		float:left;
+		display:block;
+		width:4rem;
+		height:100%;
+		text-align:center;
+		i{
+			margin:.5rem auto 0;
+		}
+		span{
+			font-size:.6rem;
+			color:$darkGrey;
+		}
+	}
+	a.current{
+		span{
+			color:$orange;
+		}
+	}
 }
