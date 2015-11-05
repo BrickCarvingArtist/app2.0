@@ -13,7 +13,10 @@ module.exports = {
 		loaders : [
 			{
 				test : /\.js/,
-				loader : "babel"
+				loaders : [
+					"jsx",
+					"babel"
+				]
 			}
 		]
 	},

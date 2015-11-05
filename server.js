@@ -2,9 +2,12 @@ var express = require("express"),
 	path = require("path"),
 	bodyParser = require("body-parser"),
 	compression = require("compression"),
+	react = require("react"),
+	reactDOMServer = require("react-dom/server"),
 	port = process.env.PORT || 8080,
 	app = express(),
-	router = express.Router();
+	router = express.Router(),
+	Util = require("./dev_resource/pack/util");
 app.set("views", "./view");
 app.set("view engine", "jade");
 app.use(compression(9));
@@ -18,6 +21,6 @@ app.use(express.static(path.join(__dirname, "./resource"), {
 app.use(function(req, res, next){
 	next();
 });
-app.use(require("./controller/static")(router));
+app.use(require("./controller/static")(router, react, reactDOMServer, Util));
 app.listen(port);
 console.log("server started on port " + port);

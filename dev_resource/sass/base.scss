@@ -1,2 +1,14 @@
 @import "variable";
 @import "reset";
+body > div{
+	position:relative;
+	float:left;
+	width:16rem;
+}
+.shortcut{
+	position:fixed;
+	bottom:0;
+	height:3rem;
+	background-color:white;
+	border-top:.025rem solid $grey;
+}
