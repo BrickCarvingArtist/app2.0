@@ -40,7 +40,27 @@ module.exports = function(router, react, reactDOMServer, Util){
 				]
 			});
 		});
-	//router
+	router
+		.route("/api/getproduct")
+		.get(function(req, res, next){
+			res.json({
+				data : [
+					{
+						title : "新手专享39号",
+						scale : 200000,
+						rate : 0.095,
+						term : 30
+					},
+					{
+						title : "周一见12号",
+						scale : 200000,
+						rate : 0.095,
+						term : 30
+					}
+				]
+			});
+		});
+	//route
 	router
 		.route("/")
 		.get(function(req, res, next){
@@ -48,6 +68,16 @@ module.exports = function(router, react, reactDOMServer, Util){
 				style : ["/css/home.css"],
 				script : ["/js/home.js"],
 				title : "首页",
+				page : "loading..."
+			});
+		});
+	router
+		.route("/product")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/product.css"],
+				script : ["/js/product.js"],
+				title : "理财产品",
 				page : "loading..."
 			});
 		});
