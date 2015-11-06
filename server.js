@@ -6,6 +6,7 @@ var express = require("express"),
 	reactDOMServer = require("react-dom/server"),
 	port = process.env.PORT || 8080,
 	app = express(),
+	request = require("request"),
 	router = express.Router(),
 	Util = require("./dev_resource/pack/util");
 app.set("views", "./view");
@@ -21,6 +22,6 @@ app.use(express.static(path.join(__dirname, "./resource"), {
 app.use(function(req, res, next){
 	next();
 });
-app.use(require("./controller/static")(router, react, reactDOMServer, Util));
+app.use(require("./controller/static")(request, router, react, reactDOMServer, Util));
 app.listen(port);
 console.log("server started on port " + port);

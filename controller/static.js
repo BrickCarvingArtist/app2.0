@@ -1,4 +1,4 @@
-module.exports = function(router, react, reactDOMServer, Util){
+module.exports = function(request, router, react, reactDOMServer, Util){
 	//api
 	router
 		.route("/api/getinfo")
@@ -74,11 +74,13 @@ module.exports = function(router, react, reactDOMServer, Util){
 	router
 		.route("/product")
 		.get(function(req, res, next){
-			res.render("./index", {
-				style : ["/css/product.css"],
-				script : ["/js/product.js"],
-				title : "理财产品",
-				page : "loading..."
+			request("http://www.xilanlicai.com/api/getproducts/56", function(err, response, body){
+				res.render("./index", {
+					style : ["/css/product.css"],
+					script : ["/js/product.js"],
+					title : "理财产品",
+					page : body
+				});
 			});
 		});
 	router
