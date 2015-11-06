@@ -52,6 +52,7 @@ var Info = React.createClass({
 		window.addEventListener("popstate", function(e){
 			init();
 		}, 0);
+		document.title = this.state.title;
 		document.body.style.backgroundColor = "white";
 		React.render(
 			<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={this.state.detail}/>,
@@ -104,6 +105,7 @@ function init(){
 	$.ajax({
 		url : "/api/getinfo",
 		success : function(data){
+			document.title = "消息中心";
 			document.body.style.backgroundColor = "rgb(244, 244, 244)";
 			React.render(
 				<Page data={data.data} />,
