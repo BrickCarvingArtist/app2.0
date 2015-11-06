@@ -69,11 +69,12 @@ var Util = {
 			reactDOMServer = option.reactDOMServer,
 			req = option.req,
 			main = option.main;
-			// foot = reactDOMServer.renderToString(react.createFactory(Foot)({}));
 		return main;
 	},
 	setRem : function(){
-		document.documentElement.style.fontSize = window.innerWidth / 16 + "px";
+		window.onload = window.onresize = function(){
+			document.documentElement.style.fontSize = window.innerWidth / 16 + "px";
+		}
 	}
 };
 module.exports = Util;

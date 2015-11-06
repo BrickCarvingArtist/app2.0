@@ -1,4 +1,6 @@
-var React = require("react");
+var React = require("react"),
+	Util = require("../pack/util");
+Util.setRem();
 var Info = React.createClass({
 	getInitialState : function(){
 		return {
@@ -51,25 +53,25 @@ React.render(
 			{
 				status : 1,
 				title : "标题",
-				summary : "简介",
+				summary : "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
 				time : "2015-11-05"
 			},
 			{
 				status : 0,
 				title : "标题",
-				summary : "简介",
+				summary : "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
 				time : "2015-11-05"
 			},
 			{
 				status : 0,
 				title : "标题",
-				summary : "简介",
+				summary : "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
 				time : "2015-11-05"
 			},
 			{
 				status : 1,
 				title : "标题",
-				summary : "简介",
+				summary : "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
 				time : "2015-11-05"
 			}
 		]

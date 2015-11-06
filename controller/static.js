@@ -10,13 +10,14 @@ module.exports = function(router, react, reactDOMServer, Util){
 					react : react,
 					reactDOMServer : reactDOMServer,
 					req : req,
-					main : "首页"
+					main : ""
 				})
 			});
 		});
 	router
 		.route("/infocenter")
 		.get(function(req, res, next){
+			// page = reactDOMServer.renderToString(react.createFactory(Foot)({}));
 			res.render("./index", {
 				style : ["/css/info.css"],
 				script : ["/js/info.js"],
@@ -25,7 +26,7 @@ module.exports = function(router, react, reactDOMServer, Util){
 					react : react,
 					reactDOMServer : reactDOMServer,
 					req : req,
-					main : "消息中心"
+					main : ""
 				})
 			});
 		});

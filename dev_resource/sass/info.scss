@@ -1,2 +1,54 @@
 @import "variable";
 @import "base";
+body{
+	background-color:$lightGrey;
+}
+section{
+	margin-bottom:.5rem;
+	padding:1.25rem 1.375rem 0;
+	width:16rem;
+	height:6.25rem;
+	background-color:white;
+	border-bottom:.025rem solid $grey;
+	box-shadow:0 .025rem .025rem 0 $grey;
+	h1{
+		height:1rem;
+		overflow:hidden;
+		font-size:.75rem;
+		font-weight:bold;
+		line-height:1rem;
+		text-overflow:ellipsis;
+	}
+	h1:before{
+		margin-right:.5rem;
+		content:"\2022";
+		font-size:1rem;
+		font-weight:bold;
+		color:$grey;
+	}
+	p{
+		margin-top:.45rem;
+		font-size:.6rem;
+		line-height:.8rem;
+		color:$darkGrey;
+		overflow:hidden;
+		text-overflow:ellipsis;
+		display:-webkit-box;
+		-webkit-box-orient:vertical;
+		-webkit-line-clamp:2;
+	}
+	span{
+		float:right;
+		margin-top:.3rem;
+		font-size:.5rem;
+		color:$grey;
+	}
+}
+section.unread{
+	h1:before{
+		color:$orange;
+	}
+	span{
+		color:$orange;
+	}
+}
