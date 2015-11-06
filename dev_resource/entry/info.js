@@ -1,18 +1,66 @@
 var React = require("react"),
 	Util = require("../pack/util");
 Util.setRem();
-var Info = React.createClass({
+var InfoDetail = React.createClass({
 	getInitialState : function(){
 		return {
-			status : this.props.status,
 			title : this.props.title,
-			summary : this.props.summary,
-			time : this.props.time
+			time : this.props.time,
+			source : this.props.source,
+			detail : this.props.detail
+		};
+	},
+	checkMarkup : function(){
+		return {
+			__html : this.state.detail
 		};
 	},
 	render : function(){
 		return (
-			<section className={this.state.status ? "unread" : ""}>
+			<section className="detail">
+				<h1>
+					{this.state.title}
+				</h1>
+				<h2>
+					{"来源:" + this.state.source}
+				</h2>
+				<div className="detail" dangerouslySetInnerHTML={this.checkMarkup()}></div>
+				<span>
+					{this.state.time}
+				</span>
+			</section>
+		);
+	}
+});
+var Info = React.createClass({
+	getInitialState : function(){
+		return {
+			index : this.props.index,
+			status : this.props.status,
+			title : this.props.title,
+			summary : this.props.summary,
+			detail : this.props.detail,
+			source : this.props.source,
+			time : this.props.time
+		};
+	},
+	handleClick : function(){
+		var body = document.body;
+		if(!Util.QueryString("index")){
+			window.history.pushState({}, this.state.title, "?index=" + this.state.index);
+		}
+		window.addEventListener("popstate", function(e){
+			init();
+		}, 0);
+		document.body.style.backgroundColor = "white";
+		React.render(
+			<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={this.state.detail}/>,
+			body
+		);
+	},
+	render : function(){
+		return (
+			<section className={this.state.status ? "unread" : ""} onClick={this.handleClick}>
 				<h1>
 					{this.state.title}
 				</h1>
@@ -32,12 +80,17 @@ var	Page = React.createClass({
 			data : this.props.data
 		};
 	},
+	componentDidMount : function(){
+		if(Util.QueryString("index")){
+			this.refs["info" + Util.QueryString("index")].getDOMNode().click();
+		}
+	},
 	render : function(){
 		var lists = [],
 			data = this.state.data;
-		data.forEach(function(list){
+		data.forEach(function(list, index){
 			lists.push(
-				<Info status={list.status} title={list.title} summary={list.summary} time={list.time} />
+				<Info index={index + 1} status={list.status} title={list.title} summary={list.summary} detail={list.detail} source={list.source} time={list.time} ref={"info" + (index + 1)}/>
 			);
 		});
 		return (
@@ -47,34 +100,16 @@ var	Page = React.createClass({
 		);
 	}
 });
-React.render(
-	<Page data={
-		[
-			{
-				status : 1,
-				title : "标题",
-				summary : "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-				time : "2015-11-05"
-			},
-			{
-				status : 0,
-				title : "标题",
-				summary : "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-				time : "2015-11-05"
-			},
-			{
-				status : 0,
-				title : "标题",
-				summary : "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-				time : "2015-11-05"
-			},
-			{
-				status : 1,
-				title : "标题",
-				summary : "简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介",
-				time : "2015-11-05"
-			}
-		]
-	} />,
-	document.body
-);
+function init(){
+	$.ajax({
+		url : "/api/getinfo",
+		success : function(data){
+			document.body.style.backgroundColor = "rgb(244, 244, 244)";
+			React.render(
+				<Page data={data.data} />,
+				document.body
+			);
+		}
+	});
+}
+init();
