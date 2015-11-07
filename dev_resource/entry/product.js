@@ -1,5 +1,8 @@
 var React = require("react"),
-	Util = require("../pack/util");
+	Util = require("../pack/util"),
+	Component = require("../pack/component"),
+	Shortcut = Component.Shortcut;
+Util.setRem();
 var ProductDetail = React.createClass({
 	getInitialState : function(){
 		return {
@@ -109,6 +112,26 @@ var Page = React.createClass({
 		return (
 			<body>
 				{lists}
+				<Shortcut index={1} data={
+					[
+						{
+							href : "/",
+							title : "首页"
+						},
+						{
+							href : "/product",
+							title : "理财产品"
+						},
+						{
+							href : "/account",
+							title : "我的账户"
+						},
+						{
+							href : "/more",
+							title : "更多"
+						},
+					]
+				} />
 			</body>
 		);
 	}

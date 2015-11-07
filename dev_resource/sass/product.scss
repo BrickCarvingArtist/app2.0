@@ -1,2 +1,11 @@
 @import "variable";
 @import "base";
+body{
+	background-color:$lightGrey;
+}
+section{
+	margin-bottom:.45rem;
+	background-color:white;
+	border-bottom:.025rem solid $grey;
+	box-shadow:0 .025rem .025rem 0 $grey;
+}
