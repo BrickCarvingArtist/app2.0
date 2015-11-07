@@ -101,10 +101,9 @@ var Page = React.createClass({
 	render : function(){
 		var lists = [],
 			data = this.state.data;
-			console.log(data);
 		data.forEach(function(list, index){
 			lists.push(
-				<Product index={index + 1} title={list.title} scale={list.scale} rate={(list.rate * 100).toFixed(1)} term={list.term} beginTime={list.beginTime} stopBuyTime={list.stopBuyTime} />
+				<Product index={index + 1} title={list.title} scale={list.scale} rate={(list.rate * 100).toFixed(1)} term={list.term} beginTime={list.beginTime.split(" ")[0]} stopBuyTime={list.stopBuyTime.split(" ")[0]} />
 			);
 		});
 		return (

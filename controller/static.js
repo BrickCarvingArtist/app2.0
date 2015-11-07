@@ -43,21 +43,28 @@ module.exports = function(request, router, react, reactDOMServer, Util){
 	router
 		.route("/api/getproduct")
 		.get(function(req, res, next){
-			res.json({
-				data : [
-					{
-						title : "新手专享39号",
-						scale : 200000,
-						rate : 0.095,
-						term : 30
-					},
-					{
-						title : "周一见12号",
-						scale : 200000,
-						rate : 0.095,
-						term : 30
-					}
-				]
+			request("http://www.xilanlicai.com/api/getproducts/56", function(err, response, body){
+				var data = JSON.parse(body).data;
+				res.json({
+					data : [
+						{
+							title : data.product.name,
+							scale : data.product.lumpSum,
+							rate : data.product.primeRate,
+							term : data.product.days,
+							beginTime : data.product.beginTime,
+							stopBuyTime : data.product.stopBuyTime
+						},
+						{
+							title : "周一见12号",
+							scale : 200000,
+							rate : 0.095,
+							term : 30,
+							beginTime : data.product.beginTime,
+							stopBuyTime : data.product.stopBuyTime
+						}
+					]
+				});
 			});
 		});
 	//route
@@ -74,13 +81,11 @@ module.exports = function(request, router, react, reactDOMServer, Util){
 	router
 		.route("/product")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getproducts/56", function(err, response, body){
-				res.render("./index", {
-					style : ["/css/product.css"],
-					script : ["/js/product.js"],
-					title : "理财产品",
-					page : body
-				});
+			res.render("./index", {
+				style : ["/css/product.css"],
+				script : ["/js/product.js"],
+				title : "理财产品",
+				page : "loading"
 			});
 		});
 	router
