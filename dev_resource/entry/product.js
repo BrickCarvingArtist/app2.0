@@ -2,11 +2,26 @@ var React = require("react"),
 	Util = require("../pack/util");
 var ProductDetail = React.createClass({
 	getInitialState : function(){
-		return {};
+		return {
+			title : this.props.title,
+			beginTime : this.props.beginTime,
+			stopBuyTime : this.props.stopBuyTime
+		};
 	},
 	render : function(){
 		return (
-			<div className="product"></div>
+			<body>
+				<div className="part1">
+				</div>
+				<div className="part2">
+				</div>
+				<div className="part3">
+				</div>
+				<p>
+					{"募集时间:" + this.state.beginTime + " 至 " + this.state.stopBuyTime}
+				</p>
+				<a className="btnBuy"></a>
+			</body>
 		);
 	}
 });
@@ -17,7 +32,9 @@ var Product = React.createClass({
 			title : this.props.title,
 			scale : this.props.scale,
 			rate : this.props.rate,
-			term : this.props.term
+			term : this.props.term,
+			beginTime : this.props.beginTime,
+			stopBuyTime : this.props.stopBuyTime
 		};
 	},
 	handleClick : function(){
@@ -30,7 +47,7 @@ var Product = React.createClass({
 		}, 0);
 		document.title = this.state.title;
 		React.render(
-			<ProductDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={this.state.detail}/>,
+			<ProductDetail title={this.state.title} beginTime={this.state.beginTime} stopBuyTime={this.state.stopBuyTime} />,
 			body
 		);
 	},
@@ -84,9 +101,10 @@ var Page = React.createClass({
 	render : function(){
 		var lists = [],
 			data = this.state.data;
+			console.log(data);
 		data.forEach(function(list, index){
 			lists.push(
-				<Product index={index + 1} title={list.title} scale={list.scale} rate={(list.rate * 100).toFixed(1)} term={list.term} />
+				<Product index={index + 1} title={list.title} scale={list.scale} rate={(list.rate * 100).toFixed(1)} term={list.term} beginTime={list.beginTime} stopBuyTime={list.stopBuyTime} />
 			);
 		});
 		return (
