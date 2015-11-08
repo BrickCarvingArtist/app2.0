@@ -129,7 +129,7 @@ var Page = React.createClass({
 						{
 							href : "/more",
 							title : "更多"
-						},
+						}
 					]
 				} />
 			</body>
