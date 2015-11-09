@@ -72,9 +72,7 @@ var Util = {
 		return main;
 	},
 	setRem : function(){
-		window.onload = window.onresize = function(){
-			document.documentElement.style.fontSize = window.innerWidth / 16 + "px";
-		}
+		document.documentElement.style.fontSize = window.innerWidth / 16 + "px";
 	}
 };
 module.exports = Util;
