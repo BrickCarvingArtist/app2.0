@@ -2,6 +2,7 @@ var express = require("express"),
 	path = require("path"),
 	bodyParser = require("body-parser"),
 	compression = require("compression"),
+	babel = require("babel-core/register"),
 	react = require("react"),
 	reactDOMServer = require("react-dom/server"),
 	port = process.env.PORT || 8080,
@@ -22,6 +23,6 @@ app.use(express.static(path.join(__dirname, "./resource"), {
 app.use(function(req, res, next){
 	next();
 });
-app.use(require("./controller/static")(request, router, react, reactDOMServer, Util));
+app.use(require("./controller/static")(request, router, babel, react, reactDOMServer, Util));
 app.listen(port);
 console.log("server started on port " + port);

@@ -1,4 +1,5 @@
-module.exports = function(request, router, react, reactDOMServer, Util){
+module.exports = function(request, router, babel, react, reactDOMServer, Util){
+	babel = babel;
 	//api
 	router
 		.route("/api/getinfo")
@@ -91,12 +92,15 @@ module.exports = function(request, router, react, reactDOMServer, Util){
 	router
 		.route("/infocenter")
 		.get(function(req, res, next){
-			// page = reactDOMServer.renderToString(react.createFactory(Foot)({}));
-			res.render("./index", {
-				style : ["/css/info.css"],
-				script : ["/js/info.js"],
-				title : "消息中心",
-				page : "loading..."
+			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, response, body){
+				res.render("./index", {
+					style : ["/css/info.css"],
+					script : ["/js/info.js"],
+					title : "消息中心",
+					page : reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/info").main)({
+						data : JSON.parse(body).data
+					}))
+				});
 			});
 		});
 	return router;
