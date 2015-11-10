@@ -36,7 +36,7 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				style : ["/css/home.css"],
 				script : ["/js/home.js"],
 				title : "首页",
-				page : "loading..."
+				page : "<div class=\"loading\"></div>"
 			});
 		});
 	router
@@ -46,21 +46,17 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				style : ["/css/product.css"],
 				script : ["/js/product.js"],
 				title : "理财产品",
-				page : "loading"
+				page : "<div class=\"loading\"></div>"
 			});
 		});
 	router
 		.route("/infocenter")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, response, body){
-				res.render("./index", {
-					style : ["/css/info.css"],
-					script : ["/js/info.js"],
-					title : "消息中心",
-					page : reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/info").main)({
-						data : JSON.parse(body).data
-					}))
-				});
+			res.render("./index", {
+				style : ["/css/info.css"],
+				script : ["/js/info.js"],
+				title : "消息中心",
+				page : "<div class=\"loading\"></div>"
 			});
 		});
 	router

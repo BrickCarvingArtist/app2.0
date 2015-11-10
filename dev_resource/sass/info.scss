@@ -1,14 +1,15 @@
 @import "variable";
 @import "base";
 section{
-	margin-bottom:.5rem;
-	padding:1.25rem 1.375rem 0;
+	margin-bottom:.4rem;
+	padding:.65rem 1.375rem .65rem;
 	width:16rem;
-	height:6.25rem;
+	height:auto;
+	overflow:hidden;
 	background-color:white;
 	border-bottom:.025rem solid $grey;
 	box-shadow:0 .025rem .025rem 0 $grey;
-	h1{
+	> h1{
 		height:1rem;
 		overflow:hidden;
 		font-size:.75rem;
@@ -16,7 +17,7 @@ section{
 		line-height:1rem;
 		text-overflow:ellipsis;
 	}
-	h1:before{
+	> h1:before{
 		margin-right:.5rem;
 		content:"\2022";
 		font-size:1rem;
@@ -34,7 +35,7 @@ section{
 		-webkit-box-orient:vertical;
 		-webkit-line-clamp:2;
 	}
-	span{
+	> span{
 		float:right;
 		margin-top:.3rem;
 		font-size:.5rem;
@@ -54,24 +55,24 @@ section.detail{
 	background-color:transparent;
 	border:none;
 	box-shadow:none;
-	h1{
+	> h1{
 		margin-top:1rem;
 		text-align:center;
 	}
-	h1:before{
+	> h1:before{
 		margin:0;
 		content:"";
 	}
-	h2{
+	> h2{
 		margin-top:1.5rem;
 		font-size:.5rem;
 		color:$grey;
 		text-align:center;
 	}
-	div.detail{
+	> div.detail{
 		margin-top:1rem;
 		font-size:.65rem;
-		p{
+		> p{
 			line-height:2;
 		}
 	}

@@ -35,10 +35,10 @@ var Info = React.createClass({
 	getInitialState : function(){
 		return {
 			index : this.props.index,
+			id : this.props.id,
 			status : this.props.status,
 			title : this.props.title,
 			introduce : this.props.introduce,
-			detail : this.props.detail,
 			source : this.props.source,
 			time : this.props.time
 		};
@@ -48,15 +48,17 @@ var Info = React.createClass({
 		if(!Util.QueryString("index")){
 			window.history.pushState({}, this.state.title, "?index=" + this.state.index);
 		}
-		window.addEventListener("popstate", function(e){
-			init();
-		}, 0);
-		document.title = this.state.title;
-		document.body.style.backgroundColor = "white";
-		// React.render(
-		// 	<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={this.state.detail}/>,
-		// 	body
-		// );
+		$.ajax({
+			url : "http://www.xilanlicai.com/api/getnews/" + this.state.id,
+			success : function(data){
+				document.title = this.state.title;
+				document.body.style.backgroundColor = "white";
+				React.render(
+					<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={data.data.details} />,
+					body
+				);
+			}.bind(this)
+		});
 	},
 	render : function(){
 		return (
@@ -80,8 +82,8 @@ var	Page = React.createClass({
 			data : this.props.data
 		};
 	},
-	shouldComponentUpdate : function(nextProps, nextState){
-		return nextState.data.length !== this.state.data.length;
+	shouldComponentUpdate : function(){
+		return 0;
 	},
 	componentDidMount : function(){
 		if(Util.QueryString("index")){
@@ -93,7 +95,7 @@ var	Page = React.createClass({
 			data = this.state.data;
 		data.forEach(function(list, index){
 			lists.push(
-				<Info index={index + 1} status={list.status} title={list.title} introduce={list.introduce} detail={list.detail} source={list.source} time={list.time} ref={"info" + (index + 1)}/>
+				<Info index={index + 1} id={list.id} status={list.status} title={list.title} introduce={list.introduce} source={list.source} time={list.time} ref={"info" + (index + 1)}/>
 			);
 		});
 		return (
@@ -104,17 +106,19 @@ var	Page = React.createClass({
 	}
 });
 var init = function(){
+	window.onpopstate = function(){
+		init();
+	};
 	$.ajax({
 		url : "http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1",
 		success : function(data){
 			Util.setRem();
-			console.log(data)
 			document.title = "消息中心";
 			document.body.style.backgroundColor = "rgb(244, 244, 244)";
-			// React.render(
-			// 	<Page data={data.data} />,
-			// 	document.body
-			// );
+			React.render(
+				<Page data={data.data} />,
+				document.body
+			);
 		}
 	});
 };
