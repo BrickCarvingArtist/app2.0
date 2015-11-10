@@ -12,7 +12,7 @@ var List = React.createClass({
 		var state = this.state;
 		return (
 			<a className={state.currentIndex === state.index ? "current" : ""} href={state.href}>
-				<i className="icon48"></i>
+				<i className="icon40"></i>
 				<span>
 					{state.title}
 				</span>

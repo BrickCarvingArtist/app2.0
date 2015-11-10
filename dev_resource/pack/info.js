@@ -44,6 +44,7 @@ var Info = React.createClass({
 		};
 	},
 	handleClick : function(){
+		console.log(123)
 		var body = document.body;
 		if(!Util.QueryString("index")){
 			window.history.pushState({}, this.state.title, "?index=" + this.state.index);
@@ -61,6 +62,7 @@ var Info = React.createClass({
 		});
 	},
 	render : function(){
+		console.log(this.handleClick)
 		return (
 			<section className={this.state.status ? "unread" : ""} onClick={this.handleClick}>
 				<h1>
@@ -81,9 +83,6 @@ var	Page = React.createClass({
 		return {
 			data : this.props.data
 		};
-	},
-	shouldComponentUpdate : function(){
-		return 0;
 	},
 	componentDidMount : function(){
 		if(Util.QueryString("index")){
@@ -106,13 +105,13 @@ var	Page = React.createClass({
 	}
 });
 var init = function(){
+	Util.setRem();
 	window.onpopstate = function(){
 		init();
 	};
 	$.ajax({
-		url : "http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1",
+		url : "/api/getinfo",
 		success : function(data){
-			Util.setRem();
 			document.title = "消息中心";
 			document.body.style.backgroundColor = "rgb(244, 244, 244)";
 			React.render(

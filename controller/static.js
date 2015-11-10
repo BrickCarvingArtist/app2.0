@@ -1,6 +1,16 @@
 module.exports = function(request, router, babel, react, reactDOMServer, Util){
-	babel = babel;
+	var babel = babel,
+		loading = "<div class=\"loading\"></div>";
 	//api
+	router
+		.route("/api/getinfo")
+		.get(function(req, res, next){
+			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, request, body){
+				if(!err && request.statusCode === 200){
+					res.json(JSON.parse(body));
+				}
+			});
+		});
 	router
 		.route("/api/getproduct")
 		.get(function(req, res, next){
@@ -36,7 +46,7 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				style : ["/css/home.css"],
 				script : ["/js/home.js"],
 				title : "首页",
-				page : "<div class=\"loading\"></div>"
+				page : loading
 			});
 		});
 	router
@@ -46,17 +56,23 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				style : ["/css/product.css"],
 				script : ["/js/product.js"],
 				title : "理财产品",
-				page : "<div class=\"loading\"></div>"
+				page : loading
 			});
 		});
 	router
 		.route("/infocenter")
 		.get(function(req, res, next){
-			res.render("./index", {
-				style : ["/css/info.css"],
-				script : ["/js/info.js"],
-				title : "消息中心",
-				page : "<div class=\"loading\"></div>"
+			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, request, body){
+				if(!err && request.statusCode === 200){
+					res.render("./index", {
+						style : ["/css/info.css"],
+						script : ["/js/info.js"],
+						title : "消息中心",
+						page : reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/info").main)({
+							data : JSON.parse(body).data
+						}))
+					});
+				}
 			});
 		});
 	router

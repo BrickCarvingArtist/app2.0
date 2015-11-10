@@ -4,11 +4,6 @@ body > div, header, footer{
 	float:left;
 	width:16rem;
 }
-.icon48{
-	display:block;
-	width:1.2rem;
-	height:1.2rem;
-}
 footer{
 	position:fixed;
 	bottom:0;
@@ -23,10 +18,54 @@ footer{
 		text-align:center;
 		i{
 			margin:.5rem auto 0;
+			width:.95rem;
+			height:.95rem;
+			background-size:.95rem .95rem;
 		}
+		
 		span{
 			font-size:.6rem;
 			color:$darkGrey;
+		}
+	}
+	a:first-of-type{
+		i{
+			background-image:$home0;
+		}
+	}
+	a:nth-of-type(2){
+		i{
+			background-image:$product0;
+		}
+	}
+	a:nth-of-type(3){
+		i{
+			background-image:$account0;
+		}
+	}
+	a:last-of-type{
+		i{
+			background-image:$more0;
+		}
+	}
+	a:first-of-type.current{
+		i{
+			background-image:$home1;
+		}
+	}
+	a:nth-of-type(2).current{
+		i{
+			background-image:$product1;
+		}
+	}
+	a:nth-of-type(3).current{
+		i{
+			background-image:$account1;
+		}
+	}
+	a:last-of-type.current{
+		i{
+			background-image:$more1;
 		}
 	}
 	a.current{
