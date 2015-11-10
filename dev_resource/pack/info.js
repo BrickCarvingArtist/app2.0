@@ -53,10 +53,10 @@ var Info = React.createClass({
 		}, 0);
 		document.title = this.state.title;
 		document.body.style.backgroundColor = "white";
-		React.render(
-			<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={this.state.detail}/>,
-			body
-		);
+		// React.render(
+		// 	<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={this.state.detail}/>,
+		// 	body
+		// );
 	},
 	render : function(){
 		return (
@@ -84,7 +84,6 @@ var	Page = React.createClass({
 		return nextState.data.length !== this.state.data.length;
 	},
 	componentDidMount : function(){
-		Util.setRem();
 		if(Util.QueryString("index")){
 			this.refs["info" + Util.QueryString("index")].getDOMNode().click();
 		}
@@ -108,12 +107,14 @@ var init = function(){
 	$.ajax({
 		url : "http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1",
 		success : function(data){
+			Util.setRem();
+			console.log(data)
 			document.title = "消息中心";
 			document.body.style.backgroundColor = "rgb(244, 244, 244)";
-			React.render(
-				<Page data={data.data} />,
-				document.body
-			);
+			// React.render(
+			// 	<Page data={data.data} />,
+			// 	document.body
+			// );
 		}
 	});
 };
