@@ -12,6 +12,13 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
+		.route("/api/getinfo/:id")
+		.get(function(req, res, next){
+			request("http://www.xilanlicai.com/api/getnews/" + req.params.id, function(err, request, body){
+				res.json(JSON.parse(body));
+			});
+		});
+	router
 		.route("/api/getproduct")
 		.get(function(req, res, next){
 			request("http://www.xilanlicai.com/api/getproducts/56", function(err, response, body){

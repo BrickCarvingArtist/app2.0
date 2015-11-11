@@ -43,28 +43,27 @@ var Info = React.createClass({
 			time : this.props.time
 		};
 	},
-	handleClick : function(){
-		console.log(123)
-		// var body = document.body;
-		// if(!Util.QueryString("index")){
-		// 	window.history.pushState({}, this.state.title, "?index=" + this.state.index);
-		// }
-		// $.ajax({
-		// 	url : "http://www.xilanlicai.com/api/getnews/" + this.state.id,
-		// 	success : function(data){
-		// 		document.title = this.state.title;
-		// 		document.body.style.backgroundColor = "white";
-		// 		React.render(
-		// 			<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={data.data.details} />,
-		// 			body
-		// 		);
-		// 	}.bind(this)
-		// });
+	componentDidMount : function(){
+		this.getDOMNode().onclick = function(){
+			$.ajax({
+				url : "/api/getinfo/" + this.state.id,
+				success : function(data){
+					document.title = this.state.title;
+					document.body.style.backgroundColor = "white";
+					if(!Util.QueryString("index")){
+						window.history.pushState({}, this.state.title, "?index=" + this.state.index);
+					}
+					React.render(
+						<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={data.data.details} />,
+						document.body
+					);
+				}.bind(this)
+			});
+		}.bind(this);
 	},
 	render : function(){
-		console.log(this.handleClick)
 		return (
-			<section className={this.state.status ? "unread" : ""} onClick={this.handleClick}>
+			<section className={this.state.status ? "unread" : ""}>
 				<h1>
 					{this.state.title}
 				</h1>
