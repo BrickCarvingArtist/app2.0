@@ -45,21 +45,21 @@ var Info = React.createClass({
 	},
 	handleClick : function(){
 		console.log(123)
-		var body = document.body;
-		if(!Util.QueryString("index")){
-			window.history.pushState({}, this.state.title, "?index=" + this.state.index);
-		}
-		$.ajax({
-			url : "http://www.xilanlicai.com/api/getnews/" + this.state.id,
-			success : function(data){
-				document.title = this.state.title;
-				document.body.style.backgroundColor = "white";
-				React.render(
-					<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={data.data.details} />,
-					body
-				);
-			}.bind(this)
-		});
+		// var body = document.body;
+		// if(!Util.QueryString("index")){
+		// 	window.history.pushState({}, this.state.title, "?index=" + this.state.index);
+		// }
+		// $.ajax({
+		// 	url : "http://www.xilanlicai.com/api/getnews/" + this.state.id,
+		// 	success : function(data){
+		// 		document.title = this.state.title;
+		// 		document.body.style.backgroundColor = "white";
+		// 		React.render(
+		// 			<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={data.data.details} />,
+		// 			body
+		// 		);
+		// 	}.bind(this)
+		// });
 	},
 	render : function(){
 		console.log(this.handleClick)
