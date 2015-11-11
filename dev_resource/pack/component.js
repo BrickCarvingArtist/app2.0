@@ -1,4 +1,4 @@
 module.exports = {
 	Banner : require("../component/banner"),
-	Shortcut : require("../component/shortcut")
+	Menu : require("../component/menu")
 };

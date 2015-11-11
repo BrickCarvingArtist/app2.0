@@ -1,10 +1,17 @@
 @import "variable";
 @import "reset";
+// @mixin shortcutBG($i, $name:"shortcut"){
+// 	a:nth-of-type(#{$i}){
+// 		i{
+// 			background-image:map-get($shortcut, $i);
+// 		}
+// 	}
+// }
 body > div, header, footer{
 	float:left;
 	width:16rem;
 }
-footer{
+menu{
 	position:fixed;
 	bottom:0;
 	height:3rem;
@@ -22,7 +29,6 @@ footer{
 			height:.95rem;
 			background-size:.95rem .95rem;
 		}
-		
 		span{
 			font-size:.6rem;
 			color:$darkGrey;
@@ -30,42 +36,42 @@ footer{
 	}
 	a:first-of-type{
 		i{
-			background-image:$home0;
+			background-image:$shortcut1_0;
 		}
 	}
 	a:nth-of-type(2){
 		i{
-			background-image:$product0;
+			background-image:$shortcut2_0;
 		}
 	}
 	a:nth-of-type(3){
 		i{
-			background-image:$account0;
+			background-image:$shortcut3_0;
 		}
 	}
 	a:last-of-type{
 		i{
-			background-image:$more0;
+			background-image:$shortcut4_0;
 		}
 	}
 	a:first-of-type.current{
 		i{
-			background-image:$home1;
+			background-image:$shortcut1_1;
 		}
 	}
 	a:nth-of-type(2).current{
 		i{
-			background-image:$product1;
+			background-image:$shortcut2_1;
 		}
 	}
 	a:nth-of-type(3).current{
 		i{
-			background-image:$account1;
+			background-image:$shortcut3_1;
 		}
 	}
 	a:last-of-type.current{
 		i{
-			background-image:$more1;
+			background-image:$shortcut4_1;
 		}
 	}
 	a.current{

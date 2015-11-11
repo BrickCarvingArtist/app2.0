@@ -53,7 +53,7 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				style : ["/css/home.css"],
 				script : ["/js/home.js"],
 				title : "首页",
-				page : loading
+				page : reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/home").main)({}))
 			});
 		});
 	router
