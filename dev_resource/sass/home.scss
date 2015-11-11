@@ -13,6 +13,40 @@ header{
 		}
 	}
 }
+menu.menu_3col_anchor{
+	float:left;
+	border-bottom:.025rem solid $grey;
+	a{
+		i{
+			float:left;
+			margin:.575rem .5rem;
+			width:1rem;
+			height:1rem;
+			background-size:1rem 1rem;
+		}
+		span{
+			font-size:.55rem;
+			line-height:2.15rem;
+		}
+	}
+	a:nth-of-type(1){
+		border-right:solid .025rem $grey;
+		i{
+			background-image:$bonus;
+		}
+	}
+	a:nth-of-type(2){
+		border-right:solid .025rem $grey;
+		i{
+			background-image:$activity;
+		}
+	}
+	a:nth-of-type(3){
+		i{
+			background-image:$sign;
+		}
+	}
+}
 @-webkit-keyframes banner{
 	0%, 20%{
 		-webkit-transform:translateX(0);

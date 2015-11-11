@@ -1,47 +1,4 @@
 var React = require("react");
-// var List = React.createClass({
-// 	getInitialState : function(){
-// 		return {
-// 			index : this.props.index,
-// 			href : this.props.href,
-// 			title : this.props.title,
-// 			currentIndex : this.props.currentIndex
-// 		};
-// 	},
-// 	render : function(){
-// 		var state = this.state;
-// 		return (
-// 			<a className={state.currentIndex === state.index ? "current" : ""} href={state.href}>
-// 				<i className="icon40"></i>
-// 				<span>
-// 					{state.title}
-// 				</span>
-// 			</a>
-// 		);
-// 	}
-// });
-// var Menu = React.createClass({
-// 	getInitialState : function(){
-// 		return {
-// 			currentIndex : this.props.index,
-// 			data : this.props.data
-// 		}
-// 	},
-// 	render : function(){
-// 		var lists = [],
-// 			data = this.state.data;
-// 		data.forEach(function(list, index){
-// 			lists.push(
-// 				<List index={index} href={list.href} title={list.title} currentIndex={this.state.currentIndex} />
-// 			);
-// 		}.bind(this))
-// 		return (
-// 			<footer>
-// 				{lists}
-// 			</footer>
-// 		);
-// 	}
-// });
 var List1 = React.createClass({
 	getInitialState : function(){
 		var option = this.props.option;
@@ -68,11 +25,20 @@ var List2 = React.createClass({
 	getInitialState : function(){
 		var option = this.props.option;
 		return {
-
+			href : option.href,
+			text : option.text
 		};
 	},
 	render : function(){
-
+		var state = this.state;
+		return (
+			<a href={state.href}>
+				<i></i>
+				<span>
+					{state.text}
+				</span>
+			</a>
+		);
 	}
 });
 var List3 = React.createClass({
@@ -91,7 +57,7 @@ var MenuBar = React.createClass({
 				returnValue = "footer";
 				break;
 			case 2:
-				returnValue = "menu_2col";
+				returnValue = "menu_3col_anchor";
 				break;
 			case 3:
 				returnValue = "menu_3col"
@@ -115,6 +81,14 @@ var MenuBar = React.createClass({
 				);
 				break;
 			case 2:
+				returnValue = (
+					<List2 option={
+						{
+							href : list.href,
+							text : list.text
+						}
+					} />
+				);
 				break;
 			case 3:
 				break;

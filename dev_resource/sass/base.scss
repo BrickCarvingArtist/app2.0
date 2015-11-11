@@ -7,30 +7,35 @@
 // 		}
 // 	}
 // }
-body > div, header, footer{
+body > div, header, menu{
 	float:left;
 	width:16rem;
 }
 menu{
-	position:fixed;
-	bottom:0;
-	height:3rem;
-	background-color:white;
-	border-top:.025rem solid $grey;
+	display:-webkit-flex;
+	height:2.15rem;
 	a{
 		float:left;
 		display:block;
-		width:4rem;
+		-webkit-flex:1;
 		height:100%;
+	}
+}
+menu.footer{
+	position:fixed;
+	bottom:0;
+	background-color:white;
+	border-top:.025rem solid $grey;
+	a{
 		text-align:center;
 		i{
-			margin:.5rem auto 0;
+			margin:.2rem auto -.2rem;
 			width:.95rem;
 			height:.95rem;
 			background-size:.95rem .95rem;
 		}
 		span{
-			font-size:.6rem;
+			font-size:.55rem;
 			color:$darkGrey;
 		}
 	}

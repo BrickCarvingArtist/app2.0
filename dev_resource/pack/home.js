@@ -31,6 +31,22 @@ var Page  = React.createClass({
 						}
 					]
 				} />
+				<Menu type={2} option={
+					[
+						{
+							href : "/bonus",
+							text : "推荐送红包"
+						},
+						{
+							href : "/activity",
+							text : "活动中心"
+						},
+						{
+							href : "/sign",
+							text : "马上签到"
+						}
+					]
+				} />
 				<Menu currentIndex={0} type={1} option={
 					[
 						{
@@ -55,14 +71,13 @@ var Page  = React.createClass({
 		);
 	}
 });
-var init = function(){
-	Util.setRem();
-	React.render(
-		<Page />,
-		document.body
-	);
-};
 module.exports = {
 	main : Page,
-	init : init
+	init : function(){
+		Util.setRem();
+		React.render(
+			<Page />,
+			document.body
+		);
+	}
 };

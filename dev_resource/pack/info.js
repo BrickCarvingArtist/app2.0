@@ -103,24 +103,23 @@ var	Page = React.createClass({
 		);
 	}
 });
-var init = function(){
-	Util.setRem();
-	window.onpopstate = function(){
-		init();
-	};
-	$.ajax({
-		url : "/api/getinfo",
-		success : function(data){
-			document.title = "消息中心";
-			document.body.style.backgroundColor = "rgb(244, 244, 244)";
-			React.render(
-				<Page data={data.data} />,
-				document.body
-			);
-		}
-	});
-};
 module.exports = {
 	main : Page,
-	init : init
+	init : function(){
+		Util.setRem();
+		window.onpopstate = function(){
+			init();
+		};
+		$.ajax({
+			url : "/api/getinfo",
+			success : function(data){
+				document.title = "消息中心";
+				document.body.style.backgroundColor = "rgb(244, 244, 244)";
+				React.render(
+					<Page data={data.data} />,
+					document.body
+				);
+			}
+		});
+	};
 };
