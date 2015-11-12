@@ -6,13 +6,21 @@ var React = require("react"),
 var Info = React.createClass({
 	getInitialState : function(){
 		return {
+			index : this.props.index,
+			currentIndex : this.props.currentIndex,
 			data : this.props.data
 		};
+	},
+	componentDidMount : function(){
+		// var t = setTimeout(function(){
+		// 	clearTimeout(t);
+		// 	$(this.getDOMNode()).removeClass("current");
+		// }.bind(this), 1000);
 	},
 	render : function(){
 		var data = this.state.data;
 		return (
-			<div className="info">
+			<div className={"info" + (this.state.index === this.state.currentIndex ? " current" : "")}>
 				<div className="bg"></div>
 				<div className="circle">
 					<h1>
@@ -50,15 +58,18 @@ var Button = React.createClass({
 var Option = React.createClass({
 	getInitialState : function(){
 		return {
+			sum : this.props.sum,
 			userClass : this.props.userClass,
 			type : this.props.type
 		}
 	},
 	componentDidMount : function(){
-		var userClass = this.state.userClass;
+		var userClass = this.state.userClass,
+			sum = this.state.sum;
 		this.getDOMNode().onclick = function(){
+			var currentIndex = userClass.state.currentIndex;
 			userClass.setState({
-				currentIndex : this.state.type >> 1 ? userClass.state.currentIndex + 1 : userClass.state.currentIndex - 1
+				currentIndex : this.state.type >> 1 ? currentIndex >= sum - 1 ? 0 : currentIndex + 1 : currentIndex <= 0 ? sum - 1 : currentIndex - 1
 			});
 		}.bind(this);
 	},
@@ -79,19 +90,21 @@ var Product = React.createClass({
 		console.log(this.state.currentIndex);
 	},
 	render : function(){
-		var lists = [];
-		this.state.data.forEach(function(list, index){
+		var lists = [],
+			data = this.state.data,
+			dataLen = data.length;
+		data.forEach(function(list, index){
 			lists.push(
-				<Info data={list} />
+				<Info index={index} currentIndex={this.state.currentIndex} data={list} />
 			);
-		});
+		}.bind(this));
 		return (
 			<div className="product">
 				<div className="container">
 					{lists}
 				</div>
-				<Option userClass={this} type={1} />
-				<Option userClass={this} type={2} />
+				<Option sum={dataLen} userClass={this} type={1} />
+				<Option sum={dataLen} userClass={this} type={2} />
 				<Button />
 			</div>
 		);

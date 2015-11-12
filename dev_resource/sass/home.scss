@@ -61,6 +61,7 @@ menu.menu_3col_anchor{
 		display:inline-block;
 		width:16rem;
 		overflow:hidden;
+		-webkit-animation:slideOut 1s linear forwards;
 		.bg{
 			position:relative;
 			margin:.675rem auto 0;
@@ -130,6 +131,9 @@ menu.menu_3col_anchor{
 				border-radius:.3rem;
 			}
 		}
+	}
+	.info.current{
+		-webkit-animation:slideIn 1s linear forwards;
 	}
 	.prev, .next{
 		position:absolute;
@@ -202,5 +206,24 @@ menu.menu_3col_anchor{
 @-webkit-keyframes rotate{
 	to{
 		-webkit-transform:rotate(360deg);
+	}
+}
+@-webkit-keyframes slideIn{
+	from{
+		-webkit-transform:translateX(16rem);
+		opacity:0;
+	}
+	to{
+		-webkit-transform:translateX(0);
+		opacity:1;
+	}
+}
+@-webkit-keyframes slideOut{
+	from{
+		-webkit-transform:translateX(0);
+	}
+	to{
+		-webkit-transform:translateX(-16rem);
+		opacity:0;
 	}
 }
