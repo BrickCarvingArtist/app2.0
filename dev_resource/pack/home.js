@@ -3,6 +3,71 @@ var React = require("react"),
 	Component = require("../pack/component"),
 	Banner = Component.Banner,
 	Menu = Component.Menu;
+var Info = React.createClass({
+	getInitialState : function(){
+		return {
+			data : this.props.data
+		};
+	},
+	render : function(){
+		var data = this.state.data;
+		return (
+			<div className="info">
+				<div className="circle">
+					<h1>
+						<strong>9.8</strong>
+						<em>％</em>
+					</h1>
+					<h2>周一见12号</h2>
+				</div>
+				<ul>
+					<li>起投500元</li>
+					<li>可投100000元</li>
+					<li>30天</li>
+				</ul>
+			</div>
+		);
+	}
+});
+var Button = React.createClass({
+	render : function(){
+		return (
+			<a className="btnBuy">立即购买</a>
+		);
+	}
+});
+var Option = React.createClass({
+	getInitialState : function(){
+		return {
+			type : this.props.type
+		}
+	},
+	render : function(){
+		return (
+			<i className={this.state.type >> 1 ? "next" : "prev"}></i>
+		);
+	}
+});
+var Product = React.createClass({
+	getInitialState : function(){
+		return {
+			currentIndex : 0
+		};
+	},
+	render : function(){
+		var lists = [];
+		return (
+			<div className="product">
+				<div className="container">
+					<Info />
+				</div>
+				<Option type={1} />
+				<Option type={2} />
+				<Button />
+			</div>
+		);
+	}
+});
 var Page  = React.createClass({
 	render : function(){
 		return (
@@ -47,6 +112,7 @@ var Page  = React.createClass({
 						}
 					]
 				} />
+				<Product />
 				<Menu type={1} option={
 					[
 						{

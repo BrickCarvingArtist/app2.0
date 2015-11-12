@@ -7,6 +7,35 @@
 // 		}
 // 	}
 // }
+body{
+	position:relative;
+	padding-top:2.3rem;
+}
+body:before{
+	position:absolute;
+	top:0;
+	left:0;
+	width:16rem;
+	height:2.3rem;
+	background-color:$darkGrey;
+	content:"标题";
+	font-size:.8rem;
+	font-weight:bold;
+	color:white;
+	letter-spacing:.2rem;
+	line-height:2.3rem;
+	text-align:center;
+}
+body:after{
+	position:absolute;
+	top:0;
+	left:.5rem;
+	height:2.3rem;
+	content:"<";
+	font-size:1rem;
+	color:white;
+	line-height:2.3rem;
+}
 body > div, header, menu{
 	float:left;
 	width:16rem;

@@ -85,7 +85,12 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("*")
 		.get(function(req, res, next){
-			res.end();
+			res.render("./index", {
+				style : ["/css/base.css"],
+				script : [],
+				title : "迷路了",
+				page : loading
+			});
 		});
 	return router;
 };
