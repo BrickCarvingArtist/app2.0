@@ -2,7 +2,7 @@
 @import "base";
 section{
 	margin-bottom:.4rem;
-	padding:.65rem 1.375rem .65rem;
+	padding:.65rem .85rem .65rem;
 	width:16rem;
 	height:auto;
 	overflow:hidden;
@@ -12,21 +12,21 @@ section{
 	> h1{
 		height:1rem;
 		overflow:hidden;
-		font-size:.75rem;
+		font-size:.65rem;
 		font-weight:bold;
 		line-height:1rem;
+		white-space:nowrap;
 		text-overflow:ellipsis;
 	}
 	> h1:before{
 		margin-right:.5rem;
 		content:"\2022";
-		font-size:1rem;
 		font-weight:bold;
 		color:$grey;
 	}
 	> p{
 		margin-top:.45rem;
-		font-size:.6rem;
+		font-size:.55rem;
 		line-height:.8rem;
 		color:$darkGrey;
 		overflow:hidden;
@@ -38,7 +38,7 @@ section{
 	> span{
 		float:right;
 		margin-top:.3rem;
-		font-size:.5rem;
+		font-size:.55rem;
 		color:$grey;
 	}
 }
@@ -56,7 +56,7 @@ section.detail{
 	border:none;
 	box-shadow:none;
 	> h1{
-		margin-top:1rem;
+		margin-top:1.25rem;
 		text-align:center;
 	}
 	> h1:before{
@@ -64,16 +64,20 @@ section.detail{
 		content:"";
 	}
 	> h2{
-		margin-top:1.5rem;
+		margin-top:.75rem;
 		font-size:.5rem;
 		color:$grey;
 		text-align:center;
 	}
 	> div.detail{
-		margin-top:1rem;
+		margin-top:.75rem;
 		font-size:.65rem;
 		> p{
-			line-height:2;
+			line-height:1.5;
 		}
+	}
+	> span{
+		margin-top:.75rem;
+		font-size:.5rem;
 	}
 }

@@ -47,7 +47,7 @@ var Page  = React.createClass({
 						}
 					]
 				} />
-				<Menu currentIndex={0} type={1} option={
+				<Menu type={1} option={
 					[
 						{
 							href : "/",
@@ -66,7 +66,7 @@ var Page  = React.createClass({
 							text : "更多"
 						}
 					]
-				} />
+				} currentIndex={0} />
 			</body>
 		);
 	}
