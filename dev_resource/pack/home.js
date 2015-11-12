@@ -38,6 +38,9 @@ var Button = React.createClass({
 	}
 });
 var Option = React.createClass({
+	handleClick : function(){
+		console.log(123);
+	},
 	getInitialState : function(){
 		return {
 			type : this.props.type
@@ -45,7 +48,7 @@ var Option = React.createClass({
 	},
 	render : function(){
 		return (
-			<i className={this.state.type >> 1 ? "next" : "prev"}></i>
+			<i className={this.state.type >> 1 ? "next" : "prev"} onClick={this.handleClick}></i>
 		);
 	}
 });
