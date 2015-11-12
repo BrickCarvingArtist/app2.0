@@ -54,8 +54,11 @@ menu.menu_3col_anchor{
 	width:16rem;
 	height:14rem;
 	overflow:hidden;
-	.container{}
+	.container{
+		width:48rem;
+	}
 	.info{
+		display:inline-block;
 		width:16rem;
 		overflow:hidden;
 		.bg{

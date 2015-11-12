@@ -16,15 +16,25 @@ var Info = React.createClass({
 				<div className="bg"></div>
 				<div className="circle">
 					<h1>
-						<strong>9.8</strong>
+						<strong>
+							{(data.primeRate * 100).toFixed(1)}
+						</strong>
 						<em>％</em>
 					</h1>
-					<h2>周一见12号</h2>
+					<h2>
+						{data.name}
+					</h2>
 				</div>
 				<ul>
-					<li>起投500元</li>
-					<li>可投100000元</li>
-					<li>30天</li>
+					<li>
+						{"起投" + data.minUnitCount * data.unitCount + "元"}
+					</li>
+					<li>
+						{"可投" + data.lumpSum + "元"}
+					</li>
+					<li>
+						{data.days + "天"}
+					</li>
 				</ul>
 			</div>
 		);
@@ -38,41 +48,61 @@ var Button = React.createClass({
 	}
 });
 var Option = React.createClass({
-	handleClick : function(){
-		console.log(123);
-	},
 	getInitialState : function(){
 		return {
+			userClass : this.props.userClass,
 			type : this.props.type
 		}
 	},
+	componentDidMount : function(){
+		var userClass = this.state.userClass;
+		this.getDOMNode().onclick = function(){
+			userClass.setState({
+				currentIndex : this.state.type >> 1 ? userClass.state.currentIndex + 1 : userClass.state.currentIndex - 1
+			});
+		}.bind(this);
+	},
 	render : function(){
 		return (
-			<i className={this.state.type >> 1 ? "next" : "prev"} onClick={this.handleClick}></i>
+			<i className={this.state.type >> 1 ? "next" : "prev"}></i>
 		);
 	}
 });
 var Product = React.createClass({
 	getInitialState : function(){
 		return {
-			currentIndex : 0
+			currentIndex : 0,
+			data : this.props.data
 		};
+	},
+	componentDidUpdate : function(){
+		console.log(this.state.currentIndex);
 	},
 	render : function(){
 		var lists = [];
+		this.state.data.forEach(function(list, index){
+			lists.push(
+				<Info data={list} />
+			);
+		});
 		return (
 			<div className="product">
 				<div className="container">
-					<Info />
+					{lists}
 				</div>
-				<Option type={1} />
-				<Option type={2} />
+				<Option userClass={this} type={1} />
+				<Option userClass={this} type={2} />
 				<Button />
 			</div>
 		);
 	}
 });
 var Page  = React.createClass({
+	getInitialState : function(){
+		return {
+			data : this.props.data
+		}
+	},
 	render : function(){
 		return (
 			<body>
@@ -116,7 +146,7 @@ var Page  = React.createClass({
 						}
 					]
 				} />
-				<Product />
+				<Product data={this.state.data} />
 				<Menu type={1} option={
 					[
 						{
@@ -145,9 +175,14 @@ module.exports = {
 	main : Page,
 	init : function(){
 		Util.setRem();
-		React.render(
-			<Page />,
-			document.body
-		);
+		$.ajax({
+			url : "/api/gethomeproduct",
+			success : function(data){
+				React.render(
+					<Page data={data.data} />,
+					document.body
+				);
+			}
+		});
 	}
 };

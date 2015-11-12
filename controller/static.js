@@ -3,6 +3,15 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 		loading = "<div class=\"loading\"></div>";
 	//api
 	router
+		.route("/api/gethomeproduct")
+		.get(function(req, res, next){
+			request("http://www.xilanlicai.com/api/getproducts", function(err, request, body){
+				if(!err && request.statusCode === 200){
+					res.json(JSON.parse(body));
+				}
+			});
+		});
+	router
 		.route("/api/getinfo")
 		.get(function(req, res, next){
 			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, request, body){
@@ -49,11 +58,15 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/")
 		.get(function(req, res, next){
-			res.render("./index", {
-				style : ["/css/home.css"],
-				script : ["/js/home.js"],
-				title : "首页",
-				page : reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/home").main)({}))
+			request("http://www.xilanlicai.com/api/getproducts", function(err, request, body){
+				res.render("./index", {
+					style : ["/css/home.css"],
+					script : ["/js/home.js"],
+					title : "首页",
+					page : reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/home").main)({
+						data : JSON.parse(body)
+					}))
+				});
 			});
 		});
 	router
