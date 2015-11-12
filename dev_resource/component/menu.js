@@ -43,10 +43,12 @@ var List2 = React.createClass({
 });
 var List3 = React.createClass({
 	getInitialState : function(){
-
+		return {};
 	},
 	render : function(){
-
+		return (
+			<a></a>
+		);
 	}
 });
 var MenuBar = React.createClass({
