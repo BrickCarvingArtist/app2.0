@@ -48,69 +48,100 @@ menu.menu_3col_anchor{
 	}
 }
 .product{
+	position:relative;
 	float:left;
-	padding-top:1.5rem;
+	padding-top:1.325rem;
 	width:16rem;
 	height:14rem;
 	overflow:hidden;
-	.container{
-		.info{
-			padding-top:.5rem;
-			width:16rem;
-			overflow:hidden;
-			.circle{
-				position:relative;
-				margin:0 auto;
-				padding-top:1rem;
-				width:5.8rem;
-				height:5.8rem;
-				background-color:$orange;
-				color:white;
-				text-align:center;
-				border-radius:50%;
-				h1{
-					margin:0 .5rem;
-					line-height:2.5rem;
-					border-bottom:.025rem solid white;
-					strong{
-						font-size:2.5rem;
-					}
-					em{
-						font-size:.85rem;
-					}
+	.container{}
+	.info{
+		width:16rem;
+		overflow:hidden;
+		.bg{
+			position:relative;
+			margin:.675rem auto 0;
+			width:5.8rem;
+			height:5.8rem;
+			background-color:$orange;
+			border-radius:50%;
+			-webkit-animation:rotate 3.1415926535898s linear infinite;
+		}
+		.bg:before{
+			position:absolute;
+			top:-.5rem;
+			left:-.5rem;
+			width:6.8rem;
+			height:6.8rem;
+			content:"";
+			border:.05rem solid $orange;
+			opacity:.7;
+			border-radius:50%;
+		}
+		.bg:after{
+			position:absolute;
+			top:2.625rem;
+			left:-.675rem;
+			width:.35rem;
+			height:.35rem;
+			background-color:$orange;
+			content:"";
+			border-radius:50%;
+		}
+		.circle{
+			position:relative;
+			margin:-5.8rem auto 0;
+			padding-top:1rem;
+			width:5.8rem;
+			height:5.8rem;
+			color:white;
+			text-align:center;
+			h1{
+				margin:0 .5rem;
+				line-height:2.5rem;
+				border-bottom:.025rem solid white;
+				strong{
+					font-size:2.5rem;
 				}
-				h2{
-					font-size:.55rem;
-					line-height:1.5rem;
+				em{
+					font-size:.85rem;
 				}
 			}
-			.circle:before{
-				position:absolute;
-				top:-.5rem;
-				left:-.5rem;
-				width:6.8rem;
-				height:6.8rem;
-				content:"";
-				border:.05rem solid $orange;
-				opacity:.7;
-				border-radius:50%;
-			}
-			ul{
-				margin-top:.5rem;
-				padding:.8rem 0;
-				text-align:center;
-				li{
-					margin-right:.2rem;
-					display:inline-block;
-					padding:.1rem;
-					font-size:.55rem;
-					color:$darkGrey;
-					text-align:center;
-					border:.025rem solid $darkGrey;
-					border-radius:.3rem;
-				}
+			h2{
+				font-size:.55rem;
+				line-height:1.5rem;
 			}
 		}
+		ul{
+			margin-top:.5rem;
+			padding:.8rem 0;
+			text-align:center;
+			li{
+				margin-right:.2rem;
+				display:inline-block;
+				padding:.1rem;
+				font-size:.55rem;
+				color:$darkGrey;
+				text-align:center;
+				border:.025rem solid $darkGrey;
+				border-radius:.3rem;
+			}
+		}
+	}
+	.prev, .next{
+		position:absolute;
+		top:3.95rem;
+		width:.725rem;
+		height:1.825rem;
+		background-size:.725rem 1.825rem;
+	}
+	.prev{
+		left:1.35rem;
+		background-image:$prev;
+	}
+	.next{
+		right:1.35rem;
+		background-image:$next;
 	}
 	.btnBuy{
 		position:relative;
@@ -163,5 +194,10 @@ menu.menu_3col_anchor{
 	}
 	100%{
 		-webkit-transform:translateX(-64rem);
+	}
+}
+@-webkit-keyframes rotate{
+	to{
+		-webkit-transform:rotate(360deg);
 	}
 }

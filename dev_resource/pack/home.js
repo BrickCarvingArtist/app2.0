@@ -13,6 +13,7 @@ var Info = React.createClass({
 		var data = this.state.data;
 		return (
 			<div className="info">
+				<div className="bg"></div>
 				<div className="circle">
 					<h1>
 						<strong>9.8</strong>
