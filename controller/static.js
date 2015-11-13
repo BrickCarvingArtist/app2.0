@@ -8,6 +8,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			request("http://www.xilanlicai.com/api/getproducts", function(err, request, body){
 				if(!err && request.statusCode === 200){
 					res.json(JSON.parse(body));
+				}else{
+					next();
 				}
 			});
 		});
@@ -17,6 +19,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, request, body){
 				if(!err && request.statusCode === 200){
 					res.json(JSON.parse(body));
+				}else{
+					next();
 				}
 			});
 		});
@@ -24,34 +28,42 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 		.route("/api/getinfo/:id")
 		.get(function(req, res, next){
 			request("http://www.xilanlicai.com/api/getnews/" + req.params.id, function(err, request, body){
-				res.json(JSON.parse(body));
+				if(!err && request.statusCode === 200){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
 			});
 		});
 	router
 		.route("/api/getproduct")
 		.get(function(req, res, next){
 			request("http://www.xilanlicai.com/api/getproducts/56", function(err, response, body){
-				var data = JSON.parse(body).data;
-				res.json({
-					data : [
-						{
-							title : data.product.name,
-							scale : data.product.lumpSum,
-							rate : data.product.primeRate,
-							term : data.product.days,
-							beginTime : data.product.beginTime,
-							stopBuyTime : data.product.stopBuyTime
-						},
-						{
-							title : "周一见12号",
-							scale : 200000,
-							rate : 0.095,
-							term : 30,
-							beginTime : data.product.beginTime,
-							stopBuyTime : data.product.stopBuyTime
-						}
-					]
-				});
+				if(!err && request.statusCode === 200){
+					var data = JSON.parse(body).data;
+					res.json({
+						data : [
+							{
+								title : data.product.name,
+								scale : data.product.lumpSum,
+								rate : data.product.primeRate,
+								term : data.product.days,
+								beginTime : data.product.beginTime,
+								stopBuyTime : data.product.stopBuyTime
+							},
+							{
+								title : "周一见12号",
+								scale : 200000,
+								rate : 0.095,
+								term : 30,
+								beginTime : data.product.beginTime,
+								stopBuyTime : data.product.stopBuyTime
+							}
+						]
+					});
+				}else{
+					next();
+				}
 			});
 		});
 	//route
@@ -59,14 +71,18 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 		.route("/")
 		.get(function(req, res, next){
 			request("http://www.xilanlicai.com/api/getproducts", function(err, request, body){
-				res.render("./index", {
-					style : ["/css/home.css"],
-					script : ["/js/home.js"],
-					title : "首页",
-					page : reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/home").main)({
-						data : JSON.parse(body)
-					}))
-				});
+				if(!err && request.statusCode === 200){
+					res.render("./index", {
+						style : ["/css/home.css"],
+						script : ["/js/home.js"],
+						title : "首页",
+						page : reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/home").main)({
+							data : JSON.parse(body)
+						}))
+					});
+				}else{
+					next();
+				}
 			});
 		});
 	router
@@ -92,6 +108,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 							data : JSON.parse(body).data
 						}))
 					});
+				}else{
+					next();
 				}
 			});
 		});
