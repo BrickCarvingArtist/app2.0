@@ -11,23 +11,13 @@ var Info = React.createClass({
 			data : this.props.data
 		};
 	},
-	componentDidMount : function(){
-		// var t = setTimeout(function(){
-		// 	clearTimeout(t);
-		// 	this.getDOMNode().style.webkitAnimation = "slideIn 1s linear forwards";
-		// }.bind(this), 1000);
-	},
+	componentDidMount : function(){},
 	componentWillReceiveProps : function(nextProps){
 		this.setState({
 			currentIndex : nextProps.currentIndex
 		});	
 	},
-	componentDidUpdate : function(){
-		// var t = setTimeout(function(){
-		// 	clearTimeout(t);
-		// 	this.getDOMNode().style.webkitAnimation = "slideIn 1s linear forwards";
-		// }.bind(this), 1000);
-	},
+	componentDidUpdate : function(){},
 	render : function(){
 		var data = this.state.data;
 		return (
