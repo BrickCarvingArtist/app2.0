@@ -14,7 +14,18 @@ var Info = React.createClass({
 	componentDidMount : function(){
 		// var t = setTimeout(function(){
 		// 	clearTimeout(t);
-		// 	$(this.getDOMNode()).removeClass("current");
+		// 	this.getDOMNode().style.webkitAnimation = "slideIn 1s linear forwards";
+		// }.bind(this), 1000);
+	},
+	componentWillReceiveProps : function(nextProps){
+		this.setState({
+			currentIndex : nextProps.currentIndex
+		});	
+	},
+	componentDidUpdate : function(){
+		// var t = setTimeout(function(){
+		// 	clearTimeout(t);
+		// 	this.getDOMNode().style.webkitAnimation = "slideIn 1s linear forwards";
 		// }.bind(this), 1000);
 	},
 	render : function(){
@@ -101,7 +112,6 @@ var Product = React.createClass({
 		});
 	},
 	render : function(){
-		// console.log(this.state.currentIndex);
 		var lists = [],
 			data = this.state.data,
 			dataLen = data.length;
@@ -112,9 +122,7 @@ var Product = React.createClass({
 		}.bind(this));
 		return (
 			<div className="product">
-				<div className="container">
-					{lists}
-				</div>
+				{lists}
 				<Option sum={dataLen} userClass={this} type={1} />
 				<Option sum={dataLen} userClass={this} type={2} />
 				<Button ref="button" href={this.state.data[this.state.currentIndex].id} />

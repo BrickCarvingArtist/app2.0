@@ -57,18 +57,18 @@ menu.menu_3col_anchor{
 .product{
 	position:relative;
 	float:left;
-	padding-top:1.325rem;
+	margin-top:1.325rem;
 	width:16rem;
 	height:14rem;
 	overflow:hidden;
-	.container{
-		width:48rem;
-	}
 	.info{
+		position:absolute;
+		top:0;
+		left:0;
 		display:inline-block;
 		width:16rem;
 		overflow:hidden;
-		-webkit-animation:slideOut 1s linear forwards;
+		-webkit-animation:slideOut .5s linear forwards;
 		.bg{
 			position:relative;
 			margin:.675rem auto 0;
@@ -140,7 +140,7 @@ menu.menu_3col_anchor{
 		}
 	}
 	.info.current{
-		-webkit-animation:slideIn 1s linear forwards;
+		-webkit-animation:slideIn .5s linear forwards;
 	}
 	.prev, .next{
 		position:absolute;
@@ -159,6 +159,8 @@ menu.menu_3col_anchor{
 	}
 	.btnBuy{
 		position:relative;
+		top:9.65rem;
+		left:0;
 		margin:0 auto;
 		display:block;
 		width:13.3rem;
@@ -217,7 +219,7 @@ menu.menu_3col_anchor{
 }
 @-webkit-keyframes slideIn{
 	from{
-		-webkit-transform:translateX(16rem);
+		-webkit-transform:translateX(10rem);
 		opacity:0;
 	}
 	to{
@@ -228,9 +230,10 @@ menu.menu_3col_anchor{
 @-webkit-keyframes slideOut{
 	from{
 		-webkit-transform:translateX(0);
+		opacity:1;
 	}
 	to{
-		-webkit-transform:translateX(-16rem);
+		-webkit-transform:translateX(-10rem);
 		opacity:0;
 	}
 }
