@@ -49,9 +49,17 @@ var Info = React.createClass({
 	}
 });
 var Button = React.createClass({
+	getInitialState : function(){
+		return {
+			href : this.props.href
+		};
+	},
+	shouldComponentUpdate : function(nextProps, nextState){
+		return this.state.href !== nextState.href;
+	},
 	render : function(){
 		return (
-			<a className="btnBuy">立即购买</a>
+			<a className="btnBuy" href={"/api/getproduct/" + this.state.href}>立即购买</a>
 		);
 	}
 });
@@ -83,13 +91,17 @@ var Product = React.createClass({
 	getInitialState : function(){
 		return {
 			currentIndex : 0,
-			data : this.props.data
+			data : this.props.data.data
 		};
 	},
 	componentDidUpdate : function(){
-		console.log(this.state.currentIndex);
+		var state = this.state;
+		this.refs.button.setState({
+			href : state.data[state.currentIndex].id
+		});
 	},
 	render : function(){
+		// console.log(this.state.currentIndex);
 		var lists = [],
 			data = this.state.data,
 			dataLen = data.length;
@@ -105,7 +117,7 @@ var Product = React.createClass({
 				</div>
 				<Option sum={dataLen} userClass={this} type={1} />
 				<Option sum={dataLen} userClass={this} type={2} />
-				<Button />
+				<Button ref="button" href={this.state.data[this.state.currentIndex].id} />
 			</div>
 		);
 	}
@@ -188,11 +200,12 @@ module.exports = {
 	main : Page,
 	init : function(){
 		Util.setRem();
+		document.body.style.opacity = 1;
 		$.ajax({
 			url : "/api/gethomeproduct",
 			success : function(data){
 				React.render(
-					<Page data={data.data} />,
+					<Page data={data} />,
 					document.body
 				);
 			}

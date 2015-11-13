@@ -105,6 +105,7 @@ var	Page = React.createClass({
 });
 var init = function(){
 	Util.setRem();
+	document.body.style.opacity = 1;
 	window.onpopstate = function(e){
 		init();
 	};

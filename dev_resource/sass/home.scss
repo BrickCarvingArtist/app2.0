@@ -17,6 +17,7 @@ menu.menu_3col_anchor{
 	float:left;
 	border-bottom:.025rem solid $grey;
 	a{
+		position:relative;
 		i{
 			float:left;
 			margin:.575rem .5rem;
@@ -30,13 +31,11 @@ menu.menu_3col_anchor{
 		}
 	}
 	a:nth-of-type(1){
-		border-right:solid .025rem $grey;
 		i{
 			background-image:$bonus;
 		}
 	}
 	a:nth-of-type(2){
-		border-right:solid .025rem $grey;
 		i{
 			background-image:$activity;
 		}
@@ -45,6 +44,14 @@ menu.menu_3col_anchor{
 		i{
 			background-image:$sign;
 		}
+	}
+	a:nth-of-type(1):after, a:nth-of-type(2):after{
+		position:absolute;
+		top:.225rem;
+		right:0;
+		content:"";
+		height:1.7rem;
+		border-right:solid .025rem $grey;
 	}
 }
 .product{
