@@ -24,6 +24,12 @@ table{
 textarea{
 	resize:none;
 }
+h1{
+	-webkit-margin-before:0;
+	-webkit-margin-after:0;
+	-webkit-margin-start:0;
+	-webkit-margin-end:0;
+}
 a{
 	color:inherit;
 	text-decoration:none;

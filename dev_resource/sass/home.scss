@@ -64,11 +64,11 @@ menu.menu_3col_anchor{
 	.info{
 		position:absolute;
 		top:0;
-		left:0;
+		left:2.075rem;
 		display:inline-block;
-		width:16rem;
+		width:11.85rem;
 		overflow:hidden;
-		-webkit-animation:slideOut .5s linear forwards;
+		-webkit-animation:slideOut .25s linear forwards;
 		.bg{
 			position:relative;
 			margin:.675rem auto 0;
@@ -76,7 +76,7 @@ menu.menu_3col_anchor{
 			height:5.8rem;
 			background-color:$orange;
 			border-radius:50%;
-			-webkit-animation:rotate 3.1415926535898s linear infinite;
+			-webkit-animation:rotate 31.415926535898s linear infinite;
 		}
 		.bg:before{
 			position:absolute;
@@ -140,11 +140,11 @@ menu.menu_3col_anchor{
 		}
 	}
 	.info.current{
-		-webkit-animation:slideIn .5s linear forwards;
+		-webkit-animation:slideIn .25s linear forwards;
 	}
 	.prev, .next{
 		position:absolute;
-		top:3.95rem;
+		top:2.625rem;
 		width:.725rem;
 		height:1.825rem;
 		background-size:.725rem 1.825rem;
@@ -170,7 +170,7 @@ menu.menu_3col_anchor{
 		color:white;
 		line-height:1.6rem;
 		text-align:center;
-		border-radius:.3rem;
+		border-radius:.25rem;
 	}
 	.btnBuy:before{
 		position:absolute;
@@ -220,20 +220,16 @@ menu.menu_3col_anchor{
 @-webkit-keyframes slideIn{
 	from{
 		-webkit-transform:translateX(10rem);
-		opacity:0;
 	}
 	to{
 		-webkit-transform:translateX(0);
-		opacity:1;
 	}
 }
 @-webkit-keyframes slideOut{
 	from{
 		-webkit-transform:translateX(0);
-		opacity:1;
 	}
 	to{
-		-webkit-transform:translateX(-10rem);
-		opacity:0;
+		-webkit-transform:translateX(-16rem);
 	}
 }
