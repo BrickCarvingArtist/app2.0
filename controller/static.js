@@ -46,6 +46,15 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				}
 			});
 		});
+	router
+		.route("/api/getproduct/:id")
+		.get(function(req, res, next){
+			request("http://www.xilanlicai.com/api/getproducts/" + req.params.id, function(err, request, body){
+				if(!err && request.statusCode === 200){
+					res.json(JSON.parse(body));
+				}
+			});
+		});
 	//route
 	router
 		.route("/")
