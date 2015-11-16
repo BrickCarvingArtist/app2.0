@@ -15,17 +15,17 @@ section{
 		margin:0 .85rem;
 		width:14.3rem;
 		height:1.7rem;
-		line-height:1.7rem;
 		border-bottom:.025rem solid $grey;
 		strong{
+			float:left;
 			font-size:.65rem;
+			line-height:1.7rem;
 		}
 		em{
 			float:right;
-			margin-top:1rem;
+			margin-top:.64rem;
 			font-size:.5rem;
 			color:$grey;
-			line-height:1;
 			text-align:right;
 		}
 	}
@@ -37,13 +37,50 @@ section{
 		.column1{
 			float:left;
 			padding-left:.4rem;
+			p{
+				float:left;
+				width:100%;
+			}
+			p:first-of-type{
+				font-size:.5rem;
+				color:$grey;
+			}
+			p:last-of-type{
+				padding-top:.3rem;
+				color:$orange;
+				strong{
+					float:left;
+					font-size:1.2rem;
+				}
+				em{
+					float:left;
+					margin-top:.25rem;
+					font-size:.85rem;
+				}
+			}
 		}
 		.column2{
 			float:left;
-		}
-		.column1 span, .column2 span{
-			font-size:.5rem;
-			color:$grey;
+			p{
+				float:left;
+				width:100%;
+			}
+			p:first-of-type{
+				font-size:.5rem;
+				color:$grey;
+			}
+			p:last-of-type{
+				padding-top:.8rem;
+				color:$heavyGrey;
+				strong{
+					float:left;
+					font-size:.6rem;
+				}
+				em{
+					float:left;
+					font-size:.6rem;
+				}
+			}
 		}
 		a{
 			float:right;

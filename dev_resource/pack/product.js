@@ -63,16 +63,16 @@ var Product = React.createClass({
 				</h1>
 				<div className="main">
 					<div className="column1">
-						<span>年化率</span>
+						<p>年化率</p>
 						<p>
 							<strong>
-								{data.primeRate}
+								{(data.primeRate * 100).toFixed(1)}
 							</strong>
 							<em>％</em>
 						</p>
 					</div>
 					<div className="column2">
-						<span>期限</span>
+						<p>期限</p>
 						<p>
 							<strong>
 								{data.days}
