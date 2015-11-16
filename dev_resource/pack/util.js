@@ -73,6 +73,32 @@ var Util = {
 	},
 	setRem : function(){
 		document.documentElement.style.fontSize = window.innerWidth / 16 + "px";
+	},
+	PageData : {
+		render : function(init){
+			Util.setRem();
+			document.body.style.opacity = 1;
+			window.onpopstate = function(){
+				init();
+			};
+		},
+		setData : function(url, callback){
+			if(!this.getData()){
+				$.ajax({
+					url : url,
+					success : function(data){
+						this.data = data;
+						callback(data);
+					}.bind(this)
+				});
+			}else{
+				callback(this.getData());
+			}
+			return this;
+		},
+		getData : function(){
+			return this.data;
+		}
 	}
 };
 module.exports = Util;

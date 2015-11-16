@@ -2,31 +2,30 @@ var React = require("react"),
 	Util = require("../pack/util"),
 	Component = require("../pack/component"),
 	Menu = Component.Menu;
-// var ProductDetail = React.createClass({
-// 	getInitialState : function(){
-// 		return {
-// 			title : this.props.title,
-// 			beginTime : this.props.beginTime,
-// 			stopBuyTime : this.props.stopBuyTime
-// 		};
-// 	},
-// 	render : function(){
-// 		return (
-// 			<body>
-// 				<div className="part1">
-// 				</div>
-// 				<div className="part2">
-// 				</div>
-// 				<div className="part3">
-// 				</div>
-// 				<p>
-// 					{"募集时间:" + this.state.beginTime + " 至 " + this.state.stopBuyTime}
-// 				</p>
-// 				<a className="btnBuy"></a>
-// 			</body>
-// 		);
-// 	}
-// });
+var ProductDetail = React.createClass({
+	getInitialState : function(){
+		return {
+			data : this.props.data
+		};
+	},
+	render : function(){
+		var data = this.state.data;
+		return (
+			<body>
+				<div className="part1">
+				</div>
+				<div className="part2">
+				</div>
+				<div className="part3">
+				</div>
+				<p>
+					{"募集时间:" + data.beginTime + " 至 " + data.stopBuyTime}
+				</p>
+				<a className="btnBuy" href={"/payment/" + data.id}></a>
+			</body>
+		);
+	}
+});
 var Product = React.createClass({
 	getInitialState : function(){
 		return {
@@ -34,25 +33,24 @@ var Product = React.createClass({
 			data : this.props.data
 		};
 	},
-	handleClick : function(){
-		var body = document.body,
-			data = this.state.data;
-		if(!Util.QueryString("index")){
-			window.history.pushState({}, data.name, "?index=" + this.state.index);
-		}
-		window.addEventListener("popstate", function(e){
-			init();
-		}, 0);
-		document.title = data.name;
-		// React.render(
-		// 	<ProductDetail title={this.state.title} beginTime={this.state.beginTime} stopBuyTime={this.state.stopBuyTime} />,
-		// 	body
-		// );
+	componentDidMount : function(){
+		this.getDOMNode().onclick = function(){
+			var body = document.body,
+				data = this.state.data;
+			if(!Util.QueryString("index")){
+				window.history.pushState({}, data.name, "?index=" + this.state.index);
+			}
+			document.title = data.name;
+			React.render(
+				<ProductDetail data={data} />,
+				body
+			);
+		}.bind(this);
 	},
 	render : function(){
 		var data = this.state.data;
 		return (
-			<section onClick={this.handleClick}>
+			<section>
 				<h1>
 					<strong>
 						{data.name}
@@ -94,7 +92,7 @@ var Page = React.createClass({
 	},
 	componentDidMount : function(){
 		if(Util.QueryString("index")){
-			this.refs["info" + Util.QueryString("index")].getDOMNode().click();
+			this.refs["product" + Util.QueryString("index")].getDOMNode().click();
 		}
 	},
 	render : function(){
@@ -102,7 +100,7 @@ var Page = React.createClass({
 			data = this.state.data;
 		data.forEach(function(list, index){
 			lists.push(
-				<Product index={index} data={list} />
+				<Product index={index + 1} data={list} ref={"product" + (index + 1)} />
 			);
 		});
 		return (
@@ -132,19 +130,15 @@ var Page = React.createClass({
 		);
 	}
 });
+var init = function(){
+	Util.PageData.setData("/api/getproduct", function(data){
+		React.render(
+			<Page data={data} />,
+			document.body
+		);
+	}).render(init);
+};
 module.exports = {
 	main : Page,
-	init : function(){
-		Util.setRem();
-		document.body.style.opacity = 1;
-		$.ajax({
-			url : "/api/getproduct",
-			success : function(data){
-				React.render(
-					<Page data={data} />,
-					document.body
-				);
-			}
-		});
-	}
+	init : init
 };

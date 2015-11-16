@@ -104,22 +104,14 @@ var	Page = React.createClass({
 	}
 });
 var init = function(){
-	Util.setRem();
-	document.body.style.opacity = 1;
-	window.onpopstate = function(e){
-		init();
-	};
-	$.ajax({
-		url : "/api/getinfo",
-		success : function(data){
-			document.title = "消息中心";
-			document.body.style.backgroundColor = "rgb(244, 244, 244)";
-			React.render(
-				<Page data={data.data} />,
-				document.body
-			);
-		}
-	});
+	Util.PageData.setData("/api/getinfo", function(data){
+		document.title = "消息中心";
+		document.body.style.backgroundColor = "rgb(244, 244, 244)";
+		React.render(
+			<Page data={data.data} />,
+			document.body
+		);
+	}).render(init);
 };
 module.exports = {
 	main : Page,

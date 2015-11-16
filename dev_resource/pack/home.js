@@ -194,19 +194,15 @@ var Page  = React.createClass({
 		);
 	}
 });
+var init = function(){
+	Util.PageData.setData("/api/gethomeproduct", function(data){
+		React.render(
+			<Page data={data} />,
+			document.body
+		);
+	}).render(init);
+}
 module.exports = {
 	main : Page,
-	init : function(){
-		Util.setRem();
-		document.body.style.opacity = 1;
-		$.ajax({
-			url : "/api/gethomeproduct",
-			success : function(data){
-				React.render(
-					<Page data={data} />,
-					document.body
-				);
-			}
-		});
-	}
+	init : init
 };
