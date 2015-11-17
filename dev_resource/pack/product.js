@@ -2,6 +2,49 @@ var React = require("react"),
 	Util = require("../pack/util"),
 	Component = require("../pack/component"),
 	Menu = Component.Menu;
+var Part1 = React.createClass({
+	getInitialState : function(){
+		return {
+			data : this.props.data
+		};
+	},
+	render : function(){
+		var data = this.state.data;
+		return (
+			<div className="part1">
+				<p>
+					<strong>
+						{(data.primeRate * 100).toFixed(1)}
+					</strong>
+					<em>％</em>
+					<span>预计年化收益</span>
+					<b>起息日:T+1</b>
+				</p>
+				<ul>
+					<li>
+						<p>
+							{data.days + "天"}
+						</p>
+						<p>项目期限</p>
+					</li>
+					<li>
+						<p>
+							{data.unitPrice * data.minUnitCount + "元"}
+						</p>
+						<p>起投金额</p>
+					</li>
+					<li>
+						<p>
+							{data.lumpSum + "元"}
+						</p>
+						<p>项目总额</p>
+					</li>
+				</ul>
+				<p></p>
+			</div>
+		);
+	}
+});
 var Part2 = React.createClass({
 	getDefaultProps : function(){
 		return {
@@ -54,12 +97,11 @@ var ProductDetail = React.createClass({
 		};
 	},
 	render : function(){
-		console.log(this.state.data);
 		var product = this.state.data.product,
 			detail = this.state.data.detail;
 		return (
 			<body>
-				<div className="part1"></div>
+				<Part1 data={product} />
 				<Part2 />
 				<div className="part3">
 				</div>
