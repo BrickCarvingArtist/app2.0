@@ -8,8 +8,7 @@ section{
 	height:5rem;
 	margin-bottom:.4rem;
 	background-color:white;
-	border-bottom:.025rem solid $grey;
-	box-shadow:0 .025rem .025rem 0 $grey;
+	box-shadow:0 .025rem .025rem 0 $bitGrey;
 	h1{
 		float:left;
 		margin:0 .85rem;
@@ -96,4 +95,35 @@ section{
 			border-radius:.25rem;
 		}
 	}
+}
+.part2{
+	width:16rem;
+	height:7.6rem;
+	box-shadow:0 .025rem .025rem 0 $bitGrey;
+	p{
+		margin-left:.85rem;
+		height:1.9rem;
+		line-height:1.9rem;
+		border-bottom:solid .025rem $bitGrey;
+		span{
+			float:left;
+			font-size:.55rem;
+			color:$heavyGrey;
+		}
+		em{
+			float:right;
+			margin-right:.85rem;
+			font-size:.5rem;
+			color:$grey;
+		}
+	}
+	p:last-of-type{
+		border-bottom:none;
+	}
+}
+.term{
+	font-size:.5rem;
+	line-height:1.5rem;
+	color:$grey;
+	text-align:center;
 }

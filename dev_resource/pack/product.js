@@ -2,6 +2,51 @@ var React = require("react"),
 	Util = require("../pack/util"),
 	Component = require("../pack/component"),
 	Menu = Component.Menu;
+var Part2 = React.createClass({
+	getDefaultProps : function(){
+		return {
+			setting : [
+				{
+					name : "还款方式",
+					value : "自动还款"
+				},
+				{
+					name : "产品描述",
+					value : "利率高"
+				},
+				{
+					name : "资金保障",
+					value : "风险低"
+				},
+				{
+					name : "申购情况",
+					value : "已申购订单"
+				}
+			]
+		};
+	},
+	render : function(){
+		var lists = [],
+			setting = this.props.setting;
+		setting.forEach(function(list){
+			lists.push(
+				<p>
+					<span>
+						{list.name}
+					</span>
+					<em>
+						{list.value}
+					</em>
+				</p>
+			);
+		});
+		return (
+			<div className="part2">
+				{lists}
+			</div>
+		);
+	}
+});
 var ProductDetail = React.createClass({
 	getInitialState : function(){
 		return {
@@ -9,19 +54,19 @@ var ProductDetail = React.createClass({
 		};
 	},
 	render : function(){
-		var data = this.state.data;
+		console.log(this.state.data);
+		var product = this.state.data.product,
+			detail = this.state.data.detail;
 		return (
 			<body>
-				<div className="part1">
-				</div>
-				<div className="part2">
-				</div>
+				<div className="part1"></div>
+				<Part2 />
 				<div className="part3">
 				</div>
-				<p>
-					{"募集时间:" + data.beginTime + " 至 " + data.stopBuyTime}
+				<p className="term">
+					{"募集时间:" + product.beginTime + " 至 " + product.stopBuyTime}
 				</p>
-				<a className="btnBuy" href={"/payment/" + data.id}></a>
+				<a className="longBtn btnBuy" href={"/payment/" + product.id}>立即购买</a>
 			</body>
 		);
 	}
@@ -41,10 +86,15 @@ var Product = React.createClass({
 				window.history.pushState({}, data.name, "?index=" + this.state.index);
 			}
 			document.title = data.name;
-			React.render(
-				<ProductDetail data={data} />,
-				body
-			);
+			$.ajax({
+				url : "/api/getproduct/" + data.id,
+				success : function(data){
+					React.render(
+						<ProductDetail data={data.data} />,
+						body
+					);
+				}
+			});
 		}.bind(this);
 	},
 	render : function(){

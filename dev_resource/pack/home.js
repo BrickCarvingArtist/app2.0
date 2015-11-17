@@ -60,7 +60,7 @@ var Button = React.createClass({
 	},
 	render : function(){
 		return (
-			<a className="btnBuy" href={"/api/getproduct/" + this.state.href}>立即购买</a>
+			<a className="longBtn btnBuy" href={"/api/getproduct/" + this.state.href}>立即购买</a>
 		);
 	}
 });
