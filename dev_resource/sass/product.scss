@@ -144,8 +144,22 @@ section{
 	}
 	> p:last-of-type{
 		font-size:.5rem;
+		height:1.4rem;
 		line-height:1.4rem;
 		text-align:center;
+		border-top:solid .025rem $bitGrey;
+		i{
+			display:inline-block;
+			width:.375rem;
+			height:.5rem;
+			background-image:$signature;
+			background-size:.375rem .5rem;
+			vertical-align:middle;
+		}
+		span{
+			margin-left:.15rem;
+			color:$grey;
+		}
 	}
 }
 .part2{
@@ -177,10 +191,75 @@ section{
 }
 .part3{
 	margin-top:.4rem;
-}
-.term{
-	font-size:.5rem;
-	line-height:1.5rem;
-	color:$grey;
-	text-align:center;
+	background-color:white;
+	div{
+		float:left;
+		margin:.25rem 0;
+		padding:.375rem 0;
+		width:8rem;
+		text-align:center;
+		p:first-of-type{
+			font-size:.75rem;
+			color:$orange;
+		}
+		p:last-of-type{
+			margin-top:.325rem;
+			font-size:.55rem;
+			color:$grey;
+		}
+	}
+	div:first-of-type{
+		border-right:solid .025rem $bitGrey;
+	}
+	form{
+		float:left;
+		border-top:solid .025rem $bitGrey;
+		span{
+			display:block;
+			width:2.15rem;
+			font-size:1rem;
+			line-height:2rem;
+			color:$grey;
+		}
+		span:first-of-type{
+			float:left;
+			margin-left:.85rem;
+		}
+		span:last-of-type{
+			float:right;
+			margin-right:.85rem;
+			direction:rtl;
+		}
+		.num{
+			width:10rem;
+			height:2rem;
+			font-size:1rem;
+			line-height:2rem;
+			color:$darkGrey;
+			text-align:center;
+		}
+		.term{
+			position:relative;
+			float:left;
+			width:100%;
+			background-color:$lightGrey;
+			font-size:.5rem;
+			line-height:1.5rem;
+			color:$grey;
+			text-align:center;
+			box-shadow:0 .025rem .025rem 0 $bitGrey inset;
+		}
+		.term:after{
+			position:absolute;
+			top:1.5rem;
+			left:0;
+			width:16rem;
+			height:1.6rem;
+			background-color:$lightGrey;
+			content:"";
+		}
+		.btnBuy{
+			position:relative;
+		}
+	}
 }

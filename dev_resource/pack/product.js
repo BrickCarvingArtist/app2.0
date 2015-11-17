@@ -9,7 +9,19 @@ var Part1 = React.createClass({
 		};
 	},
 	render : function(){
-		var data = this.state.data;
+		var data = this.state.data,
+			other = "";
+		data.other = "满20000元即可获得20元红包!";
+		if(data.other){
+			other = (
+				<p>
+					<i></i>
+					<span>
+						{data.other}
+					</span>
+				</p>
+			);
+		}
 		return (
 			<div className="part1">
 				<p>
@@ -40,7 +52,7 @@ var Part1 = React.createClass({
 						<p>项目总额</p>
 					</li>
 				</ul>
-				<p></p>
+				{other}
 			</div>
 		);
 	}
@@ -90,6 +102,41 @@ var Part2 = React.createClass({
 		);
 	}
 });
+var Part3 = React.createClass({
+	getInitialState : function(){
+		return {
+			data : this.props.data
+		}
+	},
+	render : function(){
+		var data = this.state.data;
+		return (
+			<div className="part3">
+				<div>
+					<p>
+						{data.balance + "元"}
+					</p>
+					<p>可投金额</p>
+				</div>
+				<div>
+					<p>
+						{"0元"}
+					</p>
+					<p>预期收益</p>
+				</div>
+				<form>
+					<span>－</span>
+					<input className="num" type="text" defaultValue="0" />
+					<span>＋</span>
+					<p className="term">
+						{"募集时间:" + data.beginTime.split(" ")[0] + " 至 " + data.stopBuyTime.split(" ")[0]}
+					</p>
+					<input className="longBtn btnBuy" type="submit" value="立即购买" />
+				</form>
+			</div>
+		);
+	}
+});
 var ProductDetail = React.createClass({
 	getInitialState : function(){
 		return {
@@ -102,13 +149,8 @@ var ProductDetail = React.createClass({
 		return (
 			<body>
 				<Part1 data={product} />
-				<Part2 />
-				<div className="part3">
-				</div>
-				<p className="term">
-					{"募集时间:" + product.beginTime + " 至 " + product.stopBuyTime}
-				</p>
-				<a className="longBtn btnBuy" href={"/payment/" + product.id}>立即购买</a>
+				<Part2 data={detail} />
+				<Part3 data={product} />
 			</body>
 		);
 	}
