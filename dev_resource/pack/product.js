@@ -3,13 +3,8 @@ var React = require("react"),
 	Component = require("../pack/component"),
 	Menu = Component.Menu;
 var Part1 = React.createClass({
-	getInitialState : function(){
-		return {
-			data : this.props.data
-		};
-	},
 	render : function(){
-		var data = this.state.data,
+		var data = this.props.data,
 			other = "";
 		data.other = "满20000元即可获得20元红包!";
 		if(data.other){
@@ -58,12 +53,75 @@ var Part1 = React.createClass({
 	}
 });
 var DetailDetail = React.createClass({
+	checkMarkup : function(data){
+		return {
+			__html : data
+		};
+	},
 	render : function(){
-		var data = this.props.data;
+		var lists = [],
+			data = this.props.data;
+			console.log(data)
+		for(var i in data){
+			if(data[i]){
+				lists.push(
+					<div className="detail">
+						<h1>
+							{i}
+						</h1>
+						<pre>
+							<p dangerouslySetInnerHTML={this.checkMarkup(data[i])}></p>
+						</pre>
+					</div>
+				);
+			}
+		}
 		return (
-			<div>
-
-			</div>
+			<body>
+				{lists}
+			</body>
+		);
+	}
+});
+var Bidder = React.createClass({
+	getDefaultProps : function(){
+		return {
+			setting : ["购买人", "购买金额", "购买时间"]
+		};
+	},
+	render : function(){
+		var lists = [],
+			title = [],
+			data = this.props.data;
+		this.props.setting.forEach(function(list){
+			title.push(
+				<li>
+					{list}
+				</li>
+			);
+		});
+		data.forEach(function(list){
+			lists.push(
+				<ul>
+					<li>
+						{list.name}
+					</li>
+					<li>
+						{list.money}
+					</li>
+					<li>
+						{list.buyTime}
+					</li>
+				</ul>
+			);
+		});
+		return (
+			<body>
+				<ul>
+					{title}
+				</ul>
+				{lists}
+			</body>
 		);
 	}
 });
@@ -71,22 +129,26 @@ var List = React.createClass({
 	componentDidMount : function(){
 		var id = this.props.id,
 			index = this.props.index,
-			data = this.props.data;
+			data = this.props.data,
+			body = document.body;
 		if(index){
 			this.getDOMNode().onclick = function(){
 				if(Object.keys(data).length){
 					React.render(
 						<DetailDetail data={data} />,
-						document.body
+						body
 					);
-					if(!Util.QueryString("detail")){
-						window.history.pushState({}, data.name, "&detail=" + index);
-					}
+					// if(!Util.QueryString("detail")){
+					// 	window.history.pushState({}, data.name, "&detail=" + index);
+					// }
 				}else{
 					$.ajax({
 						url : "/api/getbidder/" + id,
 						success : function(data){
-							console.log(data);
+							React.render(
+								<Bidder data={data.data} />,
+								body
+							);
 						}
 					});
 				}
@@ -119,12 +181,38 @@ var Part2 = React.createClass({
 				{
 					name : "产品描述",
 					value : "利率高",
-					detail : ["fundUse", "collateral", "source"]
+					detail : [
+						{
+							name : "资金用途",
+							value : "fundUse"
+						},
+						{
+							name : "抵押物说明",
+							value : "collateral"
+						},
+						{
+							name : "还款来源",
+							value : "source"
+						}
+					]
 				},
 				{
 					name : "资金保障",
 					value : "风险低",
-					detail : ["repayment", "guaranteeIntroduce", "fundSafe"]
+					detail : [
+						{
+							name : "担保方式",
+							value : "guarantee"
+						},
+						{
+							name : "担保方介绍",
+							value : "guaranteeIntroduce"
+						},
+						{
+							name : "资金安全",
+							value : "fundSafe"
+						}
+					]
 				},
 				{
 					name : "申购情况",
@@ -137,7 +225,7 @@ var Part2 = React.createClass({
 	adaptor : function(detail, data){
 		var _data = {};
 		for(var i = 0, detailLen = detail.length; i < detailLen; i++){
-			_data[detail[i]] = data[detail[i]];
+			_data[detail[i].name] = data[detail[i].value];
 		}
 		return _data;
 	},

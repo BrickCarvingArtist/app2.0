@@ -131,6 +131,7 @@ section{
 			border-right:solid .025rem $bitGrey;
 			p:first-of-type{
 				font-size:.65rem;
+				color:$heavyGrey;
 			}
 			p:last-of-type{
 				margin-top:.25rem;
@@ -235,7 +236,7 @@ section{
 			height:2rem;
 			font-size:1rem;
 			line-height:2rem;
-			color:$darkGrey;
+			color:$heavyGrey;
 			text-align:center;
 		}
 		.term{
@@ -261,5 +262,21 @@ section{
 		.btnBuy{
 			position:relative;
 		}
+	}
+}
+body > .detail{
+	h1{
+		padding:0 .85rem;
+		font-size:.65rem;
+		line-height:1.7rem;
+		color:$heavyGrey;
+	}
+	p{
+		padding:.4rem .85rem;
+		background-color:white;
+		word-wrap:break-word; 
+		font-size:.55rem;
+		line-height:1rem;
+		color:$grey;
 	}
 }
