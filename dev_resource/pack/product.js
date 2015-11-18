@@ -106,7 +106,7 @@ var Part3 = React.createClass({
 	getInitialState : function(){
 		return {
 			data : this.props.data
-		}
+		};
 	},
 	render : function(){
 		var data = this.state.data;
