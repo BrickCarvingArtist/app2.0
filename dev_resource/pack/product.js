@@ -158,9 +158,18 @@ var Part2 = React.createClass({
 	}
 });
 var Part3 = React.createClass({
+	getInitialState : function(){
+		return {
+			interest : 0
+		};
+	},
 	matchNum : function(dom, lumpSum){
-		var value = dom.value = Math.floor(dom.value);
-		dom.value = value >= 0 ? value > lumpSum ? value = lumpSum : value : 0;
+		var data = this.props.data,
+			value = dom.value = Math.floor(dom.value);
+		dom.value = value = value >= 0 ? value > lumpSum ? value = lumpSum : value : 0;
+		this.setState({
+			interest : (value * data.primeRate / 365 * data.days).toFixed(2)
+		});
 	},
 	componentDidMount : function(){
 		var _this = this,
@@ -192,7 +201,7 @@ var Part3 = React.createClass({
 				</div>
 				<div>
 					<p>
-						{"0元"}
+						{this.state.interest + "元"}
 					</p>
 					<p>预期收益</p>
 				</div>
@@ -284,7 +293,7 @@ var Product = React.createClass({
 							<em>天</em>
 						</p>
 					</div>
-					<a href={data.id}>立即购买</a>
+					<a>立即购买</a>
 				</div>
 			</section>
 		);
