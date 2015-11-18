@@ -57,44 +57,99 @@ var Part1 = React.createClass({
 		);
 	}
 });
+var DetailDetail = React.createClass({
+	render : function(){
+		var data = this.props.data;
+		return (
+			<div>
+
+			</div>
+		);
+	}
+});
+var List = React.createClass({
+	componentDidMount : function(){
+		var id = this.props.id,
+			index = this.props.index,
+			data = this.props.data;
+		if(index){
+			this.getDOMNode().onclick = function(){
+				if(Object.keys(data).length){
+					React.render(
+						<DetailDetail data={data} />,
+						document.body
+					);
+					if(!Util.QueryString("detail")){
+						window.history.pushState({}, data.name, "&detail=" + index);
+					}
+				}else{
+					$.ajax({
+						url : "/api/getbidder/" + id,
+						success : function(data){
+							console.log(data);
+						}
+					});
+				}
+			}.bind(this);
+		}
+	},
+	render : function(){
+		var props = this.props;
+		return (
+			<p>
+				<span>
+					{props.name}
+				</span>
+				<em>
+					{props.value}
+				</em>
+			</p>
+		);
+	}
+});
 var Part2 = React.createClass({
 	getDefaultProps : function(){
 		return {
 			setting : [
 				{
 					name : "还款方式",
-					value : "自动还款"
+					value : "自动还款",
+					detail : []
 				},
 				{
 					name : "产品描述",
-					value : "利率高"
+					value : "利率高",
+					detail : ["fundUse", "collateral", "source"]
 				},
 				{
 					name : "资金保障",
-					value : "风险低"
+					value : "风险低",
+					detail : ["repayment", "guaranteeIntroduce", "fundSafe"]
 				},
 				{
 					name : "申购情况",
-					value : "已申购订单"
+					value : "已申购订单",
+					detail : []
 				}
 			]
 		};
 	},
+	adaptor : function(detail, data){
+		var _data = {};
+		for(var i = 0, detailLen = detail.length; i < detailLen; i++){
+			_data[detail[i]] = data[detail[i]];
+		}
+		return _data;
+	},
 	render : function(){
 		var lists = [],
-			setting = this.props.setting;
-		setting.forEach(function(list){
+			setting = this.props.setting,
+			data = this.props.data;
+		setting.forEach(function(list, index){
 			lists.push(
-				<p>
-					<span>
-						{list.name}
-					</span>
-					<em>
-						{list.value}
-					</em>
-				</p>
+				<List id={data.id} index={index} name={list.name} value={list.value} data={this.adaptor(list.detail, data)} />
 			);
-		});
+		}.bind(this));
 		return (
 			<div className="part2">
 				{lists}
@@ -103,13 +158,30 @@ var Part2 = React.createClass({
 	}
 });
 var Part3 = React.createClass({
-	getInitialState : function(){
-		return {
-			data : this.props.data
+	matchNum : function(dom, lumpSum){
+		var value = dom.value = Math.floor(dom.value);
+		dom.value = value >= 0 ? value > lumpSum ? value = lumpSum : value : 0;
+	},
+	componentDidMount : function(){
+		var _this = this,
+			data = this.props.data,
+			minus = this.refs.minus,
+			plus = this.refs.plus,
+			num = this.refs.num;
+		num.onkeyup = function(){
+			_this.matchNum(this, data.lumpSum);
+		};
+		minus.onclick = function(){
+			num.value -= 500;
+			num.onkeyup();
+		};
+		plus.onclick = function(){
+			num.value = parseInt(num.value) + 500;
+			num.onkeyup();
 		};
 	},
 	render : function(){
-		var data = this.state.data;
+		var data = this.props.data;
 		return (
 			<div className="part3">
 				<div>
@@ -124,10 +196,10 @@ var Part3 = React.createClass({
 					</p>
 					<p>预期收益</p>
 				</div>
-				<form>
-					<span>－</span>
-					<input className="num" type="text" defaultValue="0" />
-					<span>＋</span>
+				<form method="post" action="/api/postbill">
+					<span ref="minus">－</span>
+					<input name="invest" ref="num" className="num" type="text" defaultValue="0" />
+					<span ref="plus">＋</span>
 					<p className="term">
 						{"募集时间:" + data.beginTime.split(" ")[0] + " 至 " + data.stopBuyTime.split(" ")[0]}
 					</p>
@@ -145,7 +217,7 @@ var ProductDetail = React.createClass({
 	},
 	render : function(){
 		var product = this.state.data.product,
-			detail = this.state.data.detail;
+			detail = this.state.data.details;
 		return (
 			<body>
 				<Part1 data={product} />

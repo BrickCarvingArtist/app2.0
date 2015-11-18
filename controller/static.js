@@ -57,6 +57,29 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				}
 			});
 		});
+	router
+		.route("/api/getbidder/:id")
+		.get(function(req, res, next){
+			request("http://www.xilanlicai.com/api/getproductbuy?pageindex=1&pagesize=99&id=" + req.params.id, function(err, request, body){
+				if(!err && request.statusCode === 200){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		});
+	router
+		.route("/api/postbill")
+		.post(function(req, res, next){
+			console.log(req.body)
+			request("http://www.xilanlicai.com/api/getorder", function(err, request, body){
+				if(!err && request.statusCode === 200){
+					res.redirect("/payment");
+				}else{
+					next();
+				}
+			});
+		});
 	//route
 	router
 		.route("/")
