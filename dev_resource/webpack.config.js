@@ -2,7 +2,8 @@ module.exports = {
 	entry : {
 		home : "./entry/home",
 		info : "./entry/info",
-		product : "./entry/product"
+		product : "./entry/product",
+		more : "./entry/more"
 	},
 	output : {
 		filename : "../resource/js/[name].js"

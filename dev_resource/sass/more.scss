@@ -1,0 +1,39 @@
+@import "variable";
+@import "base";
+body{
+	background-color:$lightGrey;
+}
+h1{
+	position:relative;
+	height:1.9rem;
+	padding-right:1.5rem;
+	background-color:white;
+	overflow:auto;
+	font-size:.6rem;
+	line-height:1.875rem;
+	color:$darkGrey;
+	text-indent:.85rem;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+h1:after{
+	position:absolute;
+	top:.6625rem;
+	right:.85rem;
+	width:.375rem;
+	height:.55rem;
+	content:"";
+	background-image:$nextStep;
+	background-size:.375rem .55rem;
+}
+h1:not(:last-of-type):before{
+	position:absolute;
+	top:1.875rem;
+	left:.85rem;
+	width:15.15rem;
+	border-bottom:solid .025rem $bitGrey;
+	content:"";
+}
+h1:last-of-type{
+	border-bottom:solid .025rem $bitGrey;
+}

@@ -83,7 +83,7 @@ var Util = {
 			};
 		},
 		setData : function(url, callback){
-			if(!this.getData()){
+			if(url && !this.getData()){
 				$.ajax({
 					url : url,
 					success : function(data){

@@ -110,6 +110,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
+		.route("/more")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/more.css"],
+				script : ["/js/more.js"],
+				title : "更多",
+				page : loading
+			});
+		});
+	router
 		.route("/infocenter")
 		.get(function(req, res, next){
 			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, request, body){
