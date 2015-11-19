@@ -37,3 +37,30 @@ h1:not(:last-of-type):before{
 h1:last-of-type{
 	border-bottom:solid .025rem $bitGrey;
 }
+section{
+	p{
+		height:0;	
+		word-wrap:break-word; 
+		font-size:0;
+		line-height:1rem;
+		color:$grey;
+		a{
+			color:$blue;
+		}
+	}
+}
+.current{
+	h1:after{
+		background-image:none;
+	}
+	p{
+		-webkit-animation:slideDown .25s forwards;
+	}
+}
+@-webkit-keyframes slideDown{
+	to{
+		height:auto;
+		padding:.4rem .85rem;
+		font-size:.55rem;
+	}
+}

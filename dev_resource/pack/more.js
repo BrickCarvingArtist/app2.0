@@ -2,15 +2,75 @@ var React = require("react"),
 	Util = require("../pack/util"),
 	Component = require("../pack/component"),
 	Menu = Component.Menu;
-var List = React.createClass({
+var QA = React.createClass({
+	checkMarkup : function(data){
+		return {
+			__html : data
+		};
+	},
 	componentDidMount : function(){
 		this.getDOMNode().onclick = function(){
-			$.ajax({
-				url : this.props.data.value,
-				success : function(data){
-
-				}
-			});
+			if(this.status){
+				$(this).removeClass("current");
+				this.status = 0;
+			}else{
+				$("section").removeClass("current");
+				$(this).addClass("current");
+				this.status = 1;
+			}
+		};
+	},
+	render : function(){
+		return (
+			<section>
+				<h1>
+					{this.props.data.q}
+				</h1>
+				<pre>
+					<p dangerouslySetInnerHTML={this.checkMarkup(this.props.data.a)}></p>
+				</pre>
+			</section>
+		);
+	}
+});
+var Question = React.createClass({
+	render : function(){
+		var lists = [],
+			data = this.props.data;
+		data.forEach(function(list, index){
+			lists.push(
+				<QA data={list} ref={"q" + (index + 1)} />
+			);
+		});
+		return (
+			<body>
+				{lists}
+			</body>
+		);
+	}
+});
+var List = React.createClass({
+	componentDidMount : function(){
+		var url = this.props.data.value,
+			body = document.body;
+		this.getDOMNode().onclick = function(){
+			if(url.match(/api/)){
+				$.ajax({
+					url : url,
+					success : function(data){
+						if(!Util.QueryString("index")){
+							window.history.pushState({}, document.title, "?index=" + this.props.index);
+						}
+						document.title = "常见问题";
+						React.render(
+							<Question data={data.data} />,
+							body
+						);
+					}.bind(this)
+				});
+			}else{
+				console.log(url);
+			}
 		}.bind(this);
 	},
 	render : function(){
@@ -31,11 +91,11 @@ var Page = React.createClass({
 				},
 				{
 					name : "常见问题",
-					value : ""
+					value : "/api/gethelp",
 				},
 				{
 					name : "意见反馈",
-					value : "",
+					value : "/",
 				},
 				{
 					name : "联系客服",
@@ -44,12 +104,17 @@ var Page = React.createClass({
 			]
 		};
 	},
+	componentDidMount : function(){
+		if(Util.QueryString("index")){
+			this.refs["more" + Util.QueryString("index")].getDOMNode().click();
+		}
+	},
 	render : function(){
 		var lists = [],
 			setting = this.props.setting;
-		setting.forEach(function(list){
+		setting.forEach(function(list, index){
 			lists.push(
-				<List data={list} />
+				<List data={list} index={index + 1} ref={"more" + (index + 1)} />
 			);
 		});
 		return (
