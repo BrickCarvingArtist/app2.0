@@ -280,3 +280,34 @@ body > .detail{
 		color:$grey;
 	}
 }
+body > ul{
+	display:-webkit-flex;
+	li{
+		text-align:center;
+		border-bottom:solid .025rem $bitGrey;
+	}
+	li:nth-of-type(1){
+		-webkit-flex:1;
+	}
+	li:nth-of-type(2){
+		-webkit-flex:1;
+	}
+	li:nth-of-type(3){
+		-webkit-flex:2;
+	}
+}
+body > ul:first-of-type{
+	li{
+		font-size:.6rem;
+		line-height:1.7rem;
+		color:$heavyGrey;
+	}
+}
+body > ul:nth-of-type(n+2){
+	li{
+		background-color:white;
+		font-size:.55rem;
+		line-height:1.9rem;
+		color:$darkGrey;
+	}
+}
