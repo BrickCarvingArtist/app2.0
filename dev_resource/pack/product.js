@@ -248,7 +248,7 @@ var Part2 = React.createClass({
 var Part3 = React.createClass({
 	getInitialState : function(){
 		return {
-			interest : 0
+			interest : "0.00"
 		};
 	},
 	matchNum : function(dom, lumpSum){
