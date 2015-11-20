@@ -2,6 +2,30 @@ var React = require("react"),
 	Util = require("../pack/util"),
 	Component = require("../pack/component"),
 	Menu = Component.Menu;
+var About = React.createClass({
+	getDefaultProps : function(){
+		return {
+			description : "\t喜蓝理财互联网金融平台由杭州喜马拉雅电子商务有限公司负责运营。喜马拉雅作为启蓝控股集团旗下的子公司之一，于2014年初正式成立，其经营团队由投资理财、线上交易及风险控制等业界一流的专业人士组成。\n\t公司经营的理财平台于2015年4月先后被评为“中国互联网金融服务年度最具竞争力品牌”和“中国互联网金融服务年度最具发展潜力平台”。后于2015年6月，公司被评为“2015最具投资价值互联网金融公司”。公司董事长家族世代经商，2011年入驻上海世博会并获评“最浙江家庭”。喜蓝理财秉持并延续家族诚信经营的商业理念，全力为客户打造安全、稳定、高效的理财体验。",
+			imgSrc : "/images/about.png"
+		};
+	},
+	render : function(){
+		return (
+			<body>
+				<header></header>
+				<div className="description">
+					<h1>公司简介</h1>
+					<pre>
+						<p>
+							{this.props.description}
+						</p>
+					</pre>
+					<img src={this.props.imgSrc} />
+				</div>
+			</body>
+		);
+	}
+});
 var QA = React.createClass({
 	checkMarkup : function(data){
 		return {
@@ -33,7 +57,7 @@ var QA = React.createClass({
 		);
 	}
 });
-var Question = React.createClass({
+var Help = React.createClass({
 	render : function(){
 		var lists = [],
 			data = this.props.data;
@@ -51,25 +75,28 @@ var Question = React.createClass({
 });
 var List = React.createClass({
 	componentDidMount : function(){
-		var url = this.props.data.value,
+		var value = this.props.data.value,
 			body = document.body;
 		this.getDOMNode().onclick = function(){
-			if(url.match(/api/)){
+			if(typeof value === "string"){
 				$.ajax({
-					url : url,
+					url : value,
 					success : function(data){
 						if(!Util.QueryString("index")){
 							window.history.pushState({}, document.title, "?index=" + this.props.index);
 						}
 						document.title = "常见问题";
 						React.render(
-							<Question data={data.data} />,
+							<Help data={data.data} />,
 							body
 						);
 					}.bind(this)
 				});
 			}else{
-				console.log(url);
+				React.render(
+					React.createElement(value, null),
+					body
+				);
 			}
 		}.bind(this);
 	},
@@ -81,13 +108,27 @@ var List = React.createClass({
 		);
 	}
 });
+var Suggestion = React.createClass({
+	render : function(){
+		return (
+			<body></body>
+		);
+	}
+});
+var Contact = React.createClass({
+	render : function(){
+		return (
+			<body></body>
+		);
+	}
+});
 var Page = React.createClass({
 	getDefaultProps : function(){
 		return {
 			setting : [
 				{
 					name : "关于喜蓝理财",
-					value : ""
+					value : About
 				},
 				{
 					name : "常见问题",
@@ -95,11 +136,11 @@ var Page = React.createClass({
 				},
 				{
 					name : "意见反馈",
-					value : "/",
+					value : Suggestion,
 				},
 				{
 					name : "联系客服",
-					value : ""
+					value : Contact
 				}
 			]
 		};
