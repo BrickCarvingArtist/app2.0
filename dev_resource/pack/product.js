@@ -335,10 +335,10 @@ var Product = React.createClass({
 		this.getDOMNode().onclick = function(){
 			var body = document.body,
 				data = this.state.data;
+			document.title = data.name;
 			if(!Util.QueryString("index")){
 				window.history.pushState({}, data.name, "?index=" + this.state.index);
 			}
-			document.title = data.name;
 			$.ajax({
 				url : "/api/getproduct/" + data.id,
 				success : function(data){
