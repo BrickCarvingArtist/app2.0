@@ -116,7 +116,12 @@ var List = React.createClass({
 var Suggestion = React.createClass({
 	render : function(){
 		return (
-			<body></body>
+			<body>
+				<form method="post" action="/api/getsuggestion">
+					<textarea name="suggestion" placeholder="我们很高兴能收到您反馈的意见！"></textarea>
+					<input className="longBtn" type="submit" value="确定" />
+				</form>
+			</body>
 		);
 	}
 });

@@ -128,6 +128,12 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				]
 			});
 		});
+	router
+		.route("/api/getsuggestion")
+		.post(function(req, res, next){
+			console.log(req.body.suggestion);
+			res.redirect("/");
+		});
 	//route
 	router
 		.route("/")

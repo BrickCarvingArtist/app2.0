@@ -64,7 +64,7 @@ header{
 }
 section{
 	p{
-		height:0;	
+		height:0;
 		word-wrap:break-word;
 		font-size:0;
 		line-height:1rem;
@@ -81,6 +81,16 @@ section{
 	p{
 		-webkit-animation:slideDown .25s forwards;
 	}
+}
+textarea{
+	margin:.4rem 0;
+	padding:0 .85rem;
+	width:16rem;
+	height:6rem;
+	background-color:white;
+	font-size:.5rem;
+	line-height:1rem;
+	box-shadow:0 .025rem .025rem $bitGrey;
 }
 @-webkit-keyframes slideDown{
 	to{
