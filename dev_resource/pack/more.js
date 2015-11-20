@@ -75,17 +75,18 @@ var Help = React.createClass({
 });
 var List = React.createClass({
 	componentDidMount : function(){
-		var value = this.props.data.value,
+		var title = this.props.data.name,
+			value = this.props.data.value,
 			body = document.body;
 		this.getDOMNode().onclick = function(){
 			if(typeof value === "string"){
 				$.ajax({
 					url : value,
 					success : function(data){
+						document.title = title;
 						if(!Util.QueryString("index")){
 							window.history.pushState({}, document.title, "?index=" + this.props.index);
 						}
-						document.title = "常见问题";
 						React.render(
 							<Help data={data.data} />,
 							body
@@ -97,6 +98,10 @@ var List = React.createClass({
 					React.createElement(value, null),
 					body
 				);
+				document.title = title;
+				if(!Util.QueryString("index")){
+					window.history.pushState({}, document.title, "?index=" + this.props.index);
+				}
 			}
 		}.bind(this);
 	},
