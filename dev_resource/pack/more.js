@@ -126,9 +126,51 @@ var Suggestion = React.createClass({
 	}
 });
 var Contact = React.createClass({
+	getDefaultProps : function(){
+		return {
+			setting : [
+				{
+					name : "微信订阅号:xmlyjr",
+					value : ""
+				},
+				{
+					name : "微信订阅号:hi-lend",
+					value : ""
+				},
+				{
+					name : "@喜蓝理财",
+					value : ""
+				},
+				{
+					name : "4000525522",
+					value : "mqqwpa://im/chat?chat_type=wpa&uin=4000525522"
+				}
+			]
+		};
+	},
 	render : function(){
+		var lists = [],
+			setting = this.props.setting;
+		setting.forEach(function(list){
+			lists.push(
+				<h1 className="withIcon">
+					<i></i>
+					<a href={list.value}>
+						{list.name}
+					</a>
+				</h1>
+			);
+		});
 		return (
-			<body></body>
+			<body>
+				<header></header>
+				<div className="tel">
+					<h2>400-052-5522</h2>
+					<p>客服热线 (09:00-21:00)</p>
+					<a className="longBtn" href="tel:4000525522">拨打客服热线</a>
+				</div>
+				{lists}
+			</body>
 		);
 	}
 });

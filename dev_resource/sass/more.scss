@@ -34,7 +34,17 @@ body, section{
 		content:"";
 	}
 	h1:last-of-type{
+		box-shadow:0 .025rem .025rem $bitGrey;
+	}
+}
+section:not(:last-of-type){
+	> h1:before{
+		position:absolute;
+		top:1.875rem;
+		left:.85rem;
+		width:15.15rem;
 		border-bottom:solid .025rem $bitGrey;
+		content:"";
 	}
 }
 header{
@@ -91,6 +101,49 @@ textarea{
 	font-size:.5rem;
 	line-height:1rem;
 	box-shadow:0 .025rem .025rem $bitGrey;
+}
+.tel{
+	margin:.4rem 0;
+	padding:1rem 0;
+	background-color:white;
+	box-shadow:0 .025rem .025rem 0 $bitGrey;
+	h2{
+		font-size:1.1rem;
+		color:$orange;
+		text-align:center;
+	}
+	p{
+		font-size:.55rem;
+		line-height:1.55rem;
+		color:$grey;
+		text-align:center;
+	}
+}
+h1.withIcon{
+	i{
+		margin-right:.6rem;
+		display:inline-block;
+		width:.9rem;
+		height:.9rem;
+		background-size:.9rem .9rem;
+		vertical-align:middle;
+		content:"";
+	}
+}
+h1.withIcon:nth-of-type(1), h1.withIcon:nth-of-type(2){
+	i{
+		background-image:$wechat;
+	}
+}
+h1.withIcon:nth-of-type(3){
+	i{
+		background-image:$microblog;
+	}
+}
+h1.withIcon:nth-of-type(4){
+	i{
+		background-image:$qq;
+	}
 }
 @-webkit-keyframes slideDown{
 	to{
