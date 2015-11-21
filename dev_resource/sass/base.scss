@@ -29,13 +29,15 @@ body:before{
 }
 body:after{
 	position:absolute;
-	top:0;
-	left:.5rem;
-	height:2.3rem;
-	content:"<";
-	font-size:1rem;
-	color:white;
-	line-height:2.3rem;
+	top:.75rem;
+	left:.85rem;
+	width:.545rem;
+	height:.8rem;
+	background-image:$nextStep;
+	background-size:.545rem .8rem;
+	-webkit-transform:rotate(180deg);
+	content:"";
+	-webkit-filter:brightness(10);
 }
 .longBtn{
 	margin:0 auto;
