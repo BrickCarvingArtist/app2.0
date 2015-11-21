@@ -269,7 +269,7 @@ var Part3 = React.createClass({
 			_this.matchNum(this, data.lumpSum);
 		};
 		minus.onclick = function(){
-			num.value -= 500;
+			num.value = parseInt(num.value) - 500;
 			num.onkeyup();
 		};
 		plus.onclick = function(){
