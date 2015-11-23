@@ -179,7 +179,7 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 		.get(function(req, res, next){
 			res.render("./index", {
 				style : ["/css/me.css"],
-				script : ["js/me.js"],
+				script : ["/js/me.js"],
 				title : "我的资产",
 				page : loading
 			});
