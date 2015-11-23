@@ -69,6 +69,17 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
+		.route("/api/getauth")
+		.get(function(req, res, next){
+			request("http://www.xilanlicai.com/api/getuserauth", function(err, request, body){
+				if(!err && request.statusCode === 200){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		});
+	router
 		.route("/api/postbill")
 		.post(function(req, res, next){
 			console.log(req.body);
@@ -160,6 +171,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				style : ["/css/product.css"],
 				script : ["/js/product.js"],
 				title : "理财产品",
+				page : loading
+			});
+		});
+	router
+		.route("/me")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/me.css"],
+				script : ["js/me.js"],
+				title : "我的资产",
 				page : loading
 			});
 		});

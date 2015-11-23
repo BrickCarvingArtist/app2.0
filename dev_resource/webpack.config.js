@@ -3,6 +3,7 @@ module.exports = {
 		home : "./entry/home",
 		info : "./entry/info",
 		product : "./entry/product",
+		me : "./entry/me",
 		more : "./entry/more"
 	},
 	output : {

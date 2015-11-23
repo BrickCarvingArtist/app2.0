@@ -224,7 +224,7 @@ var Page = React.createClass({
 							text : "理财产品"
 						},
 						{
-							href : "/account",
+							href : "/me",
 							text : "我的账户"
 						},
 						{
