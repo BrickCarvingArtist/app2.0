@@ -21,6 +21,7 @@ body{
 	background-color:white;
 	.option{
 		float:left;
+		box-sizing:content-box;
 		width:5.3rem;
 		height:4.5rem;
 		text-align:center;
@@ -35,8 +36,12 @@ body{
 			color:$darkGrey;
 		}
 	}
-	.option:nth-of-type(1), .option:nth-of-type(2), .option:nth-of-type(4), .option:nth-of-type(5), .option:nth-of-type(7), .option:nth-of-type(8){
-		border-right:solid .05rem $lightGrey;
+	@for $i from 0 to 9{
+		@if $i % 3 != 0{
+			.option:nth-of-type(#{$i}){
+				border-right:solid .05rem $lightGrey;
+			}
+		}
 	}
 	@for $i from 0 to 6{
 		.option:nth-of-type(#{$i+1}){
