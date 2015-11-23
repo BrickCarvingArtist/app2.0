@@ -1,2 +1,86 @@
 @import "variable";
 @import "base";
+body{
+	background-color:$lightGrey;
+}
+.info{
+	padding-top:4.4rem;
+	height:6rem;
+	background-color:$orange;
+	font-size:.55rem;
+	color:white;
+	text-align:center;
+}
+.info.common{
+	background-image:$common;
+	background-repeat:no-repeat;
+	background-position:50% 1rem;
+}
+.entrance{
+	margin-top:.4rem;
+	background-color:white;
+	.option{
+		float:left;
+		width:5.3rem;
+		height:4.5rem;
+		text-align:center;
+		i{
+			margin:1.4rem auto 0;
+			width:.95rem;
+			height:.95rem;
+			background-size:.95rem .95rem;
+		}
+		span{
+			font-size:.55rem;
+			color:$darkGrey;
+		}
+	}
+	.option:nth-of-type(1), .option:nth-of-type(2), .option:nth-of-type(4), .option:nth-of-type(5), .option:nth-of-type(7), .option:nth-of-type(8){
+		border-right:solid .05rem $lightGrey;
+	}
+	@for $i from 0 to 6{
+		.option:nth-of-type(#{$i+1}){
+			border-bottom:solid .05rem $lightGrey;
+		}
+	}
+	.account{
+		i{
+			background-image:$account;
+		}
+	}
+	.record{
+		i{
+			background-image:$record;
+		}
+	}
+	.score{
+		i{
+			background-image:$score;
+		}
+	}
+	.bonus{
+		i{
+			background-image:$bonus;
+		}
+	}
+	.ticket{
+		i{
+			background-image:$ticket;
+		}
+	}
+	.invitation{
+		i{
+			background-image:$invitation;
+		}
+	}
+	.safty{
+		i{
+			background-image:$safty;
+		}
+	}
+	.infoCenter{
+		i{
+			background-image:$infoCenter;
+		}
+	}
+}
