@@ -1,27 +1,26 @@
-var React = require("react"),
-	Util = require("../pack/util"),
-	Component = require("../pack/component"),
-	Banner = Component.Banner,
-	Menu = Component.Menu;
-var Info = React.createClass({
-	getInitialState : function(){
-		return {
+import React from "react";
+import ReactDOM from "react-dom";
+import {PageData} from "../pack/util";
+import {Banner} from "../component/banner";
+import {Menu} from "../component/menu";
+class Info extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			index : this.props.index,
 			currentIndex : this.props.currentIndex,
 			data : this.props.data
-		};
-	},
-	componentDidMount : function(){},
-	componentWillReceiveProps : function(nextProps){
+		}
+	}
+	componentWillReceiveProps(nextProps){
 		this.setState({
 			currentIndex : nextProps.currentIndex
 		});	
-	},
-	componentDidUpdate : function(){},
-	render : function(){
-		var data = this.state.data;
+	}
+	render(){
+		let data = this.state.data;
 		return (
-			<div className={"info" + (this.state.index === this.state.currentIndex ? " current" : "")}>
+			<div className={`info${this.state.index === this.state.currentIndex ? " current" : ""}`}>
 				<div className="bg"></div>
 				<div className="circle">
 					<h1>
@@ -36,80 +35,83 @@ var Info = React.createClass({
 				</div>
 				<ul>
 					<li>
-						{"起投" + data.minUnitCount * data.unitCount + "元"}
+						{`起投${data.minUnitCount*data.unitCount}元`}
 					</li>
 					<li>
-						{"可投" + data.lumpSum + "元"}
+						{`可投${data.lumpSum}元`}
 					</li>
 					<li>
-						{data.days + "天"}
+						{`${data.days}天`}
 					</li>
 				</ul>
 			</div>
 		);
 	}
-});
-var Button = React.createClass({
-	getInitialState : function(){
-		return {
+}
+class Button extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			href : this.props.href
 		};
-	},
-	shouldComponentUpdate : function(nextProps, nextState){
+	}
+	shouldComponentUpdate(nextProps, nextState){
 		return this.state.href !== nextState.href;
-	},
-	render : function(){
+	}
+	render(){
 		return (
-			<a className="longBtn btnBuy" href={"/api/getproduct/" + this.state.href}>立即购买</a>
+			<a className="longBtn btnBuy" href={`/api/getproduct/${this.state.href}`}>立即购买</a>
 		);
 	}
-});
-var Option = React.createClass({
-	getInitialState : function(){
-		return {
+};
+class Option extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			sum : this.props.sum,
 			userClass : this.props.userClass,
 			type : this.props.type
-		}
-	},
-	componentDidMount : function(){
-		var userClass = this.state.userClass,
+		};
+	}
+	componentDidMount(){
+		let userClass = this.state.userClass,
 			sum = this.state.sum;
-		this.getDOMNode().onclick = function(){
-			var currentIndex = userClass.state.currentIndex;
+		ReactDOM.findDOMNode(this).onclick = () => {
+			let currentIndex = userClass.state.currentIndex;
 			userClass.setState({
 				currentIndex : this.state.type >> 1 ? currentIndex >= sum - 1 ? 0 : currentIndex + 1 : currentIndex <= 0 ? sum - 1 : currentIndex - 1
 			});
-		}.bind(this);
-	},
-	render : function(){
+		};
+	}
+	render(){
 		return (
 			<i className={this.state.type >> 1 ? "next" : "prev"}></i>
 		);
 	}
-});
-var Product = React.createClass({
-	getInitialState : function(){
-		return {
+};
+class Product extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			currentIndex : 0,
 			data : this.props.data.data
 		};
-	},
-	componentDidUpdate : function(){
-		var state = this.state;
+	}
+	componentDidUpdate(){
+		let state = this.state;
 		this.refs.button.setState({
 			href : state.data[state.currentIndex].id
 		});
-	},
-	render : function(){
-		var lists = [],
+	}
+	render(){
+		let lists = [],
 			data = this.state.data,
 			dataLen = data.length;
-		data.forEach(function(list, index){
+		data.forEach((list, index) => {
 			lists.push(
 				<Info index={index} currentIndex={this.state.currentIndex} data={list} />
 			);
-		}.bind(this));
+		});
 		return (
 			<div className="product">
 				{lists}
@@ -119,14 +121,15 @@ var Product = React.createClass({
 			</div>
 		);
 	}
-});
-var Page  = React.createClass({
-	getInitialState : function(){
-		return {
+};
+class Page extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			data : this.props.data
-		}
-	},
-	render : function(){
+		};
+	}
+	render(){
 		return (
 			<body>
 				<Banner data={
@@ -193,16 +196,16 @@ var Page  = React.createClass({
 			</body>
 		);
 	}
-});
-var init = function(){
-	Util.PageData.setData("/api/gethomeproduct", function(data){
-		React.render(
+}
+const init = () => {
+	PageData.setData("/api/gethomeproduct", data => {
+		ReactDOM.render(
 			<Page data={data} />,
 			document.body
 		);
 	}).render(init);
 }
-module.exports = {
-	main : Page,
-	init : init
+export {
+	Page as main,
+	init as init
 };

@@ -203,9 +203,9 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 						style : ["/css/info.css"],
 						script : ["/js/info.js"],
 						title : "消息中心",
-						page : reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/info").main)({
+						page : loading/*reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/info").main)({
 							data : JSON.parse(body).data
-						}))
+						}))*/
 					});
 				}else{
 					next();

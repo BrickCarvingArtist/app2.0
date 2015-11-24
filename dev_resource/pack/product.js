@@ -1,10 +1,10 @@
-var React = require("react"),
-	Util = require("../pack/util"),
-	Component = require("../pack/component"),
-	Menu = Component.Menu;
-var Part1 = React.createClass({
-	render : function(){
-		var data = this.props.data,
+import React from "react";
+import ReactDOM from "react-dom";
+import {PageData, QueryString} from "../pack/util";
+import {Menu} from "../component/menu";
+class Part1 extends React.Component{
+	render(){
+		let data = this.props.data,
 			other = "";
 		data.other = "满20000元即可获得20元红包!";
 		if(data.other){
@@ -30,19 +30,19 @@ var Part1 = React.createClass({
 				<ul>
 					<li>
 						<p>
-							{data.days + "天"}
+							{`${data.days}天`}
 						</p>
 						<p>项目期限</p>
 					</li>
 					<li>
 						<p>
-							{data.unitPrice * data.minUnitCount + "元"}
+							{`${data.unitPrice * data.minUnitCount}元`}
 						</p>
 						<p>起投金额</p>
 					</li>
 					<li>
 						<p>
-							{data.lumpSum + "元"}
+							{`${data.lumpSum}元`}
 						</p>
 						<p>项目总额</p>
 					</li>
@@ -51,18 +51,20 @@ var Part1 = React.createClass({
 			</div>
 		);
 	}
-});
-var DetailDetail = React.createClass({
-	checkMarkup : function(data){
-		return {
-			__html : data
-		};
-	},
-	render : function(){
-		var lists = [],
+}
+class DetailDetail extends React.Component{
+	constructor(){
+		super();
+		this.checkMarkup = data => {
+			return {
+				__html : data
+			};
+		}
+	}
+	render(){
+		let lists = [],
 			data = this.props.data;
-			console.log(data)
-		for(var i in data){
+		for(let i in data){
 			if(data[i]){
 				lists.push(
 					<div className="detail">
@@ -82,25 +84,20 @@ var DetailDetail = React.createClass({
 			</body>
 		);
 	}
-});
-var Bidder = React.createClass({
-	getDefaultProps : function(){
-		return {
-			setting : ["购买人", "购买金额", "购买时间"]
-		};
-	},
-	render : function(){
-		var lists = [],
+}
+class Bidder extends React.Component{
+	render(){
+		let lists = [],
 			title = [],
 			data = this.props.data;
-		this.props.setting.forEach(function(list){
+		this.props.setting.forEach(list => {
 			title.push(
 				<li>
 					{list}
 				</li>
 			);
 		});
-		data.forEach(function(list){
+		data.forEach(list => {
 			lists.push(
 				<ul>
 					<li>
@@ -124,39 +121,42 @@ var Bidder = React.createClass({
 			</body>
 		);
 	}
-});
-var List = React.createClass({
-	componentDidMount : function(){
-		var id = this.props.id,
+}
+Bidder.defaultProps = {
+	setting : ["购买人", "购买金额", "购买时间"]
+};
+class List extends React.Component{
+	componentDidMount(){
+		let id = this.props.id,
 			index = this.props.index,
 			data = this.props.data,
 			body = document.body;
 		if(index){
-			this.getDOMNode().onclick = function(){
+			ReactDOM.findDOMNode(this).onclick = () =>{
 				if(Object.keys(data).length){
-					React.render(
+					ReactDOM.render(
 						<DetailDetail data={data} />,
 						body
 					);
-					// if(!Util.QueryString("detail")){
+					// if(!QueryString("detail")){
 					// 	window.history.pushState({}, data.name, "&detail=" + index);
 					// }
 				}else{
 					$.ajax({
-						url : "/api/getbidder/" + id,
-						success : function(data){
-							React.render(
+						url : `/api/getbidder/${id}`,
+						success : data => {
+							ReactDOM.render(
 								<Bidder data={data.data} />,
 								body
 							);
 						}
 					});
 				}
-			}.bind(this);
+			};
 		}
-	},
-	render : function(){
-		var props = this.props;
+	}
+	render(){
+		let props = this.props;
 		return (
 			<p>
 				<span>
@@ -168,128 +168,129 @@ var List = React.createClass({
 			</p>
 		);
 	}
-});
-var Part2 = React.createClass({
-	getDefaultProps : function(){
-		return {
-			setting : [
-				{
-					name : "还款方式",
-					value : "自动还款",
-					detail : []
-				},
-				{
-					name : "产品描述",
-					value : "利率高",
-					detail : [
-						{
-							name : "资金用途",
-							value : "fundUse"
-						},
-						{
-							name : "抵押物说明",
-							value : "collateral"
-						},
-						{
-							name : "还款来源",
-							value : "source"
-						}
-					]
-				},
-				{
-					name : "资金保障",
-					value : "风险低",
-					detail : [
-						{
-							name : "担保方式",
-							value : "guarantee"
-						},
-						{
-							name : "担保方介绍",
-							value : "guaranteeIntroduce"
-						},
-						{
-							name : "资金安全",
-							value : "fundSafe"
-						}
-					]
-				},
-				{
-					name : "申购情况",
-					value : "已申购订单",
-					detail : []
-				}
-			]
-		};
-	},
-	adaptor : function(detail, data){
-		var _data = {};
-		for(var i = 0, detailLen = detail.length; i < detailLen; i++){
-			_data[detail[i].name] = data[detail[i].value];
+}
+class Part2 extends React.Component{
+	constructor(){
+		super();
+		this.adaptor = (detail, data) => {
+			let _data = {};
+			for(let i = 0, detailLen = detail.length; i < detailLen; i++){
+				_data[detail[i].name] = data[detail[i].value];
+			}
+			return _data;
 		}
-		return _data;
-	},
-	render : function(){
-		var lists = [],
+	}
+	render(){
+		let lists = [],
 			setting = this.props.setting,
 			data = this.props.data;
-		setting.forEach(function(list, index){
+		setting.forEach((list, index) => {
 			lists.push(
 				<List id={data.id} index={index} name={list.name} value={list.value} data={this.adaptor(list.detail, data)} />
 			);
-		}.bind(this));
+		});
 		return (
 			<div className="part2">
 				{lists}
 			</div>
 		);
 	}
-});
-var Part3 = React.createClass({
-	getInitialState : function(){
-		return {
+}
+Part2.defaultProps = {
+	setting : [
+		{
+			name : "还款方式",
+			value : "自动还款",
+			detail : []
+		},
+		{
+			name : "产品描述",
+			value : "利率高",
+			detail : [
+				{
+					name : "资金用途",
+					value : "fundUse"
+				},
+				{
+					name : "抵押物说明",
+					value : "collateral"
+				},
+				{
+					name : "还款来源",
+					value : "source"
+				}
+			]
+		},
+		{
+			name : "资金保障",
+			value : "风险低",
+			detail : [
+				{
+					name : "担保方式",
+					value : "guarantee"
+				},
+				{
+					name : "担保方介绍",
+					value : "guaranteeIntroduce"
+				},
+				{
+					name : "资金安全",
+					value : "fundSafe"
+				}
+			]
+		},
+		{
+			name : "申购情况",
+			value : "已申购订单",
+			detail : []
+		}
+	]
+};
+class Part3 extends React.Component{
+	constructor(){
+		super();
+		this.state = {
 			interest : "0.00"
 		};
-	},
-	matchNum : function(dom, lumpSum){
-		var data = this.props.data,
-			value = dom.value = Math.floor(dom.value);
-		dom.value = value = value >= 0 ? value > lumpSum ? value = lumpSum : value : 0;
-		this.setState({
-			interest : (value * data.primeRate / 365 * data.days).toFixed(2)
-		});
-	},
-	componentDidMount : function(){
-		var _this = this,
-			data = this.props.data,
+		this.matchNum = (dom, lumpSum) => {
+			let data = this.props.data,
+				value = dom.value = Math.floor(dom.value);
+			dom.value = value = value >= 0 ? value > lumpSum ? value = lumpSum : value : 0;
+			this.setState({
+				interest : (value * data.primeRate / 365 * data.days).toFixed(2)
+			});
+		}
+	}
+	componentDidMount(){
+		let data = this.props.data,
 			minus = this.refs.minus,
 			plus = this.refs.plus,
 			num = this.refs.num;
-		num.onkeyup = function(){
-			_this.matchNum(this, data.lumpSum);
+		num.onkeyup = () => {
+			this.matchNum(num, data.lumpSum);
 		};
-		minus.onclick = function(){
+		minus.onclick = () => {
 			num.value = parseInt(num.value) - 500;
 			num.onkeyup();
 		};
-		plus.onclick = function(){
+		plus.onclick = () => {
 			num.value = parseInt(num.value) + 500;
 			num.onkeyup();
 		};
-	},
-	render : function(){
-		var data = this.props.data;
+	}
+	render(){
+		let data = this.props.data;
 		return (
 			<div className="part3">
 				<div>
 					<p>
-						{data.balance + "元"}
+						{`${data.balance}元`}
 					</p>
 					<p>可投金额</p>
 				</div>
 				<div>
 					<p>
-						{this.state.interest + "元"}
+						{`${this.state.interest}元`}
 					</p>
 					<p>预期收益</p>
 				</div>
@@ -298,22 +299,23 @@ var Part3 = React.createClass({
 					<input name="invest" ref="num" className="num" type="text" defaultValue="0" />
 					<span ref="plus">＋</span>
 					<p className="term">
-						{"募集时间:" + data.beginTime.split(" ")[0] + " 至 " + data.stopBuyTime.split(" ")[0]}
+						{`募集时间:${data.beginTime.split(" ")[0]}至${data.stopBuyTime.split(" ")[0]}`}
 					</p>
 					<input className="longBtn btnBuy" type="submit" value="立即购买" />
 				</form>
 			</div>
 		);
 	}
-});
-var ProductDetail = React.createClass({
-	getInitialState : function(){
-		return {
-			data : this.props.data
+}
+class ProductDetail extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			data : props.data
 		};
-	},
-	render : function(){
-		var product = this.state.data.product,
+	}
+	render(){
+		let product = this.state.data.product,
 			detail = this.state.data.details;
 		return (
 			<body>
@@ -323,35 +325,35 @@ var ProductDetail = React.createClass({
 			</body>
 		);
 	}
-});
-var Product = React.createClass({
-	getInitialState : function(){
-		return {
+}
+class Product extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			index : this.props.index,
 			data : this.props.data
 		};
-	},
-	componentDidMount : function(){
-		this.getDOMNode().onclick = function(){
-			var body = document.body,
-				data = this.state.data;
+	}
+	componentDidMount(){
+		ReactDOM.findDOMNode(this).onclick = () => {
+			let data = this.state.data;
 			document.title = data.name;
-			if(!Util.QueryString("index")){
-				window.history.pushState({}, data.name, "?index=" + this.state.index);
+			if(!QueryString("index")){
+				window.history.pushState({}, data.name, `?index=${this.state.index}`);
 			}
 			$.ajax({
-				url : "/api/getproduct/" + data.id,
-				success : function(data){
-					React.render(
+				url : `/api/getproduct/${data.id}`,
+				success : data => {
+					ReactDOM.render(
 						<ProductDetail data={data.data} />,
-						body
+						document.body
 					);
 				}
 			});
-		}.bind(this);
-	},
-	render : function(){
-		var data = this.state.data;
+		};
+	}
+	render(){
+		let data = this.state.data;
 		return (
 			<section>
 				<h1>
@@ -359,7 +361,7 @@ var Product = React.createClass({
 						{data.name}
 					</strong>
 					<em>
-						{"项目规模:" + data.lumpSum + "元"}
+						{`项目规模:${data.lumpSum}元`}
 					</em>
 				</h1>
 				<div className="main">
@@ -386,24 +388,25 @@ var Product = React.createClass({
 			</section>
 		);
 	}
-});
-var Page = React.createClass({
-	getInitialState : function(){
-		return {
-			data : this.props.data.data
+}
+class Page extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			data : props.data.data
 		};
-	},
-	componentDidMount : function(){
-		if(Util.QueryString("index")){
-			this.refs["product" + Util.QueryString("index")].getDOMNode().click();
+	}
+	componentDidMount(){
+		if(QueryString("index")){
+			ReactDOM.findDOMNode(this.refs[`product${QueryString("index")}`]).click();
 		}
-	},
-	render : function(){
-		var lists = [],
+	}
+	render(){
+		let lists = [],
 			data = this.state.data;
-		data.forEach(function(list, index){
+		data.forEach((list, index) => {
 			lists.push(
-				<Product index={index + 1} data={list} ref={"product" + (index + 1)} />
+				<Product index={index + 1} data={list} ref={`product${index + 1}`} />
 			);
 		});
 		return (
@@ -432,16 +435,16 @@ var Page = React.createClass({
 			</body>
 		);
 	}
-});
-var init = function(){
-	Util.PageData.setData("/api/getproduct", function(data){
+}
+const init = () => {
+	PageData.setData("/api/getproduct", data => {
 		React.render(
 			<Page data={data} />,
 			document.body
 		);
 	}).render(init);
 };
-module.exports = {
-	main : Page,
-	init : init
+export {
+	Page as main,
+	init as init
 };

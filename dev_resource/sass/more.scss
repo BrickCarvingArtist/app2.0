@@ -85,6 +85,9 @@ section{
 	}
 }
 .current{
+	h1:before{
+		border-bottom:none !important;
+	}
 	h1:after{
 		background-image:none;
 	}

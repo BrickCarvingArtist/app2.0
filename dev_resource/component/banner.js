@@ -1,33 +1,35 @@
-var React = require("react");
-var Case = React.createClass({
-	getInitialState : function(){
-		return {
+import React from "react";
+class Case extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			index : this.props.index,
 			href : this.props.href,
 			backgroundImage : this.props.backgroundImage
-		};
-	},
-	render : function(){
+		}
+	}
+	render(){
 		return (
 			<a href={this.state.href} style={
 				{
-					backgroundImage : "url(" + this.state.backgroundImage + ")"
+					backgroundImage : `url(${this.state.backgroundImage})`
 				}
 			}></a>
 		);
 	}
-});
-var Banner = React.createClass({
-	getInitialState : function(){
-		return {
+}
+class Banner extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			index : 0,
 			data : this.props.data
 		};
-	},
-	render : function(){
-		var lists = [],
+	}
+	render(){
+		let lists = [],
 			data = this.state.data;
-		data.forEach(function(list, index){
+		data.forEach((list, index) => {
 			lists.push(
 				<Case index={index} href={list.href} backgroundImage={list.imgSrc} />
 			);
@@ -43,5 +45,7 @@ var Banner = React.createClass({
 			</header>
 		);
 	}
-});
-module.exports = Banner;
+};
+export {
+	Banner
+}

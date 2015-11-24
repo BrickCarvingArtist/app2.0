@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "../pack/util";
-import {MenuBar as Menu} from "../component/menu";
+import {Menu} from "../component/menu";
 class Info extends React.Component{
 	constructor(){
 		super();
@@ -57,22 +57,14 @@ class Asset extends React.Component{
 	}
 }
 class Option extends React.Component{
-	componentDidMount(){
-		ReactDOM.findDOMNode(this).onclick = () => {
-			ReactDOM.render(
-				React.createElement(this.props.data.value, null),
-				document.body
-			);
-		};
-	}
 	render(){
 		return (
-			<div className={`option ${this.props.data.className}`}>
+			<a className={`option ${this.props.data.className}`} href={this.props.data.value}>
 				<i></i>
 				<span>
 					{this.props.data.name}
 				</span>
-			</div>
+			</a>
 		)
 	}
 };
@@ -132,7 +124,7 @@ Entrance.defaultProps = {
 		{
 			name : "消息中心",
 			className : "infoCenter",
-			value : ""
+			value : "/infocenter"
 		}
 	]
 };
@@ -167,7 +159,7 @@ class Page extends React.Component{
 		);
 	}
 }
-const init = init => {
+const init = () => {
 	PageData.setData(null, () => {
 		ReactDOM.render(
 			<Page />,

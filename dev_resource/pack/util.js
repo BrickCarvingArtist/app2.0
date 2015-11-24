@@ -1,4 +1,4 @@
-var Util = {
+const Util = {
 	isMatch : function(type, value){
 		switch(type){
 			case "name":

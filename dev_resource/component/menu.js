@@ -51,7 +51,7 @@ class List3 extends React.Component{
 		);
 	}
 }
-class MenuBar extends React.Component{
+class Menu extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -118,4 +118,6 @@ class MenuBar extends React.Component{
 		);
 	}
 }
-export {MenuBar}
+export {
+	Menu
+}

@@ -1,27 +1,29 @@
-var React = require("react"),
-	Util = require("../pack/util");
-var InfoDetail = React.createClass({
-	getInitialState : function(){
-		return {
-			title : this.props.title,
-			time : this.props.time,
-			source : this.props.source,
-			detail : this.props.detail
+import React from "react";
+import ReactDOM from "react-dom";
+import {PageData, QueryString} from "../pack/util";
+class InfoDetail extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			title : props.title,
+			time : props.time,
+			source : props.source,
+			detail : props.detail
 		};
-	},
-	checkMarkup : function(){
-		return {
-			__html : this.state.detail
+		this.checkMarkup = () => {
+			return {
+				__html : this.state.detail
+			};
 		};
-	},
-	render : function(){
+	}
+	render(){
 		return (
 			<section className="detail">
 				<h1>
 					{this.state.title}
 				</h1>
 				<h2>
-					{"来源:" + this.state.source}
+					{`来源:${this.state.source}`}
 				</h2>
 				<div className="detail" dangerouslySetInnerHTML={this.checkMarkup()}></div>
 				<span>
@@ -30,38 +32,39 @@ var InfoDetail = React.createClass({
 			</section>
 		);
 	}
-});
-var Info = React.createClass({
-	getInitialState : function(){
-		return {
-			index : this.props.index,
-			id : this.props.id,
-			status : this.props.status,
-			title : this.props.title,
-			introduce : this.props.introduce,
-			source : this.props.source,
-			time : this.props.time
+}
+class Info extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			index : props.index,
+			id : props.id,
+			status : props.status,
+			title : props.title,
+			source : props.source,
+			introduce : props.introduce,
+			time : props.time
 		};
-	},
-	componentDidMount : function(){
-		this.getDOMNode().onclick = function(){
+	}
+	componentDidMount(){
+		ReactDOM.findDOMNode(this).onclick = () => {
 			$.ajax({
-				url : "/api/getinfo/" + this.state.id,
-				success : function(data){
+				url : `/api/getinfo/${this.state.id}`,
+				success : data => {
 					document.title = this.state.title;
 					document.body.style.backgroundColor = "white";
-					if(!Util.QueryString("index")){
-						window.history.pushState({}, this.state.title, "?index=" + this.state.index);
+					if(!QueryString("index")){
+						window.history.pushState({}, this.state.title, `?index=${this.state.index}`);
 					}
 					React.render(
 						<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={data.data.details} />,
 						document.body
 					);
-				}.bind(this)
+				}
 			});
-		}.bind(this);
-	},
-	render : function(){
+		};
+	}
+	render(){
 		return (
 			<section className={this.state.status ? "unread" : ""}>
 				<h1>
@@ -76,24 +79,25 @@ var Info = React.createClass({
 			</section>
 		);
 	}
-});
-var	Page = React.createClass({
-	getInitialState : function(){
-		return {
-			data : this.props.data
+}
+class Page extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			data : props.data
 		};
-	},
-	componentDidMount : function(){
-		if(Util.QueryString("index")){
-			this.refs["info" + Util.QueryString("index")].getDOMNode().click();
+	}
+	componentDidMount(){
+		if(QueryString("index")){
+			ReactDOM.findDOMNode(this.refs[`info${QueryString("index")}`]).click();
 		}
-	},
-	render : function(){
-		var lists = [],
+	}
+	render(){
+		let lists = [],
 			data = this.state.data;
-		data.forEach(function(list, index){
+		data.forEach((list, index) => {
 			lists.push(
-				<Info index={index + 1} id={list.id} status={list.status} title={list.title} introduce={list.introduce} source={list.source} time={list.time} ref={"info" + (index + 1)}/>
+				<Info index={index + 1} id={list.id} status={list.status} title={list.title} source={list.source} introduce={list.introduce} time={list.time.split(" ")[0]} ref={`info${index + 1}`} />
 			);
 		});
 		return (
@@ -102,18 +106,18 @@ var	Page = React.createClass({
 			</body>
 		);
 	}
-});
-var init = function(){
-	Util.PageData.setData("/api/getinfo", function(data){
+}
+const init = () => {
+	PageData.setData("/api/getinfo", data => {
 		document.title = "消息中心";
 		document.body.style.backgroundColor = "rgb(244, 244, 244)";
-		React.render(
+		ReactDOM.render(
 			<Page data={data.data} />,
 			document.body
 		);
 	}).render(init);
 };
-module.exports = {
-	main : Page,
-	init : init
-};
+export {
+	Page as main,
+	init as init
+}

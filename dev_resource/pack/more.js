@@ -1,15 +1,9 @@
-var React = require("react"),
-	Util = require("../pack/util"),
-	Component = require("../pack/component"),
-	Menu = Component.Menu;
-var About = React.createClass({
-	getDefaultProps : function(){
-		return {
-			description : "\t喜蓝理财互联网金融平台由杭州喜马拉雅电子商务有限公司负责运营。喜马拉雅作为启蓝控股集团旗下的子公司之一，于2014年初正式成立，其经营团队由投资理财、线上交易及风险控制等业界一流的专业人士组成。\n\t公司经营的理财平台于2015年4月先后被评为“中国互联网金融服务年度最具竞争力品牌”和“中国互联网金融服务年度最具发展潜力平台”。后于2015年6月，公司被评为“2015最具投资价值互联网金融公司”。公司董事长家族世代经商，2011年入驻上海世博会并获评“最浙江家庭”。喜蓝理财秉持并延续家族诚信经营的商业理念，全力为客户打造安全、稳定、高效的理财体验。",
-			imgSrc : "/images/about.png"
-		};
-	},
-	render : function(){
+import React from "react";
+import ReactDOM from "react-dom";
+import {PageData, QueryString} from "../pack/util";
+import {Menu} from "../component/menu";
+class About extends React.Component{
+	render(){
 		return (
 			<body>
 				<header></header>
@@ -25,15 +19,22 @@ var About = React.createClass({
 			</body>
 		);
 	}
-});
-var QA = React.createClass({
-	checkMarkup : function(data){
-		return {
-			__html : data
+}
+About.defaultProps = {
+	description : "\t喜蓝理财互联网金融平台由杭州喜马拉雅电子商务有限公司负责运营。喜马拉雅作为启蓝控股集团旗下的子公司之一，于2014年初正式成立，其经营团队由投资理财、线上交易及风险控制等业界一流的专业人士组成。\n\t公司经营的理财平台于2015年4月先后被评为“中国互联网金融服务年度最具竞争力品牌”和“中国互联网金融服务年度最具发展潜力平台”。后于2015年6月，公司被评为“2015最具投资价值互联网金融公司”。公司董事长家族世代经商，2011年入驻上海世博会并获评“最浙江家庭”。喜蓝理财秉持并延续家族诚信经营的商业理念，全力为客户打造安全、稳定、高效的理财体验。",
+	imgSrc : "/images/about.png"
+};
+class QA extends React.Component{
+	constructor(){
+		super();
+		this.checkMarkup = data => {
+			return {
+				__html : data
+			};
 		};
-	},
-	componentDidMount : function(){
-		this.getDOMNode().onclick = function(){
+	}
+	componentDidMount(){
+		ReactDOM.findDOMNode(this).onclick = function(){
 			if(this.status){
 				$(this).removeClass("current");
 				this.status = 0;
@@ -43,8 +44,8 @@ var QA = React.createClass({
 				this.status = 1;
 			}
 		};
-	},
-	render : function(){
+	}
+	render(){
 		return (
 			<section>
 				<h1>
@@ -56,14 +57,14 @@ var QA = React.createClass({
 			</section>
 		);
 	}
-});
-var Help = React.createClass({
-	render : function(){
-		var lists = [],
+}
+class Help extends React.Component{
+	render(){
+		let lists = [],
 			data = this.props.data;
-		data.forEach(function(list, index){
+		data.forEach((list, index) => {
 			lists.push(
-				<QA data={list} ref={"q" + (index + 1)} />
+				<QA data={list} ref={`q${index + 1}`} />
 			);
 		});
 		return (
@@ -72,26 +73,26 @@ var Help = React.createClass({
 			</body>
 		);
 	}
-});
-var List = React.createClass({
-	componentDidMount : function(){
-		var title = this.props.data.name,
+}
+class List extends React.Component{
+	componentDidMount(){
+		let title = this.props.data.name,
 			value = this.props.data.value,
 			body = document.body;
-		this.getDOMNode().onclick = function(){
+		ReactDOM.findDOMNode(this).onclick = () => {
 			if(typeof value === "string"){
 				$.ajax({
 					url : value,
-					success : function(data){
+					success : data => {
 						document.title = title;
-						if(!Util.QueryString("index")){
-							window.history.pushState({}, document.title, "?index=" + this.props.index);
+						if(!QueryString("index")){
+							window.history.pushState({}, document.title, `?index=${this.props.index}`);
 						}
 						React.render(
 							<Help data={data.data} />,
 							body
 						);
-					}.bind(this)
+					}
 				});
 			}else{
 				React.render(
@@ -99,22 +100,22 @@ var List = React.createClass({
 					body
 				);
 				document.title = title;
-				if(!Util.QueryString("index")){
-					window.history.pushState({}, document.title, "?index=" + this.props.index);
+				if(!QueryString("index")){
+					window.history.pushState({}, document.title, `?index=${this.props.index}`);
 				}
 			}
-		}.bind(this);
-	},
-	render : function(){
+		};
+	}
+	render(){
 		return (
 			<h1>
 				{this.props.data.name}
 			</h1>
 		);
 	}
-});
-var Suggestion = React.createClass({
-	render : function(){
+}
+class Suggestion extends React.Component{
+	render(){
 		return (
 			<body>
 				<form method="post" action="/api/getsuggestion">
@@ -124,34 +125,12 @@ var Suggestion = React.createClass({
 			</body>
 		);
 	}
-});
-var Contact = React.createClass({
-	getDefaultProps : function(){
-		return {
-			setting : [
-				{
-					name : "微信订阅号:xmlyjr",
-					value : ""
-				},
-				{
-					name : "微信订阅号:hi-lend",
-					value : ""
-				},
-				{
-					name : "@喜蓝理财",
-					value : ""
-				},
-				{
-					name : "4000525522",
-					value : "mqqwpa://im/chat?chat_type=wpa&uin=4000525522"
-				}
-			]
-		};
-	},
-	render : function(){
+}
+class Contact extends React.Component{
+	render(){
 		var lists = [],
 			setting = this.props.setting;
-		setting.forEach(function(list){
+		setting.forEach(list => {
 			lists.push(
 				<h1 className="withIcon">
 					<i></i>
@@ -173,41 +152,39 @@ var Contact = React.createClass({
 			</body>
 		);
 	}
-});
-var Page = React.createClass({
-	getDefaultProps : function(){
-		return {
-			setting : [
-				{
-					name : "关于喜蓝理财",
-					value : About
-				},
-				{
-					name : "常见问题",
-					value : "/api/gethelp",
-				},
-				{
-					name : "意见反馈",
-					value : Suggestion,
-				},
-				{
-					name : "联系客服",
-					value : Contact
-				}
-			]
-		};
-	},
-	componentDidMount : function(){
-		if(Util.QueryString("index")){
-			this.refs["more" + Util.QueryString("index")].getDOMNode().click();
+}
+Contact.defaultProps = {
+	setting : [
+		{
+			name : "微信订阅号:xmlyjr",
+			value : ""
+		},
+		{
+			name : "微信订阅号:hi-lend",
+			value : ""
+		},
+		{
+			name : "@喜蓝理财",
+			value : ""
+		},
+		{
+			name : "4000525522",
+			value : "mqqwpa://im/chat?chat_type=wpa&uin=4000525522"
 		}
-	},
-	render : function(){
-		var lists = [],
+	]
+};
+class Page extends React.Component{
+	componentDidMount(){
+		if(QueryString("index")){
+			ReactDOM.findDOMNode(this.refs[`more${QueryString("index")}`]).click();
+		}
+	}
+	render(){
+		let lists = [],
 			setting = this.props.setting;
-		setting.forEach(function(list, index){
+		setting.forEach((list, index) => {
 			lists.push(
-				<List data={list} index={index + 1} ref={"more" + (index + 1)} />
+				<List data={list} index={index + 1} ref={`more${index + 1}`} />
 			);
 		});
 		return (
@@ -236,18 +213,38 @@ var Page = React.createClass({
 			</body>
 		);
 	}
-});
-var init = function(){
-	Util.PageData.setData(null, function(){
+}
+Page.defaultProps = {
+	setting : [
+		{
+			name : "关于喜蓝理财",
+			value : About
+		},
+		{
+			name : "常见问题",
+			value : "/api/gethelp",
+		},
+		{
+			name : "意见反馈",
+			value : Suggestion,
+		},
+		{
+			name : "联系客服",
+			value : Contact
+		}
+	]
+};
+const init = () => {
+	PageData.setData(null, () => {
 		document.title = "更多";
 		document.body.style.backgroundColor = "rgb(244, 244, 244)";
-		React.render(
+		ReactDOM.render(
 			<Page />,
 			document.body
 		);
 	}).render(init);
 };
-module.exports = {
-	main : Page,
-	init : init
+export {
+	Page as main,
+	init as init
 };
