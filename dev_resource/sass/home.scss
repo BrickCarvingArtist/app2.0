@@ -13,7 +13,7 @@ header{
 		}
 	}
 }
-menu.menu_3col_anchor{
+.menu_3col_anchor{
 	float:left;
 	border-bottom:.025rem solid $grey;
 	a{
@@ -58,6 +58,7 @@ menu.menu_3col_anchor{
 	position:relative;
 	float:left;
 	margin-top:1.325rem;
+	margin-bottom:2rem;
 	width:16rem;
 	height:14rem;
 	overflow:hidden;

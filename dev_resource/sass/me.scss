@@ -31,8 +31,35 @@ body{
 	background-repeat:no-repeat;
 	background-position:50% 1rem;
 }
+.menu_3col_infoAnchor{
+	float:left;
+	background-color:$darkOrange;
+	box-shadow:0 .025rem .025rem $bitGrey;
+	a{
+		position:relative;
+		color:white;
+		text-align:center;
+		h1{
+			margin-top:.4rem;
+			font-size:.55rem;
+		}
+		h2{
+			margin-top:.1rem;
+			font-size:.75rem;
+		}
+	}
+	a:nth-of-type(1):after, a:nth-of-type(2):after{
+		position:absolute;
+		top:.225rem;
+		right:0;
+		content:"";
+		height:1.7rem;
+		border-right:solid .025rem white;
+	}
+}
 .entrance{
 	margin-top:.4rem;
+	margin-bottom:3rem;
 	background-color:white;
 	.option{
 		float:left;

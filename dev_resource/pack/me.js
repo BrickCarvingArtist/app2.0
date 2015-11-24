@@ -49,13 +49,6 @@ class Info extends React.Component{
 		);
 	}
 }
-class Asset extends React.Component{
-	render(){
-		return (
-			<div className="asset"></div>
-		);
-	}
-}
 class Option extends React.Component{
 	render(){
 		return (
@@ -133,7 +126,25 @@ class Page extends React.Component{
 		return (
 			<body>
 				<Info />
-				<Asset />
+				<Menu type={3} option={
+					[
+						{
+							href : "",
+							name : "我的资产",
+							value : "1024.00"
+						},
+						{
+							href : "",
+							name : "预期收益",
+							value : "24.00"
+						},
+						{
+							href : "",
+							name : "历史收益",
+							value : "1024.00"
+						}
+					]
+				} />
 				<Entrance />
 				<Menu type={1} option={
 					[

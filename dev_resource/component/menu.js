@@ -27,7 +27,7 @@ class List2 extends React.Component{
 		this.state = {
 			href : props.option.href,
 			text : props.option.text
-		}
+		};
 	}
 	render(){
 		let state = this.state;
@@ -42,12 +42,25 @@ class List2 extends React.Component{
 	}
 }
 class List3 extends React.Component{
-	constructor(){
-		super();
+	constructor(props){
+		super(props);
+		this.state = {
+			href : props.option.href,
+			name : props.option.name,
+			value : props.option.value
+		};
 	}
 	render(){
+		let state = this.state;
 		return (
-			<a></a>
+			<a href={state.href}>
+				<h1>
+					{state.name}
+				</h1>
+				<h2>
+					{state.value}
+				</h2>
+			</a>
 		);
 	}
 }
@@ -69,7 +82,7 @@ class Menu extends React.Component{
 					returnValue = "menu_3col_anchor";
 					break;
 				case 3:
-					returnValue = "menu_3col"
+					returnValue = "menu_3col_infoAnchor";
 					break;
 			}
 			return returnValue;
@@ -100,6 +113,15 @@ class Menu extends React.Component{
 					);
 					break;
 				case 3:
+					returnValue = (
+						<List3 option={
+							{
+								href : list.href,
+								name : list.name,
+								value : list.value
+							}
+						} />
+					);
 					break;
 			}
 			return returnValue;
