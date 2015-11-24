@@ -17,31 +17,12 @@ const Util = {
 				return value.toString().match(/^\d{15,18}$/) ? 1 : 0;
 		}
 	},
-	Adaptor : function(type, data){
-		var _data;
-		switch(type){
-			case "complexNav":
-				_data = {
-					supList : []
-				};
-				data.forEach(function(list, index){
-					if(list.level === 1){
-						list.subList = [];
-						_data.supList.push(list);
-					}else{
-						_data.supList[list.type - 1].subList.push(list);
-					}
-				});
-				break;
-		}
-		return _data;
-	},
 	QueryString : function(name){
-		var result = window.location.search.substr(1).match(new RegExp("(^|&)" + name + "=([^&]*)(&|$)"));
+		let result = window.location.search.substr(1).match(new RegExp("(^|&)" + name + "=([^&]*)(&|$)"));
 		return result === null ? null : unescape(result[2]);
 	},
 	ParamString : function(){
-		var href = window.location.href,
+		let href = window.location.href,
 			search = window.location.search,
 			result = search ? href.split(search)[0].substring(href.split(search)[0].lastIndexOf("/") + 1) : href.split("/")[href.split("/").length - 1];
 		return ~result.indexOf("#") ? result.split("#")[0] : result;
@@ -56,29 +37,29 @@ const Util = {
 		}else{
 			$.ajax({
 				url : this.url,
-				success : function(data){
+				success : data => {
 					localStorage[this.name] = JSON.stringify(data);
 					localStorage[this.name + "_v"] = this.version;
 					this.callback(data);
-				}.bind(this)
+				}
 			});
 		}
 	},
 	getPage : function(option){
-		var react = option.react,
+		let react = option.react,
 			reactDOMServer = option.reactDOMServer,
 			req = option.req,
 			main = option.main;
 		return main;
 	},
 	setRem : function(){
-		document.documentElement.style.fontSize = window.innerWidth / 16 + "px";
+		document.documentElement.style.fontSize = `${window.innerWidth / 16}px`;
 	},
 	PageData : {
 		render : function(init){
 			Util.setRem();
 			document.body.style.opacity = 1;
-			window.onpopstate = function(){
+			window.onpopstate = () => {
 				init();
 			};
 		},
@@ -86,10 +67,10 @@ const Util = {
 			if(url && !this.getData()){
 				$.ajax({
 					url : url,
-					success : function(data){
+					success : data => {
 						this.data = data;
 						callback(data);
-					}.bind(this)
+					}
 				});
 			}else{
 				callback(this.getData());
