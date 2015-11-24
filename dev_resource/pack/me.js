@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Util from "../pack/util";
-import Component from "./component";
-let Menu = Component.Menu;
+import {Menu} from "./component";
 class Info extends React.Component{
 	constructor(props){
 		super(props);
@@ -176,7 +175,7 @@ const init = init => {
 		);
 	}).render(init);
 };
-module.exports = {
-	main : Page,
-	init : init
-};
+export {
+	Page as main,
+	init as init
+}
