@@ -1,10 +1,12 @@
-var React = require("react"),
+let React = require("react"),
+	ReactDOM = require("react-dom"),
 	Util = require("../pack/util"),
 	Component = require("./component"),
 	Menu = Component.Menu;
-var Info = React.createClass({
-	getInitialState : function(){
-		return {
+class Info extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
 			vip : "普通会员",
 			name : "＊＊＊",
 			setting : [
@@ -25,48 +27,48 @@ var Info = React.createClass({
 					value : "钻石会员"
 				}
 			]
-		}
-	},
-	componentDidMount : function(){
+		};
+	}
+	componentDidMount(){
 		$.ajax({
 			url : "/api/getauth",
-			success : function(data){
+			success : data => {
 				if(data.code !== 400){
 					this.setState({
 						vip : data.vip,
 						name : data.name
 					});
 				}
-			}.bind(this)
+			}
 		});
-	},
-	render : function(){
+	}
+	render(){
 		return (
 			<div className="info common">
-				{this.state.vip + this.state.name + ",你好!"}
+				{`${this.state.vip}${this.state.name},你好!`}
 			</div>
 		);
 	}
-});
-var Asset = React.createClass({
-	render : function(){
+}
+class Asset extends React.Component{
+	render(){
 		return (
 			<div className="asset"></div>
 		);
 	}
-});
-var Option = React.createClass({
-	componentDidMount : function(){
-		this.getDOMNode().onclick = function(){
-			React.render(
+}
+class Option extends React.Component{
+	componentDidMount(){
+		ReactDOM.findDOMNode(this).onclick = () => {
+			ReactDOM.render(
 				React.createElement(this.props.data.value, null),
 				document.body
 			);
-		}.bind(this);
-	},
-	render : function(){
+		};
+	}
+	render(){
 		return (
-			<div className={"option" + " " + this.props.data.className}>
+			<div className={`option ${this.props.data.className}`}>
 				<i></i>
 				<span>
 					{this.props.data.name}
@@ -74,58 +76,12 @@ var Option = React.createClass({
 			</div>
 		)
 	}
-});
-var Entrance = React.createClass({
-	getDefaultProps : function(){
-		return {
-			setting : [
-				{
-					name : "个人信息",
-					className : "account",
-					value : ""
-				},
-				{
-					name : "交易记录",
-					className : "record",
-					value : ""
-				},
-				{
-					name : "我的积分",
-					className : "score",
-					value : ""
-				},
-				{
-					name : "我的红包",
-					className : "bonus",
-					value : ""
-				},
-				{
-					name : "我的加息",
-					className : "ticket",
-					value : ""
-				},
-				{
-					name : "我的邀请",
-					className : "invitation",
-					value : ""
-				},
-				{
-					name : "安全中心",
-					className : "safty",
-					value : ""
-				},
-				{
-					name : "消息中心",
-					className : "infoCenter",
-					value : ""
-				}
-			]
-		};
-	},
-	render : function(){
-		var lists = [],
+};
+class Entrance extends React.Component{
+	render(){
+		let lists = [],
 			setting = this.props.setting;
-		setting.forEach(function(list){
+		setting.forEach(list => {
 			lists.push(
 				<Option data={list} />
 			);
@@ -136,9 +92,53 @@ var Entrance = React.createClass({
 			</div>
 		);
 	}
-});
-var Page = React.createClass({
-	render : function(){
+}
+Entrance.defaultProps = {
+	setting : [
+		{
+			name : "个人信息",
+			className : "account",
+			value : ""
+		},
+		{
+			name : "交易记录",
+			className : "record",
+			value : ""
+		},
+		{
+			name : "我的积分",
+			className : "score",
+			value : ""
+		},
+		{
+			name : "我的红包",
+			className : "bonus",
+			value : ""
+		},
+		{
+			name : "我的加息",
+			className : "ticket",
+			value : ""
+		},
+		{
+			name : "我的邀请",
+			className : "invitation",
+			value : ""
+		},
+		{
+			name : "安全中心",
+			className : "safty",
+			value : ""
+		},
+		{
+			name : "消息中心",
+			className : "infoCenter",
+			value : ""
+		}
+	]
+};
+class Page extends React.Component{
+	render(){
 		return (
 			<body>
 				<Info />
@@ -167,10 +167,10 @@ var Page = React.createClass({
 			</body>
 		);
 	}
-});
-var init = function(){
-	Util.PageData.setData(null, function(){
-		React.render(
+}
+const init = init => {
+	Util.PageData.setData(null, () => {
+		ReactDOM.render(
 			<Page />,
 			document.body
 		);

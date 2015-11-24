@@ -10,7 +10,8 @@ module.exports = {
 		filename : "../resource/js/[name].js"
 	},
 	externals : {
-		react : "React"
+		react : "React",
+		"react-dom" : "ReactDOM"
 	},
 	module : {
 		loaders : [
