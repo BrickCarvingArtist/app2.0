@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Util from "../pack/util";
-import {Menu} from "./component";
+import {PageData} from "../pack/util";
+import {MenuBar as Menu} from "../component/menu";
 class Info extends React.Component{
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 		this.state = {
 			vip : "普通会员",
 			name : "＊＊＊",
@@ -168,7 +168,7 @@ class Page extends React.Component{
 	}
 }
 const init = init => {
-	Util.PageData.setData(null, () => {
+	PageData.setData(null, () => {
 		ReactDOM.render(
 			<Page />,
 			document.body

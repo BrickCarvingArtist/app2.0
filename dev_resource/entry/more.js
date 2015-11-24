@@ -1,4 +1,2 @@
-var More = require("../pack/more"),
-	Page = More.main,
-	init = More.init;
+import {More, init} from "../pack/more";
 init();

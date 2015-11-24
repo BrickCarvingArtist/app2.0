@@ -1,4 +1,2 @@
-var Me = require("../pack/me"),
-	Page = Me.main,
-	init = Me.init;
+import {Me, init} from "../pack/me";
 init();

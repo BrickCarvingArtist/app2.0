@@ -1,16 +1,16 @@
-var React = require("react");
-var List1 = React.createClass({
-	getInitialState : function(){
-		var option = this.props.option;
-		return {
-			currentIndex : option.currentIndex,
-			index : option.index,
-			href : option.href,
-			text : option.text
+import React from "react";
+class List1 extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			currentIndex : props.option.currentIndex,
+			index : props.option.index,
+			href : props.option.href,
+			text : props.option.text
 		};
-	},
-	render : function(){
-		var state = this.state;
+	}
+	render(){
+		let state = this.state;
 		return (
 			<a className={state.currentIndex === state.index ? "current" : ""} href={state.href}>
 				<i></i>
@@ -20,17 +20,17 @@ var List1 = React.createClass({
 			</a>
 		);
 	}
-});
-var List2 = React.createClass({
-	getInitialState : function(){
-		var option = this.props.option;
-		return {
-			href : option.href,
-			text : option.text
-		};
-	},
-	render : function(){
-		var state = this.state;
+}
+class List2 extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			href : props.option.href,
+			text : props.option.text
+		}
+	}
+	render(){
+		let state = this.state;
 		return (
 			<a href={state.href}>
 				<i></i>
@@ -40,81 +40,82 @@ var List2 = React.createClass({
 			</a>
 		);
 	}
-});
-var List3 = React.createClass({
-	getInitialState : function(){
-		return {};
-	},
-	render : function(){
+}
+class List3 extends React.Component{
+	constructor(){
+		super();
+	}
+	render(){
 		return (
 			<a></a>
 		);
 	}
-});
-var MenuBar = React.createClass({
-	getClassType : function(classList){
-		var returnValue;
-		switch(this.state.type){
-			case 1:
-				returnValue = "footer";
-				break;
-			case 2:
-				returnValue = "menu_3col_anchor";
-				break;
-			case 3:
-				returnValue = "menu_3col"
-				break;
-		}
-		return returnValue;
-	},
-	getListType : function(list, index){
-		var returnValue;
-		switch(this.state.type){
-			case 1:
-				returnValue = (
-					<List1 option={
-						{
-							currentIndex : this.state.currentIndex,
-							index : index,
-							href : list.href,
-							text : list.text
-						}
-					} />
-				);
-				break;
-			case 2:
-				returnValue = (
-					<List2 option={
-						{
-							href : list.href,
-							text : list.text
-						}
-					} />
-				);
-				break;
-			case 3:
-				break;
-		}
-		return returnValue;
-	},
-	getInitialState : function(){
-		return {
-			currentIndex : this.props.currentIndex,
-			type : this.props.type,
-			option : this.props.option
+}
+class MenuBar extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			currentIndex : props.currentIndex,
+			type : props.type,
+			option : props.option
 		};
-	},
-	render : function(){
-		var lists = [],
+		this.getClassType = classList => {
+			let returnValue;
+			switch(this.state.type){
+				case 1:
+					returnValue = "footer";
+					break;
+				case 2:
+					returnValue = "menu_3col_anchor";
+					break;
+				case 3:
+					returnValue = "menu_3col"
+					break;
+			}
+			return returnValue;
+		};
+		this.getListType = (list, index) => {
+			let returnValue;
+			switch(this.state.type){
+				case 1:
+					returnValue = (
+						<List1 option={
+							{
+								currentIndex : this.state.currentIndex,
+								index : index,
+								href : list.href,
+								text : list.text
+							}
+						} />
+					);
+					break;
+				case 2:
+					returnValue = (
+						<List2 option={
+							{
+								href : list.href,
+								text : list.text
+							}
+						} />
+					);
+					break;
+				case 3:
+					break;
+			}
+			return returnValue;
+		}
+	}
+	render(){
+		let lists = [],
 			option = this.state.option;
-		option.forEach(function(list, index){
+		option.forEach((list, index) => {
 			lists.push(this.getListType(list, index));
-		}.bind(this));
+		});
 		return (
 			<menu className={this.getClassType()}>
 				{lists}
 			</menu>
 		);
 	}
-});
-module.exports = MenuBar;
+}
+export {MenuBar}

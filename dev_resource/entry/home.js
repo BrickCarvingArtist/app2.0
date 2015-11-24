@@ -1,4 +1,2 @@
-var Home = require("../pack/home"),
-	Page = Home.main,
-	init = Home.init;
+import {Home, init} from "../pack/home";
 init();

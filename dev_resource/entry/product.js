@@ -1,4 +1,2 @@
-var Info = require("../pack/product"),
-	Page = Info.main,
-	init = Info.init;
+import {product, init} from "../pack/product";
 init();

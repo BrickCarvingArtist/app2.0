@@ -16,6 +16,21 @@ body{
 	background-repeat:no-repeat;
 	background-position:50% 1rem;
 }
+.info.jadeite{
+	background-image:$jadeite;
+	background-repeat:no-repeat;
+	background-position:50% 1rem;
+}
+.info.platinum{
+	background-image:$platinum;
+	background-repeat:no-repeat;
+	background-position:50% 1rem;
+}
+.info.diamond{
+	background-image:$diamond;
+	background-repeat:no-repeat;
+	background-position:50% 1rem;
+}
 .entrance{
 	margin-top:.4rem;
 	background-color:white;
