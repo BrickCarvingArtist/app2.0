@@ -1,8 +1,8 @@
-let React = require("react"),
-	ReactDOM = require("react-dom"),
-	Util = require("../pack/util"),
-	Component = require("./component"),
-	Menu = Component.Menu;
+import React from "react";
+import ReactDOM from "react-dom";
+import Util from "../pack/util";
+import Component from "./component";
+let Menu = Component.Menu;
 class Info extends React.Component{
 	constructor(props){
 		super(props);
