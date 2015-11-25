@@ -1,2 +1,71 @@
 @import "variable";
 @import "base";
+.part1{
+	position:relative;
+	padding-top:1.6rem;
+	height:4.65rem;
+	background-image:$common;
+	background-repeat:no-repeat;
+	background-position:.825rem .825rem;
+	background-size:3rem 3rem;
+	p{
+		margin-left:4rem;
+		font-size:.55rem;
+		color:$darkGrey;
+	}
+	p:last-of-type{
+		margin-top:.2rem;
+		b{
+			margin-left:.1rem;
+			font-size:.9rem;
+			color:$orange;
+		}
+	}
+	.sign{
+		position:absolute;
+		top:1.35rem;
+		right:.85rem;
+		width:1rem;
+		height:1rem;
+		background-image:$sign;
+	}
+	.sign:after{
+		position:absolute;
+		top:1.25rem;
+		left:-.05rem;
+		width:1.1rem;
+		content:"签到";
+		font-size:.55rem;
+	}
+}
+.entrance{
+	float:left;
+	display:block;
+	width:16rem;
+	height:14.5rem;
+	background-image:$img_score;
+	background-size:16rem 14.5rem;
+}
+.record{
+	padding:0 .85rem;
+	h1{
+		font-size:.65rem;
+		font-weight:bold;
+		line-height:1.65rem;
+		border-bottom:solid .025rem $bitGrey;
+	}
+	ul{
+		margin-top:.5rem;
+		display:-webkit-flex;
+		li{
+			-webkit-flex:1;
+			font-size:.5rem;
+		}
+	}
+	ul:first-of-type{
+		margin-top:.75rem;
+		li{
+			font-size:.55rem;
+		}
+	}
+}
