@@ -1,4 +1,5 @@
 import React from "react";
+import {Dialog} from "./dialog";
 class List1 extends React.Component{
 	constructor(props){
 		super(props);
@@ -69,7 +70,6 @@ class Menu extends React.Component{
 		super(props);
 		this.state = {
 			currentIndex : props.currentIndex,
-			type : props.type,
 			menu : (() => {
 				let returnValue;
 				switch(props.type){
@@ -88,7 +88,7 @@ class Menu extends React.Component{
 		};
 		this.getListType = (list, index) => {
 			let returnValue;
-			switch(this.state.type){
+			switch(this.props.type){
 				case 1:
 					returnValue = (
 						<List1 option={
@@ -124,6 +124,24 @@ class Menu extends React.Component{
 					break;
 			}
 			return returnValue;
+		}
+	}
+	componentDidMount(){
+		if(this.props.type === 3){
+			$.ajax({
+				type : "post",
+				url : "/api/getinvest",
+				success : data => {
+					if(data.message){
+						ReactDOM.render(
+							<Dialog html={
+								<a className="longBtn" href="/signin">登录</a>
+							} />,
+							document.querySelector(".shadow")
+						);
+					}
+				}
+			});
 		}
 	}
 	render(){

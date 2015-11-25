@@ -161,12 +161,12 @@ body{
 		right:1.35rem;
 		background-image:$next;
 	}
-	.btnBuy{
+	.longBtn{
 		position:relative;
 		top:9.65rem;
 		left:0;
 	}
-	.btnBuy:before{
+	.longBtn:before{
 		position:absolute;
 		top:-.1rem;
 		right:-.1rem;
@@ -177,7 +177,7 @@ body{
 		background-image:$sinosig;
 		background-size:1.4rem 1.4rem;
 	}
-	.btnBuy:after{
+	.longBtn:after{
 		position:absolute;
 		top:2.1rem;
 		left:0;

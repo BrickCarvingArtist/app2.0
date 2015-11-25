@@ -70,6 +70,7 @@ menu.footer{
 	bottom:0;
 	background-color:white;
 	border-top:.025rem solid $grey;
+	z-index:1;
 	a{
 		text-align:center;
 		i{
@@ -143,6 +144,15 @@ menu.footer{
 		.70711rem -.70711rem 0 .17678rem #f1c40f;
 	animation:gw 1s ease-in-out infinite,
 		rot 2.8s linear infinite;
+}
+.shadow{
+	position:fixed;
+	top:0;
+	left:0;
+	display:none;
+	width:100%;
+	height:100%;
+	background-color:rgba(0, 0, 0, .7);
 }
 @-webkit-keyframes rot{
 	to{

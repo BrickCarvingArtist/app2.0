@@ -9,29 +9,24 @@ body{
 	padding-top:4.4rem;
 	height:6rem;
 	background-color:$orange;
+	background-repeat:no-repeat;
+	background-position:50% 1rem;
+	background-size:3rem 3rem;
 	font-size:.55rem;
 	color:white;
 	text-align:center;
 }
 .info.common{
 	background-image:$common;
-	background-repeat:no-repeat;
-	background-position:50% 1rem;
 }
 .info.jadeite{
 	background-image:$jadeite;
-	background-repeat:no-repeat;
-	background-position:50% 1rem;
 }
 .info.platinum{
 	background-image:$platinum;
-	background-repeat:no-repeat;
-	background-position:50% 1rem;
 }
 .info.diamond{
 	background-image:$diamond;
-	background-repeat:no-repeat;
-	background-position:50% 1rem;
 }
 .menu_3col_infoAnchor{
 	float:left;
@@ -132,4 +127,21 @@ body{
 			background-image:$infoCenter;
 		}
 	}
+}
+.longBtn{
+	position:fixed;
+	bottom:7rem;
+	left:50%;
+	margin-left:-6.65rem;
+}
+.longBtn:after{
+	position:absolute;
+	top:2.1rem;
+	left:0;
+	width:13.3rem;
+	content:"账户资金安全由阳光保险100％承保";
+	font-size:.5rem;
+	line-height:1;
+	color:white;
+	text-align:center;
 }

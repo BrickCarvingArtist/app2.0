@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "../pack/util";
 import {Menu} from "../component/menu";
+import {Dialog} from "../component/dialog";
 class Info extends React.Component{
 	constructor(){
 		super();
@@ -129,6 +130,9 @@ class Page extends React.Component{
 				<Menu type={3} />
 				<Entrance />
 				<Menu type={1} currentIndex={2} />
+				<div className="shadow">
+					<Dialog />
+				</div>
 			</body>
 		);
 	}

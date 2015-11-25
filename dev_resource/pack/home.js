@@ -60,7 +60,7 @@ class Button extends React.Component{
 	}
 	render(){
 		return (
-			<a className="longBtn btnBuy" href={`/api/getproduct/${this.state.href}`}>立即购买</a>
+			<a className="longBtn" href={`/api/getproduct/${this.state.href}`}>立即购买</a>
 		);
 	}
 };

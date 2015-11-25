@@ -5,8 +5,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/api/gethomeproduct")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getproducts", function(err, request, body){
-				if(!err && request.statusCode === 200){
+			request("http://www.xilanlicai.com/api/getproducts", function(err, response, body){
+				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{
 					next();
@@ -16,8 +16,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/api/getinfo")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, request, body){
-				if(!err && request.statusCode === 200){
+			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, response, body){
+				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{
 					next();
@@ -27,8 +27,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/api/getinfo/:id")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getnews/" + req.params.id, function(err, request, body){
-				if(!err && request.statusCode === 200){
+			request("http://www.xilanlicai.com/api/getnews/" + req.params.id, function(err, response, body){
+				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{
 					next();
@@ -38,8 +38,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/api/getproduct")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getproducts?pageindex=1&pagesize=99&supertype=&type=&status=", function(err, request, body){
-				if(!err && request.statusCode === 200){
+			request("http://www.xilanlicai.com/api/getproducts?pageindex=1&pagesize=99&supertype=&type=&status=", function(err, response, body){
+				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{
 					next();
@@ -60,8 +60,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/api/getbidder/:id")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getproductbuy?pageindex=1&pagesize=99&id=" + req.params.id, function(err, request, body){
-				if(!err && request.statusCode === 200){
+			request("http://www.xilanlicai.com/api/getproductbuy?pageindex=1&pagesize=99&id=" + req.params.id, function(err, response, body){
+				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{
 					next();
@@ -71,8 +71,21 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/api/getauth")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getuserauth", function(err, request, body){
-				if(!err && request.statusCode === 200){
+			request("http://www.xilanlicai.com/api/getuserauth", function(err, response, body){
+				if(!err && response.statusCode === 200){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		});
+	router
+		.route("/api/getinvest")
+		.post(function(req, res, next){
+			request.post({
+				url:"http://account.xilanlicai.com/api/getprodinvested"
+			}, function(err, response, body){
+				if(!err){
 					res.json(JSON.parse(body));
 				}else{
 					next();
@@ -83,8 +96,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 		.route("/api/postbill")
 		.post(function(req, res, next){
 			console.log(req.body);
-			request("http://www.xilanlicai.com/api/getorder", function(err, request, body){
-				if(!err && request.statusCode === 200){
+			request("http://www.xilanlicai.com/api/getorder", function(err, response, body){
+				if(!err && response.statusCode === 200){
 					res.redirect("/payment");
 				}else{
 					next();
@@ -149,8 +162,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getproducts", function(err, request, body){
-				if(!err && request.statusCode === 200){
+			request("http://www.xilanlicai.com/api/getproducts", function(err, response, body){
+				if(!err && response.statusCode === 200){
 					res.render("./index", {
 						style : ["/css/home.css"],
 						script : ["/js/home.js"],
@@ -197,8 +210,8 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/infocenter")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, request, body){
-				if(!err && request.statusCode === 200){
+			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, response, body){
+				if(!err && response.statusCode === 200){
 					res.render("./index", {
 						style : ["/css/info.css"],
 						script : ["/js/info.js"],
