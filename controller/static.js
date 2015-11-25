@@ -208,6 +208,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
+		.route("/score")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/score.css"],
+				script : ["/js/score.js"],
+				title : "我的积分",
+				page : loading
+			});
+		});
+	router
 		.route("/infocenter")
 		.get(function(req, res, next){
 			request("http://www.xilanlicai.com/api/getnews?pageindex=1&pagesize=99&newstype=1", function(err, response, body){

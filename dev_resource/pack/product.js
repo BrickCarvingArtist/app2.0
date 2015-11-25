@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {PageData, QueryString} from "../pack/util";
+import {PageData, QueryString} from "./util";
 import {Menu} from "../component/menu";
 class Part1 extends React.Component{
 	render(){
@@ -426,6 +426,5 @@ const init = () => {
 	}).render(init);
 };
 export {
-	Page as main,
-	init as init
+	init
 };

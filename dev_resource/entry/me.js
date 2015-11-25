@@ -1,2 +1,2 @@
-import {Me, init} from "../pack/me";
+import {init} from "../pack/me";
 init();

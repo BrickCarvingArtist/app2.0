@@ -191,7 +191,7 @@ Menu.defaultProps = {
 				text : "活动中心"
 			},
 			{
-				href : "/sign",
+				href : "/score",
 				text : "马上签到"
 			}
 		]

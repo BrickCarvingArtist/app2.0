@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {PageData} from "../pack/util";
+import {PageData} from "./util";
 import {Menu} from "../component/menu";
 import {Dialog} from "../component/dialog";
 class Info extends React.Component{

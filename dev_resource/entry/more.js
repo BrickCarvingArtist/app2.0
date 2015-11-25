@@ -1,2 +1,2 @@
-import {More, init} from "../pack/more";
+import {init} from "../pack/more";
 init();

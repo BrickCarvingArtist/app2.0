@@ -1,2 +1,2 @@
-import {Info, init} from "../pack/info";
+import {init} from "../pack/info";
 init();

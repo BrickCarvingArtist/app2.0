@@ -1,2 +1,2 @@
-import {product, init} from "../pack/product";
+import {init} from "../pack/product";
 init();

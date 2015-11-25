@@ -1,2 +1,2 @@
-import {Home, init} from "../pack/home";
+import {init} from "../pack/home";
 init();

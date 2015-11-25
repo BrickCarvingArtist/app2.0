@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {PageData, QueryString} from "../pack/util";
+import {PageData, QueryString} from "./util";
 class InfoDetail extends React.Component{
 	constructor(props){
 		super(props);

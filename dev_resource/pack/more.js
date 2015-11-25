@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {PageData, QueryString} from "../pack/util";
+import {PageData, QueryString} from "./util";
 import {Menu} from "../component/menu";
 class About extends React.Component{
 	render(){
