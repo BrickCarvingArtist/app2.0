@@ -118,6 +118,5 @@ const init = () => {
 	}).render(init);
 };
 export {
-	Page as main,
-	init as init
+	init
 }
