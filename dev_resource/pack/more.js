@@ -190,26 +190,7 @@ class Page extends React.Component{
 		return (
 			<body>
 				{lists}
-				<Menu type={1} option={
-					[
-						{
-							href : "/",
-							text : "首页"
-						},
-						{
-							href : "/product",
-							text : "理财产品"
-						},
-						{
-							href : "/me",
-							text : "我的账户"
-						},
-						{
-							href : "/more",
-							text : "更多"
-						}
-					]
-				} currentIndex={3} />
+				<Menu type={1} currentIndex={3} />
 			</body>
 		);
 	}

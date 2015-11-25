@@ -126,46 +126,9 @@ class Page extends React.Component{
 		return (
 			<body>
 				<Info />
-				<Menu type={3} option={
-					[
-						{
-							href : "",
-							name : "我的资产",
-							value : "1024.00"
-						},
-						{
-							href : "",
-							name : "预期收益",
-							value : "24.00"
-						},
-						{
-							href : "",
-							name : "历史收益",
-							value : "1024.00"
-						}
-					]
-				} />
+				<Menu type={3} />
 				<Entrance />
-				<Menu type={1} option={
-					[
-						{
-							href : "/",
-							text : "首页"
-						},
-						{
-							href : "/product",
-							text : "理财产品"
-						},
-						{
-							href : "/me",
-							text : "我的账户"
-						},
-						{
-							href : "/more",
-							text : "更多"
-						}
-					]
-				} currentIndex={2} />
+				<Menu type={1} currentIndex={2} />
 			</body>
 		);
 	}

@@ -1,6 +1,8 @@
 @import "variable";
 @import "base";
 body{
+	float:left;
+	margin-bottom:3rem;
 	background-color:$lightGrey;
 }
 .info{
@@ -59,7 +61,6 @@ body{
 }
 .entrance{
 	margin-top:.4rem;
-	margin-bottom:3rem;
 	background-color:white;
 	.option{
 		float:left;

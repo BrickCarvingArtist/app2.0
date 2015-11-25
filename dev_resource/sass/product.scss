@@ -1,6 +1,8 @@
 @import "variable";
 @import "base";
 body{
+	float:left;
+	margin-bottom:3rem;
 	background-color:$lightGrey;
 }
 section{

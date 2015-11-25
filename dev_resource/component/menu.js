@@ -70,22 +70,21 @@ class Menu extends React.Component{
 		this.state = {
 			currentIndex : props.currentIndex,
 			type : props.type,
-			option : props.option
-		};
-		this.getClassType = classList => {
-			let returnValue;
-			switch(this.state.type){
-				case 1:
-					returnValue = "footer";
-					break;
-				case 2:
-					returnValue = "menu_3col_anchor";
-					break;
-				case 3:
-					returnValue = "menu_3col_infoAnchor";
-					break;
-			}
-			return returnValue;
+			menu : (() => {
+				let returnValue;
+				switch(props.type){
+					case 1:
+						returnValue = props.menu1;
+						break;
+					case 2:
+						returnValue = props.menu2;
+						break;
+					case 3:
+						returnValue = props.menu3;
+						break;
+				}
+				return returnValue;
+			})()
 		};
 		this.getListType = (list, index) => {
 			let returnValue;
@@ -129,17 +128,77 @@ class Menu extends React.Component{
 	}
 	render(){
 		let lists = [],
-			option = this.state.option;
-		option.forEach((list, index) => {
+			menu = this.state.menu;
+		menu.option.forEach((list, index) => {
 			lists.push(this.getListType(list, index));
 		});
 		return (
-			<menu className={this.getClassType()}>
+			<menu className={menu.className}>
 				{lists}
 			</menu>
 		);
 	}
 }
+Menu.defaultProps = {
+	menu1 : {
+		className : "footer",
+		option : [
+			{
+				href : "/",
+				text : "首页"
+			},
+			{
+				href : "/product",
+				text : "理财产品"
+			},
+			{
+				href : "/me",
+				text : "我的账户"
+			},
+			{
+				href : "/more",
+				text : "更多"
+			}
+		]
+	},
+	menu2 : {
+		className : "menu_3col_anchor",
+		option : [
+			{
+				href : "/bonus",
+				text : "推荐送红包"
+			},
+			{
+				href : "/activity",
+				text : "活动中心"
+			},
+			{
+				href : "/sign",
+				text : "马上签到"
+			}
+		]
+	},
+	menu3 : {
+		className : "menu_3col_infoAnchor",
+		option : [
+			{
+				href : "",
+				name : "我的资产",
+				value : "0.00"
+			},
+			{
+				href : "",
+				name : "预期收益",
+				value : "0.00"
+			},
+			{
+				href : "",
+				name : "历史收益",
+				value : "0.00"
+			}
+		]
+	}
+};
 export {
 	Menu
 }

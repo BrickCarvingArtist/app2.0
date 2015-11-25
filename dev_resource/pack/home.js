@@ -156,43 +156,9 @@ class Page extends React.Component{
 						}
 					]
 				} />
-				<Menu type={2} option={
-					[
-						{
-							href : "/bonus",
-							text : "推荐送红包"
-						},
-						{
-							href : "/activity",
-							text : "活动中心"
-						},
-						{
-							href : "/sign",
-							text : "马上签到"
-						}
-					]
-				} />
+				<Menu type={2} />
 				<Product data={this.state.data} />
-				<Menu type={1} option={
-					[
-						{
-							href : "/",
-							text : "首页"
-						},
-						{
-							href : "/product",
-							text : "理财产品"
-						},
-						{
-							href : "/me",
-							text : "我的账户"
-						},
-						{
-							href : "/more",
-							text : "更多"
-						}
-					]
-				} currentIndex={0} />
+				<Menu type={1} currentIndex={0} />
 			</body>
 		);
 	}
