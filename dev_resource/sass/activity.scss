@@ -1,1 +1,23 @@
 @import "base";
+body{
+	background-color:$lightGrey;
+}
+section{
+	margin-bottom:.4rem;
+	overflow:hidden;
+	background-color:white;
+	box-shadow:0 .025rem .025rem $bitGrey;
+	img{
+		float:left;
+		width:16rem;
+		height:6rem;
+	}
+	p{
+		float:left;
+		width:16rem;
+		font-size:.55rem;
+		line-height:1.35rem;
+		color:$darkGrey;
+		text-indent:.85rem;
+	}
+}

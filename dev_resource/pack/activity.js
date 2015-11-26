@@ -5,7 +5,12 @@ class List extends React.Component{
 	render(){
 		let data = this.props.data;
 		return (
-			<section></section>
+			<section>
+				<a href={data.linkWeixin}>
+					<img src={data.imgWeixin} />
+				</a>
+				<p>{`活动时间 ${data.beginDate} 到 ${data.endDate}`}</p>
+			</section>
 		);
 	}
 }

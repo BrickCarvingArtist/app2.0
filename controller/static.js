@@ -271,7 +271,7 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				script : ["/js/activity.js"],
 				title : "活动中心",
 				page : loading
-			})
+			});
 		});
 	router
 		.route("/infocenter")
