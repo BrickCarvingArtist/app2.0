@@ -302,6 +302,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
+		.route("/signup")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/authentication.css"],
+				script : ["/js/signup.js"],
+				title : "注册",
+				page : loading
+			});
+		});
+	router
 		.route("*")
 		.get(function(req, res, next){
 			res.render("./index", {
