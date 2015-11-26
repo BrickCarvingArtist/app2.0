@@ -179,9 +179,9 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 						style : ["/css/home.css"],
 						script : ["/js/home.js"],
 						title : "首页",
-						page : reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/home").main)({
+						page : loading/*reactDOMServer.renderToString(react.createFactory(require("../dev_resource/pack/home").main)({
 							data : JSON.parse(body)
-						}))
+						}))*/
 					});
 				}else{
 					next();

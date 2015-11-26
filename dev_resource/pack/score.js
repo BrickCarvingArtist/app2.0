@@ -59,21 +59,26 @@ class Record extends React.Component{
 		$.ajax({
 			url : "/api/getscoredetail",
 			success : data => {
-				// this.setState({
-				// 	data : data.data
-				// });
-				console.log(data);
+				this.setState({
+					data : data.data || []
+				});
 			}
 		});
 	}
 	render(){
 		let lists = [],
 			data = this.state.data;
-		data.forEach(list => {
-			lists.push(
-				<List time={list.time} value={list.value} detail={list.detail} />
+		if(data.length){
+			data.forEach(list => {
+				lists.push(
+					<List time={list.time} value={list.value} detail={list.detail} />
+				);
+			});
+		}else{
+			lists = (
+				<i className="default"></i>
 			);
-		});
+		}
 		return (
 			<div className="record">
 				<h1>积分纪录</h1>

@@ -60,6 +60,7 @@
 		li{
 			-webkit-flex:1;
 			font-size:.5rem;
+			text-align:center;
 		}
 	}
 	ul:first-of-type{
@@ -67,5 +68,12 @@
 		li{
 			font-size:.55rem;
 		}
+	}
+	.default{
+		margin:.75rem auto;
+		width:7.6rem;
+		height:7.75rem;
+		background-image:$default;
+		background-size:7.6rem 7.75rem;
 	}
 }
