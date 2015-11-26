@@ -130,7 +130,7 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/api/getactivity")
 		.get(function(req, res, next){
-			request("http://activity.xilanlicai.com/api/getactivity?pageindex=1&pagesize=99&status=", function(err, response, body){
+			request("http://activity.xilanlicai.com/api/getactivity?pageindex=1&pagesize=12&status=", function(err, response, body){
 				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{
@@ -289,6 +289,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				}else{
 					next();
 				}
+			});
+		});
+	router
+		.route("/signin")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/authentication.css"],
+				script : ["/js/signin.js"],
+				title : "登录",
+				page : loading
 			});
 		});
 	router

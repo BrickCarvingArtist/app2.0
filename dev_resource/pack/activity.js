@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {PageData, QueryString} from "./util";
+import {PageData} from "./util";
 class List extends React.Component{
 	render(){
 		let data = this.props.data;

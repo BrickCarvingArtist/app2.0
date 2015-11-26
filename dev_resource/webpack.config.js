@@ -6,7 +6,8 @@ module.exports = {
 		more : "./entry/more",
 		info : "./entry/info",
 		score : "./entry/score",
-		activity : "./entry/activity"
+		activity : "./entry/activity",
+		signin : "./entry/signin"
 	},
 	output : {
 		filename : "../resource/js/[name].js"
