@@ -104,6 +104,30 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
+		.route("/api/sign")
+		.post(function(req, res, next){
+			request.post({
+				url : "http://account.xilanlicai.com/api/sign"
+			}, function(err, response, body){
+				if(!err){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		});
+	router
+		.route("/api/getscore")
+		.get(function(req, res, next){
+			request("http://account.xilanlicai.com/api/getpoints?pageindex=1&pagesize=99", function(err, response,body){
+				if(!err){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		});
+	router
 		.route("/api/postbill")
 		.post(function(req, res, next){
 			console.log(req.body);

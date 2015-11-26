@@ -21,7 +21,7 @@
 			color:$orange;
 		}
 	}
-	.sign{
+	.btnSign{
 		position:absolute;
 		top:1.35rem;
 		right:.85rem;
@@ -29,13 +29,14 @@
 		height:1rem;
 		background-image:$sign;
 	}
-	.sign:after{
+	.btnSign:after{
 		position:absolute;
 		top:1.25rem;
 		left:-.05rem;
 		width:1.1rem;
 		content:"签到";
 		font-size:.55rem;
+		color:$darkGrey;
 	}
 }
 .entrance{
@@ -52,6 +53,7 @@
 		font-size:.65rem;
 		font-weight:bold;
 		line-height:1.65rem;
+		color:$heavyGrey;
 		border-bottom:solid .025rem $bitGrey;
 	}
 	ul{
@@ -67,13 +69,30 @@
 		margin-top:.75rem;
 		li{
 			font-size:.55rem;
+			color:$darkGrey;
 		}
 	}
 	.default{
-		margin:.75rem auto;
+		margin:2rem auto;
 		width:7.6rem;
 		height:7.75rem;
 		background-image:$default;
 		background-size:7.6rem 7.75rem;
+	}
+}
+.sign{
+	height:25.7rem;
+	background-image:$img_sign;
+	text-align:center;
+	b{
+		display:block;
+		font-size:3.45rem;
+		font-weight:bold;
+		line-height:10rem;
+		color:$lightOrange;
+		letter-spacing:-.15rem;
+		text-shadow:.15rem 0 .15rem $brown;
+		-webkit-text-stroke:.1rem white;
+		-webkit-transform:scale(1, .8);
 	}
 }
