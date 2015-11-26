@@ -5,7 +5,8 @@ module.exports = {
 		me : "./entry/me",
 		more : "./entry/more",
 		info : "./entry/info",
-		score : "./entry/score"
+		score : "./entry/score",
+		activity : "./entry/activity"
 	},
 	output : {
 		filename : "../resource/js/[name].js"

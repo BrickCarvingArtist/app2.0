@@ -119,8 +119,19 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	router
 		.route("/api/getscore")
 		.get(function(req, res, next){
-			request("http://account.xilanlicai.com/api/getpoints?pageindex=1&pagesize=99", function(err, response,body){
+			request("http://account.xilanlicai.com/api/getpoints?pageindex=1&pagesize=99", function(err, response, body){
 				if(!err){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		});
+	router
+		.route("/api/getactivity")
+		.get(function(req, res, next){
+			request("http://activity.xilanlicai.com/api/getactivity?pageindex=1&pagesize=99&status=", function(err, response, body){
+				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{
 					next();
@@ -251,6 +262,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				title : "我的积分",
 				page : loading
 			});
+		});
+	router
+		.route("/activity")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/activity.css"],
+				script : ["/js/activity.js"],
+				title : "活动中心",
+				page : loading
+			})
 		});
 	router
 		.route("/infocenter")
