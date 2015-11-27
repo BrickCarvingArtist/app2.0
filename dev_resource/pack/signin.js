@@ -2,11 +2,12 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "./util";
 import {Banner} from "../component/banner";
+import {Warning} from "../component/warning";
 class Form extends React.Component{
 	render(){
 		return (
 			<form>
-				<input className="longInput mobile" type="text" placeholder="手机号码" />
+				<input className="longInput mobile" type="tel" placeholder="手机号码" />
 				<input className="longInput password" type="password" placeholder="密码" />
 				<a href="/reset">忘记密码?</a>
 				<input className="longBtn" type="submit" value="确认" />

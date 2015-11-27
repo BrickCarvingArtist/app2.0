@@ -43,16 +43,42 @@ form{
 	.password{
 		background-image:$password;
 	}
+	.captcha{
+		background-image:$captcha;
+	}
+	.invitor{
+		background-image:$invitor;
+	}
 	> a{
 		float:right;
+		margin-top:.5rem;
+		font-size:.55rem;
 		color:$grey;
 	}
 	p{
+		float:left;
+		margin-top:.5rem;
+		font-size:.55rem;
 		span{
 			color:$grey;
 		}
 		a{
 			color:$blue;
 		}
+	}
+	label{
+		float:left;
+		margin-top:.5rem;
+		font-size:.55rem;
+		span{
+			color:$grey;
+		}
+		b{
+			color:$orange;
+		}
+	}
+	.longBtn{
+		float:left;
+		margin-top:.5rem;
 	}
 }

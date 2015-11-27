@@ -51,8 +51,22 @@ body:after{
 	text-align:center;
 	border-radius:.25rem;
 }
+.shortBtn{
+	float:right;
+	margin-top:.625rem;
+	width:3.85rem;
+	display:block;
+	height:1.6rem;
+	background-color:$orange;
+	font-size:.75rem;
+	color:white;
+	line-height:1.6rem;
+	text-align:center;
+	border-radius:.25rem;
+}
 .longInput{
-	margin:0 auto;
+	float:left;
+	margin-top:.625rem;
 	display:block;
 	width:13.3rem;
 	height:1.6rem;
@@ -60,7 +74,7 @@ body:after{
 	background-position:.4rem .4rem;
 	background-repeat:no-repeat;
 	background-size:.75rem .75rem;
-	font-size:.75rem;
+	font-size:.65rem;
 	line-height:1.55rem;
 	color:$darkGrey;
 	border:solid .025rem $bitGrey;
@@ -68,7 +82,29 @@ body:after{
 	text-indent:1.55rem;
 }
 .shortInput{
-
+	float:left;
+	margin-top:.625rem;
+	display:block;
+	width:9.25rem;
+	height:1.6rem;
+	background-color:white;
+	background-position:.4rem .4rem;
+	background-repeat:no-repeat;
+	background-size:.75rem .75rem;
+	font-size:.65rem;
+	line-height:1.55rem;
+	color:$darkGrey;
+	border:solid .025rem $bitGrey;
+	border-radius:.25rem;
+	text-indent:1.55rem;
+}
+.ckb{
+	float:left;
+}
+.warning{
+	font-size:.65rem;
+	line-height:1.15rem;
+	background-color:rgba(0, 0, 0, .45);
 }
 body > div, header, menu{
 	float:left;
