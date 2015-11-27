@@ -38,7 +38,7 @@ form{
 	padding:0 1.35rem;
 	width:16rem;
 	input.longInput:first-of-type{
-		margin-top:1.25rem;
+		margin-top:1.25rem !important;
 	}
 	.mobile{
 		background-image:$mobile;

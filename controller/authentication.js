@@ -1,5 +1,5 @@
 module.exports = function(request, router, md5, Util){
-	//auth
+	//authentication
 	router
 		.route("/api/getauth")
 		.get(function(req, res, next){

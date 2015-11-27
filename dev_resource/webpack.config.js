@@ -8,7 +8,8 @@ module.exports = {
 		score : "./entry/score",
 		activity : "./entry/activity",
 		signin : "./entry/signin",
-		signup: "./entry/signup"
+		signup: "./entry/signup",
+		reset : "./entry/reset"
 	},
 	output : {
 		filename : "../resource/js/[name].js"
