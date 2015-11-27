@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, "./resource"), {
 app.use(function(req, res, next){
 	next();
 });
-app.use(require("./controller/static")(request, router, babel, md5, react, reactDOMServer, Util));
+app.use(require("./controller/authentication")(request, router, md5, Util));
+app.use(require("./controller/static")(request, router, babel, react, reactDOMServer, Util));
 app.listen(port);
 console.log("server started on port " + port);
