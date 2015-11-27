@@ -44,7 +44,7 @@ body:after{
 	display:block;
 	width:13.3rem;
 	height:1.6rem;
-	background-color:$orange;
+	background-color:$orange !important;
 	font-size:.75rem;
 	color:white;
 	line-height:1.6rem;
@@ -53,11 +53,11 @@ body:after{
 }
 .shortBtn{
 	float:right;
-	margin-top:.625rem;
+	margin-top:.625rem !important;
 	width:3.85rem;
 	display:block;
 	height:1.6rem;
-	background-color:$orange;
+	background-color:$orange !important;
 	font-size:.75rem;
 	color:white;
 	line-height:1.6rem;
@@ -66,40 +66,46 @@ body:after{
 }
 .longInput{
 	float:left;
-	margin-top:.625rem;
+	margin-top:.625rem !important;
 	display:block;
 	width:13.3rem;
 	height:1.6rem;
-	background-color:white;
+	background-color:white !important;
 	background-position:.4rem .4rem;
 	background-repeat:no-repeat;
 	background-size:.75rem .75rem;
 	font-size:.65rem;
 	line-height:1.55rem;
 	color:$darkGrey;
-	border:solid .025rem $bitGrey;
+	border:solid .025rem $bitGrey !important;
 	border-radius:.25rem;
 	text-indent:1.55rem;
 }
 .shortInput{
 	float:left;
-	margin-top:.625rem;
+	margin-top:.625rem !important;
 	display:block;
 	width:9.25rem;
 	height:1.6rem;
-	background-color:white;
+	background-color:white !important;
 	background-position:.4rem .4rem;
 	background-repeat:no-repeat;
 	background-size:.75rem .75rem;
 	font-size:.65rem;
 	line-height:1.55rem;
 	color:$darkGrey;
-	border:solid .025rem $bitGrey;
+	border:solid .025rem $bitGrey !important;
 	border-radius:.25rem;
 	text-indent:1.55rem;
 }
 .ckb{
 	float:left;
+	margin-top:.5rem;
+	margin-left:.25rem;
+	width:.55rem;
+	height:.55rem;
+	background-color:white;
+	border:solid .05rem $bitGrey;
 }
 .warning{
 	font-size:.65rem;

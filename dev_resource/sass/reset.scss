@@ -1,4 +1,4 @@
-body,div,span,h1,h2,h3,h4,h5,h6,p,pre,a,del,em,img,strong,tt,b,u,i,dl,dt,dd,ol,ul,li,fieldset,form,input,select,label,legend,section,table,caption,tbody,tfoot,thead,tr,th,td,textarea,canvas,embed,mark,audio,video,menu{
+body,div,span,h1,h2,h3,h4,h5,h6,p,pre,a,del,em,img,strong,tt,b,u,i,dl,dt,dd,ol,ul,li,fieldset,form,input:not([type="checkbox"]),select,label,legend,section,table,caption,tbody,tfoot,thead,tr,th,td,textarea,canvas,embed,mark,audio,video,menu{
 	margin:0;
 	padding:0;
 	border:none;

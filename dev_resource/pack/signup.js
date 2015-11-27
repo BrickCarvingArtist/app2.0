@@ -12,14 +12,14 @@ class Protocol extends React.Component{
 class Form extends React.Component{
 	render(){
 		return (
-			<form>
+			<form method="post" action="/api/signup">
 				<input className="longInput mobile" type="tel" placeholder="手机号码" />
 				<input className="longInput password" type="password" placeholder="密码" />
 				<input className="longInput password" type="password" placeholder="确认密码" />
 				<input className="shortInput captcha" type="text" placeholder="验证码" />
 				<input className="shortBtn" type="button" value="获取" />
 				<input className="longInput invitor" type="tel" placeholder="推荐人" />
-				<input className="ckb" id="ckb" type="checkbox" checkded="checkded" />
+				<input className="ckb" id="ckb" type="checkbox" checked="checked" />
 				<label htmlFor="ckb">
 					<span>我同意</span>
 					<b ref="btnProtocol">《协议》</b>

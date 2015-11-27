@@ -1,4 +1,4 @@
-module.exports = function(request, router, babel, react, reactDOMServer, Util){
+module.exports = function(request, router, babel, md5, react, reactDOMServer, Util){
 	var babel = babel,
 		loading = "<div class=\"loading\"></div>";
 	//api
@@ -68,12 +68,57 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				}
 			});
 		});
+	//auth
 	router
 		.route("/api/getauth")
 		.get(function(req, res, next){
 			request("http://www.xilanlicai.com/api/getuserauth", function(err, response, body){
 				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		});
+	router
+		.route("/api/signup")
+		.post(function(req, res, next){
+			request.post({
+				url : "http://"
+			}, function(err, response, body){
+				if(!err){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		});
+	router
+		.route("/api/signin")
+		.post(function(req, res, next){
+			request("http://account.xilanlicai.com/api/login", function(err, response, body){
+				if(!err && response.statusCode === 200){
+					body = body.replace(/"/g, "");
+					request.post({
+						url : "http://account.xilanlicai.com/api/login",
+						form : {
+							phone : req.body.mobile,
+							password : md5(md5(md5(req.body.password).toUpperCase()).toUpperCase() + "2xeDFvZHKSt8Eldh" + body).toUpperCase(),
+							clientId : 2,
+							loginTime : body
+						}
+					}, function(err, response, body){
+						body = JSON.parse(body);
+						if(!err && response.statusCode === 200){
+							if(body.code === 200){
+								res.redirect("/me");
+							}else{
+								res.json(body);
+							}
+						}else{
+							next();
+						}
+					});
 				}else{
 					next();
 				}
@@ -308,6 +353,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 				style : ["/css/authentication.css"],
 				script : ["/js/signup.js"],
 				title : "注册",
+				page : loading
+			});
+		});
+	router
+		.route("/reset")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/authentication.css"],
+				script : ["/js/reset.js"],
+				title : "修改密码",
 				page : loading
 			});
 		});
