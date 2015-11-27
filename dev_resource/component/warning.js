@@ -13,9 +13,9 @@ class Warning extends React.Component{
 	}
 	render(){
 		return (
-			<div className="warning">
+			<p className="message">
 				{this.state.message}
-			</div>
+			</p>
 		);
 	}
 }

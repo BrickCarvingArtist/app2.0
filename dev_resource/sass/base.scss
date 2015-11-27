@@ -109,12 +109,12 @@ body:after{
 }
 .warning{
 	position:absolute;
-	top:0;
 	left:0;
+	background-color:rgba(0, 0, 0, .45);
 	font-size:.65rem;
 	line-height:1.15rem;
 	color:white;
-	background-color:rgba(0, 0, 0, .45);
+	text-align:center;
 }
 body > div, header, menu{
 	float:left;
