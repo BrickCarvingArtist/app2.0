@@ -88,3 +88,34 @@ form{
 		margin-top:.5rem;
 	}
 }
+pre{
+	padding:.85rem;
+	background-color:white;
+	word-wrap:break-word;
+	h2{
+		font-size:.75rem;
+		line-height:2.5rem;
+		color:$heavyGrey;
+		text-align:center;
+	}
+	h2 + p{
+		text-indent:1.1rem;
+	}
+	p{
+		font-size:.55rem;
+		line-height:.8rem;
+		color:$darkGrey;
+		strong{
+			font-weight:bold;
+		}
+		strong:after{
+			content:"\D\A";
+			white-space:pre;
+		}
+	}
+	h3{
+		font-size:.65rem;
+		line-height:1.5rem;
+		color:$heavyGrey;
+	}
+}

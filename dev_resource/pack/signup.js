@@ -1,15 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
+import {Protocol} from "../component/protocol";
 import {Warning} from "../component/warning";
-class Protocol extends React.Component{
-	render(){
-		return (
-			<body></body>
-		);
-	}
-}
 class Form extends React.Component{
+	componentDidMount(){
+		this.refs.btnProtocol.onclick = () => {
+			if(!QueryString("protocol")){
+				document.title = "喜蓝互联网金融平台用户协议";
+				window.history.pushState({}, document.title, "?protocol=1");
+			}
+			ReactDOM.render(
+				<Protocol type="signIn" />,
+				document.body
+			);
+		}
+	}
 	render(){
 		return (
 			<form method="post" action="/api/signup">
@@ -22,7 +28,7 @@ class Form extends React.Component{
 				<input className="ckb" id="ckb" type="checkbox" checked="checked" />
 				<label htmlFor="ckb">
 					<span>我同意</span>
-					<b ref="btnProtocol">《协议》</b>
+					<b ref="btnProtocol">《喜蓝互联网金融平台用户协议》</b>
 				</label>
 				<input className="longBtn" type="submit" value="确认" />
 			</form>
@@ -32,13 +38,13 @@ class Form extends React.Component{
 class Page extends React.Component{
 	componentDidMount(){
 		if(QueryString("protocol")){
-
+			this.refs.form.refs.btnProtocol.click();
 		}
 	}
 	render(){
 		return (
 			<body>
-				<Form />
+				<Form ref="form" />
 			</body>
 		)
 	}
