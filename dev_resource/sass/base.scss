@@ -108,6 +108,9 @@ body:after{
 	border:solid .05rem $bitGrey;
 }
 .warning{
+	position:absolute;
+	top:0;
+	left:0;
 	font-size:.65rem;
 	line-height:1.15rem;
 	color:white;

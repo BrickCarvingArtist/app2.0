@@ -8,7 +8,7 @@ class Warning extends React.Component{
 	}
 	componentWillReceiveProps(nextProps){
 		this.setState({
-			nextProps.message
+			message : nextProps.message
 		});
 	}
 	render(){
