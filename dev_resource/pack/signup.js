@@ -3,6 +3,28 @@ import ReactDOM from "react-dom";
 import {PageData, QueryString, isMatch} from "./util";
 import {Protocol} from "../component/protocol";
 import {Warning} from "../component/warning";
+class Input extends React.Component{
+	constructor(){
+		super();
+		this.state = {
+			matched : 0
+		};
+	}
+	componentDidMount(){
+		ReactDOM.findDOMNode(this).onblur = e => {
+			if(isMatch(this.props.className.split(" ")[1], e.target.value)){
+				this.setState({
+					matched : 1
+				});
+			}
+		};
+	}
+	render(){
+		return (
+			<input type={this.props.type} className={this.props.className} placeholder={this.props.placeholder} maxLength={this.props.maxLength} />
+		);
+	}
+}
 class Form extends React.Component{
 	constructor(){
 		super();
@@ -24,6 +46,10 @@ class Form extends React.Component{
 		ReactDOM.findDOMNode(this.refs.btn).onclick = e => {
 			if(!this.state.matched){
 				e.preventDefault();
+				for(let i of this.props.setting){
+					console.log(ReactDOM.findDOMNode(this.refs[i.ref]))
+					ReactDOM.findDOMNode(this.refs[i.ref]).blur();
+				}
 				ReactDOM.render(
 					<Warning message={`${this.refs.mobile.placeholder}输入错误`} />,
 					document.querySelector(".warning")
@@ -32,14 +58,18 @@ class Form extends React.Component{
 		};
 	}
 	render(){
+		let lists = [],
+			setting = this.props.setting;
+		setting.forEach(list => {
+			lists.push(
+				<Input ref={list.ref} type={list.type} className={list.className} placeholder={list.placeholder} maxLength={list.maxLength} />
+			);
+		});
 		return (
 			<form method="post" action="/api/signup">
-				<input ref="mobile" className="longInput mobile" type="tel" placeholder="手机号码" />
-				<input ref="password" className="longInput password" type="password" placeholder="密码" />
-				<input ref="password" className="longInput password" type="password" placeholder="确认密码" />
-				<input ref="captcha" className="shortInput captcha" type="text" placeholder="验证码" />
+				{lists}
 				<input className="shortBtn" type="button" value="获取" />
-				<input className="longInput invitor" type="tel" placeholder="推荐人" />
+				<input className="longInput invitor" type="tel" placeholder="推荐人" maxLength="11" />
 				<input ref="ckb" className="ckb" id="ckb" type="checkbox" checked="checked" />
 				<label htmlFor="ckb">
 					<span>我同意</span>
@@ -50,6 +80,38 @@ class Form extends React.Component{
 		);
 	}
 }
+Form.defaultProps = {
+	setting : [
+		{
+			ref : "mobile",
+			type : "tel",
+			className : "longInput mobile",
+			placeholder : "手机号码",
+			maxLength : "11"
+		},
+		{
+			ref : "password",
+			type : "password",
+			className : "longInput password",
+			placeholder : "密码",
+			maxLength : null
+		},
+		{
+			ref : "rePassword",
+			type : "password",
+			className : "longInput mobile",
+			placeholder : "确认密码",
+			maxLength : null
+		},
+		{
+			ref : "captcha",
+			type : "text",
+			className : "shortInput captcha",
+			placeholder : "验证码",
+			maxLength : "5"
+		}
+	]
+};
 class Page extends React.Component{
 	componentDidMount(){
 		if(QueryString("protocol")){

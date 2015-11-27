@@ -3,12 +3,12 @@ const Util = {
 		switch(type){
 			case "name":
 				return value.toString().length >> 1;
-			case "tel":
+			case "mobile":
 				return value.toString().match(/^1\d{10}$/) ? 1 : 0;
 			case "phone":
 				return value.toString().match(/^(0|8)[1-9]{1,2}\d{7,8}$/) ? 1 : 0;
 			case "captcha":
-				return value.toString().match(/^\d{6}$/) ? 1 : 0;
+				return value.toString().match(/^\d{5}$/) ? 1 : 0;
 			case "password":
 				return value.toString().match(/^\S{6,16}$/) ? 1 : 0;
 			case "bankcard":
