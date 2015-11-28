@@ -15,7 +15,13 @@ module.exports = function(request, router, md5, Util){
 		.route("/api/signup")
 		.post(function(req, res, next){
 			request.post({
-				url : "http://"
+				url : "http://account.xilanlicai.com/register",
+				form : {
+					phone : req.body.mobile,
+					password : req.body.password,
+					invitor : req.body.invitor,
+					captcha : req.body.captcha
+				}
 			}, function(err, response, body){
 				if(!err){
 					res.json(JSON.parse(body));
