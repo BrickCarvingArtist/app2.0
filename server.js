@@ -25,6 +25,7 @@ app.use(function(req, res, next){
 	next();
 });
 app.use(require("./controller/authentication")(request, router, md5, Util));
+app.use(require("./controller/api")(request, router));
 app.use(require("./controller/static")(request, router, babel, react, reactDOMServer, Util));
 app.listen(port);
 console.log("server started on port " + port);
