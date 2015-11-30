@@ -9,6 +9,7 @@ var express = require("express"),
 	app = express(),
 	request = require("request"),
 	md5 = require("md5"),
+	cookie = require("cookie"),
 	router = express.Router(),
 	Util = require("./dev_resource/pack/util");
 app.set("views", "./view");
@@ -24,7 +25,7 @@ app.use(express.static(path.join(__dirname, "./resource"), {
 app.use(function(req, res, next){
 	next();
 });
-app.use(require("./controller/authentication")(request, router, md5, Util));
+app.use(require("./controller/authentication")(request, router, md5, cookie, Util));
 app.use(require("./controller/api")(request, router));
 app.use(require("./controller/static")(request, router, babel, react, reactDOMServer, Util));
 app.listen(port);

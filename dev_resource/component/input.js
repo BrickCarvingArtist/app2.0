@@ -17,7 +17,8 @@ export class Input extends React.Component{
 		};
 	}
 	componentDidMount(){
-		ReactDOM.findDOMNode(this).onblur = e => {
+		let dom = ReactDOM.findDOMNode(this);
+		dom.onchange = dom.onblur = e => {
 			this.setState({
 				matched : isMatch(this.props.className.split(" ")[1], e.target.value)
 			});

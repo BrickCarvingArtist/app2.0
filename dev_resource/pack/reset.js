@@ -46,7 +46,7 @@ Form.defaultProps = {
 			ref : "password",
 			name : "password",
 			type : "password",
-			className : "longInput mobile",
+			className : "longInput password",
 			placeholder : "新密码",
 			maxLength : "20"
 		},
@@ -54,7 +54,7 @@ Form.defaultProps = {
 			ref : "rePassword",
 			name : "rePassword",
 			type : "password",
-			className : "longInput mobile",
+			className : "longInput password",
 			placeholder : "确认密码",
 			maxLength : "20"
 		},
