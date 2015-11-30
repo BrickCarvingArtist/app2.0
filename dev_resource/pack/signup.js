@@ -11,6 +11,7 @@ class Form extends React.Component{
 			domPassword = ReactDOM.findDOMNode(refs.password),
 			domRePassword = ReactDOM.findDOMNode(refs.rePassword),
 			domCaptcha = ReactDOM.findDOMNode(refs.captcha),
+			domBtnCaptcha = ReactDOM.findDOMNode(refs.btnCaptcha),
 			domInvitor = ReactDOM.findDOMNode(refs.invitor);
 		refs.btnProtocol.onclick = () => {
 			if(!QueryString("protocol")){
@@ -22,15 +23,30 @@ class Form extends React.Component{
 				document.body
 			);
 		};
-		ReactDOM.findDOMNode(refs.btnCaptcha).onclick = () => {
+		domBtnCaptcha.onclick = () => {
 			if(refs.mobile.handleCheck()){
 				$.ajax({
-					url : `/api/reset?mobile=${domMobile.value}`,
+					type : "post",
+					url : `/api/signup?mobile=${domMobile.value}`,
 					success : data => {
-						ReactDOM.render(
-							<Warning message={data.message} />,
-							document.querySelector(".warning")
-						);
+						console.log(data)
+						if(data.code === 200){
+							ReactDOM.render(
+								<Warning message={data.message} />,
+								document.querySelector(".warning")
+							);
+						}else{
+							$.ajax({
+								url : `/api/signup?mobile=${domMobile.value}`,
+								success : data => {
+									console.log(data)
+									ReactDOM.render(
+										<Warning message={data.message} />,
+										document.querySelector(".warning")
+									);
+								}
+							});
+						}
 					}
 				});
 			}

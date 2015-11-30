@@ -9,8 +9,9 @@ class Form extends React.Component{
 			domMobile = ReactDOM.findDOMNode(refs.mobile),
 			domPassword = ReactDOM.findDOMNode(refs.password),
 			domRePassword = ReactDOM.findDOMNode(refs.rePassword),
-			domCaptcha = ReactDOM.findDOMNode(refs.captcha);
-		ReactDOM.findDOMNode(refs.btnCaptcha).onclick = () => {
+			domCaptcha = ReactDOM.findDOMNode(refs.captcha),
+			domBtnCaptcha = ReactDOM.findDOMNode(refs.btnCaptcha);
+		domBtnCaptcha.onclick = () => {
 			if(refs.mobile.handleCheck()){
 				$.ajax({
 					url : `/api/reset?mobile=${domMobile.value}`,

@@ -45,15 +45,26 @@ module.exports = function(request, router, md5, cookie, Util){
 			});
 		})
 		.post(function(req, res, next){
-			request.post({
-				url : "http://account.xilanlicai.com/register",
-				form : {
-					phone : req.body.mobile,
-					password : req.body.password,
-					invitor : req.body.invitor,
-					captcha : req.body.captcha
+			request.post((function(){
+				if(req.query.mobile){
+					return {
+						url : "http://account.xilanlicai.com/api/checkphone",
+						form : {
+							phone : req.query.mobile
+						}
+					}
+				}else if(req.body){
+					return {
+						url : "http://account.xilanlicai.com/register",
+						form : {
+							phone : req.body.mobile,
+							password : req.body.password,
+							invitor : req.body.invitor,
+							captcha : req.body.captcha
+						}
+					};
 				}
-			}, function(err, response, body){
+			})(), function(err, response, body){
 				if(!err){
 					res.json(JSON.parse(body));
 				}else{
