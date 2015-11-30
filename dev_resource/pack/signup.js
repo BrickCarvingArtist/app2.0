@@ -9,15 +9,25 @@ class Input extends React.Component{
 		this.state = {
 			matched : 0
 		};
+		this.handleCheck = () => {
+			if(!this.state.matched){
+				ReactDOM.render(
+					<Warning message={`${this.props.placeholder}输入错误`} />,
+					document.querySelector(".warning")
+				);
+			}
+			return this.state.matched;
+		};
 	}
 	componentDidMount(){
 		ReactDOM.findDOMNode(this).onblur = e => {
-			if(isMatch(this.props.className.split(" ")[1], e.target.value)){
-				this.setState({
-					matched : 1
-				});
-			}
+			this.setState({
+				matched : isMatch(this.props.className.split(" ")[1], e.target.value) ? 1 : 0
+			});
 		};
+	}
+	componentWillUpdate(){
+		this.handleCheck();
 	}
 	render(){
 		return (
@@ -28,9 +38,6 @@ class Input extends React.Component{
 class Form extends React.Component{
 	constructor(){
 		super();
-		this.state = {
-			matched : 0
-		};
 	}
 	componentDidMount(){
 		this.refs.btnProtocol.onclick = () => {
@@ -44,16 +51,12 @@ class Form extends React.Component{
 			);
 		};
 		ReactDOM.findDOMNode(this.refs.btn).onclick = e => {
-			if(!this.state.matched){
-				e.preventDefault();
-				for(let i of this.props.setting){
-					console.log(ReactDOM.findDOMNode(this.refs[i.ref]))
-					ReactDOM.findDOMNode(this.refs[i.ref]).blur();
+			let refs = this.refs;
+			for(let i of this.props.setting){
+				if(!refs[i.ref].handleCheck()){
+					e.preventDefault();
+					return;
 				}
-				ReactDOM.render(
-					<Warning message={`${this.refs.mobile.placeholder}输入错误`} />,
-					document.querySelector(".warning")
-				);
 			}
 		};
 	}

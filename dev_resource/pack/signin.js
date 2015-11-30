@@ -23,6 +23,9 @@ class Page extends React.Component{
 	render(){
 		return (
 			<body>
+				<div className="warning">
+					<Warning />
+				</div>
 				<Banner data={
 					[
 						{
