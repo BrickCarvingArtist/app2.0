@@ -1,44 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {PageData, QueryString, isMatch} from "./util";
+import {PageData, QueryString} from "./util";
 import {Protocol} from "../component/protocol";
 import {Warning} from "../component/warning";
-class Input extends React.Component{
-	constructor(){
-		super();
-		this.state = {
-			matched : 0
-		};
-		this.handleCheck = () => {
-			if(!this.state.matched){
-				ReactDOM.render(
-					<Warning message={`${this.props.placeholder}输入错误`} />,
-					document.querySelector(".warning")
-				);
-			}
-			return this.state.matched;
-		};
-	}
-	componentDidMount(){
-		ReactDOM.findDOMNode(this).onblur = e => {
-			this.setState({
-				matched : isMatch(this.props.className.split(" ")[1], e.target.value) ? 1 : 0
-			});
-		};
-	}
-	componentWillUpdate(){
-		this.handleCheck();
-	}
-	render(){
-		return (
-			<input type={this.props.type} className={this.props.className} placeholder={this.props.placeholder} maxLength={this.props.maxLength} />
-		);
-	}
-}
+import {Input} from "../component/input";
 class Form extends React.Component{
-	constructor(){
-		super();
-	}
 	componentDidMount(){
 		this.refs.btnProtocol.onclick = () => {
 			if(!QueryString("protocol")){
@@ -50,7 +16,7 @@ class Form extends React.Component{
 				document.body
 			);
 		};
-		ReactDOM.findDOMNode(this.refs.btn).onclick = e => {
+		ReactDOM.findDOMNode(this.refs.btnSubmit).onclick = e => {
 			let refs = this.refs;
 			for(let i of this.props.setting){
 				if(!refs[i.ref].handleCheck()){
@@ -65,7 +31,7 @@ class Form extends React.Component{
 			setting = this.props.setting;
 		setting.forEach(list => {
 			lists.push(
-				<Input ref={list.ref} type={list.type} className={list.className} placeholder={list.placeholder} maxLength={list.maxLength} />
+				<Input ref={list.ref} name={list.name} type={list.type} className={list.className} placeholder={list.placeholder} maxLength={list.maxLength} />
 			);
 		});
 		return (
@@ -78,7 +44,7 @@ class Form extends React.Component{
 					<span>我同意</span>
 					<b ref="btnProtocol">《喜蓝互联网金融平台用户协议》</b>
 				</label>
-				<input ref="btn" className="longBtn" type="submit" value="确认" />
+				<input ref="btnSubmit" className="longBtn" type="submit" value="确认" />
 			</form>
 		);
 	}
@@ -87,6 +53,7 @@ Form.defaultProps = {
 	setting : [
 		{
 			ref : "mobile",
+			name : "mobile",
 			type : "tel",
 			className : "longInput mobile",
 			placeholder : "手机号码",
@@ -94,20 +61,23 @@ Form.defaultProps = {
 		},
 		{
 			ref : "password",
+			name : "password",
 			type : "password",
 			className : "longInput password",
 			placeholder : "密码",
-			maxLength : null
+			maxLength : "20"
 		},
 		{
 			ref : "rePassword",
+			name : "rePassword",
 			type : "password",
 			className : "longInput mobile",
 			placeholder : "确认密码",
-			maxLength : null
+			maxLength : "20"
 		},
 		{
 			ref : "captcha",
+			name : "captcha",
 			type : "text",
 			className : "shortInput captcha",
 			placeholder : "验证码",

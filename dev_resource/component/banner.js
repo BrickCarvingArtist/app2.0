@@ -18,7 +18,7 @@ class Case extends React.Component{
 		);
 	}
 }
-class Banner extends React.Component{
+export class Banner extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -46,6 +46,3 @@ class Banner extends React.Component{
 		);
 	}
 };
-export {
-	Banner
-}
