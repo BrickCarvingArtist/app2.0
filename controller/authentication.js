@@ -89,5 +89,33 @@ module.exports = function(request, router, md5, cookie, Util){
 				}
 			});
 		});
+	router
+		.route("/api/reset")
+		.get(function(req, res, next){
+			request("http://account.xilanlicai.com/api/resetpwd?phone=" + req.query.id, function(err, response, body){
+				if(!err && response.statusCode === 200){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		})
+		.post(function(req, res, next){
+			request.post({
+				url : "http://account.xilanlicai.com/api/resetpwd",
+				form : {
+					code : req.body.captcha,
+					password : req.body.password,
+					confirmPassword : req.body.rePassword,
+					phone : req.body.mobile
+				}
+			}, function(err, response, body){
+				if(!err && response.statusCode === 200){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		});
 	return router;
 };

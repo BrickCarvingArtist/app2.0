@@ -51,6 +51,13 @@ class List3 extends React.Component{
 			value : props.option.value
 		};
 	}
+	componentWillReceiveProps(nextProps){
+		this.setState({
+			href : nextProps.option.href,
+			name : nextProps.option.name,
+			value : nextProps.option.value
+		});
+	}
 	render(){
 		let state = this.state;
 		return (
@@ -132,7 +139,28 @@ class Menu extends React.Component{
 				type : "post",
 				url : "/api/getinvest",
 				success : data => {
-					console.log(data);
+					this.setState({
+						menu : {
+							className : this.state.menu.className,
+							option : [
+								{
+									href : "",
+									name : "我的资产",
+									value : data.money || "0.00"
+								},
+								{
+									href : "",
+									name : "预期收益",
+									value : "0.00"
+								},
+								{
+									href : "",
+									name : "历史收益",
+									value : data.investment || "0.00"
+								}
+							]
+						}
+					});
 				}
 			});
 		}

@@ -5,13 +5,38 @@ import {Warning} from "../component/warning";
 import {Input} from "../component/input";
 class Form extends React.Component{
 	componentDidMount(){
+		let domMobile = ReactDOM.findDOMNode(this.refs.mobile),
+			domPassword = ReactDOM.findDOMNode(this.refs.password),
+			domRePassword = ReactDOM.findDOMNode(this.refs.rePassword);
+		ReactDOM.findDOMNode(this.refs.btnCaptcha).onclick = () => {
+			if(this.refs.mobile.handleCheck()){
+				$.ajax({
+					url : `/api/reset?mobile=${domMobile.value}`,
+					success : data => {
+						ReactDOM.render(
+							<Warning message={data.message} />,
+							document.querySelector(".warning")
+						);
+					}
+				})
+			}
+		};
 		ReactDOM.findDOMNode(this.refs.btnSubmit).onclick = e => {
 			let refs = this.refs;
 			for(let i of this.props.setting){
 				if(!refs[i.ref].handleCheck()){
 					e.preventDefault();
 					return;
-				}
+				}else{
+					if(domPassword.value !== domRePassword.value){
+						ReactDOM.render(
+							<Warning message="两次输入的密码不一致" />,
+							document.querySelector(".warning")
+						);
+						e.preventDefault();
+						return;
+					}
+				}	
 			}
 		};
 	}
@@ -26,7 +51,7 @@ class Form extends React.Component{
 		return (
 			<form method="post" action="/api/reset">
 				{lists}
-				<input className="shortBtn" type="button" value="获取" />
+				<input ref="btnCaptcha" className="shortBtn" type="button" value="获取" />
 				<input ref="btnSubmit" className="longBtn" type="submit" value="确认" />
 			</form>
 		);
