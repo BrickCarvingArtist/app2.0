@@ -2,8 +2,28 @@ module.exports = function(request, router, md5, cookie, Util){
 	router
 		.route("/api/getauth")
 		.get(function(req, res, next){
-			request("http://www.xilanlicai.com/api/getuserauth", function(err, response, body){
-				console.log(body)
+			var authCookie = cookie.parse(req.headers.cookie);
+			request({
+				url : "http://www.xilanlicai.com/api/getuserauth",
+				headers : {
+					cookie : cookie.serialize("xlauth", authCookie.xlauth)
+				}
+			}, function(err, response, body){
+				if(!err && response.statusCode === 200){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		})
+		.post(function(req, res, next){
+			var authCookie = cookie.parse(req.headers.cookie);
+			request.post({
+				url : "http://account.xilanlicai.com/api/getuserauth",
+				headers : {
+					cookie : cookie.serialize("xlauth", authCookie.xlauth)
+				}
+			}, function(err, response, body){
 				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{

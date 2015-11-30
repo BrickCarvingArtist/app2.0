@@ -8,7 +8,7 @@ class Info extends React.Component{
 		super();
 		this.state = {
 			vip : "普通会员",
-			name : "＊＊＊",
+			name : "***",
 			setting : [
 				{
 					name : "common",
@@ -33,11 +33,24 @@ class Info extends React.Component{
 		$.ajax({
 			url : "/api/getauth",
 			success : data => {
-				if(data.code !== 400){
-					this.setState({
-						vip : data.vip,
-						name : data.name
+				if(data.code === 200){
+					$.ajax({
+						type : "post",
+						url : "/api/getauth",
+						success : data => {
+							this.setState({
+								vip : data.vip,
+								name : data.name
+							});
+						}
 					});
+				}else{
+					ReactDOM.render(
+						<Dialog html={
+							<a className="longBtn" href="/signin">登录/注册</a>
+						} />,
+						document.querySelector(".shadow")
+					);
 				}
 			}
 		});

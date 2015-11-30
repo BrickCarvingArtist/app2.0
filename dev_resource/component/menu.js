@@ -132,14 +132,7 @@ class Menu extends React.Component{
 				type : "post",
 				url : "/api/getinvest",
 				success : data => {
-					if(data.message){
-						ReactDOM.render(
-							<Dialog html={
-								<a className="longBtn" href="/signin">登录/注册</a>
-							} />,
-							document.querySelector(".shadow")
-						);
-					}
+					console.log(data);
 				}
 			});
 		}

@@ -1,4 +1,4 @@
-module.exports = function(request, router){
+module.exports = function(request, router, cookie){
 	router
 		.route("/api/gethomeproduct")
 		.get(function(req, res, next){
@@ -68,8 +68,12 @@ module.exports = function(request, router){
 	router
 		.route("/api/getinvest")
 		.post(function(req, res, next){
+			var authCookie = cookie.parse(req.headers.cookie);
 			request.post({
-				url:"http://account.xilanlicai.com/api/getprodinvested"
+				url:"http://account.xilanlicai.com/api/getprodinvested",
+				headers : {
+					cookie : cookie.serialize("xlauth", authCookie.xlauth)
+				}
 			}, function(err, response, body){
 				if(!err){
 					res.json(JSON.parse(body));

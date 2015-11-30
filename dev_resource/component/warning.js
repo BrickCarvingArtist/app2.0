@@ -1,5 +1,5 @@
 import React from "react";
-export class Warning extends React.Component{
+class Warning extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -22,3 +22,6 @@ export class Warning extends React.Component{
 Warning.defaultProps = {
 	message : ""
 };
+export {
+	Warning
+}
