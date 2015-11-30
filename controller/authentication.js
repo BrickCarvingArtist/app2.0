@@ -92,7 +92,13 @@ module.exports = function(request, router, md5, cookie, Util){
 	router
 		.route("/api/reset")
 		.get(function(req, res, next){
-			request("http://account.xilanlicai.com/api/resetpwd?phone=" + req.query.id, function(err, response, body){
+			var authCookie = cookie.parse(req.headers.cookie);
+			request({
+				url : "http://account.xilanlicai.com/api/resetpwd?phone=" + req.query.mobile,
+				headers : {
+					cookie : cookie.serialize("xlauth", authCookie.xlauth)
+				}
+			}, function(err, response, body){
 				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{
@@ -101,8 +107,12 @@ module.exports = function(request, router, md5, cookie, Util){
 			});
 		})
 		.post(function(req, res, next){
+			var authCookie = cookie.parse(req.headers.cookie);
 			request.post({
 				url : "http://account.xilanlicai.com/api/resetpwd",
+				headers : {
+					cookie : cookie.serialize("xlauth", authCookie.xlauth)
+				},
 				form : {
 					code : req.body.captcha,
 					password : req.body.password,

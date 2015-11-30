@@ -7,7 +7,8 @@ class Form extends React.Component{
 	componentDidMount(){
 		let domMobile = ReactDOM.findDOMNode(this.refs.mobile),
 			domPassword = ReactDOM.findDOMNode(this.refs.password),
-			domRePassword = ReactDOM.findDOMNode(this.refs.rePassword);
+			domRePassword = ReactDOM.findDOMNode(this.refs.rePassword),
+			domCaptcha = ReactDOM.findDOMNode(this.refs.captcha);
 		ReactDOM.findDOMNode(this.refs.btnCaptcha).onclick = () => {
 			if(this.refs.mobile.handleCheck()){
 				$.ajax({
@@ -21,11 +22,12 @@ class Form extends React.Component{
 				})
 			}
 		};
-		ReactDOM.findDOMNode(this.refs.btnSubmit).onclick = e => {
-			let refs = this.refs;
+		ReactDOM.findDOMNode(this.refs.btnSubmit).onclick = () => {
+			let refs = this.refs,
+				match = 1;
 			for(let i of this.props.setting){
 				if(!refs[i.ref].handleCheck()){
-					e.preventDefault();
+					match = 0;
 					return;
 				}else{
 					if(domPassword.value !== domRePassword.value){
@@ -33,10 +35,33 @@ class Form extends React.Component{
 							<Warning message="两次输入的密码不一致" />,
 							document.querySelector(".warning")
 						);
-						e.preventDefault();
+						match = 0;
 						return;
 					}
-				}	
+				}
+			}
+			if(match){
+				$.ajax({
+					type : "post",
+					url : "/api/reset",
+					data : {
+						mobile : domMobile.value,
+						password : domPassword.value,
+						rePassword : domRePassword.value,
+						captcha : domCaptcha.value
+					},
+					success : data => {
+						ReactDOM.render(
+							<Warning message={data.message} />,
+							document.querySelector(".warning")
+						);
+						if(data.code === 200){
+							setTimeout(() => {
+								window.location.href = "/me";
+							}, 1000);
+						}
+					}
+				})
 			}
 		};
 	}
@@ -49,10 +74,10 @@ class Form extends React.Component{
 			);
 		});
 		return (
-			<form method="post" action="/api/reset">
+			<form>
 				{lists}
 				<input ref="btnCaptcha" className="shortBtn" type="button" value="获取" />
-				<input ref="btnSubmit" className="longBtn" type="submit" value="确认" />
+				<input ref="btnSubmit" className="longBtn" type="button" value="确认" />
 			</form>
 		);
 	}
