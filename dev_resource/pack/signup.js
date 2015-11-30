@@ -6,7 +6,13 @@ import {Warning} from "../component/warning";
 import {Input} from "../component/input";
 class Form extends React.Component{
 	componentDidMount(){
-		this.refs.btnProtocol.onclick = () => {
+		let refs = this.refs,
+			domMobile = ReactDOM.findDOMNode(refs.mobile),
+			domPassword = ReactDOM.findDOMNode(refs.password),
+			domRePassword = ReactDOM.findDOMNode(refs.rePassword),
+			domCaptcha = ReactDOM.findDOMNode(refs.captcha),
+			domInvitor = ReactDOM.findDOMNode(refs.invitor);
+		refs.btnProtocol.onclick = () => {
 			if(!QueryString("protocol")){
 				document.title = "喜蓝互联网金融平台用户协议";
 				window.history.pushState({}, document.title, "?protocol=1");
@@ -16,13 +22,59 @@ class Form extends React.Component{
 				document.body
 			);
 		};
-		ReactDOM.findDOMNode(this.refs.btnSubmit).onclick = e => {
-			let refs = this.refs;
+		ReactDOM.findDOMNode(refs.btnCaptcha).onclick = () => {
+			if(refs.mobile.handleCheck()){
+				$.ajax({
+					url : `/api/reset?mobile=${domMobile.value}`,
+					success : data => {
+						ReactDOM.render(
+							<Warning message={data.message} />,
+							document.querySelector(".warning")
+						);
+					}
+				});
+			}
+		};
+		ReactDOM.findDOMNode(refs.btnSubmit).onclick = () => {
+			let match = 1;
 			for(let i of this.props.setting){
 				if(!refs[i.ref].handleCheck()){
-					e.preventDefault();
+					match = 0;
 					return;
+				}else{
+					if(domPassword.value !== domRePassword.value){
+						ReactDOM.render(
+							<Warning message="两次输入的密码不一致" />,
+							document.querySelector(".warning")
+						);
+						match = 0;
+						return;
+					}
 				}
+			}
+			if(match){
+				$.ajax({
+					type : "post",
+					url : "/api/signup",
+					data : {
+						mobile : domMobile.value,
+						password : domPassword.value,
+						rePassword : domRePassword.value,
+						captcha : domCaptcha.value,
+						invitor : domInvitor.value
+					},
+					success : data => {
+						ReactDOM.render(
+							<Warning message={data.message} />,
+							document.querySelector(".warning")
+						);
+						if(data.code === 200){
+							setTimeout(() => {
+								window.location.href = "/signin";
+							}, 1000);
+						}
+					}
+				});
 			}
 		};
 	}
@@ -35,16 +87,16 @@ class Form extends React.Component{
 			);
 		});
 		return (
-			<form method="post" action="/api/signup">
+			<form>
 				{lists}
-				<input className="shortBtn" type="button" value="获取" />
-				<input className="longInput invitor" type="tel" placeholder="推荐人" maxLength="11" />
+				<input ref="btnCaptcha" className="shortBtn" type="button" value="获取" />
+				<input ref="invitor" className="longInput invitor" type="tel" placeholder="推荐人" maxLength="11" />
 				<input ref="ckb" className="ckb" id="ckb" type="checkbox" checked="checked" />
 				<label htmlFor="ckb">
 					<span>我同意</span>
 					<b ref="btnProtocol">《喜蓝互联网金融平台用户协议》</b>
 				</label>
-				<input ref="btnSubmit" className="longBtn" type="submit" value="确认" />
+				<input ref="btnSubmit" className="longBtn" type="button" value="确认" />
 			</form>
 		);
 	}

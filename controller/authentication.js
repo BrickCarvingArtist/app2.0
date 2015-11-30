@@ -33,6 +33,17 @@ module.exports = function(request, router, md5, cookie, Util){
 		});
 	router
 		.route("/api/signup")
+		.get(function(req, res, next){
+			request({
+				url : "http://account.xilanlicai.com/api/register?phone=" + req.query.mobile
+			}, function(err, response, body){
+				if(!err && response.statusCode === 200){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		})
 		.post(function(req, res, next){
 			request.post({
 				url : "http://account.xilanlicai.com/register",

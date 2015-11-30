@@ -6,11 +6,11 @@ import {Warning} from "../component/warning";
 import {Input} from "../component/Input";
 class Form extends React.Component{
 	componentDidMount(){
-		let domMobile = ReactDOM.findDOMNode(this.refs.mobile),
-			domPassword = ReactDOM.findDOMNode(this.refs.password);
-		ReactDOM.findDOMNode(this.refs.btnSubmit).onclick = () => {
-			let refs = this.refs,
-				match = 1;
+		let refs = this.refs,
+			domMobile = ReactDOM.findDOMNode(refs.mobile),
+			domPassword = ReactDOM.findDOMNode(refs.password);
+		ReactDOM.findDOMNode(refs.btnSubmit).onclick = () => {
+			let match = 1;
 			for(let i of this.props.setting){
 				if(!refs[i.ref].handleCheck()){
 					match = 0;
@@ -36,7 +36,7 @@ class Form extends React.Component{
 							}, 1000);
 						}
 					}
-				})
+				});
 			}
 		};
 	}

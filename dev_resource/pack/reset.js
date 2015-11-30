@@ -5,12 +5,13 @@ import {Warning} from "../component/warning";
 import {Input} from "../component/input";
 class Form extends React.Component{
 	componentDidMount(){
-		let domMobile = ReactDOM.findDOMNode(this.refs.mobile),
-			domPassword = ReactDOM.findDOMNode(this.refs.password),
-			domRePassword = ReactDOM.findDOMNode(this.refs.rePassword),
-			domCaptcha = ReactDOM.findDOMNode(this.refs.captcha);
-		ReactDOM.findDOMNode(this.refs.btnCaptcha).onclick = () => {
-			if(this.refs.mobile.handleCheck()){
+		let refs = this.refs,
+			domMobile = ReactDOM.findDOMNode(refs.mobile),
+			domPassword = ReactDOM.findDOMNode(refs.password),
+			domRePassword = ReactDOM.findDOMNode(refs.rePassword),
+			domCaptcha = ReactDOM.findDOMNode(refs.captcha);
+		ReactDOM.findDOMNode(refs.btnCaptcha).onclick = () => {
+			if(refs.mobile.handleCheck()){
 				$.ajax({
 					url : `/api/reset?mobile=${domMobile.value}`,
 					success : data => {
@@ -19,12 +20,11 @@ class Form extends React.Component{
 							document.querySelector(".warning")
 						);
 					}
-				})
+				});
 			}
 		};
-		ReactDOM.findDOMNode(this.refs.btnSubmit).onclick = () => {
-			let refs = this.refs,
-				match = 1;
+		ReactDOM.findDOMNode(refs.btnSubmit).onclick = () => {
+			let match = 1;
 			for(let i of this.props.setting){
 				if(!refs[i.ref].handleCheck()){
 					match = 0;
@@ -61,7 +61,7 @@ class Form extends React.Component{
 							}, 1000);
 						}
 					}
-				})
+				});
 			}
 		};
 	}
