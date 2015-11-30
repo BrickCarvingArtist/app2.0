@@ -6,13 +6,37 @@ import {Warning} from "../component/warning";
 import {Input} from "../component/Input";
 class Form extends React.Component{
 	componentDidMount(){
-		ReactDOM.findDOMNode(this.refs.btnSubmit).onclick = e => {
-			let refs = this.refs;
+		let domMobile = ReactDOM.findDOMNode(this.refs.mobile),
+			domPassword = ReactDOM.findDOMNode(this.refs.password);
+		ReactDOM.findDOMNode(this.refs.btnSubmit).onclick = () => {
+			let refs = this.refs,
+				match = 1;
 			for(let i of this.props.setting){
 				if(!refs[i.ref].handleCheck()){
-					e.preventDefault();
+					match = 0;
 					return;
 				}
+			}
+			if(match){
+				$.ajax({
+					type : "post",
+					url : "/api/signin",
+					data : {
+						mobile : domMobile.value,
+						password : domPassword.value
+					},
+					success : data => {
+						ReactDOM.render(
+							<Warning message={data.message} />,
+							document.querySelector(".warning")
+						);
+						if(data.code === 200){
+							setTimeout(() => {
+								window.location.href = "/me";
+							}, 1000);
+						}
+					}
+				})
 			}
 		};
 	}
@@ -25,10 +49,10 @@ class Form extends React.Component{
 			);
 		});
 		return (
-			<form method="post" action="/api/signin">
+			<form>
 				{lists}
 				<a href="/reset">忘记密码?</a>
-				<input ref="btnSubmit" className="longBtn" type="submit" value="确认" />
+				<input ref="btnSubmit" className="longBtn" type="button" value="确认" />
 				<p>
 					<span>还没账号?</span>
 					<a href="/signup">立即注册</a>

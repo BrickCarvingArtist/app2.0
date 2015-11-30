@@ -76,10 +76,8 @@ module.exports = function(request, router, md5, cookie, Util){
 										httpOnly : 1
 									});
 								}
-								res.redirect("/me");
-							}else{
-								res.json(body);
 							}
+							res.json(body);
 						}else{
 							next();
 						}
