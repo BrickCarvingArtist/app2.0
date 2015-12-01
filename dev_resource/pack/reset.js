@@ -57,7 +57,8 @@ class Form extends React.Component{
 							document.querySelector(".warning")
 						);
 						if(data.code === 200){
-							setTimeout(() => {
+							let t = setTimeout(() => {
+								clearTimeout(t);
 								window.location.href = "/me";
 							}, 1000);
 						}

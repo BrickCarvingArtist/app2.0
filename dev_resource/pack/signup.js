@@ -12,7 +12,8 @@ class Form extends React.Component{
 			domRePassword = ReactDOM.findDOMNode(refs.rePassword),
 			domCaptcha = ReactDOM.findDOMNode(refs.captcha),
 			domBtnCaptcha = ReactDOM.findDOMNode(refs.btnCaptcha),
-			domInvitor = ReactDOM.findDOMNode(refs.invitor);
+			domInvitor = ReactDOM.findDOMNode(refs.invitor),
+			domAgreement = ReactDOM.findDOMNode(refs.ckb);
 		refs.btnProtocol.onclick = () => {
 			if(!QueryString("protocol")){
 				document.title = "喜蓝互联网金融平台用户协议";
@@ -30,23 +31,10 @@ class Form extends React.Component{
 					url : `/api/signup?mobile=${domMobile.value}`,
 					success : data => {
 						console.log(data)
-						if(data.code === 200){
-							ReactDOM.render(
-								<Warning message={data.message} />,
-								document.querySelector(".warning")
-							);
-						}else{
-							$.ajax({
-								url : `/api/signup?mobile=${domMobile.value}`,
-								success : data => {
-									console.log(data)
-									ReactDOM.render(
-										<Warning message={data.message} />,
-										document.querySelector(".warning")
-									);
-								}
-							});
-						}
+						ReactDOM.render(
+							<Warning message={data.message} />,
+							document.querySelector(".warning")
+						);
 					}
 				});
 			}
@@ -68,29 +56,36 @@ class Form extends React.Component{
 					}
 				}
 			}
-			if(match){
-				$.ajax({
-					type : "post",
-					url : "/api/signup",
-					data : {
-						mobile : domMobile.value,
-						password : domPassword.value,
-						rePassword : domRePassword.value,
-						captcha : domCaptcha.value,
-						invitor : domInvitor.value
-					},
-					success : data => {
-						ReactDOM.render(
-							<Warning message={data.message} />,
-							document.querySelector(".warning")
-						);
-						if(data.code === 200){
-							setTimeout(() => {
-								window.location.href = "/signin";
-							}, 1000);
+			if(domAgreement.checked){
+				if(match){
+					$.ajax({
+						type : "post",
+						url : "/api/signup",
+						data : {
+							mobile : domMobile.value,
+							password : domPassword.value,
+							rePassword : domRePassword.value,
+							captcha : domCaptcha.value,
+							invitor : domInvitor.value
+						},
+						success : data => {
+							ReactDOM.render(
+								<Warning message={data.message} />,
+								document.querySelector(".warning")
+							);
+							if(data.code === 200){
+								setTimeout(() => {
+									window.location.href = "/signin";
+								}, 1000);
+							}
 						}
-					}
-				});
+					});
+				}
+			}else{
+				ReactDOM.render(
+					<Warning message="请务必同意《喜蓝互联网金融平台用户协议》" />,
+					document.querySelector(".warning")
+				);
 			}
 		};
 	}

@@ -33,44 +33,47 @@ module.exports = function(request, router, md5, cookie, Util){
 		});
 	router
 		.route("/api/signup")
-		.get(function(req, res, next){
-			request({
-				url : "http://account.xilanlicai.com/api/register?phone=" + req.query.mobile
-			}, function(err, response, body){
-				if(!err && response.statusCode === 200){
-					res.json(JSON.parse(body));
-				}else{
-					next();
-				}
-			});
-		})
 		.post(function(req, res, next){
-			request.post((function(){
-				if(req.query.mobile){
-					return {
-						url : "http://account.xilanlicai.com/api/checkphone",
-						form : {
-							phone : req.query.mobile
-						}
+			if(req.query.mobile){
+				request("http://account.xilanlicai.com/api/login", function(err, response, body){
+					if(!err && response.statusCode === 200){
+						body = body.replace(/"/g, "");
+						request.post({
+							url : "http://account.xilanlicai.com/api/registercode",
+							form : {
+								clientId : 2,
+								time : body,
+								phone : req.query.mobile,
+								token : md5(req.query.mobile + "2xeDFvZHKSt8Eldh" + body).toUpperCase()
+							}
+						}, function(err, response, body){
+							if(!err){
+								res.json(JSON.parse(body));
+							}else{
+								next();
+							}
+						});
 					}
-				}else if(req.body){
-					return {
-						url : "http://account.xilanlicai.com/register",
-						form : {
-							phone : req.body.mobile,
-							password : req.body.password,
-							invitor : req.body.invitor,
-							captcha : req.body.captcha
-						}
-					};
-				}
-			})(), function(err, response, body){
-				if(!err){
-					res.json(JSON.parse(body));
-				}else{
-					next();
-				}
-			});
+				});
+			}else if(req.body){
+				request.post({
+					url : "http://account.xilanlicai.com/api/register",
+					form : {
+						regType : 2,
+						phone : req.body.mobile,
+						password : req.body.password,
+						confirmPassword : req.body.rePassword,
+						rPhone : req.body.invitor,
+						code : req.body.captcha
+					}
+				}, function(err, response, body){
+					if(!err){
+						res.json(JSON.parse(body));
+					}else{
+						next();
+					}
+				});
+			}
 		});
 	router
 		.route("/api/signin")
