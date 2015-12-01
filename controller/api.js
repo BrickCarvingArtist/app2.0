@@ -83,21 +83,14 @@ module.exports = function(request, router, cookie){
 			});
 		});
 	router
-		.route("/api/getscoredetail")
-		.get(function(req, res, next){
-			request("http://account.xilanlicai.com/api/getpoints?pageindex=1&pagesize=99", function(err, response, body){
-				if(!err){
-					res.json(JSON.parse(body));
-				}else{
-					next();
-				}
-			});
-		});
-	router
 		.route("/api/sign")
 		.post(function(req, res, next){
+			var authCookie = cookie.parse(req.headers.cookie);
 			request.post({
-				url : "http://account.xilanlicai.com/api/sign"
+				url : "http://account.xilanlicai.com/api/sign",
+				headers : {
+					cookie : cookie.serialize("xlauth", authCookie.xlauth)
+				}
 			}, function(err, response, body){
 				if(!err){
 					res.json(JSON.parse(body));
@@ -109,7 +102,13 @@ module.exports = function(request, router, cookie){
 	router
 		.route("/api/getscore")
 		.get(function(req, res, next){
-			request("http://account.xilanlicai.com/api/getpoints?pageindex=1&pagesize=99", function(err, response, body){
+			var authCookie = cookie.parse(req.headers.cookie);
+			request({
+				url : "http://account.xilanlicai.com/api/getpoints?pageindex=1&pagesize=99",
+				headers : {
+					cookie : cookie.serialize("xlauth", authCookie.xlauth)
+				}
+			}, function(err, response, body){
 				if(!err){
 					res.json(JSON.parse(body));
 				}else{

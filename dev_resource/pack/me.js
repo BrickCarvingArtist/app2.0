@@ -106,7 +106,7 @@ Entrance.defaultProps = {
 		{
 			name : "我的积分",
 			className : "score",
-			value : ""
+			value : "/score"
 		},
 		{
 			name : "我的红包",
@@ -126,7 +126,7 @@ Entrance.defaultProps = {
 		{
 			name : "安全中心",
 			className : "safty",
-			value : ""
+			value : "/reset"
 		},
 		{
 			name : "消息中心",

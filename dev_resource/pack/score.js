@@ -1,11 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
+import {Warning} from "../component/warning";
 class Sign extends React.Component{
 	constructor(){
 		super();
 		this.state = {
 			score : 0
+		};
+		this.getScore = day => {
+			return day > 10 ? 20 : day * 2;
 		};
 	}
 	componentDidMount(){
@@ -13,21 +17,24 @@ class Sign extends React.Component{
 			type : "post",
 			url : "/api/sign",
 			success : data => {
-				$.ajax({
-					url : "/api/getscore",
-					success : data => {
-						// this.setState({
-						// 	score : data.data
-						// });
-						console.log(data);
-					}
+				this.setState({
+					score : this.getScore(parseInt(data.message))
 				});
+				if(data.code === 300){
+					ReactDOM.render(
+						<Warning message="您今日已签到!" />,
+						document.querySelector(".warning")
+					);
+				}
 			}
 		});
 	}
 	render(){
 		return (
 			<body>
+				<div className="warning">
+					<Warning />
+				</div>
 				<div className="sign">
 					<b>
 						{this.state.score}
@@ -47,17 +54,6 @@ class Part1 extends React.Component{
 		}
 	}
 	componentDidMount(){
-		if(!QueryString("sign")){
-			$.ajax({
-				url : "/api/getscore",
-				success : data => {
-					// this.setState({
-					// 	score : data.data
-					// });
-					console.log(data);
-				}
-			});
-		}
 		this.refs.btnSign.onclick = () => {
 			if(!QueryString("sign")){
 				window.history.pushState({}, this.state.title, `?sign=1`);
@@ -86,21 +82,30 @@ class Part1 extends React.Component{
 }
 Part1.defaultProps = {
 	vip : "普通会员",
-	name : "＊＊＊",
+	name : "***",
 	score : 0
 };
 class List extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			time : props.time,
+			value : props.value,
+			detail : props.detail
+		};
+	}
 	render(){
+		let state = this.state;
 		return (
 			<ul>
 				<li>
-					{this.props.time}
+					{state.time}
 				</li>
 				<li>
-					{this.props.value}
+					{state.value}
 				</li>
 				<li>
-					{this.props.datail}
+					{state.detail}
 				</li>
 			</ul>
 		);
@@ -113,25 +118,13 @@ class Record extends React.Component{
 			data : []
 		};
 	}
-	componentDidMount(){
-		if(!QueryString("sign")){
-			$.ajax({
-				url : "/api/getscoredetail",
-				success : data => {
-					this.setState({
-						data : data.data || []
-					});
-				}
-			});
-		}
-	}
 	render(){
 		let lists = [],
 			data = this.state.data;
 		if(data.length){
 			data.forEach(list => {
 				lists.push(
-					<List time={list.time} value={list.value} detail={list.detail} />
+					<List time={list.createDate} value={list.points} detail={list.remark} />
 				);
 			});
 		}else{
@@ -156,6 +149,29 @@ class Page extends React.Component{
 	componentDidMount(){
 		if(QueryString("sign")){
 			this.refs.part1.refs.btnSign.click();
+		}else{
+			let refs = this.refs;
+			$.ajax({
+				type : "post",
+				url : "/api/getauth",
+				success : data => {
+					refs.part1.setState({
+						vip : data.vip,
+						name : data.name
+					});
+				}
+			});
+			$.ajax({
+				url : "/api/getscore",
+				success : data => {
+					refs.part1.setState({
+						score : JSON.parse(data.other).points
+					});
+					refs.record.setState({
+						data : data.data || []
+					});
+				}
+			});
 		}
 	}
 	render(){
@@ -163,7 +179,7 @@ class Page extends React.Component{
 			<body>
 				<Part1 ref="part1" />
 				<a className="entrance" href="/activity/score"></a>
-				<Record />
+				<Record ref="record" />
 			</body>
 		);
 	}

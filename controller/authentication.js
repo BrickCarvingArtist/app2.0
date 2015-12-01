@@ -97,7 +97,7 @@ module.exports = function(request, router, md5, cookie, Util){
 								for(var i in cookies){
 									res.cookie(i, cookies[i], {
 										// domain : ".xilanlicai.com",
-										maxAge : 600000,
+										maxAge : 3600000,
 										httpOnly : 1
 									});
 								}
