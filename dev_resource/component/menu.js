@@ -150,28 +150,28 @@ class Menu extends React.Component{
 								{
 									href : "/asset",
 									name : "我的资产",
-									value : data.money || "0.00"
+									value : (data.money + data.investment || 0).toFixed(2)
 								},
 								{
 									href : "",
 									name : "预期收益",
-									value : data.investment || "0.00"
+									value : (data.investment || 0).toFixed(2)
 								},
 								{
 									href : "/asset?all=1",
 									name : "历史收益",
-									value : data.allInvestment || "0.00"
+									value : (data.allInvestment || 0).toFixed(2)
 								}
 							] : [
 								{
 									href : "/asset",
 									name : "我的资产",
-									value : data.money || "0.00"
+									value : (data.money + data.investment || 0).toFixed(2)
 								},
 								{
 									href : "",
 									name : "预期收益",
-									value : data.investment || "0.00"
+									value : (data.investment || 0).toFixed(2)
 								}
 							]
 						}

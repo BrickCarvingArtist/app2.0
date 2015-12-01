@@ -100,6 +100,23 @@ module.exports = function(request, router, cookie){
 			});
 		});
 	router
+		.route("/api/getuserbank")
+		.get(function(req, res, next){
+			var authCookie = cookie.parse(req.headers.cookie);
+			request({
+				url:"http://account.xilanlicai.com/api/getuserbank?pageindex=1&pagesize=99",
+				headers : {
+					cookie : cookie.serialize("xlauth", authCookie.xlauth)
+				}
+			}, function(err, response, body){
+				if(!err){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		});
+	router
 		.route("/api/sign")
 		.post(function(req, res, next){
 			var authCookie = cookie.parse(req.headers.cookie);

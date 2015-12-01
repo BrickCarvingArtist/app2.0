@@ -26,6 +26,35 @@ class Detail extends React.Component{
 			setting : props.setting
 		};
 	}
+	componentDidMount(){
+		let setting = this.state.setting;
+		$.ajax({
+			type : "post",
+			url : "/api/getauth",
+			success : data => {
+				setting[0].value = data.name;
+				setting[1].value = data.idNumber;
+				this.setState({
+					setting : setting
+				});
+			}
+		});
+		$.ajax({
+			url : "/api/getuserbank",
+			success : data => {
+				data.data.forEach(list => {
+					setting.push({
+						className : list.imgCss,
+						name : list.bankName,
+						value : list.cardNO
+					});
+					this.setState({
+						setting : setting
+					});
+				});
+			}
+		})
+	}
 	render(){
 		let lists = [],
 			setting = this.state.setting;
