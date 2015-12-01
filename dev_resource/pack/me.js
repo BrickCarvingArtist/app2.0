@@ -37,7 +37,7 @@ Entrance.defaultProps = {
 		{
 			name : "个人信息",
 			className : "account",
-			value : ""
+			value : "/basic"
 		},
 		{
 			name : "交易记录",

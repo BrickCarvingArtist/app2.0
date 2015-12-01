@@ -158,7 +158,7 @@ class Menu extends React.Component{
 									value : data.investment || "0.00"
 								},
 								{
-									href : "",
+									href : "/asset?all=1",
 									name : "历史收益",
 									value : data.allInvestment || "0.00"
 								}
@@ -236,7 +236,7 @@ Menu.defaultProps = {
 		className : "menu_3col_infoAnchor",
 		option : [
 			{
-				href : "",
+				href : "/asset",
 				name : "我的资产",
 				value : "0.00"
 			},
@@ -246,7 +246,7 @@ Menu.defaultProps = {
 				value : "0.00"
 			},
 			{
-				href : "",
+				href : "/asset?all=1",
 				name : "历史收益",
 				value : "0.00"
 			}
@@ -256,7 +256,7 @@ Menu.defaultProps = {
 		className : "menu_2col_infoAnchor",
 		option : [
 			{
-				href : "",
+				href : "/asset",
 				name : "我的资产",
 				value : "0.00"
 			},

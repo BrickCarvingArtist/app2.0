@@ -5,6 +5,7 @@ module.exports = {
 		me : "./entry/me",
 		more : "./entry/more",
 		asset : "./entry/asset",
+		basic : "./entry/basic",
 		info : "./entry/info",
 		score : "./entry/score",
 		activity : "./entry/activity",

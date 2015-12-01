@@ -50,6 +50,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
+		.route("/basic")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/basic.css"],
+				script : ["/js/basic.js"],
+				title : "个人信息",
+				page : loading
+			});
+		});
+	router
 		.route("/more")
 		.get(function(req, res, next){
 			res.render("./index", {
