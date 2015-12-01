@@ -220,6 +220,29 @@ menu.footer{
 	height:100%;
 	background-color:rgba(0, 0, 0, .7);
 }
+.info{
+	padding-top:4.4rem;
+	height:6rem;
+	background-color:$orange;
+	background-repeat:no-repeat;
+	background-position:50% 1rem;
+	background-size:3rem 3rem;
+	font-size:.55rem;
+	color:white;
+	text-align:center;
+}
+.info.common{
+	background-image:$common;
+}
+.info.jadeite{
+	background-image:$jadeite;
+}
+.info.platinum{
+	background-image:$platinum;
+}
+.info.diamond{
+	background-image:$diamond;
+}
 @-webkit-keyframes rot{
 	to{
 		-webkit-transform:rotate(360deg);

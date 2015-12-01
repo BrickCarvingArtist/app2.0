@@ -89,6 +89,9 @@ class Menu extends React.Component{
 					case 3:
 						returnValue = props.menu3;
 						break;
+					case 4:
+						returnValue = props.menu4;
+						break;
 				}
 				return returnValue;
 			})()
@@ -119,6 +122,7 @@ class Menu extends React.Component{
 					);
 					break;
 				case 3:
+				case 4:
 					returnValue = (
 						<List3 option={
 							{
@@ -134,7 +138,7 @@ class Menu extends React.Component{
 		}
 	}
 	componentDidMount(){
-		if(this.props.type === 3){
+		if(this.props.type === 3 || this.props.type === 4){
 			$.ajax({
 				type : "post",
 				url : "/api/getinvest",
@@ -142,7 +146,7 @@ class Menu extends React.Component{
 					this.setState({
 						menu : {
 							className : this.state.menu.className,
-							option : [
+							option : this.props.type === 3 ? [
 								{
 									href : "/asset",
 									name : "我的资产",
@@ -157,6 +161,17 @@ class Menu extends React.Component{
 									href : "",
 									name : "历史收益",
 									value : data.allInvestment || "0.00"
+								}
+							] : [
+								{
+									href : "/asset",
+									name : "我的资产",
+									value : data.money || "0.00"
+								},
+								{
+									href : "",
+									name : "预期收益",
+									value : data.investment || "0.00"
 								}
 							]
 						}
@@ -233,6 +248,21 @@ Menu.defaultProps = {
 			{
 				href : "",
 				name : "历史收益",
+				value : "0.00"
+			}
+		]
+	},
+	menu4 : {
+		className : "menu_2col_infoAnchor",
+		option : [
+			{
+				href : "",
+				name : "我的资产",
+				value : "0.00"
+			},
+			{
+				href : "",
+				name : "预期收益",
 				value : "0.00"
 			}
 		]

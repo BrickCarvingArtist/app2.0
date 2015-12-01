@@ -3,66 +3,7 @@ import ReactDOM from "react-dom";
 import {PageData} from "./util";
 import {Menu} from "../component/menu";
 import {Dialog} from "../component/dialog";
-class Info extends React.Component{
-	constructor(){
-		super();
-		this.state = {
-			vip : "普通会员",
-			name : "***",
-			setting : [
-				{
-					name : "common",
-					value : "普通会员"
-				},
-				{
-					name : "jadeite",
-					value : "翡翠会员"
-				},
-				{
-					name : "platinum",
-					value : "铂金会员"
-				},
-				{
-					name : "diamond",
-					value : "钻石会员"
-				}
-			]
-		};
-	}
-	componentDidMount(){
-		$.ajax({
-			url : "/api/getauth",
-			success : data => {
-				if(data.code === 200){
-					$.ajax({
-						type : "post",
-						url : "/api/getauth",
-						success : data => {
-							this.setState({
-								vip : data.vip,
-								name : data.name
-							});
-						}
-					});
-				}else{
-					ReactDOM.render(
-						<Dialog html={
-							<a className="longBtn" href="/signin">登录/注册</a>
-						} />,
-						document.querySelector(".shadow")
-					);
-				}
-			}
-		});
-	}
-	render(){
-		return (
-			<div className="info common">
-				{`${this.state.vip}${this.state.name},你好!`}
-			</div>
-		);
-	}
-}
+import {Info} from "../component/info";
 class Option extends React.Component{
 	render(){
 		return (
