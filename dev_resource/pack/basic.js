@@ -6,8 +6,8 @@ import {Warning} from "../component/warning";
 class List extends React.Component{
 	render(){
 		return (
-			<div className={this.props.className}>
-				<h1>
+			<div>
+				<h1 className={this.props.className}>
 					<span>
 						{this.props.name}
 					</span>
@@ -73,12 +73,12 @@ class Detail extends React.Component{
 Detail.defaultProps = {
 	setting : [
 		{
-			className : "account",
+			className : "name",
 			name : "账户名",
 			value : ""
 		},
 		{
-			className : "IdCard",
+			className : "idCard",
 			name : "身份证",
 			value : ""
 		}

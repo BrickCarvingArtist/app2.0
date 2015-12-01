@@ -17,6 +17,7 @@ body{
 			white-space:nowrap;
 			text-overflow:ellipsis;
 			span{
+				margin-left:1rem;
 				color:$darkGrey;
 			}
 			em{
@@ -30,6 +31,15 @@ body{
 			left:.85rem;
 			width:15.15rem;
 			border-bottom:solid .025rem $bitGrey;
+			content:"";
+		}
+		h1:after{
+			position:absolute;
+			top:.575rem;
+			left:.85rem;
+			width:.75rem;
+			height:.75rem;
+			background-size:.75rem .75rem;
 			content:"";
 		}
 		h1:last-of-type{
@@ -46,6 +56,57 @@ body{
 			content:"";
 		}
 	}
+}
+.name:after{
+	background-image:$name;
+}
+.idCard:after{
+	background-image:$idCard;
+}
+.ICBC:after{
+	background-image:$ICBC;
+}
+.ABC:after{
+	background-image:$ABC;
+}
+.CCB:after{
+	background-image:$CCB;
+}
+.CMBCD:after{
+	background-image:$CMBCD;
+}
+.BOCSH:after{
+	background-image:$BOCSH;
+}
+.CMB:after{
+	background-image:$CMB;
+}
+.CIB:after{
+	background-image:$CIB;
+}
+.CEB:after{
+	background-image:$CEB;
+}
+.GDB:after{
+	background-image:$GDB;
+}
+.CNCB:after{
+	background-image:$CNCB;
+}
+.PINGAN:after{
+	background-image:$PINGAN;
+}
+.POSTGC:after{
+	background-image:$POSTGC;
+}
+.COMM:after{
+	background-image:$COMM;
+}
+.SPDB:after{
+	background-image:$SPDB;
+}
+.HXB:after{
+	background-image:$HXB;
 }
 .longBtn{
 	float:left;
