@@ -4,6 +4,7 @@ module.exports = {
 		product : "./entry/product",
 		me : "./entry/me",
 		more : "./entry/more",
+		asset : "./entry/asset",
 		info : "./entry/info",
 		score : "./entry/score",
 		activity : "./entry/activity",

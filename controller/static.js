@@ -35,6 +35,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			res.render("./index", {
 				style : ["/css/me.css"],
 				script : ["/js/me.js"],
+				title : "我的账户",
+				page : loading
+			});
+		});
+	router
+		.route("/asset")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/asset.css"],
+				script : ["/js/asset.js"],
 				title : "我的资产",
 				page : loading
 			});

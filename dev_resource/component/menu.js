@@ -144,19 +144,19 @@ class Menu extends React.Component{
 							className : this.state.menu.className,
 							option : [
 								{
-									href : "",
+									href : "/asset",
 									name : "我的资产",
 									value : data.money || "0.00"
 								},
 								{
 									href : "",
 									name : "预期收益",
-									value : "0.00"
+									value : data.investment || "0.00"
 								},
 								{
 									href : "",
 									name : "历史收益",
-									value : data.investment || "0.00"
+									value : data.allInvestment || "0.00"
 								}
 							]
 						}
