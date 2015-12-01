@@ -150,5 +150,18 @@ module.exports = function(request, router, md5, cookie, Util){
 				}
 			});
 		});
+	router
+		.route("/api/signout")
+		.get(function(req, res, next){
+			res.cookie("xlauth", "", {
+				// domain : ".xilanlicai.com",
+				maxAge : 0,
+				httpOnly : 1
+			});
+			res.json({
+				code : 200,
+				message : "成功退出!"
+			});
+		});
 	return router;
 };

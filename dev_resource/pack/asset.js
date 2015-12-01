@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {PageData} from "./util";
+import {PageData, QueryString} from "./util";
 import {Info} from "../component/info";
 import {Menu} from "../component/menu";
 class List extends React.Component{
@@ -74,6 +74,11 @@ Option.defaultProps = {
 	]
 };
 class Page extends React.Component{
+	componentDidMount(){
+		if(QueryString("all")){
+			
+		}
+	}
 	render(){
 		return (
 			<body>
