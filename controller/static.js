@@ -60,22 +60,42 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
-		.route("/more")
-		.get(function(req, res, next){
-			res.render("./index", {
-				style : ["/css/more.css"],
-				script : ["/js/more.js"],
-				title : "更多",
-				page : loading
-			});
-		});
-	router
 		.route("/score")
 		.get(function(req, res, next){
 			res.render("./index", {
 				style : ["/css/score.css"],
 				script : ["/js/score.js"],
 				title : "我的积分",
+				page : loading
+			});
+		});
+	router
+		.route("/bonus")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/bonus.css"],
+				script : ["/js/bonus.js"],
+				title : "我的红包",
+				page : loading
+			});
+		});
+	router
+		.route("/interest")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/bonus.css"],
+				script : ["/js/interest.js"],
+				title : "我的加息券",
+				page : loading
+			});
+		});
+	router
+		.route("/more")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/more.css"],
+				script : ["/js/more.js"],
+				title : "更多",
 				page : loading
 			});
 		});

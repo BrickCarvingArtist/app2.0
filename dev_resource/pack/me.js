@@ -52,12 +52,12 @@ Entrance.defaultProps = {
 		{
 			name : "我的红包",
 			className : "bonus",
-			value : ""
+			value : "/bonus"
 		},
 		{
 			name : "我的加息",
 			className : "ticket",
-			value : ""
+			value : "/interest"
 		},
 		{
 			name : "我的邀请",
