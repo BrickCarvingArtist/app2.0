@@ -40,7 +40,9 @@ class Tab extends React.Component{
 		};
 	}
 	componentDidMount(){
-		ReactDOM.findDOMNode(this.refs.list1).click();
+		if(this.refs.list1){
+			ReactDOM.findDOMNode(this.refs.list1).click();
+		}
 	}
 	shouldComponentUpdate(nextProps, nextState){
 		return this.state.currentIndex !== nextState.currentIndex;

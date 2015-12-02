@@ -1,6 +1,9 @@
 @import "base";
 body{
 	background-color:$lightGrey;
+	> img{
+		width:16rem;
+	}
 }
 .rule{
 	display:block;
@@ -11,7 +14,7 @@ body{
 .rule.bonus{
 	background-image:$img_bonus;
 }
-.rule.activity{
+.rule.interest{
 	background-image:$img_interest;
 }
 menu{
@@ -35,10 +38,10 @@ menu{
 		padding:.9rem .85rem;
 		background-repeat:no-repeat;
 		background-position:.9rem .85rem;
+		background-size:3.5rem 1.6rem;
 		border-bottom:.025rem solid $bitGrey;
 		b{
 			float:left;
-			margin:0 2.1rem 0 .4rem;
 			display:block;
 			width:1.2rem;
 			font-size:1rem;
@@ -46,6 +49,7 @@ menu{
 			line-height:1.6rem;
 			color:white;
 			text-align:center;
+			letter-spacing:-.05rem;
 			-webkit-transform:scale(1, .8);
 		}
 		p{
@@ -72,7 +76,9 @@ menu{
 }
 .content.bonus{
 	section{
-		background-size:3.5rem 1.6rem;
+		b{
+			margin:0 2.1rem 0 .4rem;
+		}
 	}
 }
 .content.bonus.available{
@@ -87,7 +93,9 @@ menu{
 }
 .content.interest{
 	section{
-		background-size:3.5rem 1.6rem;
+		b{
+			margin:0 2.3rem 0 .2rem;
+		}
 	}
 }
 .content.interest.available{
