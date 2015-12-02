@@ -83,11 +83,11 @@ module.exports = function(request, router, cookie){
 			});
 		});
 	router
-		.route("/api/getbonus")
+		.route("/api/getbonus/:status")
 		.get(function(req, res, next){
 			var authCookie = cookie.parse(req.headers.cookie);
 			request({
-				url:"http://account.xilanlicai.com/api/getvouchers?pageindex=1&pagesize=99&status=0",
+				url : "http://account.xilanlicai.com/api/getvouchers?pageindex=1&pagesize=99&status=" + req.params.status,
 				headers : {
 					cookie : cookie.serialize("xlauth", authCookie.xlauth)
 				}

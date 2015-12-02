@@ -1,1 +1,32 @@
 @import "base";
+body{
+	background-color:$lightGrey;
+}
+.rule{
+	display:block;
+	width:16rem;
+	height:6rem;
+	background-size:16rem 6rem;
+}
+.rule.bonus{
+	background-image:$img_bonus;
+}
+menu{
+	a{
+		background-color:white;
+		font-size:.65rem;
+		line-height:2.15rem;
+		color:$darkGrey;
+		text-align:center;
+	}
+	a.current{
+		border-bottom:.1rem solid $orange;
+	}
+}
+.content{
+	margin-top:.4rem;
+	background-color:white;
+}
+.default{
+	margin:5rem auto;
+}

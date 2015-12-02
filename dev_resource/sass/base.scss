@@ -243,6 +243,13 @@ menu.footer{
 .info.diamond{
 	background-image:$diamond;
 }
+.default{
+	margin:2rem auto;
+	width:7.6rem;
+	height:7.75rem;
+	background-image:$default;
+	background-size:7.6rem 7.75rem;
+}
 @-webkit-keyframes rot{
 	to{
 		-webkit-transform:rotate(360deg);
