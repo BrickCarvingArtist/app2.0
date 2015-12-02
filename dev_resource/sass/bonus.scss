@@ -20,12 +20,54 @@ menu{
 		text-align:center;
 	}
 	a.current{
+		color:$orange;
 		border-bottom:.1rem solid $orange;
 	}
 }
 .content{
 	margin-top:.4rem;
 	background-color:white;
+	section{
+		float:left;
+		padding:.9rem .85rem;
+		background-image:$bonusAvailable;
+		background-repeat:no-repeat;
+		background-position:.9rem .85rem;
+		background-size:4.25rem 1.6rem;
+		border-bottom:.025rem solid $bitGrey;
+		b{
+			float:left;
+			margin:0 3rem 0 .5rem;
+			display:block;
+			width:1.125rem;
+			font-size:1rem;
+			font-weight:bold;
+			line-height:1.6rem;
+			color:white;
+			text-align:center;
+			-webkit-transform:scale(1, .8);
+		}
+		p{
+			float:left;
+			width:9.6rem;
+		}
+		p:first-of-type{
+			margin-top:.075rem;
+			font-size:.55rem;
+			color:$darkGrey;
+		}
+		p:last-of-type{
+			margin-top:.25rem;
+			font-size:.5rem;
+			color:$grey;
+			span{
+				float:left;
+			}
+			em{
+				float:right;
+			}
+		}
+	}
 }
 .default{
 	margin:5rem auto;
