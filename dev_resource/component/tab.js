@@ -3,15 +3,6 @@ import ReactDOM from "react-dom";
 class List extends React.Component{
 	constructor(){
 		super();
-		this.setCurrent = () => {
-			let userClass = this.props.userClass,
-				dom = ReactDOM.findDOMNode(this);
-			if(this.props.index === userClass.state.currentIndex){
-				dom.classList.add("current");
-			}else{
-				dom.classList.remove("current");
-			}
-		};
 		this.getData = userClass => {
 			$.ajax({
 				url : this.props.value,
@@ -19,26 +10,23 @@ class List extends React.Component{
 					userClass.setState({
 						currentIndex : this.props.index
 					});
-					userClass.props.callback(data);
+					userClass.props.callback(data, this.props.status);
 				}
 			});
 		};
 	}
 	componentDidMount(){
-		let dom = ReactDOM.findDOMNode(this),
-			userClass = this.props.userClass;
-		dom.onclick = () => {
+		let userClass = this.props.userClass;
+		ReactDOM.findDOMNode(this).onclick = () => {
 			if(this.props.index !== userClass.state.currentIndex){
 				this.getData(userClass);
 			}
 		};
 	}
-	componentDidUpdate(){
-		this.setCurrent();
-	}
 	render(){
+		let userClass = this.props.userClass;
 		return (
-			<a>
+			<a className={this.props.index === userClass.state.currentIndex ? "current" : ""}>
 				{this.props.name}
 			</a>
 		);
@@ -62,7 +50,7 @@ class Tab extends React.Component{
 			setting = this.props.setting;
 		setting.forEach((list, index) => {
 			lists.push(
-				<List userClass={this} ref={`list${index + 1}`} index={index + 1} name={list.name} value={list.value} />
+				<List userClass={this} ref={`list${index + 1}`} index={index + 1} name={list.name} value={list.value} status={index} />
 			);
 		});
 		return (

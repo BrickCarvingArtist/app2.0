@@ -11,6 +11,9 @@ body{
 .rule.bonus{
 	background-image:$img_bonus;
 }
+.rule.activity{
+	background-image:$img_interest;
+}
 menu{
 	a{
 		background-color:white;
@@ -30,16 +33,14 @@ menu{
 	section{
 		float:left;
 		padding:.9rem .85rem;
-		background-image:$bonusAvailable;
 		background-repeat:no-repeat;
 		background-position:.9rem .85rem;
-		background-size:4.25rem 1.6rem;
 		border-bottom:.025rem solid $bitGrey;
 		b{
 			float:left;
-			margin:0 3rem 0 .5rem;
+			margin:0 2.1rem 0 .4rem;
 			display:block;
-			width:1.125rem;
+			width:1.2rem;
 			font-size:1rem;
 			font-weight:bold;
 			line-height:1.6rem;
@@ -49,7 +50,7 @@ menu{
 		}
 		p{
 			float:left;
-			width:9.6rem;
+			width:10.6rem;
 		}
 		p:first-of-type{
 			margin-top:.075rem;
@@ -67,6 +68,36 @@ menu{
 				float:right;
 			}
 		}
+	}
+}
+.content.bonus{
+	section{
+		background-size:3.5rem 1.6rem;
+	}
+}
+.content.bonus.available{
+	section{
+		background-image:$bonusAvailable;
+	}
+}
+.content.bonus.unavailable{
+	section{
+		background-image:$bonusUnavailable;
+	}
+}
+.content.interest{
+	section{
+		background-size:3.5rem 1.6rem;
+	}
+}
+.content.interest.available{
+	section{
+		background-image:$interestAvailable;
+	}
+}
+.content.interest.unavailable{
+	section{
+		background-image:$interestUnavailable;
 	}
 }
 .default{
