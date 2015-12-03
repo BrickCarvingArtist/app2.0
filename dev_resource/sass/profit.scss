@@ -32,3 +32,29 @@ menu{
 		border-bottom:.1rem solid $orange;
 	}
 }
+.content{
+	margin-top:.4rem;
+}
+section{
+	float:left;
+	padding:0 .85rem;
+	width:16rem;
+	background-color:white;
+	box-shadow:0 .025rem .025rem $bitGrey;
+	h1{
+		height:1.7rem;
+		border-bottom:.025rem solid $bitGrey;
+		b{
+			float:left;
+			font-size:.65rem;
+			line-height:1.7rem;
+			color:$heavyGrey;
+		}
+		span{
+			float:right;
+			margin-top:.625rem;
+			font-size:.5rem;
+			color:$darkGrey;
+		}
+	}
+}

@@ -23,22 +23,17 @@ class List extends React.Component{
 	}
 	render(){
 		let props = this.props;
+		console.log(props)
 		return (
 			<section>
-				<b>
-					{props.name}
-				</b>
-				<p>
-					{props.payTime}
-				</p>
-				<p>
+				<h1>
+					<b>
+						{props.name}
+					</b>
 					<span>
-						{`单笔投资≥${props.condition}元`}
+						{`交易时间:${props.time}`}
 					</span>
-					<em>
-						{this.getStatus()}
-					</em>
-				</p>
+				</h1>
 			</section>
 		);
 	}
@@ -74,7 +69,7 @@ class Content extends React.Component{
 		if(data.length){
 			data.forEach(list => {
 				lists.push(
-					<List name={list.prod_Name} money={list.money} dueInterest={list.dueInterest} payTime={list.payTime.split(" ")[0]} status={list.status} />
+					<List name={list.prod_Name} money={list.money} dueInterest={list.dueInterest} time={list.payTime.split(" ")[0]} status={list.status} />
 				);
 			});
 		}else{
@@ -83,9 +78,9 @@ class Content extends React.Component{
 			);
 		}
 		return (
-			<section className={`content ${this.getClassName()}`}>
+			<div className={`content ${this.getClassName()}`}>
 				{lists}
-			</section>
+			</div>
 		);
 	}
 }
