@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Info} from "../component/info";
 import {Tab} from "../component/tab";
+import {Dialog} from "../component/dialog";
 class List extends React.Component{
 	constructor(){
 		super();
@@ -204,6 +205,11 @@ class Page extends React.Component{
 			this.refs.rule.click();
 		}else if(QueryString("status")){
 			ReactDOM.findDOMNode(this.refs.entrance.refs[`case${QueryString("status")}`]).click();
+		}else{
+			ReactDOM.render(
+				<Dialog html=" " enableClose="1" />,
+				document.querySelector(".shadow")
+			);
 		}
 	}
 	render(){
@@ -212,11 +218,13 @@ class Page extends React.Component{
 				<a ref="rule" className="rule invite"></a>
 				<Entrance ref="entrance" />
 				<a className="longBtn">赶紧邀请小伙伴吧</a>
+				<div className="shadow">
+					<Dialog />
+				</div>
 			</body>
 		);
 	}
 }
-
 const init = () => {
 	PageData.setData(null, () => {
 		ReactDOM.render(

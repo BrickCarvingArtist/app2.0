@@ -10,6 +10,12 @@ class Dialog extends React.Component{
 		if(this.state.html){
 			document.querySelector(".shadow").style.display = "block";
 		}
+		let domShadow = document.querySelector(".shadow");
+		domShadow.onclick = () => {
+			if(this.props.enableClose){
+				domShadow.style.display = "none";
+			}
+		};
 	}
 	componentReceiveProps(nextProps){
 		this.setState({

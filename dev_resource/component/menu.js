@@ -1,5 +1,4 @@
 import React from "react";
-import {Dialog} from "./dialog";
 class List1 extends React.Component{
 	constructor(props){
 		super(props);
