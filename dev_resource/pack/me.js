@@ -42,7 +42,7 @@ Entrance.defaultProps = {
 		{
 			name : "交易记录",
 			className : "record",
-			value : ""
+			value : "/record"
 		},
 		{
 			name : "我的积分",
@@ -62,7 +62,7 @@ Entrance.defaultProps = {
 		{
 			name : "我的邀请",
 			className : "invitation",
-			value : ""
+			value : "/invite"
 		},
 		{
 			name : "安全中心",

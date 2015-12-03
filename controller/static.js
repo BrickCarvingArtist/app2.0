@@ -2,6 +2,36 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 	var babel = babel,
 		loading = "<div class=\"loading\"></div>";
 	router
+		.route("/signin")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/authentication.css"],
+				script : ["/js/signin.js"],
+				title : "登录",
+				page : loading
+			});
+		});
+	router
+		.route("/signup")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/authentication.css"],
+				script : ["/js/signup.js"],
+				title : "注册",
+				page : loading
+			});
+		});
+	router
+		.route("/reset")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/authentication.css"],
+				script : ["/js/reset.js"],
+				title : "修改密码",
+				page : loading
+			});
+		});
+	router
 		.route("/")
 		.get(function(req, res, next){
 			request("http://www.xilanlicai.com/api/getproducts", function(err, response, body){
@@ -90,22 +120,12 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
-		.route("/more")
+		.route("/invite")
 		.get(function(req, res, next){
 			res.render("./index", {
-				style : ["/css/more.css"],
-				script : ["/js/more.js"],
-				title : "更多",
-				page : loading
-			});
-		});
-	router
-		.route("/activity")
-		.get(function(req, res, next){
-			res.render("./index", {
-				style : ["/css/activity.css"],
-				script : ["/js/activity.js"],
-				title : "活动中心",
+				style : ["/css/invite.css"],
+				script : ["/js/invite.js"],
+				title : "我的邀请",
 				page : loading
 			});
 		});
@@ -128,32 +148,22 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
-		.route("/signin")
+		.route("/more")
 		.get(function(req, res, next){
 			res.render("./index", {
-				style : ["/css/authentication.css"],
-				script : ["/js/signin.js"],
-				title : "登录",
+				style : ["/css/more.css"],
+				script : ["/js/more.js"],
+				title : "更多",
 				page : loading
 			});
 		});
 	router
-		.route("/signup")
+		.route("/activity")
 		.get(function(req, res, next){
 			res.render("./index", {
-				style : ["/css/authentication.css"],
-				script : ["/js/signup.js"],
-				title : "注册",
-				page : loading
-			});
-		});
-	router
-		.route("/reset")
-		.get(function(req, res, next){
-			res.render("./index", {
-				style : ["/css/authentication.css"],
-				script : ["/js/reset.js"],
-				title : "修改密码",
+				style : ["/css/activity.css"],
+				script : ["/js/activity.js"],
+				title : "活动中心",
 				page : loading
 			});
 		});

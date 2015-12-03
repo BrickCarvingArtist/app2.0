@@ -8,6 +8,7 @@ module.exports = {
 		basic : "./entry/basic",
 		bonus : "./entry/bonus",
 		interest : "./entry/interest",
+		invite : "./entry/invite",
 		info : "./entry/info",
 		score : "./entry/score",
 		activity : "./entry/activity",
