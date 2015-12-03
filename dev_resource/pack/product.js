@@ -5,28 +5,27 @@ import {Menu} from "../component/menu";
 class Part1 extends React.Component{
 	render(){
 		let data = this.props.data,
-			other = "";
-		data.other = "满20000元即可获得20元红包!";
-		if(data.other){
-			other = (
+			discount = "";
+		if(data.discount){
+			discount = (
 				<p>
 					<i></i>
 					<span>
-						{data.other}
+						{data.discount}
 					</span>
 				</p>
 			);
 		}
 		return (
 			<div className="part1">
-				<p>
+				<h1>
 					<strong>
 						{(data.primeRate * 100).toFixed(1)}
 					</strong>
 					<em>％</em>
 					<span>预计年化收益</span>
 					<b>起息日:T+1</b>
-				</p>
+				</h1>
 				<ul>
 					<li>
 						<p>
@@ -47,7 +46,7 @@ class Part1 extends React.Component{
 						<p>项目总额</p>
 					</li>
 				</ul>
-				{other}
+				{discount}
 			</div>
 		);
 	}
@@ -317,6 +316,7 @@ class ProductDetail extends React.Component{
 	render(){
 		let product = this.state.data.product,
 			detail = this.state.data.details;
+		product.discount = detail.discount;
 		return (
 			<body>
 				<Part1 data={product} />
