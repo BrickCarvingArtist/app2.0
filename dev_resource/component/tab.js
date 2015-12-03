@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {QueryString} from "../pack/util";
 class List extends React.Component{
 	constructor(){
 		super();
@@ -40,7 +41,7 @@ class Tab extends React.Component{
 		};
 	}
 	componentDidMount(){
-		if(this.refs.list1){
+		if(this.refs.list1 && !QueryString("status")){
 			ReactDOM.findDOMNode(this.refs.list1).click();
 		}
 	}

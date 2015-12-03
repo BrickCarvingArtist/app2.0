@@ -1,6 +1,60 @@
 @import "base";
 body{
 	background-color:$lightGrey;
+	> img{
+		width:16rem;
+	}
+}
+.rule{
+	display:block;
+	width:16rem;
+	height:6rem;
+	background-size:16rem 6rem;
+}
+.rule.invite{
+	background-image:$img_invite;
+}
+.entrance{
+	margin-top:.4rem;
+	background-color:white;
+	box-shadow:0 .025rem .025rem $bitGrey;
+	div{
+		float:left;
+		p{
+			text-align:center;
+		}
+		p:first-of-type{
+			font-size:.65rem;
+			color:$darkGrey;
+		}
+		p:last-of-type{
+			color:$orange;
+		}
+	}
+	div:first-of-type{
+		padding:1.35rem 0;
+		width:16rem;
+		border-bottom:.025rem solid $bitGrey;
+		p:last-of-type{
+			margin-top:.65rem;
+			font-size:1.25rem;
+		}
+	}
+	div:not(:first-of-type){
+		padding:.5rem 0;
+		width:8rem;
+		p:last-of-type{
+			margin-top:.1rem;
+			font-size:.75rem;
+		}
+	}
+	div:last-of-type{
+		border-left:.025rem solid $bitGrey;
+	}
+}
+.longBtn{
+	float:left;
+	margin:1rem 1.35rem 0;
 }
 menu{
 	box-shadow:0 .025rem .025rem $bitGrey;

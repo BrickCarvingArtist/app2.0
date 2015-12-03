@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {PageData} from "./util";
+import {PageData, QueryString} from "./util";
 import {Info} from "../component/info";
 import {Tab} from "../component/tab";
 class List extends React.Component{
@@ -27,7 +27,7 @@ class List extends React.Component{
 					{props.mobile}
 				</li>
 				<li>
-					{props.name}
+					{props.name || "***"}
 				</li>
 				<li>
 					{this.getStatus()}
@@ -76,18 +76,23 @@ class Content extends React.Component{
 		);
 	}
 }
-class Page extends React.Component{
+class Detail extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			data : []
 		};
 	}
+	componentDidMount(){
+		if(QueryString("status")){
+			ReactDOM.findDOMNode(this.refs.tab.refs[`list${QueryString("status")}`]).click();
+		}
+	}
 	render(){
 		return (
 			<body>
 				<Info />
-				<Tab setting={
+				<Tab ref="tab" setting={
 					[
 						{
 							name : "全部",
@@ -114,6 +119,104 @@ class Page extends React.Component{
 		);
 	}
 }
+class Case extends React.Component{
+	componentDidMount(){
+		ReactDOM.findDOMNode(this).onclick = () => {
+			if(!QueryString("status")){
+				window.history.pushState({}, document.title, `?status=${this.props.status}`);
+			}
+			ReactDOM.render(
+				<Detail />,
+				document.body
+			);
+		};
+	}
+	render(){
+		return (
+			<div ref="all">
+				<p>
+					{this.props.name}
+				</p>
+				<p>
+					{this.props.value}
+				</p>
+			</div>
+		);
+	}
+}
+class Entrance extends React.Component{
+	render(){
+		let lists = [],
+			setting = this.props.setting;
+		setting.forEach((list, index) => {
+			lists.push(
+				<Case ref={`case${index + 1}`} name={list.name} value={list.value} status={index + 1} />
+			);
+		});
+		return (
+			<div className="entrance">
+				{lists}
+			</div>
+		);
+	}
+}
+Entrance.defaultProps = {
+	setting : [
+		{
+			name : "邀请总人数",
+			value : "0"
+		},
+		{
+			name : "已邀请人数",
+			value : "0"
+		},
+		{
+			name : "未投资人数",
+			value : "0"
+		}
+	]
+};
+class Rule extends React.Component{
+	render(){
+		return (
+			<body>
+				<img src="../images/inviterule.png" />
+			</body>
+		);
+	}
+}
+class Page extends React.Component{
+	constructor(props){
+		super(props);
+	}
+	componentDidMount(){
+		this.refs.rule.onclick = () => {
+			if(!QueryString("rule")){
+				document.title = "邀请规则";
+				window.history.pushState({}, document.title, "?rule=1");
+			}
+			ReactDOM.render(
+				<Rule />,
+				document.body
+			);
+		};
+		if(QueryString("rule")){
+			this.refs.rule.click();
+		}else if(QueryString("status")){
+			ReactDOM.findDOMNode(this.refs.entrance.refs[`case${QueryString("status")}`]).click();
+		}
+	}
+	render(){
+		return (
+			<body>
+				<a ref="rule" className="rule invite"></a>
+				<Entrance ref="entrance" />
+				<a className="longBtn">赶紧邀请小伙伴吧</a>
+			</body>
+		);
+	}
+}
+
 const init = () => {
 	PageData.setData(null, () => {
 		ReactDOM.render(
