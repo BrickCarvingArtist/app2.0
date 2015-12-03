@@ -90,6 +90,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
+		.route("/record")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/record.css"],
+				script : ["/js/record.js"],
+				title : "交易记录",
+				page : loading
+			});
+		});
+	router
 		.route("/score")
 		.get(function(req, res, next){
 			res.render("./index", {
