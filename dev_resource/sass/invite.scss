@@ -1,1 +1,37 @@
 @import "base";
+body{
+	background-color:$lightGrey;
+}
+menu{
+	box-shadow:0 .025rem .025rem $bitGrey;
+	a{
+		background-color:white;
+		font-size:.65rem;
+		line-height:2.15rem;
+		color:$darkGrey;
+		text-align:center;
+	}
+	a.current{
+		color:$orange;
+		border-bottom:.1rem solid $orange;
+	}
+}
+.content{
+	margin-top:.4rem;
+	background-color:white;
+	box-shadow:0 .025rem .025rem $bitGrey;
+	ul{
+		margin:0 .85rem;
+		display:-webkit-flex;
+		li{
+			-webkit-flex:1;
+			font-size:.55rem;
+			line-height:1.9rem;
+			color:$darkGrey;
+			text-align:center;
+		}
+	}
+	ul:not(:last-of-type){
+		border-bottom:.025rem solid $bitGrey;
+	}
+}

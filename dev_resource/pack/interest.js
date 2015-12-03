@@ -13,8 +13,8 @@ class Rule extends React.Component{
 	}
 }
 class Page extends React.Component{
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 		this.state = {
 			data : []
 		};
