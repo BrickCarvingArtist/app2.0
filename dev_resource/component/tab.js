@@ -6,7 +6,7 @@ class List extends React.Component{
 		super();
 		this.getData = userClass => {
 			$.ajax({
-				url : this.props.value,
+				url : this.props.href,
 				success : data => {
 					userClass.setState({
 						currentIndex : this.props.index
@@ -26,7 +26,18 @@ class List extends React.Component{
 	}
 	render(){
 		let userClass = this.props.userClass;
-		return (
+		return this.props.value + 0 ?
+		(
+			<a className={this.props.index === userClass.state.currentIndex ? "current" : ""}>
+				<h1>
+					{this.props.name}
+				</h1>
+				<h2>
+					{this.props.value || 0}
+				</h2>
+			</a>
+		) :
+		(
 			<a className={this.props.index === userClass.state.currentIndex ? "current" : ""}>
 				{this.props.name}
 			</a>
@@ -53,7 +64,7 @@ class Tab extends React.Component{
 			setting = this.props.setting;
 		setting.forEach((list, index) => {
 			lists.push(
-				<List userClass={this} ref={`list${index + 1}`} index={index + 1} name={list.name} value={list.value} status={index} />
+				<List userClass={this} ref={`list${index + 1}`} index={index + 1} name={list.name} value={list.value} href={list.href} status={index} />
 			);
 		});
 		return (

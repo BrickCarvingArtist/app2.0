@@ -97,15 +97,15 @@ class Detail extends React.Component{
 					[
 						{
 							name : "全部",
-							value : "/api/getinvite/0"
+							href : "/api/getinvite/0"
 						},
 						{
 							name : "已投资",
-							value : "/api/getinvite/1"
+							href : "/api/getinvite/1"
 						},
 						{
 							name : "未投资",
-							value : "/api/getinvite/2"
+							href : "/api/getinvite/2"
 						}
 					]
 				} callback={

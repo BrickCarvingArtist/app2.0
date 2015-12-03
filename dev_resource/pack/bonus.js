@@ -44,15 +44,15 @@ class Page extends React.Component{
 					[
 						{
 							name : "未使用",
-							value : "/api/getbonus/0"
+							href : "/api/getbonus/0"
 						},
 						{
 							name : "已使用",
-							value : "/api/getbonus/1"
+							href : "/api/getbonus/1"
 						},
 						{
 							name : "已过期",
-							value : "/api/getbonus/2"
+							href : "/api/getbonus/2"
 						}
 					]
 				} callback={

@@ -157,7 +157,7 @@ class Menu extends React.Component{
 									value : (data.investment || 0).toFixed(2)
 								},
 								{
-									href : "/asset?all=1",
+									href : "/profit",
 									name : "历史收益",
 									value : (data.allInvestment || 0).toFixed(2)
 								}

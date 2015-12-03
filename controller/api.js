@@ -67,10 +67,25 @@ module.exports = function(request, router, cookie){
 		});
 	router
 		.route("/api/getinvest")
+		.get(function(req, res, next){
+			var authCookie = cookie.parse(req.headers.cookie);
+			request.get({
+				url : "http://account.xilanlicai.com/api/getprodinvested?pageindex=1&pagesize=99&status=0",
+				headers : {
+					cookie : cookie.serialize("xlauth", authCookie.xlauth)
+				}
+			}, function(err, response, body){
+				if(!err){
+					res.json(JSON.parse(body));
+				}else{
+					next();
+				}
+			});
+		})
 		.post(function(req, res, next){
 			var authCookie = cookie.parse(req.headers.cookie);
 			request.post({
-				url:"http://account.xilanlicai.com/api/getprodinvested",
+				url : "http://account.xilanlicai.com/api/getprodinvested",
 				headers : {
 					cookie : cookie.serialize("xlauth", authCookie.xlauth)
 				}

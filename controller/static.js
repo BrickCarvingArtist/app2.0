@@ -80,6 +80,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
+		.route("/profit")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/profit.css"],
+				script : ["/js/profit.js"],
+				title : "历史收益",
+				page : loading
+			});
+		});
+	router
 		.route("/basic")
 		.get(function(req, res, next){
 			res.render("./index", {
