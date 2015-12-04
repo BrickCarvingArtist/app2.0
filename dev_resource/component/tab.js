@@ -11,6 +11,9 @@ class List extends React.Component{
 					userClass.setState({
 						currentIndex : this.props.index
 					});
+					if(parseInt(QueryString("status")) !== this.props.index){
+						window.history.pushState({}, document.title, `/profit?status=${this.props.index}`);
+					}
 					userClass.props.callback(data, this.props.status);
 				}
 			});
@@ -52,9 +55,7 @@ class Tab extends React.Component{
 		};
 	}
 	componentDidMount(){
-		if(this.refs.list1 && !QueryString("status")){
-			ReactDOM.findDOMNode(this.refs.list1).click();
-		}
+		ReactDOM.findDOMNode(this.refs[`list${QueryString("status")}`]).click();
 	}
 	shouldComponentUpdate(nextProps, nextState){
 		return this.state.currentIndex !== nextState.currentIndex;

@@ -157,7 +157,7 @@ class Menu extends React.Component{
 									value : (data.investment || 0).toFixed(2)
 								},
 								{
-									href : "/profit",
+									href : "/profit?status=1",
 									name : "历史收益",
 									value : (data.allInvestment || 0).toFixed(2)
 								}
@@ -245,7 +245,7 @@ Menu.defaultProps = {
 				value : "0.00"
 			},
 			{
-				href : "/profit",
+				href : "/profit?status=1",
 				name : "历史收益",
 				value : "0.00"
 			}

@@ -38,7 +38,6 @@ class List2 extends React.Component{
 	}
 	render(){
 		let props = this.props;
-		console.log(props);
 		return (
 			<section>
 				<h1>
@@ -59,7 +58,6 @@ class List3 extends React.Component{
 	}
 	render(){
 		let props = this.props;
-		console.log(props);
 		return (
 			<section>
 				<h1>
@@ -177,12 +175,12 @@ class Page extends React.Component{
 						{
 							name : "红包奖励",
 							value : "",
-							href : "/api/getbonus/1"
+							href : "/api/getinvest/1"
 						},
 						{
 							name : "加息收益",
 							value : "",
-							href : "/api/getbonus/2"
+							href : "/api/getinvest/2"
 						}
 					]
 				} callback={

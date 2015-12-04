@@ -85,9 +85,7 @@ class Detail extends React.Component{
 		};
 	}
 	componentDidMount(){
-		if(QueryString("status")){
-			ReactDOM.findDOMNode(this.refs.tab.refs[`list${QueryString("status")}`]).click();
-		}
+		ReactDOM.findDOMNode(this.refs.tab.refs[`list${QueryString("status")}`]).click();
 	}
 	render(){
 		return (
