@@ -118,7 +118,7 @@ section{
 		}
 		b{
 			float:right;
-			margin-top:1rem;
+			margin-top:1.2rem;
 			font-size:.5rem;
 			color:$grey;
 		}
@@ -262,7 +262,8 @@ section{
 		}
 		.longBtn{
 			position:relative;
-			margin:0 auto !important;
+			float:left;
+			margin:0 1.35rem;
 		}
 	}
 }

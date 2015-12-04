@@ -188,6 +188,16 @@ module.exports = function(request, router, babel, react, reactDOMServer, Util){
 			});
 		});
 	router
+		.route("/payment")
+		.get(function(req, res, next){
+			res.render("./index", {
+				style : ["/css/payment.css"],
+				script : ["/js/payment.js"],
+				title : "支付",
+				page : loading
+			});
+		});
+	router
 		.route("*")
 		.get(function(req, res, next){
 			res.render("./index", {

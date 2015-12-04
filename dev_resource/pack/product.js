@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Menu} from "../component/menu";
+import {Warning} from "../component/warning";
 class Part1 extends React.Component{
 	render(){
 		let data = this.props.data,
@@ -249,24 +250,28 @@ class Part3 extends React.Component{
 	constructor(){
 		super();
 		this.state = {
-			interest : "0.00"
+			money : 0,
+			interest : 0
 		};
-		this.matchNum = (dom, lumpSum) => {
+		this.matchNum = (dom, minimum, balance) => {
 			let data = this.props.data,
 				value = dom.value = Math.floor(dom.value);
-			dom.value = value = value >= 0 ? value > lumpSum ? value = lumpSum : value : 0;
+			dom.value = value = value >= minimum ? value > balance ? balance : value : minimum;
 			this.setState({
-				interest : (value * data.primeRate / 365 * data.days).toFixed(2)
+				money : value,
+				interest : value * data.primeRate / 365 * data.days
 			});
-		}
+		};
 	}
 	componentDidMount(){
 		let data = this.props.data,
+			minimum = data.minUnitCount * data.unitPrice,
+			balance = data.balance,
 			minus = this.refs.minus,
 			plus = this.refs.plus,
 			num = this.refs.num;
 		num.onkeyup = () => {
-			this.matchNum(num, data.lumpSum);
+			this.matchNum(num, minimum, balance);
 		};
 		minus.onclick = () => {
 			num.value = parseInt(num.value) - 500;
@@ -289,18 +294,18 @@ class Part3 extends React.Component{
 				</div>
 				<div>
 					<p>
-						{`${this.state.interest}元`}
+						{`${this.state.interest.toFixed(2)}元`}
 					</p>
 					<p>预期收益</p>
 				</div>
-				<form method="post" action="/api/postbill">
+				<form>
 					<span ref="minus">－</span>
 					<input name="invest" ref="num" className="num" type="text" defaultValue="0" />
 					<span ref="plus">＋</span>
 					<p className="term">
 						{`募集时间:${data.beginTime.split(" ")[0]}至${data.stopBuyTime.split(" ")[0]}`}
 					</p>
-					<input className="longBtn btnBuy" type="submit" value="立即购买" />
+					<a className="longBtn btnBuy" href={`/payment?money=${this.state.money}`}>立即购买</a>
 				</form>
 			</div>
 		);
@@ -319,6 +324,9 @@ class ProductDetail extends React.Component{
 		product.discount = detail.discount;
 		return (
 			<body>
+				<div className="warning">
+					<Warning />
+				</div>
 				<Part1 data={product} />
 				<Part2 data={detail} />
 				<Part3 data={product} />

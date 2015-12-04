@@ -213,18 +213,6 @@ module.exports = function(request, router, cookie){
 			});
 		});
 	router
-		.route("/api/postbill")
-		.post(function(req, res, next){
-			console.log(req.body);
-			request("http://www.xilanlicai.com/api/getorder", function(err, response, body){
-				if(!err && response.statusCode === 200){
-					res.redirect("/payment");
-				}else{
-					next();
-				}
-			});
-		});
-	router
 		.route("/api/gethelp")
 		.get(function(req, res, next){
 			res.json({

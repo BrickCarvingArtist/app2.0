@@ -16,7 +16,8 @@ module.exports = {
 		activity : "./entry/activity",
 		signin : "./entry/signin",
 		signup: "./entry/signup",
-		reset : "./entry/reset"
+		reset : "./entry/reset",
+		payment : "./entry/payment"
 	},
 	output : {
 		filename : "../resource/js/[name].js"

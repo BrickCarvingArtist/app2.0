@@ -1,0 +1,59 @@
+@import "base";
+body{
+	background-color:$lightGrey;
+}
+form{
+	float:left;
+	padding:0 1.35rem;
+	width:16rem;
+	input.longInput:first-of-type{
+		margin-top:1.25rem !important;
+	}
+	.mobile{
+		background-image:$mobile;
+	}
+	.password{
+		background-image:$password;
+	}
+	.captcha{
+		background-image:$captcha;
+	}
+	.invitor{
+		background-image:$invitor;
+	}
+	> a{
+		float:right;
+		margin-top:.5rem;
+		font-size:.55rem;
+		color:$grey;
+	}
+	p{
+		float:left;
+		margin-top:.5rem;
+		width:100%;
+		font-size:.55rem;
+		text-align:center;
+		span{
+			color:$grey;
+		}
+		a{
+			color:$blue;
+		}
+	}
+	label{
+		float:left;
+		margin-top:.5rem;
+		margin-left:.25rem;
+		font-size:.55rem;
+		span{
+			color:$grey;
+		}
+		b{
+			color:$orange;
+		}
+	}
+	.longBtn{
+		float:left;
+		margin-top:.5rem;
+	}
+}
