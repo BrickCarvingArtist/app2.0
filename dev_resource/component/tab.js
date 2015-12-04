@@ -33,7 +33,7 @@ class List extends React.Component{
 					{this.props.name}
 				</h1>
 				<h2>
-					{this.props.value || 0}
+					{(this.props.value || 0).toFixed(2)}
 				</h2>
 			</a>
 		) :

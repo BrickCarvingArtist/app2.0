@@ -2,28 +2,62 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Tab} from "../component/tab";
-class List extends React.Component{
+class List1 extends React.Component{
 	constructor(){
 		super();
-		this.getStatus = () => {
-			let returnValue = "";
-			switch(this.props.status){
-				case 0:
-					returnValue = `${this.props.expirationDate}到期`;
-					break;
-				case 1:
-					returnValue = "已使用";
-					break;
-				case 2:
-					returnValue = "已过期";
-					break;
-			}
-			return returnValue;
-		}
 	}
 	render(){
 		let props = this.props;
-		console.log(props)
+		console.log(props);
+		return (
+			<section>
+				<h1>
+					<b>
+						{props.name}
+					</b>
+					<span>
+						{`交易时间:${props.time}`}
+					</span>
+				</h1>
+				<p>
+					{`交易金额 (¥) : ${props.money}`}
+				</p>
+				<p>
+					{`收益金额 (¥) : ${props.dueInterest}`}
+				</p>
+				<em>未结算</em>
+			</section>
+		);
+	}
+}
+class List2 extends React.Component{
+	constructor(){
+		super();
+	}
+	render(){
+		let props = this.props;
+		console.log(props);
+		return (
+			<section>
+				<h1>
+					<b>
+						{props.name}
+					</b>
+					<span>
+						{`交易时间:${props.time}`}
+					</span>
+				</h1>
+			</section>
+		);
+	}
+}
+class List3 extends React.Component{
+	constructor(){
+		super();
+	}
+	render(){
+		let props = this.props;
+		console.log(props);
 		return (
 			<section>
 				<h1>
@@ -59,6 +93,21 @@ class Content extends React.Component{
 			}
 			return returnValue;
 		};
+		this.getContent = data => {
+			let returnValue = "";
+			switch(this.state.status){
+				case 0:
+					returnValue = <List1 name={data.prod_Name} money={data.money} dueInterest={data.dueInterest} time={data.payTime.split(" ")[0]} status={data.status} />;
+					break;
+				case 1:
+					returnValue = <List2 name={data.prod_Name} money={data.money} dueInterest={data.dueInterest} time={data.payTime.split(" ")[0]} status={data.status} />;
+					break;
+				case 2:
+					returnValue = <List3 name={data.prod_Name} money={data.money} dueInterest={data.dueInterest} time={data.payTime.split(" ")[0]} status={data.status} />;
+					break;
+			}
+			return returnValue;
+		};
 	}
 	componentWillReceiveProps(nextProps){
 		this.setState(nextProps);
@@ -69,7 +118,7 @@ class Content extends React.Component{
 		if(data.length){
 			data.forEach(list => {
 				lists.push(
-					<List name={list.prod_Name} money={list.money} dueInterest={list.dueInterest} time={list.payTime.split(" ")[0]} status={list.status} />
+					this.getContent(list)
 				);
 			});
 		}else{
@@ -99,7 +148,7 @@ class Page extends React.Component{
 						{
 							name : "产品收益",
 							value : "",
-							href : "/api/getinvest"
+							href : "/api/getinvest/0"
 						},
 						{
 							name : "红包奖励",
