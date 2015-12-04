@@ -8,7 +8,6 @@ class List1 extends React.Component{
 	}
 	render(){
 		let props = this.props;
-		console.log(props);
 		return (
 			<section>
 				<h1>
@@ -22,8 +21,11 @@ class List1 extends React.Component{
 				<p>
 					{`交易金额 (¥) : ${props.money}`}
 				</p>
-				<p>
-					{`收益金额 (¥) : ${props.dueInterest}`}
+				<p >
+					<span>收益金额 (¥) : </span>
+					<b>
+						{props.dueInterest}
+					</b>
 				</p>
 				<em>未结算</em>
 			</section>
@@ -133,6 +135,27 @@ class Content extends React.Component{
 		);
 	}
 }
+class Total extends React.Component{
+	constructor(props){
+		super(props);
+		this.state = {
+			money : props.money
+		};
+	}
+	componentWillReceiveProps(nextProps){
+		this.setState(nextProps);
+	}
+	render(){
+		return (
+			<div className="total">
+				{this.state.money.toFixed(2)}
+			</div>
+		);
+	}
+}
+Total.defaultProps = {
+	money : 0
+};
 class Page extends React.Component{
 	constructor(){
 		super();
@@ -143,6 +166,7 @@ class Page extends React.Component{
 	render(){
 		return (
 			<body>
+				<Total />
 				<Tab setting={
 					[
 						{

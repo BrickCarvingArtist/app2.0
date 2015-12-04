@@ -245,7 +245,7 @@ Menu.defaultProps = {
 				value : "0.00"
 			},
 			{
-				href : "/asset?all=1",
+				href : "/profit",
 				name : "历史收益",
 				value : "0.00"
 			}

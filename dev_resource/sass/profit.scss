@@ -2,6 +2,30 @@
 body{
 	background-color:$lightGrey;
 }
+.total{
+	position:relative;
+	padding-top:2.8rem;
+	height:6rem;
+	background-color:$orange;
+	font-size:1.25rem;
+	color:white;
+	text-align:center;
+}
+.total:before{
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin-top:-2.425rem;
+	margin-left:-2.425rem;
+	padding-top:.75rem;
+	width:4.85rem;
+	height:4.85rem;
+	content:"累计收益";
+	font-size:.65rem;
+	color:white;
+	border:.15rem solid $whiteOrange;
+	border-radius:50%;
+}
 menu{
 	float:left;
 	background-color:white;
@@ -67,8 +91,12 @@ section{
 		margin-top:.75rem;
 	}
 	p:last-of-type{
-		margin-top:.5rem;
+		margin-top:.3rem;
 		margin-bottom:.75rem;
+		b{
+			font-size:.75rem;
+			color:$orange;
+		}
 	}
 	em{
 		position:absolute;
