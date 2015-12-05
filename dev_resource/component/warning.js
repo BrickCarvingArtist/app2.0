@@ -11,6 +11,9 @@ class Warning extends React.Component{
 			message : nextProps.message
 		});
 	}
+	shouldComponentUpdate(nextProps, nextState){
+		return nextProps.message !== this.props.message || nextState.message !== this.state.message;
+	}
 	render(){
 		return (
 			<p className="message">

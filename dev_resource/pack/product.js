@@ -256,11 +256,22 @@ class Part3 extends React.Component{
 		this.matchNum = (dom, minimum, balance) => {
 			let data = this.props.data,
 				value = dom.value = Math.floor(dom.value);
+			if(value < minimum || value > balance){
+				this.showWarning(minimum, balance);
+			}else{
+				this.showWarning();
+			}
 			dom.value = value = value >= minimum ? value > balance ? balance : value : minimum;
 			this.setState({
 				money : value,
 				interest : value * data.primeRate / 365 * data.days
 			});
+		};
+		this.showWarning = (...argument) => {
+			ReactDOM.render(
+				<Warning message={argument.length ? `该产品可投金额区间为${argument[0]}元至${argument[1]}元!` : ""} />,
+				document.querySelector(".message")
+			);
 		};
 	}
 	componentDidMount(){
