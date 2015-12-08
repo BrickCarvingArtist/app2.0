@@ -108,9 +108,23 @@ class Detail extends React.Component{
 					]
 				} callback={
 					data => {
-						this.setState({
-							data : data.data
-						});
+						if(data.code === 200){
+							this.setState({
+								data : data.data
+							});
+						}else{
+							let warning = document.querySelector(".warning");
+							if(warning){
+								ReactDOM.render(
+									<Warning message={data.message} />,
+									warning
+								);
+								let t = setTimeout(() => {
+									clearTimeout(t);
+									window.location.href = "/signin";
+								}, 1000);
+							}
+						}
 					}
 				} />
 				<Content data={this.state.data} />
@@ -213,6 +227,9 @@ class Page extends React.Component{
 	render(){
 		return (
 			<body>
+				<div className="warning">
+					<Warning />
+				</div>
 				<a ref="rule" className="rule invite"></a>
 				<Entrance ref="entrance" />
 				<a className="longBtn">赶紧邀请小伙伴吧</a>

@@ -155,21 +155,49 @@ class Page extends React.Component{
 				type : "post",
 				url : "/api/getauth",
 				success : data => {
-					refs.part1.setState({
-						vip : data.vip,
-						name : data.name
-					});
+					if(data.code === 200){
+						refs.part1.setState({
+							vip : data.vip,
+							name : data.name
+						});
+					}else{
+						let warning = document.querySelector(".warning");
+						if(warning){
+							ReactDOM.render(
+								<Warning message={data.message} />,
+								warning
+							);
+							let t = setTimeout(() => {
+								clearTimeout(t);
+								window.location.href = "/signin";
+							}, 1000);
+						}
+					}
 				}
 			});
 			$.ajax({
 				url : "/api/getscore",
 				success : data => {
-					refs.part1.setState({
-						score : JSON.parse(data.other).points
-					});
-					refs.record.setState({
-						data : data.data || []
-					});
+					if(data.code === 200){
+						refs.part1.setState({
+							score : JSON.parse(data.other).points
+						});
+						refs.record.setState({
+							data : data.data || []
+						});
+					}else{
+						let warning = document.querySelector(".warning");
+						if(warning){
+							ReactDOM.render(
+								<Warning message={data.message} />,
+								warning
+							);
+							let t = setTimeout(() => {
+								clearTimeout(t);
+								window.location.href = "/signin";
+							}, 1000);
+						}
+					}
 				}
 			});
 		}
@@ -177,6 +205,9 @@ class Page extends React.Component{
 	render(){
 		return (
 			<body>
+				<div className="warning">
+					<Warning />
+				</div>
 				<Part1 ref="part1" />
 				<a className="entrance" href="/activity/score"></a>
 				<Record ref="record" />

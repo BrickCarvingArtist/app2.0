@@ -32,26 +32,54 @@ class Detail extends React.Component{
 			type : "post",
 			url : "/api/getauth",
 			success : data => {
-				setting[0].value = data.name;
-				setting[1].value = data.idNumber;
-				this.setState({
-					setting : setting
-				});
+				if(data.code === 200){
+					setting[0].value = data.name;
+					setting[1].value = data.idNumber;
+					this.setState({
+						setting : setting
+					});
+				}else{
+					let warning = document.querySelector(".warning");
+					if(warning){
+						ReactDOM.render(
+							<Warning message={data.message} />,
+							warning
+						);
+						let t = setTimeout(() => {
+							clearTimeout(t);
+							window.location.href = "/signin";
+						}, 1000);
+					}
+				}
 			}
 		});
 		$.ajax({
 			url : "/api/getuserbank",
 			success : data => {
-				data.data.forEach(list => {
-					setting.push({
-						className : list.imgCss,
-						name : list.bankName,
-						value : list.cardNO
+				if(data.code === 200){
+					data.data.forEach(list => {
+						setting.push({
+							className : list.imgCss,
+							name : list.bankName,
+							value : list.cardNO
+						});
+						this.setState({
+							setting : setting
+						});
 					});
-					this.setState({
-						setting : setting
-					});
-				});
+				}else{
+					let warning = document.querySelector(".warning");
+					if(warning){
+						ReactDOM.render(
+							<Warning message={data.message} />,
+							warning
+						);
+						let t = setTimeout(() => {
+							clearTimeout(t);
+							window.location.href = "/signin";
+						}, 1000);
+					}
+				}
 			}
 		})
 	}

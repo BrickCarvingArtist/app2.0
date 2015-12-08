@@ -1,4 +1,14 @@
 module.exports = function(request, router, md5, cookie, Util){
+	function isAuth(res, statusCode, body){
+		res.json(statusCode === 200 ? (function(){
+			var _body = JSON.parse(body);
+			_body.code = statusCode;
+			return _body;
+		})() : {
+			code : statusCode,
+			message : "您已长时间未进行操作，需要重新登录"
+		});
+	}
 	router
 		.route("/api/getauth")
 		.get(function(req, res, next){
@@ -10,7 +20,7 @@ module.exports = function(request, router, md5, cookie, Util){
 				}
 			}, function(err, response, body){
 				if(!err && response.statusCode === 200){
-					res.json(JSON.parse(body));
+					isAuth(res, JSON.parse(body).code, body);
 				}else{
 					next();
 				}
@@ -24,8 +34,8 @@ module.exports = function(request, router, md5, cookie, Util){
 					cookie : cookie.serialize("xlauth", authCookie.xlauth)
 				}
 			}, function(err, response, body){
-				if(!err && response.statusCode === 200){
-					res.json(JSON.parse(body));
+				if(!err){
+					isAuth(res, response.statusCode, body);
 				}else{
 					next();
 				}
@@ -48,7 +58,7 @@ module.exports = function(request, router, md5, cookie, Util){
 							}
 						}, function(err, response, body){
 							if(!err){
-								res.json(JSON.parse(body));
+								isAuth(res, response.statusCode, body);
 							}else{
 								next();
 							}
@@ -68,7 +78,7 @@ module.exports = function(request, router, md5, cookie, Util){
 					}
 				}, function(err, response, body){
 					if(!err){
-						res.json(JSON.parse(body));
+						isAuth(res, response.statusCode, body);
 					}else{
 						next();
 					}

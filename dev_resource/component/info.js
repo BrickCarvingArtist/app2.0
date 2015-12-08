@@ -24,12 +24,15 @@ class Info extends React.Component{
 						}
 					});
 				}else{
-					ReactDOM.render(
-						<Dialog html={
-							<a className="longBtn" href="/signin">登录/注册</a>
-						} />,
-						document.querySelector(".shadow")
-					);
+					let shadow = document.querySelector(".shadow");
+					if(shadow){
+						ReactDOM.render(
+							<Dialog html={
+								<a className="longBtn" href="/signin">登录/注册</a>
+							} />,
+							shadow
+						);
+					}
 				}
 			}
 		});

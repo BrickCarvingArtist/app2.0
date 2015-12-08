@@ -26,8 +26,9 @@ app.use(function(req, res, next){
 	next();
 });
 app.use(require("./controller/authentication")(request, router, md5, cookie, Util));
-app.use(require("./controller/api")(request, router, cookie));
+app.use(require("./controller/me")(request, router, cookie))
 app.use(require("./controller/payment")(request, router, cookie));
 app.use(require("./controller/static")(request, router, babel, react, reactDOMServer, Util));
+app.use(require("./controller/api")(request, router));
 app.listen(port);
 console.log("server started on port " + port);

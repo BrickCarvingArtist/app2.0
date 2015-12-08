@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Tab} from "../component/tab";
 import {Content} from "../component/content";
+import {Warning} from "../component/warning";
 class Rule extends React.Component{
 	render(){
 		return (
@@ -37,6 +38,9 @@ class Page extends React.Component{
 	render(){
 		return (
 			<body>
+				<div className="warning">
+					<Warning />
+				</div>
 				<a ref="rule" className="rule interest"></a>
 				<Tab setting={
 					QueryString("rule") ?
@@ -57,10 +61,24 @@ class Page extends React.Component{
 					]
 				} callback={
 					(data, status) => {
-						this.setState({
-							data : data.data,
-							status : status
-						});
+						if(data.code === 200){
+							this.setState({
+								data : data.data,
+								status : status
+							});
+						}else{
+							let warning = document.querySelector(".warning");
+							if(warning){
+								ReactDOM.render(
+									<Warning message={data.message} />,
+									warning
+								);
+								let t = setTimeout(() => {
+									clearTimeout(t);
+									window.location.href = "/signin";
+								}, 1000);
+							}
+						}
 					}
 				} />
 				<Content data={this.state.data} type="interest" status={this.state.status} />

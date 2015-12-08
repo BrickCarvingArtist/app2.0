@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Info} from "../component/info";
 import {Menu} from "../component/menu";
+import {Warning} from "../component/warning";
 class List extends React.Component{
 	constructor(props){
 		super(props);
@@ -82,6 +83,9 @@ class Page extends React.Component{
 	render(){
 		return (
 			<body>
+				<div className="warning">
+					<Warning />
+				</div>
 				<Info />
 				<Menu type={4} />
 				<Option />

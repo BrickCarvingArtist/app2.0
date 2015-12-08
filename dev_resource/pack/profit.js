@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Tab} from "../component/tab";
+import {Warning} from "../component/warning";
 class List1 extends React.Component{
 	constructor(){
 		super();
@@ -19,7 +20,7 @@ class List1 extends React.Component{
 					</span>
 				</h1>
 				<p>
-					{`交易金额 (¥) : ${props.money}`}
+					{`支付金额 (¥) : ${props.money}`}
 				</p>
 				<p >
 					<span>收益金额 (¥) : </span>
@@ -164,11 +165,14 @@ class Page extends React.Component{
 	render(){
 		return (
 			<body>
+				<div className="warning">
+					<Warning />
+				</div>
 				<Total />
 				<Tab setting={
 					[
 						{
-							name : "产品收益",
+							name : "本金收益",
 							value : "",
 							href : "/api/getinvest/0"
 						},
@@ -185,10 +189,24 @@ class Page extends React.Component{
 					]
 				} callback={
 					(data, status) => {
-						this.setState({
-							data : data.data,
-							status : status
-						});
+						if(data.code === 200){
+							this.setState({
+								data : data.data,
+								status : status
+							});
+						}else{
+							let warning = document.querySelector(".warning");
+							if(warning){
+								ReactDOM.render(
+									<Warning message={data.message} />,
+									warning
+								);
+								let t = setTimeout(() => {
+									clearTimeout(t);
+									window.location.href = "/signin";
+								}, 1000);
+							}
+						}
 					}
 				} />
 				<Content data={this.state.data} status={this.state.status} />

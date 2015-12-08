@@ -1,4 +1,6 @@
 import React from "react";
+import ReactDOM from "react-dom";
+import {Warning} from "../component/warning";
 class List1 extends React.Component{
 	constructor(props){
 		super(props);
@@ -142,39 +144,53 @@ class Menu extends React.Component{
 				type : "post",
 				url : "/api/getinvest",
 				success : data => {
-					this.setState({
-						menu : {
-							className : this.state.menu.className,
-							option : this.props.type === 3 ? [
-								{
-									href : "/asset",
-									name : "我的资产",
-									value : (data.money + data.investment || 0).toFixed(2)
-								},
-								{
-									href : "",
-									name : "预期收益",
-									value : (data.investment || 0).toFixed(2)
-								},
-								{
-									href : "/profit?status=1",
-									name : "历史收益",
-									value : (data.allInvestment || 0).toFixed(2)
-								}
-							] : [
-								{
-									href : "/asset",
-									name : "我的资产",
-									value : (data.money + data.investment || 0).toFixed(2)
-								},
-								{
-									href : "",
-									name : "预期收益",
-									value : (data.investment || 0).toFixed(2)
-								}
-							]
+					if(data.code === 200){
+						this.setState({
+							menu : {
+								className : this.state.menu.className,
+								option : this.props.type === 3 ? [
+									{
+										href : "/asset",
+										name : "我的资产",
+										value : (data.money + data.investment || 0).toFixed(2)
+									},
+									{
+										href : "",
+										name : "预期收益",
+										value : (data.investment || 0).toFixed(2)
+									},
+									{
+										href : "/profit?status=1",
+										name : "历史收益",
+										value : (data.allInvestment || 0).toFixed(2)
+									}
+								] : [
+									{
+										href : "/asset",
+										name : "我的资产",
+										value : (data.money + data.investment || 0).toFixed(2)
+									},
+									{
+										href : "",
+										name : "预期收益",
+										value : (data.investment || 0).toFixed(2)
+									}
+								]
+							}
+						});
+					}else{
+						let warning = document.querySelector(".warning");
+						if(warning){
+							ReactDOM.render(
+								<Warning message={data.message} />,
+								warning
+							);
+							let t = setTimeout(() => {
+								clearTimeout(t);
+								window.location.href = "/signin";
+							}, 1000);
 						}
-					});
+					}
 				}
 			});
 		}
