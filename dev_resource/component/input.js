@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {Warning} from "../component/warning";
 import {isMatch} from "../pack/util";
-export class Input extends React.Component{
+const Input = class extends React.Component{
 	constructor(){
 		super();
 		this.state = {
@@ -33,3 +33,4 @@ export class Input extends React.Component{
 		);
 	}
 }
+export default Input;

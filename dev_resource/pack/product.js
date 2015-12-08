@@ -255,8 +255,9 @@ class Part3 extends React.Component{
 		};
 		this.matchNum = (dom, minimum, balance) => {
 			let data = this.props.data,
-				value = dom.value = Math.floor(dom.value);
-			if(value < minimum || value > balance){
+				value = dom.value = Math.floor(dom.value),
+				notMatched = value < minimum || value > balance;
+			if(notMatched){
 				this.showWarning(minimum, balance);
 			}else{
 				this.showWarning();
@@ -266,6 +267,7 @@ class Part3 extends React.Component{
 				money : value,
 				interest : value * data.primeRate / 365 * data.days
 			});
+			return notMatched;
 		};
 		this.showWarning = (...argument) => {
 			ReactDOM.render(
@@ -278,19 +280,26 @@ class Part3 extends React.Component{
 		let data = this.props.data,
 			minimum = data.minUnitCount * data.unitPrice,
 			balance = data.balance,
-			minus = this.refs.minus,
-			plus = this.refs.plus,
-			num = this.refs.num;
+			refs = this.refs,
+			minus = refs.minus,
+			plus = refs.plus,
+			num = refs.num,
+			buy = refs.buy;
 		num.onkeyup = () => {
 			this.matchNum(num, minimum, balance);
 		};
 		minus.onclick = () => {
 			num.value = parseInt(num.value) - 500;
-			num.onkeyup();
+			this.matchNum(num, minimum, balance);
 		};
 		plus.onclick = () => {
 			num.value = parseInt(num.value) + 500;
-			num.onkeyup();
+			this.matchNum(num, minimum, balance);
+		};
+		buy.onclick = e => {
+			if(this.matchNum(num, minimum, balance)){
+				e.preventDefault();
+			}
 		};
 	}
 	render(){
@@ -316,7 +325,7 @@ class Part3 extends React.Component{
 					<p className="term">
 						{`募集时间:${data.beginTime.split(" ")[0]}至${data.stopBuyTime.split(" ")[0]}`}
 					</p>
-					<a className="longBtn btnBuy" href={`/payment?money=${this.state.money}`}>立即购买</a>
+					<a ref="buy" className="longBtn btnBuy" href={`/payment?money=${this.state.money}`}>立即购买</a>
 				</form>
 			</div>
 		);

@@ -1,7 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
-import {Input} from "../component/input";
+import Input from "../component/input";
+import Select from "../component/select";
 class Form extends React.Component{
 	componentDidMount(){
 		let refs = this.refs,
@@ -52,6 +53,7 @@ class Form extends React.Component{
 		});
 		return (
 			<form>
+				<Select />
 				{lists}
 				<input ref="btnCaptcha" className="shortBtn" type="button" value="获取" />
 				<input ref="ckb" className="ckb" id="ckb" type="checkbox" checked="checked" />

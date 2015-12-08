@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "./util";
 import {Warning} from "../component/warning";
-import {Input} from "../component/input";
+import Input from "../component/input";
 class Form extends React.Component{
 	componentDidMount(){
 		let refs = this.refs,
