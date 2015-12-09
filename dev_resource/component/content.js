@@ -1,4 +1,6 @@
 import React from "react";
+import ReactDOM from "react-dom";
+import {Warning} from "./warning";
 class List extends React.Component{
 	constructor(){
 		super();
@@ -44,7 +46,8 @@ class Content extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			data : props.data
+			data : props.data || [],
+			status : 0
 		};
 		this.getClassName = () => {
 			let returnValue = "";
@@ -62,6 +65,32 @@ class Content extends React.Component{
 			}
 			return returnValue;
 		};
+	}
+	componentDidMount(){
+		if(this.props.url){
+			$.ajax({
+				url : this.props.url,
+				success : data => {
+					if(data.code === 200){
+						this.setState({
+							data : data.data
+						});
+					}else{
+						let warning = document.querySelector(".warning");
+						if(warning){
+							ReactDOM.render(
+								<Warning message={data.message} />,
+								warning
+							);
+							let t = setTimeout(() => {
+								clearTimeout(t);
+								window.location.href = "/signin";
+							}, 1000);
+						}
+					}
+				}
+			});
+		}
 	}
 	componentWillReceiveProps(nextProps){
 		this.setState(nextProps);

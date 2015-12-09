@@ -64,7 +64,7 @@ body:after{
 	text-align:center;
 	border-radius:.25rem;
 }
-.longInput{
+.longInput, .select{
 	float:left;
 	margin-top:.625rem !important;
 	display:block;
@@ -80,6 +80,13 @@ body:after{
 	border:solid .025rem $bitGrey !important;
 	border-radius:.25rem;
 	text-indent:1.55rem;
+}
+.select{
+	color:$grey;
+	em{
+		float:right;
+		margin-right:.8rem;
+	}
 }
 .shortInput{
 	float:left;

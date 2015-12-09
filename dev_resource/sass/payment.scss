@@ -6,20 +6,39 @@ form{
 	float:left;
 	padding:0 1.35rem;
 	width:16rem;
+	.select{
+		position:relative;
+	}
+	.select:after{
+		position:absolute;
+		top:.5rem;
+		right:.25rem;
+		width:.375rem;
+		height:.55rem;
+		content:"";
+		background-image:$nextStep;
+		background-size:.375rem .55rem;
+	}
 	input.longInput:first-of-type{
 		margin-top:1.25rem !important;
+	}
+	.payBonus{
+		background-image:$payBonus;
+	}
+	.payInterest{
+		background-image:$payInterest;
+	}
+	.bank{
+		background-image:$bank;
 	}
 	.mobile{
 		background-image:$mobile;
 	}
-	.password{
-		background-image:$password;
+	.trueName{
+		background-image:$trueName;
 	}
 	.captcha{
 		background-image:$captcha;
-	}
-	.invitor{
-		background-image:$invitor;
 	}
 	> a{
 		float:right;
@@ -56,4 +75,85 @@ form{
 		float:left;
 		margin-top:.5rem;
 	}
+}
+.content{
+	section{
+		float:left;
+		margin-bottom:.4rem;
+		padding:.9rem .85rem;
+		background-color:white;
+		background-repeat:no-repeat;
+		background-position:.9rem .85rem;
+		background-size:3.5rem 1.6rem;
+		box-shadow:0 .025rem .025rem $bitGrey;
+		b{
+			float:left;
+			display:block;
+			width:1.2rem;
+			font-size:1rem;
+			font-weight:bold;
+			line-height:1.6rem;
+			color:white;
+			text-align:center;
+			letter-spacing:-.05rem;
+			-webkit-transform:scale(1, .8);
+		}
+		p{
+			float:left;
+			width:10.6rem;
+		}
+		p:first-of-type{
+			margin-top:.075rem;
+			font-size:.55rem;
+			color:$darkGrey;
+		}
+		p:last-of-type{
+			margin-top:.25rem;
+			font-size:.5rem;
+			color:$grey;
+			span{
+				float:left;
+			}
+			em{
+				float:right;
+			}
+		}
+	}
+}
+.content.bonus{
+	section{
+		b{
+			margin:0 2.1rem 0 .4rem;
+		}
+	}
+}
+.content.bonus.available{
+	section{
+		background-image:$bonusAvailable;
+	}
+}
+.content.bonus.unavailable{
+	section{
+		background-image:$bonusUnavailable;
+	}
+}
+.content.interest{
+	section{
+		b{
+			margin:0 2.3rem 0 .2rem;
+		}
+	}
+}
+.content.interest.available{
+	section{
+		background-image:$interestAvailable;
+	}
+}
+.content.interest.unavailable{
+	section{
+		background-image:$interestUnavailable;
+	}
+}
+.default{
+	margin:9rem auto;
 }

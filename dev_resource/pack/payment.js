@@ -2,7 +2,33 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import Input from "../component/input";
+import {Content} from "../component/content";
 import Select from "../component/select";
+class Bonus extends React.Component{
+	render(){
+		return (
+			<body>
+				<Content url={this.props.url} type="bonus" status="0" />
+			</body>
+		);
+	}
+}
+class Interest extends React.Component{
+	render(){
+		return (
+			<body>
+				<Content url={this.props.url} type="interest" status="0" />
+			</body>
+		);
+	}
+}
+class Bank extends React.Component{
+	render(){
+		return (
+			<body></body>
+		);
+	}
+}
 class Form extends React.Component{
 	componentDidMount(){
 		let refs = this.refs,
@@ -48,13 +74,13 @@ class Form extends React.Component{
 			setting = this.props.setting;
 		setting.forEach(list => {
 			lists.push(
-				<Input ref={list.ref} name={list.name} type={list.type} className={list.className} placeholder={list.placeholder} maxLength={list.maxLength} />
+				<Select ref={list.ref} className={list.className} placeholder={list.placeholder} detail={list.detail} />
 			);
 		});
 		return (
 			<form>
-				<Select />
 				{lists}
+				<Input ref="captcha" name="captcha" type="text" className="shortInput captcha" placeholder="验证码" maxLength="5" />
 				<input ref="btnCaptcha" className="shortBtn" type="button" value="获取" />
 				<input ref="ckb" className="ckb" id="ckb" type="checkbox" checked="checked" />
 				<label htmlFor="ckb">
@@ -69,12 +95,22 @@ class Form extends React.Component{
 Form.defaultProps = {
 	setting : [
 		{
-			ref : "captcha",
-			name : "captcha",
-			type : "text",
-			className : "shortInput captcha",
-			placeholder : "验证码",
-			maxLength : "11"
+			ref : "bonus",
+			className : "select payBonus",
+			placeholder : "选择理财红包",
+			detail : <Bonus url="/api/getbonus/0" />
+		},
+		{
+			ref : "interest",
+			className : "select payInterest",
+			placeholder : "选择加息券",
+			detail : <Interest url="/api/getinterest/0" />
+		},
+		{
+			ref : "bank",
+			className : "select bank",
+			placeholder : "选择银行卡",
+			detail : <Bank />
 		}
 	]
 };
