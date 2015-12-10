@@ -2,12 +2,15 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {Router, Route, Link} from "react-router";
 import {createStore} from "redux";
-import {Provider, connect} from "react-redux";
 import {setRem, QueryString} from "./util";
 import Input from "../component/input";
 import {Content} from "../component/content";
 import Select from "../component/select";
 import {Warning} from "../component/warning";
+let store = createStore((state = [], action) => {
+	state[action.type] = action;
+	return state;
+});
 // class List extends React.Component{
 // 	render(){
 // 		return (
@@ -78,7 +81,10 @@ class Form extends React.Component{
 	constructor(){
 		super();
 		this.handleClick = () => {
-			console.log(this.props.routes[0]);
+			store.getState().warning.component.setState({
+				message : "请务必同意《喜蓝互联网金融平台支付协议》!",
+				autoHide : 1
+			});
 		};
 	}
 	render(){
@@ -148,11 +154,17 @@ class Interest extends React.Component{
 	}
 }
 const Page = class extends React.Component{
+	componentDidMount(){
+		store.dispatch({
+			type : "warning",
+			component : this.refs.warning
+		});
+	}
 	render(){
 		return (
 			<div className="page">
 				<div className="warning">
-					<Warning />
+					<Warning ref="warning" />
 				</div>
 				{this.props.children}
 			</div>

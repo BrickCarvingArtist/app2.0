@@ -1,9 +1,20 @@
 import React from "react";
-class Warning extends React.Component{
+const Warning = class extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			message : props.message
+			message : props.message,
+			autoHide : props.autoHide
+		};
+		this.autoHide = () => {
+			if(this.state.autoHide){
+				let t = setTimeout(() => {
+					clearTimeout(t);
+					this.setState({
+						message : ""
+					});
+				}, 2500);
+			}
 		};
 	}
 	componentWillReceiveProps(nextProps){
@@ -11,8 +22,14 @@ class Warning extends React.Component{
 			message : nextProps.message
 		});
 	}
+	componentDidMount(){
+		this.autoHide();
+	}
 	shouldComponentUpdate(nextProps, nextState){
 		return nextProps.message !== this.props.message || nextState.message !== this.state.message;
+	}
+	componentDidUpdate(){
+		this.autoHide();
 	}
 	render(){
 		return (
