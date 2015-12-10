@@ -1,26 +1,17 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import {Component} from "react";
 import {Link} from "react-router";
-const Select = class extends React.Component{
-	constructor(){
-		super();
-		this.state = {
-			choice : "123"
-		};
-	}
+const Select = class extends Component{
 	render(){
 		let props = this.props;
 		return (
-			<div className={props.className}>
-				<Link to={props.url}>
-					<span>
-						{props.placeholder}
-					</span>
-					<em>
-						{this.state.choice}
-					</em>
-				</Link>
-			</div>
+			<Link className={props.className} to={props.url}>
+				<span>
+					{props.placeholder}
+				</span>
+				<em>
+					{props.choice}
+				</em>
+			</Link>
 		);
 	}
 }

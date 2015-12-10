@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Tab} from "../component/tab";
 import {Content} from "../component/content";
-import {Warning} from "../component/warning";
+import Warning from "../component/warning";
 class Rule extends React.Component{
 	render(){
 		return (

@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
-import {Warning} from "../component/warning";
+import Warning from "../component/warning";
 class Sign extends React.Component{
 	constructor(){
 		super();

@@ -1,5 +1,5 @@
-import React from "react";
-class Protocol extends React.Component{
+import {Component} from "react";
+class Protocol extends Component{
 	constructor(){
 		super();
 		this.checkMarkup = () => {

@@ -157,8 +157,9 @@
 	margin:9rem auto;
 }
 .bank{
-	li{
+	a{
 		position:relative;
+		display:block;
 		height:1.9rem;
 		padding-right:.85rem;
 		background-color:white;
@@ -177,7 +178,7 @@
 			color:$grey;
 		}
 	}
-	li:not(:last-of-type):before{
+	a:not(:last-of-type):before{
 		position:absolute;
 		top:1.875rem;
 		left:.85rem;
@@ -185,7 +186,7 @@
 		border-bottom:solid .025rem $bitGrey;
 		content:"";
 	}
-	li:after{
+	a:after{
 		position:absolute;
 		top:.575rem;
 		left:.85rem;
@@ -194,7 +195,7 @@
 		background-size:.75rem .75rem;
 		content:"";
 	}
-	li:last-of-type{
+	a:last-of-type{
 		box-shadow:0 .025rem .025rem $bitGrey;
 	}
 }
@@ -250,6 +251,7 @@
 	height:.75rem;
 	background-image:$add;
 	background-repeat:no-repeat;
+	background-size:.75rem .75rem;
 	font-size:.65rem;
 	line-height:.75rem;
 	color:$grey;

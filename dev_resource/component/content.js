@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import {Warning} from "./warning";
+import Warning from "./warning";
 class List extends React.Component{
 	constructor(){
 		super();
@@ -99,9 +99,9 @@ class Content extends React.Component{
 		let lists = [],
 			data = this.state.data;
 		if(data.length){
-			data.forEach((list, index) => {
+			data.map((list, index) => {
 				lists.push(
-					<List ref={`list${index + 1}`} money={list.money} name={list.name} condition={list.conditions} expirationDate={list.expirationDate.split(" ")[0]} status={list.status} id={list.id} callback={this.props.callback} />
+					<List ref={`list${index + 1}`} money={list.money} name={list.name} condition={list.conditions} expirationDate={list.expirationDate.split(" ")[0]} status={list.status} id={list.id} callback={this.props.callback} key={index} />
 				);
 			});
 		}else{

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Protocol} from "../component/protocol";
-import {Warning} from "../component/warning";
+import Warning from "../component/warning";
 import Input from "../component/input";
 class Form extends React.Component{
 	componentDidMount(){

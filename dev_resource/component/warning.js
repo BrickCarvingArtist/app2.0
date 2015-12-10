@@ -1,5 +1,5 @@
-import React from "react";
-const Warning = class extends React.Component{
+import {Component} from "react";
+const Warning = class extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -42,6 +42,4 @@ const Warning = class extends React.Component{
 Warning.defaultProps = {
 	message : ""
 };
-export {
-	Warning
-}
+export default Warning;

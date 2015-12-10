@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Menu} from "../component/menu";
-import {Warning} from "../component/warning";
+import Warning from "../component/warning";
 class Part1 extends React.Component{
 	render(){
 		let data = this.props.data,

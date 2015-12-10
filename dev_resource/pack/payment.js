@@ -6,77 +6,81 @@ import {setRem, QueryString} from "./util";
 import Input from "../component/input";
 import {Content} from "../component/content";
 import Select from "../component/select";
-import {Warning} from "../component/warning";
+import Warning from "../component/warning";
 let store = createStore((state = [], action) => {
 	state[action.type] = action;
 	return state;
 });
-// class List extends React.Component{
-// 	render(){
-// 		return (
-// 			<li className={this.props.className}>
-// 				<span>
-// 					{this.props.name}
-// 				</span>
-// 				<em>
-// 					{this.props.value}
-// 				</em>
-// 			</li>
-// 		);
-// 	}
-// }
-// class Bank extends React.Component{
-// 	constructor(){
-// 		super();
-// 		this.state = {
-// 			data : []
-// 		};
-// 	}
-// 	componentDidMount(){
-// 		$.ajax({
-// 			url : "/api/getuserbank",
-// 			success : data => {
-// 				if(data.code === 200){
-// 					this.setState({
-// 						data : data.data
-// 					});
-// 				}else{
-// 					let warning = document.querySelector(".warning");
-// 					if(warning){
-// 						ReactDOM.render(
-// 							<Warning message={data.message} />,
-// 							warning
-// 						);
-// 						let t = setTimeout(() => {
-// 							clearTimeout(t);
-// 							window.location.href = "/signin";
-// 						}, 1000);
-// 					}
-// 				}
-// 			}
-// 		});
-// 	}
-// 	render(){
-// 		let lists = [],
-// 			data = this.state.data;
-// 		data.forEach(list => {
-// 			lists.push(
-// 				<List className={list.imgCss} name={list.bankName} value={list.cardNO} id={list.id} />
-// 			);
-// 		});
-// 		return (
-// 			<body>
-// 				<div className="warning">
-// 					<Warning />
-// 				</div>
-// 				<ul className="bank">
-// 					{lists}
-// 				</ul>
-// 				<i ref="btnAdd" className="add">点击添加银行卡</i>
-// 			</body>
-// 		);
-// 	}
-// }
+class List extends React.Component{
+	constructor(){
+		super();
+		this.handleClick = () => {
+			store.dispatch({
+				type : "bill",
+				bankNumber : this.props.value,
+				id : this.props.id
+			});
+		};
+	}
+	render(){
+		return (
+			<Link className={this.props.className} to="/form" onClick={this.handleClick}>
+				<span>
+					{this.props.name}
+				</span>
+				<em>
+					{this.props.value}
+				</em>
+			</Link>
+		);
+	}
+}
+class Bank extends React.Component{
+	constructor(){
+		super();
+		this.state = {
+			data : []
+		};
+	}
+	componentDidMount(){
+		$.ajax({
+			url : "/api/getuserbank",
+			success : data => {
+				if(data.code === 200){
+					this.setState({
+						data : data.data
+					});
+				}else{
+					store.getState().warning.component.setState({
+						message : data.message
+					});
+					let t = setTimeout(() => {
+						clearTimeout(t);
+						window.location.href = "/signin";
+					}, 1000);
+				}
+			}
+		});
+
+	}
+	render(){
+		let lists = [],
+			data = this.state.data;
+		data.map((list, index) => {
+			lists.push(
+				<List className={list.imgCss} name={list.bankName} value={list.cardNO} id={list.id} key={index}/>
+			);
+		});
+		return (
+			<div className="main">
+				<div className="bank">
+					{lists}
+				</div>
+				<i ref="btnAdd" className="add">点击添加银行卡</i>
+			</div>
+		);
+	}
+}
 class Form extends React.Component{
 	constructor(){
 		super();
@@ -92,13 +96,13 @@ class Form extends React.Component{
 			setting = this.props.setting;
 		setting.map((list, index) => {
 			lists.push(
-				<Select ref={list.ref} className={list.className} placeholder={list.placeholder} url={list.url} key={index} />
+				<Select ref={list.ref} className={list.className} placeholder={list.placeholder} url={list.url} key={index} choice={store.getState().bill ? store.getState().bill[list.choice] : ""} />
 			);
 		});
 		return (
 			<div className="main form">
 				{lists}
-				<Input ref="captcha" name="captcha" type="text" className="shortInput captcha" placeholder="验证码" maxLength="5" />
+				<Input ref="captcha" name="captcha" type="text" className="shortInput captcha" placeholder="验证码" maxLength="5" store={store.getState()} />
 				<input ref="btnCaptcha" className="shortBtn" type="button" value="获取" />
 				<input ref="ckb" className="ckb" id="ckb" type="checkbox" checked="checked" readOnly="readOnly" onClick={this.handleClick} />
 				<label htmlFor="ckb">
@@ -116,21 +120,21 @@ Form.defaultProps = {
 			ref : "bonus",
 			className : "select payBonus",
 			placeholder : "选择理财红包",
-			value : "bonus",
+			choice : "bonusMoney",
 			url : "/bonus"
 		},
 		{
 			ref : "interest",
 			className : "select payInterest",
 			placeholder : "选择加息券",
-			value : "interest",
+			choice : "interestRate",
 			url : "/interest"
 		},
 		{
 			ref : "bank",
 			className : "select bank",
 			placeholder : "选择银行卡",
-			value : "bank",
+			choice : "bankNumber",
 			url : "/bank"
 		}
 	]
@@ -181,6 +185,7 @@ const init = () => {
 					<Route path="form" component={Form} />
 					<Route path="bonus" component={Bonus} />
 					<Route path="interest" component={Interest} />
+					<Route path="bank" component={Bank} />
 				</Route>
 			</Router>
 		), document.body

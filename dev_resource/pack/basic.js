@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "./util";
 import {Info} from "../component/info";
-import {Warning} from "../component/warning";
+import Warning from "../component/warning";
 class List extends React.Component{
 	render(){
 		return (

@@ -1,7 +1,7 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
-import {Warning} from "../component/warning";
-class List1 extends React.Component{
+import Warning from "../component/warning";
+class List1 extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -23,7 +23,7 @@ class List1 extends React.Component{
 		);
 	}
 }
-class List2 extends React.Component{
+class List2 extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -43,7 +43,7 @@ class List2 extends React.Component{
 		);
 	}
 }
-class List3 extends React.Component{
+class List3 extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -73,7 +73,7 @@ class List3 extends React.Component{
 		);
 	}
 }
-class Menu extends React.Component{
+class Menu extends Component{
 	constructor(props){
 		super(props);
 		this.state = {

@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Tab} from "../component/tab";
-import {Warning} from "../component/warning";
+import Warning from "../component/warning";
 class List1 extends React.Component{
 	constructor(){
 		super();
