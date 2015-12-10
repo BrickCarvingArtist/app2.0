@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {Link} from "react-router";
 const Select = class extends React.Component{
 	constructor(){
 		super();
@@ -7,26 +8,18 @@ const Select = class extends React.Component{
 			choice : "123"
 		};
 	}
-	componentDidMount(){
-		let detail = this.props.detail;
-		if(detail){
-			ReactDOM.findDOMNode(this).onclick = () => {
-				ReactDOM.render(
-					detail,
-					document.body
-				);
-			};
-		}
-	}
 	render(){
+		let props = this.props;
 		return (
-			<div className={this.props.className}>
-				<span>
-					{this.props.placeholder}
-				</span>
-				<em>
-					{this.state.choice}
-				</em>
+			<div className={props.className}>
+				<Link to={props.url}>
+					<span>
+						{props.placeholder}
+					</span>
+					<em>
+						{this.state.choice}
+					</em>
+				</Link>
 			</div>
 		);
 	}

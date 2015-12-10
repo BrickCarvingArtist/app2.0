@@ -99,9 +99,9 @@ class Content extends React.Component{
 		let lists = [],
 			data = this.state.data;
 		if(data.length){
-			data.forEach(list => {
+			data.forEach((list, index) => {
 				lists.push(
-					<List money={list.money} name={list.name} condition={list.conditions} expirationDate={list.expirationDate.split(" ")[0]} status={list.status} />
+					<List ref={`list${index + 1}`} money={list.money} name={list.name} condition={list.conditions} expirationDate={list.expirationDate.split(" ")[0]} status={list.status} id={list.id} callback={this.props.callback} />
 				);
 			});
 		}else{

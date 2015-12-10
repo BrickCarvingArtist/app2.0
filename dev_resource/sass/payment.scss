@@ -1,11 +1,10 @@
 @import "base";
-body{
+:root{
 	background-color:$lightGrey;
 }
-form{
+.form{
 	float:left;
 	padding:0 1.35rem;
-	width:16rem;
 	.select{
 		position:relative;
 	}
@@ -156,4 +155,102 @@ form{
 }
 .default{
 	margin:9rem auto;
+}
+.bank{
+	li{
+		position:relative;
+		height:1.9rem;
+		padding-right:.85rem;
+		background-color:white;
+		overflow:auto;
+		font-size:.6rem;
+		line-height:1.875rem;
+		text-indent:.85rem;
+		white-space:nowrap;
+		text-overflow:ellipsis;
+		span{
+			margin-left:1rem;
+			color:$darkGrey;
+		}
+		em{
+			float:right;
+			color:$grey;
+		}
+	}
+	li:not(:last-of-type):before{
+		position:absolute;
+		top:1.875rem;
+		left:.85rem;
+		width:15.15rem;
+		border-bottom:solid .025rem $bitGrey;
+		content:"";
+	}
+	li:after{
+		position:absolute;
+		top:.575rem;
+		left:.85rem;
+		width:.75rem;
+		height:.75rem;
+		background-size:.75rem .75rem;
+		content:"";
+	}
+	li:last-of-type{
+		box-shadow:0 .025rem .025rem $bitGrey;
+	}
+}
+.ICBC:after{
+	background-image:$ICBC;
+}
+.ABC:after{
+	background-image:$ABC;
+}
+.CCB:after{
+	background-image:$CCB;
+}
+.CMBCD:after{
+	background-image:$CMBCD;
+}
+.BOCSH:after{
+	background-image:$BOCSH;
+}
+.CMB:after{
+	background-image:$CMB;
+}
+.CIB:after{
+	background-image:$CIB;
+}
+.CEB:after{
+	background-image:$CEB;
+}
+.GDB:after{
+	background-image:$GDB;
+}
+.CNCB:after{
+	background-image:$CNCB;
+}
+.PINGAN:after{
+	background-image:$PINGAN;
+}
+.POSTGC:after{
+	background-image:$POSTGC;
+}
+.COMM:after{
+	background-image:$COMM;
+}
+.SPDB:after{
+	background-image:$SPDB;
+}
+.HXB:after{
+	background-image:$HXB;
+}
+.add{
+	margin-top:.75rem;
+	margin-left:.85rem;
+	padding-left:1rem;
+	height:.75rem;
+	background-image:$add;
+	background-repeat:no-repeat;
+	font-size:.65rem;
+	line-height:.75rem;
+	color:$grey;
 }

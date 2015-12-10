@@ -64,6 +64,7 @@ const Util = {
 			};
 		},
 		setData : function(url, callback){
+			console.log(123)
 			if(url && !this.getData()){
 				$.ajax({
 					url : url,
