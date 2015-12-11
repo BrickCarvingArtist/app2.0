@@ -8,7 +8,13 @@ import Input from "../component/input";
 import Select from "../component/select";
 import Warning from "../component/warning";
 let store = createStore((state = [], action) => {
-	state[action.type] = action;
+	if(state[action.type]){
+		for(let i in action){
+			state[action.type][i] = action[i];
+		}
+	}else{
+		state[action.type] = action;
+	}
 	return state;
 });
 class List extends React.Component{
@@ -61,7 +67,6 @@ class Bank extends React.Component{
 				}
 			}
 		});
-
 	}
 	render(){
 		let lists = [],
@@ -168,7 +173,7 @@ const Page = class extends React.Component{
 		});
 		store.dispatch({
 			type : "bill",
-			money : QueryString("money", this.props.location.search)
+			money : Math.min(QueryString("money", this.props.location.search))
 		});
 	}
 	render(){

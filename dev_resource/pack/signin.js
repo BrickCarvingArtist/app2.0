@@ -6,7 +6,13 @@ import Banner from "../component/banner";
 import Warning from "../component/warning";
 import Input from "../component/Input";
 let store = createStore((state = [], action) => {
-	state[action.type] = action;
+	if(state[action.type]){
+		for(let i in action){
+			state[action.type][i] = action[i];
+		}
+	}else{
+		state[action.type] = action;
+	}
 	return state;
 });
 class Form extends Component{

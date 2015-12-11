@@ -5,7 +5,13 @@ import {PageData, QueryString} from "./util";
 import {Menu} from "../component/menu";
 import Warning from "../component/warning";
 let store = createStore((state = [], action) => {
-	state[action.type] = action;
+	if(state[action.type]){
+		for(let i in action){
+			state[action.type][i] = action[i];
+		}
+	}else{
+		state[action.type] = action;
+	}
 	return state;
 });
 class Part1 extends Component{
