@@ -1,9 +1,14 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
 import {PageData, QueryString} from "./util";
 import {Menu} from "../component/menu";
 import Warning from "../component/warning";
-class Part1 extends React.Component{
+let store = createStore((state = [], action) => {
+	state[action.type] = action;
+	return state;
+});
+class Part1 extends Component{
 	render(){
 		let data = this.props.data,
 			discount = "";
@@ -52,7 +57,7 @@ class Part1 extends React.Component{
 		);
 	}
 }
-class DetailDetail extends React.Component{
+class DetailDetail extends Component{
 	constructor(){
 		super();
 		this.checkMarkup = data => {
@@ -79,27 +84,27 @@ class DetailDetail extends React.Component{
 			}
 		}
 		return (
-			<body>
+			<div className="page">
 				{lists}
-			</body>
+			</div>
 		);
 	}
 }
-class Bidder extends React.Component{
+class Bidder extends Component{
 	render(){
 		let lists = [],
 			title = [],
 			data = this.props.data;
-		this.props.setting.forEach(list => {
+		this.props.setting.map((list, index) => {
 			title.push(
-				<li>
+				<li key={index}>
 					{list}
 				</li>
 			);
 		});
-		data.forEach(list => {
+		data.map((list, index) => {
 			lists.push(
-				<ul>
+				<ul key={index}>
 					<li>
 						{list.name}
 					</li>
@@ -113,19 +118,19 @@ class Bidder extends React.Component{
 			);
 		});
 		return (
-			<body>
+			<div className="page">
 				<ul>
 					{title}
 				</ul>
 				{lists}
-			</body>
+			</div>
 		);
 	}
 }
 Bidder.defaultProps = {
 	setting : ["购买人", "购买金额", "购买时间"]
 };
-class List extends React.Component{
+class List extends Component{
 	componentDidMount(){
 		let id = this.props.id,
 			index = this.props.index,
@@ -169,7 +174,7 @@ class List extends React.Component{
 		);
 	}
 }
-class Part2 extends React.Component{
+class Part2 extends Component{
 	constructor(){
 		super();
 		this.adaptor = (detail, data) => {
@@ -184,9 +189,9 @@ class Part2 extends React.Component{
 		let lists = [],
 			setting = this.props.setting,
 			data = this.props.data;
-		setting.forEach((list, index) => {
+		setting.map((list, index) => {
 			lists.push(
-				<List id={data.id} index={index} name={list.name} value={list.value} data={this.adaptor(list.detail, data)} />
+				<List id={data.id} index={index} name={list.name} value={list.value} data={this.adaptor(list.detail, data)} key={index} />
 			);
 		});
 		return (
@@ -246,7 +251,7 @@ Part2.defaultProps = {
 		}
 	]
 };
-class Part3 extends React.Component{
+class Part3 extends Component{
 	constructor(){
 		super();
 		this.state = {
@@ -270,10 +275,9 @@ class Part3 extends React.Component{
 			return notMatched;
 		};
 		this.showWarning = (...argument) => {
-			ReactDOM.render(
-				<Warning message={argument.length ? `该产品可投金额区间为${argument[0]}元至${argument[1]}元!` : ""} />,
-				document.querySelector(".message")
-			);
+			store.getState().warning.component.setState({
+				message : argument.length ? `该产品可投金额区间为${argument[0]}元至${argument[1]}元!` : ""
+			});
 		};
 	}
 	componentDidMount(){
@@ -325,36 +329,42 @@ class Part3 extends React.Component{
 					<p className="term">
 						{`募集时间:${data.beginTime.split(" ")[0]}至${data.stopBuyTime.split(" ")[0]}`}
 					</p>
-					<a ref="buy" className="longBtn btnBuy" href={`/payment?money=${this.state.money}`}>立即购买</a>
+					<a ref="buy" className="longBtn btnBuy" href={`/payment#/form?money=${this.state.money}`}>立即购买</a>
 				</form>
 			</div>
 		);
 	}
 }
-class ProductDetail extends React.Component{
+class ProductDetail extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
 			data : props.data
 		};
 	}
+	componentDidMount(){
+		store.dispatch({
+			type : "warning",
+			component : this.refs.warning
+		});
+	}
 	render(){
 		let product = this.state.data.product,
 			detail = this.state.data.details;
 		product.discount = detail.discount;
 		return (
-			<body>
+			<div className="page">
 				<div className="warning">
-					<Warning />
+					<Warning ref="warning" />
 				</div>
 				<Part1 data={product} />
 				<Part2 data={detail} />
 				<Part3 data={product} />
-			</body>
+			</div>
 		);
 	}
 }
-class Product extends React.Component{
+class Product extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -417,7 +427,7 @@ class Product extends React.Component{
 		);
 	}
 }
-class Page extends React.Component{
+class Page extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -432,22 +442,22 @@ class Page extends React.Component{
 	render(){
 		let lists = [],
 			data = this.state.data;
-		data.forEach((list, index) => {
+		data.map((list, index) => {
 			lists.push(
-				<Product index={index + 1} data={list} ref={`product${index + 1}`} />
+				<Product index={index + 1} data={list} ref={`product${index + 1}`} key={index} />
 			);
 		});
 		return (
-			<body>
+			<div className="page">
 				{lists}
 				<Menu type={1} currentIndex={1} />
-			</body>
+			</div>
 		);
 	}
 }
 const init = () => {
 	PageData.setData("/api/getproduct", data => {
-		React.render(
+		ReactDOM.render(
 			<Page data={data} />,
 			document.body
 		);

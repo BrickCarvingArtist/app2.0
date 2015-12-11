@@ -1,5 +1,5 @@
-import React from "react";
-class Dialog extends React.Component{
+import {Component} from "react";
+const Dialog = class extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -33,6 +33,4 @@ class Dialog extends React.Component{
 Dialog.defaultProps = {
 	html : ""
 };
-export {
-	Dialog
-}
+export default Dialog;

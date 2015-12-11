@@ -1,9 +1,9 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "./util";
-import {Banner} from "../component/banner";
+import Banner from "../component/banner";
 import {Menu} from "../component/menu";
-class Info extends React.Component{
+class Info extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -48,7 +48,7 @@ class Info extends React.Component{
 		);
 	}
 }
-class Button extends React.Component{
+class Button extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -64,7 +64,7 @@ class Button extends React.Component{
 		);
 	}
 };
-class Option extends React.Component{
+class Option extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -89,7 +89,7 @@ class Option extends React.Component{
 		);
 	}
 };
-class Product extends React.Component{
+class Product extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -107,9 +107,9 @@ class Product extends React.Component{
 		let lists = [],
 			data = this.state.data,
 			dataLen = data.length;
-		data.forEach((list, index) => {
+		data.map((list, index) => {
 			lists.push(
-				<Info index={index} currentIndex={this.state.currentIndex} data={list} />
+				<Info index={index} currentIndex={this.state.currentIndex} data={list} key={index} />
 			);
 		});
 		return (
@@ -122,7 +122,7 @@ class Product extends React.Component{
 		);
 	}
 };
-class Page extends React.Component{
+class Page extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -131,7 +131,7 @@ class Page extends React.Component{
 	}
 	render(){
 		return (
-			<body>
+			<div className="page">
 				<Banner data={
 					[
 						{
@@ -159,7 +159,7 @@ class Page extends React.Component{
 				<Menu type={2} />
 				<Product data={this.state.data} />
 				<Menu type={1} currentIndex={0} />
-			</body>
+			</div>
 		);
 	}
 }

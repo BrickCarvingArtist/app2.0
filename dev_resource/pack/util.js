@@ -17,8 +17,9 @@ const Util = {
 				return value.toString().match(/^\d{15,18}$/) ? 1 : 0;
 		}
 	},
-	QueryString : function(name){
-		let result = window.location.search.substr(1).match(new RegExp("(^|&)" + name + "=([^&]*)(&|$)"));
+	QueryString : function(name, location){
+		let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+		let result = location ? location.substr(1).match(reg) : window.location.search.substr(1).match(reg);
 		return result === null ? null : unescape(result[2]);
 	},
 	ParamString : function(){
@@ -64,7 +65,6 @@ const Util = {
 			};
 		},
 		setData : function(url, callback){
-			console.log(123)
 			if(url && !this.getData()){
 				$.ajax({
 					url : url,

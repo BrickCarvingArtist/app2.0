@@ -1,8 +1,8 @@
-import React from "react";
+import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Menu} from "../component/menu";
-class About extends React.Component{
+class About extends Component{
 	render(){
 		return (
 			<body>
@@ -24,7 +24,7 @@ About.defaultProps = {
 	description : "\t喜蓝理财互联网金融平台由杭州喜马拉雅电子商务有限公司负责运营。喜马拉雅作为启蓝控股集团旗下的子公司之一，于2014年初正式成立，其经营团队由投资理财、线上交易及风险控制等业界一流的专业人士组成。\n\t公司经营的理财平台于2015年4月先后被评为“中国互联网金融服务年度最具竞争力品牌”和“中国互联网金融服务年度最具发展潜力平台”。后于2015年6月，公司被评为“2015最具投资价值互联网金融公司”。公司董事长家族世代经商，2011年入驻上海世博会并获评“最浙江家庭”。喜蓝理财秉持并延续家族诚信经营的商业理念，全力为客户打造安全、稳定、高效的理财体验。",
 	imgSrc : "/images/about.png"
 };
-class QA extends React.Component{
+class QA extends Component{
 	constructor(){
 		super();
 		this.checkMarkup = data => {
@@ -58,13 +58,13 @@ class QA extends React.Component{
 		);
 	}
 }
-class Help extends React.Component{
+class Help extends Component{
 	render(){
 		let lists = [],
 			data = this.props.data;
-		data.forEach((list, index) => {
+		data.map((list, index) => {
 			lists.push(
-				<QA data={list} ref={`q${index + 1}`} />
+				<QA data={list} ref={`q${index + 1}`} key={index} />
 			);
 		});
 		return (
@@ -74,7 +74,7 @@ class Help extends React.Component{
 		);
 	}
 }
-class List extends React.Component{
+class List extends Component{
 	componentDidMount(){
 		let title = this.props.data.name,
 			value = this.props.data.value,
@@ -88,14 +88,14 @@ class List extends React.Component{
 						if(!QueryString("index")){
 							window.history.pushState({}, document.title, `?index=${this.props.index}`);
 						}
-						React.render(
+						ReactDOM.render(
 							<Help data={data.data} />,
 							body
 						);
 					}
 				});
 			}else{
-				React.render(
+				ReactDOM.render(
 					React.createElement(value, null),
 					body
 				);
@@ -114,7 +114,7 @@ class List extends React.Component{
 		);
 	}
 }
-class Suggestion extends React.Component{
+class Suggestion extends Component{
 	render(){
 		return (
 			<body>
@@ -126,13 +126,13 @@ class Suggestion extends React.Component{
 		);
 	}
 }
-class Contact extends React.Component{
+class Contact extends Component{
 	render(){
 		var lists = [],
 			setting = this.props.setting;
-		setting.forEach(list => {
+		setting.map((list, index) => {
 			lists.push(
-				<h1 className="withIcon">
+				<h1 className="withIcon" key={index}>
 					<i></i>
 					<a href={list.value}>
 						{list.name}
@@ -173,7 +173,7 @@ Contact.defaultProps = {
 		}
 	]
 };
-class Page extends React.Component{
+class Page extends Component{
 	componentDidMount(){
 		if(QueryString("index")){
 			ReactDOM.findDOMNode(this.refs[`more${QueryString("index")}`]).click();
@@ -182,9 +182,9 @@ class Page extends React.Component{
 	render(){
 		let lists = [],
 			setting = this.props.setting;
-		setting.forEach((list, index) => {
+		setting.map((list, index) => {
 			lists.push(
-				<List data={list} index={index + 1} ref={`more${index + 1}`} />
+				<List data={list} index={index + 1} ref={`more${index + 1}`} key={index} />
 			);
 		});
 		return (

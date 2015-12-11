@@ -1,7 +1,7 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "./util";
-class List extends React.Component{
+class List extends Component{
 	render(){
 		let data = this.props.data;
 		return (
@@ -14,7 +14,7 @@ class List extends React.Component{
 		);
 	}
 }
-class Page extends React.Component{
+class Page extends Component{
 	constructor(props){
 		super(props);
 	}

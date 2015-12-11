@@ -1,10 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import {render} from "react-dom";
 import {Router, Route, Link} from "react-router";
 import {createStore} from "redux";
 import {setRem, QueryString} from "./util";
-import Input from "../component/input";
 import {Content} from "../component/content";
+import Input from "../component/input";
 import Select from "../component/select";
 import Warning from "../component/warning";
 let store = createStore((state = [], action) => {
@@ -84,11 +84,14 @@ class Bank extends React.Component{
 class Form extends React.Component{
 	constructor(){
 		super();
-		this.handleClick = () => {
+		this.handleProtocol = () => {
 			store.getState().warning.component.setState({
 				message : "请务必同意《喜蓝互联网金融平台支付协议》!",
 				autoHide : 1
 			});
+		};
+		this.handleClick = () => {
+			console.log(store.getState());
 		};
 	}
 	render(){
@@ -104,12 +107,12 @@ class Form extends React.Component{
 				{lists}
 				<Input ref="captcha" name="captcha" type="text" className="shortInput captcha" placeholder="验证码" maxLength="5" store={store.getState()} />
 				<input ref="btnCaptcha" className="shortBtn" type="button" value="获取" />
-				<input ref="ckb" className="ckb" id="ckb" type="checkbox" checked="checked" readOnly="readOnly" onClick={this.handleClick} />
+				<input ref="ckb" className="ckb" id="ckb" type="checkbox" checked="checked" readOnly="readOnly" onClick={this.handleProtocol} />
 				<label htmlFor="ckb">
 					<span>我同意</span>
 					<b ref="btnProtocol">《喜蓝互联网金融平台支付协议》</b>
 				</label>
-				<input ref="btnSubmit" className="longBtn" type="button" value="确认" />
+				<input ref="btnSubmit" className="longBtn" type="button" value="确认" onClick={this.handleClick} />
 			</div>
 		);
 	}
@@ -163,6 +166,10 @@ const Page = class extends React.Component{
 			type : "warning",
 			component : this.refs.warning
 		});
+		store.dispatch({
+			type : "bill",
+			money : QueryString("money", this.props.location.search)
+		});
 	}
 	render(){
 		return (
@@ -178,7 +185,7 @@ const Page = class extends React.Component{
 const init = () => {
 	setRem();
 	document.body.style.opacity = 1;
-	ReactDOM.render(
+	render(
 		(
 			<Router>
 				<Route path="/" component={Page}>

@@ -1,10 +1,15 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
 import {PageData} from "./util";
-import {Banner} from "../component/banner";
+import Banner from "../component/banner";
 import Warning from "../component/warning";
 import Input from "../component/Input";
-class Form extends React.Component{
+let store = createStore((state = [], action) => {
+	state[action.type] = action;
+	return state;
+});
+class Form extends Component{
 	componentDidMount(){
 		let refs = this.refs,
 			domMobile = ReactDOM.findDOMNode(refs.mobile),
@@ -26,10 +31,9 @@ class Form extends React.Component{
 						password : domPassword.value
 					},
 					success : data => {
-						ReactDOM.render(
-							<Warning message={data.message} />,
-							document.querySelector(".warning")
-						);
+						store.getState().warning.component.setState({
+							message : data.message
+						});
 						if(data.code === 200){
 							let t = setTimeout(() => {
 								clearTimeout(t);
@@ -44,9 +48,9 @@ class Form extends React.Component{
 	render(){
 		let lists = [],
 			setting = this.props.setting;
-		setting.forEach(list => {
+		setting.map((list, index) => {
 			lists.push(
-				<Input ref={list.ref} name={list.name} type={list.type} className={list.className} placeholder={list.placeholder} maxLength={list.maxLength} />
+				<Input ref={list.ref} name={list.name} type={list.type} className={list.className} placeholder={list.placeholder} maxLength={list.maxLength} store={store.getState()} key={index} />
 			);
 		});
 		return (
@@ -82,12 +86,18 @@ Form.defaultProps = {
 		}
 	]
 };
-class Page extends React.Component{
+class Page extends Component{
+	componentDidMount(){
+		store.dispatch({
+			type : "warning",
+			component : this.refs.warning
+		});
+	}
 	render(){
 		return (
-			<body>
+			<div className="page">
 				<div className="warning">
-					<Warning />
+					<Warning ref="warning" />
 				</div>
 				<Banner data={
 					[
@@ -114,7 +124,7 @@ class Page extends React.Component{
 					]
 				} />
 				<Form />
-			</body>
+			</div>
 		);
 	}
 }

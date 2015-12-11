@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "./util";
 import {Menu} from "../component/menu";
-import {Dialog} from "../component/dialog";
+import Dialog from "../component/dialog";
 import {Info} from "../component/info";
 class Option extends React.Component{
 	render(){
@@ -20,9 +20,9 @@ class Entrance extends React.Component{
 	render(){
 		let lists = [],
 			setting = this.props.setting;
-		setting.forEach(list => {
+		setting.map((list, index) => {
 			lists.push(
-				<Option data={list} />
+				<Option data={list} key={index} />
 			);
 		});
 		return (

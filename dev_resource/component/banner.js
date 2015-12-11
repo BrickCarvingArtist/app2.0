@@ -1,5 +1,5 @@
-import React from "react";
-class Case extends React.Component{
+import {Component} from "react";
+const Case = class extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -17,8 +17,8 @@ class Case extends React.Component{
 			}></a>
 		);
 	}
-}
-export class Banner extends React.Component{
+};
+const Banner = class extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -29,13 +29,13 @@ export class Banner extends React.Component{
 	render(){
 		let lists = [],
 			data = this.state.data;
-		data.forEach((list, index) => {
+		data.map((list, index) => {
 			lists.push(
-				<Case index={index} href={list.href} backgroundImage={list.imgSrc} />
+				<Case index={index} href={list.href} backgroundImage={list.imgSrc} key={index} />
 			);
 		});
 		lists.push(
-			<Case index={0} href={data[0].href} backgroundImage={data[0].imgSrc} />
+			<Case index={0} href={data[0].href} backgroundImage={data[0].imgSrc} key={data.length} />
 		);
 		return (
 			<header>
@@ -46,3 +46,4 @@ export class Banner extends React.Component{
 		);
 	}
 };
+export default Banner;

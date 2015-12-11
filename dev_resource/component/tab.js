@@ -63,9 +63,9 @@ class Tab extends React.Component{
 	render(){
 		let lists = [],
 			setting = this.props.setting;
-		setting.forEach((list, index) => {
+		setting.map((list, index) => {
 			lists.push(
-				<List userClass={this} ref={`list${index + 1}`} index={index + 1} name={list.name} value={list.value} href={list.href} status={index} />
+				<List userClass={this} ref={`list${index + 1}`} index={index + 1} name={list.name} value={list.value} href={list.href} status={index} key={index} />
 			);
 		});
 		return (

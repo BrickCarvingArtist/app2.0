@@ -1,10 +1,16 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
 import {PageData, QueryString} from "./util";
 import {Info} from "../component/info";
 import {Tab} from "../component/tab";
-import {Dialog} from "../component/dialog";
-class List extends React.Component{
+import Dialog from "../component/dialog";
+import Warning from "../Component/warning";
+let store = createStore((state = [], action) => {
+	state[action.type] = action;
+	return state;
+});
+class List extends Component{
 	constructor(){
 		super();
 		this.getStatus = () => {
@@ -40,7 +46,7 @@ class List extends React.Component{
 		);
 	}
 }
-class Content extends React.Component{
+class Content extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -54,9 +60,9 @@ class Content extends React.Component{
 		let lists = [],
 			data = this.state.data;
 		if(data.length){
-			data.forEach(list => {
+			data.map((list, index) => {
 				lists.push(
-					<List mobile={list.phone} name={list.trueName} status={list.isNew} time={list.regTime.split(" ")[0]} />
+					<List mobile={list.phone} name={list.trueName} status={list.isNew} time={list.regTime.split(" ")[0]} key={index} />
 				);
 			});
 		}else{
@@ -77,7 +83,7 @@ class Content extends React.Component{
 		);
 	}
 }
-class Detail extends React.Component{
+class Detail extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -113,17 +119,13 @@ class Detail extends React.Component{
 								data : data.data
 							});
 						}else{
-							let warning = document.querySelector(".warning");
-							if(warning){
-								ReactDOM.render(
-									<Warning message={data.message} />,
-									warning
-								);
-								let t = setTimeout(() => {
-									clearTimeout(t);
-									window.location.href = "/signin";
-								}, 1000);
-							}
+							store.getState().warning.component.setState({
+								message : data.message
+							});
+							let t = setTimeout(() => {
+								clearTimeout(t);
+								window.location.href = "/signin";
+							}, 1000);
 						}
 					}
 				} />
@@ -132,7 +134,7 @@ class Detail extends React.Component{
 		);
 	}
 }
-class Case extends React.Component{
+class Case extends Component{
 	componentDidMount(){
 		ReactDOM.findDOMNode(this).onclick = () => {
 			if(!QueryString("status")){
@@ -157,13 +159,13 @@ class Case extends React.Component{
 		);
 	}
 }
-class Entrance extends React.Component{
+class Entrance extends Component{
 	render(){
 		let lists = [],
 			setting = this.props.setting;
-		setting.forEach((list, index) => {
+		setting.map((list, index) => {
 			lists.push(
-				<Case ref={`case${index + 1}`} name={list.name} value={list.value} status={index + 1} />
+				<Case ref={`case${index + 1}`} name={list.name} value={list.value} status={index + 1} key={index} />
 			);
 		});
 		return (
@@ -189,7 +191,7 @@ Entrance.defaultProps = {
 		}
 	]
 };
-class Rule extends React.Component{
+class Rule extends Component{
 	render(){
 		return (
 			<body>
@@ -198,11 +200,15 @@ class Rule extends React.Component{
 		);
 	}
 }
-class Page extends React.Component{
+class Page extends Component{
 	constructor(props){
 		super(props);
 	}
 	componentDidMount(){
+		store.dispatch({
+			type : "warning",
+			component : this.refs.warning
+		});
 		this.refs.rule.onclick = () => {
 			if(!QueryString("rule")){
 				document.title = "邀请规则";
@@ -218,23 +224,23 @@ class Page extends React.Component{
 		}else if(QueryString("status")){
 			ReactDOM.findDOMNode(this.refs.entrance.refs[`case${QueryString("status")}`]).click();
 		}else{
-			ReactDOM.render(
-				<Dialog html=" " enableClose="1" />,
-				document.querySelector(".shadow")
-			);
+			this.refs.dialog.setState({
+				html : " ",
+				enableClose : 1
+			});
 		}
 	}
 	render(){
 		return (
 			<body>
 				<div className="warning">
-					<Warning />
+					<Warning ref="warning" />
 				</div>
 				<a ref="rule" className="rule invite"></a>
 				<Entrance ref="entrance" />
 				<a className="longBtn">赶紧邀请小伙伴吧</a>
 				<div className="shadow">
-					<Dialog />
+					<Dialog ref="dialog" />
 				</div>
 			</body>
 		);

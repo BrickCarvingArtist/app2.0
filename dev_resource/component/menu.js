@@ -109,7 +109,7 @@ class Menu extends Component{
 								href : list.href,
 								text : list.text
 							}
-						} />
+						} key={index} />
 					);
 					break;
 				case 2:
@@ -119,7 +119,7 @@ class Menu extends Component{
 								href : list.href,
 								text : list.text
 							}
-						} />
+						} key={index} />
 					);
 					break;
 				case 3:
@@ -131,7 +131,7 @@ class Menu extends Component{
 								name : list.name,
 								value : list.value
 							}
-						} />
+						} key={index} />
 					);
 					break;
 			}
@@ -198,7 +198,7 @@ class Menu extends Component{
 	render(){
 		let lists = [],
 			menu = this.state.menu;
-		menu.option.forEach((list, index) => {
+		menu.option.map((list, index) => {
 			lists.push(this.getListType(list, index));
 		});
 		return (
