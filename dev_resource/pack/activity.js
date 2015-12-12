@@ -21,9 +21,9 @@ class Page extends Component{
 	render(){
 		let lists = [],
 			data = this.props.data;
-		data.forEach((list, index) => {
+		data.map((list, index) => {
 			lists.push(
-				<List data={list} index={index+1} ref={`activity${index + 1}`} />
+				<List data={list} index={index+1} ref={`activity${index + 1}`} key={index} />
 			);
 		});
 		return (
