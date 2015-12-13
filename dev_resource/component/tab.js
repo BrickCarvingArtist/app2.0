@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {QueryString} from "../pack/util";
-class List extends React.Component{
+const List = class extends React.Component{
 	constructor(){
 		super();
 		this.getData = userClass => {
@@ -47,7 +47,7 @@ class List extends React.Component{
 		);
 	}
 }
-class Tab extends React.Component{
+const Tab = class extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -78,6 +78,4 @@ class Tab extends React.Component{
 Tab.defaultProps = {
 	currentIndex : 0
 };
-export {
-	Tab
-}
+export default Tab;

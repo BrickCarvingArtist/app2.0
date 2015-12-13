@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
-import {Menu} from "../component/menu";
+import Menu from "../component/menu";
 class About extends Component{
 	render(){
 		return (

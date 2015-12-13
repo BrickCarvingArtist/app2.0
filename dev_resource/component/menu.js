@@ -73,7 +73,7 @@ class List3 extends Component{
 		);
 	}
 }
-class Menu extends Component{
+const Menu = class extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -283,6 +283,4 @@ Menu.defaultProps = {
 		]
 	}
 };
-export {
-	Menu
-}
+export default Menu;

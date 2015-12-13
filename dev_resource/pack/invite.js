@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import {createStore} from "redux";
 import {PageData, QueryString} from "./util";
 import {Info} from "../component/info";
-import {Tab} from "../component/tab";
+import Tab from "../component/tab";
 import Dialog from "../component/dialog";
 import Warning from "../Component/warning";
 let store = createStore((state = [], action) => {
@@ -101,7 +101,7 @@ class Detail extends Component{
 	}
 	render(){
 		return (
-			<body>
+			<div className="page">
 				<Info />
 				<Tab ref="tab" setting={
 					[
@@ -136,7 +136,7 @@ class Detail extends Component{
 					}
 				} />
 				<Content data={this.state.data} />
-			</body>
+			</div>
 		);
 	}
 }

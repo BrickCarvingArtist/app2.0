@@ -6,7 +6,7 @@ const Dialog = class extends Component{
 			html : props.html
 		};
 	}
-	componentDidMount(){
+	componentDidUpdate(){
 		if(this.state.html){
 			document.querySelector(".shadow").style.display = "block";
 		}
@@ -16,11 +16,6 @@ const Dialog = class extends Component{
 				domShadow.style.display = "none";
 			}
 		};
-	}
-	componentReceiveProps(nextProps){
-		this.setState({
-			html : nextProps.html
-		});
 	}
 	render(){
 		return (

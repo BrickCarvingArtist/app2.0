@@ -1,9 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
 import {PageData} from "./util";
-import {Menu} from "../component/menu";
+import Menu from "../component/menu";
 import Dialog from "../component/dialog";
 import {Info} from "../component/info";
+let store = createStore((state = [], action) => {
+	if(state[action.type]){
+		for(let i in action){
+			state[action.type][i] = action[i];
+		}
+	}else{
+		state[action.type] = action;
+	}
+	return state;
+});
 class Option extends React.Component{
 	render(){
 		return (
@@ -77,17 +88,23 @@ Entrance.defaultProps = {
 	]
 };
 class Page extends React.Component{
+	componentDidMount(){
+		store.dispatch({
+			type : "dialog",
+			component : this.refs.dialog
+		});
+	}
 	render(){
 		return (
-			<body>
-				<Info />
+			<div className="page">
+				<Info store={store.getState()} />
 				<Menu type={3} />
 				<Entrance />
 				<Menu type={1} currentIndex={2} />
 				<div className="shadow">
-					<Dialog />
+					<Dialog ref="dialog" />
 				</div>
-			</body>
+			</div>
 		);
 	}
 }

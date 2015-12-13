@@ -134,14 +134,14 @@ class Page extends React.Component{
 	}
 	render(){
 		return (
-			<body>
+			<div className="page">
 				<div className="warning">
 					<Warning />
 				</div>
 				<Info />
 				<Detail />
 				<a ref="btn" className="longBtn">安全退出</a>
-			</body>
+			</div>
 		);
 	}
 }

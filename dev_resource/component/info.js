@@ -1,5 +1,5 @@
 import React from "react";
-import {Dialog} from "./dialog";
+import Dialog from "./dialog";
 class Info extends React.Component{
 	constructor(props){
 		super(props);
@@ -24,15 +24,9 @@ class Info extends React.Component{
 						}
 					});
 				}else{
-					let shadow = document.querySelector(".shadow");
-					if(shadow){
-						ReactDOM.render(
-							<Dialog html={
-								<a className="longBtn" href="/signin">登录/注册</a>
-							} />,
-							shadow
-						);
-					}
+					this.props.store.dialog.component.setState({
+						html : (<a className="longBtn" href="/signin">登录/注册</a>)
+					});
 				}
 			}
 		});

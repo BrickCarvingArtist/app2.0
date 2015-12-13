@@ -31,7 +31,9 @@ body{
 	}
 }
 .entrance{
+	float:left;
 	margin-top:.4rem;
+	overflow:hidden;
 	background-color:white;
 	.option{
 		float:left;

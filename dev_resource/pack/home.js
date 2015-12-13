@@ -2,7 +2,7 @@ import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "./util";
 import Banner from "../component/banner";
-import {Menu} from "../component/menu";
+import Menu from "../component/menu";
 class Info extends Component{
 	constructor(props){
 		super(props);

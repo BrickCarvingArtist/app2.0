@@ -2,7 +2,7 @@ import {Component} from "react";
 import ReactDOM from "react-dom";
 import {createStore} from "redux";
 import {PageData, QueryString} from "./util";
-import {Menu} from "../component/menu";
+import Menu from "../component/menu";
 import Warning from "../component/warning";
 let store = createStore((state = [], action) => {
 	if(state[action.type]){

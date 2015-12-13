@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import {Info} from "../component/info";
-import {Menu} from "../component/menu";
+import Menu from "../component/menu";
 import Warning from "../component/warning";
 class List extends React.Component{
 	constructor(props){
@@ -82,14 +82,14 @@ class Page extends React.Component{
 	}
 	render(){
 		return (
-			<body>
+			<div className="page">
 				<div className="warning">
 					<Warning />
 				</div>
 				<Info />
 				<Menu type={4} />
 				<Option />
-			</body>
+			</div>
 		);
 	}
 }
