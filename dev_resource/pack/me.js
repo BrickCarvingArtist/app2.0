@@ -4,7 +4,7 @@ import {createStore} from "redux";
 import {PageData} from "./util";
 import Menu from "../component/menu";
 import Dialog from "../component/dialog";
-import {Info} from "../component/info";
+import Info from "../component/info";
 let store = createStore((state = [], action) => {
 	if(state[action.type]){
 		for(let i in action){

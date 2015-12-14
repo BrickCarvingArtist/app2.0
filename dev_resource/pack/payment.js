@@ -3,7 +3,7 @@ import {render} from "react-dom";
 import {Router, Route, Link} from "react-router";
 import {createStore} from "redux";
 import {setRem, QueryString} from "./util";
-import {Content} from "../component/content";
+import Content from "../component/content";
 import Input from "../component/input";
 import Select from "../component/select";
 import Warning from "../component/warning";

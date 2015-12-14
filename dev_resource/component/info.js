@@ -1,6 +1,6 @@
-import React from "react";
+import {Component} from "react";
 import Dialog from "./dialog";
-class Info extends React.Component{
+class Info extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -59,6 +59,4 @@ Info.defaultProps = {
 		}
 	]
 };
-export {
-	Info
-}
+export default Info;

@@ -1,5 +1,4 @@
 import {Component} from "react";
-import Warning from "../component/warning";
 import {isMatch} from "../pack/util";
 const Input = class extends React.Component{
 	constructor(){

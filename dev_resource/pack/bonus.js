@@ -1,10 +1,21 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
 import {PageData, QueryString} from "./util";
 import Tab from "../component/tab";
-import {Content} from "../component/content";
+import Content from "../component/content";
 import Warning from "../component/warning";
-class Rule extends React.Component{
+let store = createStore((state = [], action) => {
+	if(state[action.type]){
+		for(let i in action){
+			state[action.type][i] = action[i];
+		}
+	}else{
+		state[action.type] = action;
+	}
+	return state;
+});
+class Rule extends Component{
 	render(){
 		return (
 			<body>
@@ -13,7 +24,7 @@ class Rule extends React.Component{
 		);
 	}
 }
-class Page extends React.Component{
+class Page extends Component{
 	constructor(){
 		super();
 		this.state = {
@@ -21,6 +32,10 @@ class Page extends React.Component{
 		};
 	}
 	componentDidMount(){
+		store.dispatch({
+			type : "warning",
+			component : this.refs.warning
+		});
 		this.refs.rule.onclick = () => {
 			if(!QueryString("rule")){
 				document.title = "加息规则";
@@ -39,7 +54,7 @@ class Page extends React.Component{
 		return (
 			<body>
 				<div className="warning">
-					<Warning />
+					<Warning ref="warning" />
 				</div>
 				<a ref="rule" className="rule bonus"></a>
 				<Tab setting={
@@ -67,21 +82,17 @@ class Page extends React.Component{
 								status : status
 							});
 						}else{
-							let warning = document.querySelector(".warning");
-							if(warning){
-								ReactDOM.render(
-									<Warning message={data.message} />,
-									warning
-								);
-								let t = setTimeout(() => {
-									clearTimeout(t);
-									window.location.href = "/signin";
-								}, 1000);
-							}
+							this.refs.warning.setState({
+								message : data.message
+							});
+							let t = setTimeout(() => {
+								clearTimeout(t);
+								window.location.href = "/signin";
+							}, 1000);
 						}
 					}
 				} />
-				<Content data={this.state.data} type="bonus" status={this.state.status} />
+				<Content data={this.state.data} type="bonus" status={this.state.status} store={store.getState()} />
 			</body>
 		);
 	}

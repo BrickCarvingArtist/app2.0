@@ -2,7 +2,7 @@ import {Component} from "react";
 import ReactDOM from "react-dom";
 import {createStore} from "redux";
 import {PageData, QueryString} from "./util";
-import {Info} from "../component/info";
+import Info from "../component/info";
 import Tab from "../component/tab";
 import Dialog from "../component/dialog";
 import Warning from "../Component/warning";

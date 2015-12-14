@@ -1,7 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import {Component} from "react";
 import Warning from "./warning";
-class List extends React.Component{
+class List extends Component{
 	constructor(){
 		super();
 		this.getStatus = () => {
@@ -42,7 +41,7 @@ class List extends React.Component{
 		);
 	}
 }
-class Content extends React.Component{
+const Content = class extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -76,17 +75,13 @@ class Content extends React.Component{
 							data : data.data
 						});
 					}else{
-						let warning = document.querySelector(".warning");
-						if(warning){
-							ReactDOM.render(
-								<Warning message={data.message} />,
-								warning
-							);
-							let t = setTimeout(() => {
-								clearTimeout(t);
-								window.location.href = "/signin";
-							}, 1000);
-						}
+						this.props.store.warning.component.setState({
+							message : data.message
+						});
+						let t = setTimeout(() => {
+							clearTimeout(t);
+							window.location.href = "/signin";
+						}, 1000);
 					}
 				}
 			});
@@ -115,7 +110,5 @@ class Content extends React.Component{
 			</div>
 		);
 	}
-}
-export {
-	Content
-}
+};
+export default Content;
