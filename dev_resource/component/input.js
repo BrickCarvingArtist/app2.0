@@ -1,6 +1,6 @@
 import {Component} from "react";
 import {isMatch} from "../pack/util";
-const Input = class extends React.Component{
+const Input = class extends Component{
 	constructor(){
 		super();
 		this.state = {

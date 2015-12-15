@@ -1,9 +1,9 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "./util";
 import Warning from "../component/warning";
 import Input from "../component/input";
-class Form extends React.Component{
+class Form extends Component{
 	componentDidMount(){
 		let refs = this.refs,
 			domMobile = ReactDOM.findDOMNode(refs.mobile),
@@ -120,7 +120,7 @@ Form.defaultProps = {
 		}
 	]
 };
-class Page extends React.Component{
+class Page extends Component{
 	render(){
 		return (
 			<body>

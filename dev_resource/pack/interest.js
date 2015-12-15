@@ -1,4 +1,4 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {createStore} from "redux";
 import {PageData, QueryString} from "./util";
@@ -15,7 +15,7 @@ let store = createStore((state = [], action) => {
 	}
 	return state;
 });
-class Rule extends React.Component{
+class Rule extends Component{
 	render(){
 		return (
 			<body>
@@ -24,7 +24,7 @@ class Rule extends React.Component{
 		);
 	}
 }
-class Page extends React.Component{
+class Page extends Component{
 	constructor(){
 		super();
 		this.state = {

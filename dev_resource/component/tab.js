@@ -1,7 +1,7 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {QueryString} from "../pack/util";
-const List = class extends React.Component{
+const List = class extends Component{
 	constructor(){
 		super();
 		this.getData = userClass => {
@@ -47,7 +47,7 @@ const List = class extends React.Component{
 		);
 	}
 }
-const Tab = class extends React.Component{
+const Tab = class extends Component{
 	constructor(props){
 		super(props);
 		this.state = {

@@ -1,4 +1,4 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {createStore} from "redux";
 import {PageData} from "./util";
@@ -15,7 +15,7 @@ let store = createStore((state = [], action) => {
 	}
 	return state;
 });
-class Option extends React.Component{
+class Option extends Component{
 	render(){
 		return (
 			<a className={`option ${this.props.data.className}`} href={this.props.data.value}>
@@ -27,7 +27,7 @@ class Option extends React.Component{
 		)
 	}
 };
-class Entrance extends React.Component{
+class Entrance extends Component{
 	render(){
 		let lists = [],
 			setting = this.props.setting;
@@ -87,7 +87,7 @@ Entrance.defaultProps = {
 		}
 	]
 };
-class Page extends React.Component{
+class Page extends Component{
 	componentDidMount(){
 		store.dispatch({
 			type : "dialog",

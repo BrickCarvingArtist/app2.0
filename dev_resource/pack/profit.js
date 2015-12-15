@@ -1,9 +1,9 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import Tab from "../component/tab";
 import Warning from "../component/warning";
-class List1 extends React.Component{
+class List1 extends Component{
 	constructor(){
 		super();
 	}
@@ -33,7 +33,7 @@ class List1 extends React.Component{
 		);
 	}
 }
-class List2 extends React.Component{
+class List2 extends Component{
 	constructor(){
 		super();
 	}
@@ -53,7 +53,7 @@ class List2 extends React.Component{
 		);
 	}
 }
-class List3 extends React.Component{
+class List3 extends Component{
 	constructor(){
 		super();
 	}
@@ -73,7 +73,7 @@ class List3 extends React.Component{
 		);
 	}
 }
-class Content extends React.Component{
+class Content extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -134,7 +134,7 @@ class Content extends React.Component{
 		);
 	}
 }
-class Total extends React.Component{
+class Total extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -155,7 +155,7 @@ class Total extends React.Component{
 Total.defaultProps = {
 	money : 0
 };
-class Page extends React.Component{
+class Page extends Component{
 	constructor(){
 		super();
 		this.state = {

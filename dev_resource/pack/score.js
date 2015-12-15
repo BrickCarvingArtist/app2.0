@@ -1,8 +1,8 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import Warning from "../component/warning";
-class Sign extends React.Component{
+class Sign extends Component{
 	constructor(){
 		super();
 		this.state = {
@@ -44,7 +44,7 @@ class Sign extends React.Component{
 		);
 	}
 }
-class Part1 extends React.Component{
+class Part1 extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -85,7 +85,7 @@ Part1.defaultProps = {
 	name : "***",
 	score : 0
 };
-class List extends React.Component{
+class List extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -145,7 +145,7 @@ class Record extends React.Component{
 		);
 	}
 }
-class Page extends React.Component{
+class Page extends Component{
 	componentDidMount(){
 		if(QueryString("sign")){
 			this.refs.part1.refs.btnSign.click();

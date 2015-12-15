@@ -1,7 +1,7 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
-class InfoDetail extends React.Component{
+class InfoDetail extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -33,7 +33,7 @@ class InfoDetail extends React.Component{
 		);
 	}
 }
-class Info extends React.Component{
+class Info extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -56,7 +56,7 @@ class Info extends React.Component{
 					if(!QueryString("index")){
 						window.history.pushState({}, this.state.title, `?index=${this.state.index}`);
 					}
-					React.render(
+					ReactDOM.render(
 						<InfoDetail title={this.state.title} time={this.state.time} source={this.state.source} detail={data.data.details} />,
 						document.body
 					);
@@ -80,7 +80,7 @@ class Info extends React.Component{
 		);
 	}
 }
-class Page extends React.Component{
+class Page extends Component{
 	constructor(props){
 		super(props);
 		this.state = {

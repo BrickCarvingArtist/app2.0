@@ -1,10 +1,10 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
-class Page extends React.Component{
+class Page extends Component{
 	render(){
 		return (
-			<body></body>
+			<div className="page"></div>
 		);
 	}
 }

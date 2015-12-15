@@ -1,4 +1,4 @@
-import React from "react";
+import {Component} from "react";
 import {render} from "react-dom";
 import {Router, Route, Link} from "react-router";
 import {createStore} from "redux";
@@ -17,7 +17,7 @@ let store = createStore((state = [], action) => {
 	}
 	return state;
 });
-class List extends React.Component{
+class List extends Component{
 	constructor(){
 		super();
 		this.handleClick = () => {
@@ -41,7 +41,7 @@ class List extends React.Component{
 		);
 	}
 }
-class Bank extends React.Component{
+class Bank extends Component{
 	constructor(){
 		super();
 		this.state = {
@@ -86,7 +86,7 @@ class Bank extends React.Component{
 		);
 	}
 }
-class Form extends React.Component{
+class Form extends Component{
 	constructor(){
 		super();
 		this.handleProtocol = () => {
@@ -147,7 +147,7 @@ Form.defaultProps = {
 		}
 	]
 };
-class Bonus extends React.Component{
+class Bonus extends Component{
 	render(){
 		return (
 			<div className="main">
@@ -156,7 +156,7 @@ class Bonus extends React.Component{
 		);
 	}
 }
-class Interest extends React.Component{
+class Interest extends Component{
 	render(){
 		return (
 			<div className="main">
@@ -165,7 +165,7 @@ class Interest extends React.Component{
 		);
 	}
 }
-const Page = class extends React.Component{
+const Page = class extends Component{
 	componentDidMount(){
 		store.dispatch({
 			type : "warning",

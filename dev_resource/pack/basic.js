@@ -1,9 +1,9 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "./util";
 import Info from "../component/info";
 import Warning from "../component/warning";
-class List extends React.Component{
+class List extends Component{
 	render(){
 		return (
 			<div>
@@ -19,7 +19,7 @@ class List extends React.Component{
 		);
 	}
 }
-class Detail extends React.Component{
+class Detail extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -112,7 +112,7 @@ Detail.defaultProps = {
 		}
 	]
 };
-class Page extends React.Component{
+class Page extends Component{
 	componentDidMount(){
 		this.refs.btn.onclick = () => {
 			$.ajax({

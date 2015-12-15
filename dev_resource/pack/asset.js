@@ -1,10 +1,10 @@
-import React from "react";
+import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
 import Info from "../component/info";
 import Menu from "../component/menu";
 import Warning from "../component/warning";
-class List extends React.Component{
+class List extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -38,7 +38,7 @@ class List extends React.Component{
 		);
 	}
 }
-class Option extends React.Component{
+class Option extends Component{
 	render(){
 		let lists = [],
 			setting = this.props.setting;
@@ -74,7 +74,7 @@ Option.defaultProps = {
 		}
 	]
 };
-class Page extends React.Component{
+class Page extends Component{
 	componentDidMount(){
 		if(QueryString("all")){
 			
