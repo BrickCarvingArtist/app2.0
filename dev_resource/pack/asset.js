@@ -42,9 +42,9 @@ class Option extends Component{
 	render(){
 		let lists = [],
 			setting = this.props.setting;
-		setting.forEach(list => {
+		setting.map((list, index) => {
 			lists.push(
-				<List name={list.name} value={list.value} url={list.url} href={list.href} />
+				<List name={list.name} value={list.value} url={list.url} href={list.href} key={index} />
 			);
 		});
 		return (

@@ -1,8 +1,19 @@
 import {Component} from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
 import {PageData} from "./util";
 import Info from "../component/info";
 import Warning from "../component/warning";
+let store = createStore((state = [], action) => {
+	if(state[action.type]){
+		for(let i in action){
+			state[action.type][i] = action[i];
+		}
+	}else{
+		state[action.type] = action;
+	}
+	return state;
+});
 class List extends Component{
 	render(){
 		return (
@@ -39,17 +50,13 @@ class Detail extends Component{
 						setting : setting
 					});
 				}else{
-					let warning = document.querySelector(".warning");
-					if(warning){
-						ReactDOM.render(
-							<Warning message={data.message} />,
-							warning
-						);
-						let t = setTimeout(() => {
-							clearTimeout(t);
-							window.location.href = "/signin";
-						}, 1000);
-					}
+					store.getState().warning.component.setState({
+						message : data.message
+					});
+					let t = setTimeout(() => {
+						clearTimeout(t);
+						window.location.href = "/signin";
+					}, 1000);
 				}
 			}
 		});
@@ -57,7 +64,7 @@ class Detail extends Component{
 			url : "/api/getuserbank",
 			success : data => {
 				if(data.code === 200){
-					data.data.forEach(list => {
+					data.data.map(list => {
 						setting.push({
 							className : list.imgCss,
 							name : list.bankName,
@@ -68,17 +75,13 @@ class Detail extends Component{
 						});
 					});
 				}else{
-					let warning = document.querySelector(".warning");
-					if(warning){
-						ReactDOM.render(
-							<Warning message={data.message} />,
-							warning
-						);
-						let t = setTimeout(() => {
-							clearTimeout(t);
-							window.location.href = "/signin";
-						}, 1000);
-					}
+					store.getState().warning.component.setState({
+						message : data.message
+					});
+					let t = setTimeout(() => {
+						clearTimeout(t);
+						window.location.href = "/signin";
+					}, 1000);
 				}
 			}
 		})
@@ -86,9 +89,9 @@ class Detail extends Component{
 	render(){
 		let lists = [],
 			setting = this.state.setting;
-		setting.forEach(list => {
+		setting.map((list, index) => {
 			lists.push(
-				<List className={list.className} name={list.name} value={list.value} />
+				<List className={list.className} name={list.name} value={list.value} key={index} />
 			);
 		});
 		return (
@@ -114,14 +117,18 @@ Detail.defaultProps = {
 };
 class Page extends Component{
 	componentDidMount(){
+		let warning = this.refs.warning;
+		store.dispatch({
+			type : "warning",
+			component : warning
+		});
 		this.refs.btn.onclick = () => {
 			$.ajax({
 				url : "/api/signout",
 				success : data => {
-					ReactDOM.render(
-						<Warning message={data.message} />,
-						document.querySelector(".warning")
-					);
+					warning.setState({
+						message : data.message
+					});
 					if(data.code === 200){
 						let t = setTimeout(() => {
 							clearTimeout(t);
@@ -136,7 +143,7 @@ class Page extends Component{
 		return (
 			<div className="page">
 				<div className="warning">
-					<Warning />
+					<Warning ref="warning"/>
 				</div>
 				<Info />
 				<Detail />
