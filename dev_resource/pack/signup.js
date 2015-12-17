@@ -30,7 +30,6 @@ class Form extends Component{
 					type : "post",
 					url : `/api/signup?mobile=${domMobile.value}`,
 					success : data => {
-						console.log(data)
 						ReactDOM.render(
 							<Warning message={data.message} />,
 							document.querySelector(".warning")
