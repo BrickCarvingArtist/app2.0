@@ -24,9 +24,16 @@ class Info extends Component{
 						}
 					});
 				}else{
-					this.props.store.dialog.component.setState({
-						html : (<a className="longBtn" href="/signin">登录/注册</a>)
-					});
+					let store = this.props.store;
+					if(store.dialog){
+						store.dialog.component.setState({
+							html : (<a className="longBtn" href="/signin">登录/注册</a>)
+						});
+					}else{
+						store.warning.component.setState({
+							message : data.message
+						});
+					}
 				}
 			}
 		});

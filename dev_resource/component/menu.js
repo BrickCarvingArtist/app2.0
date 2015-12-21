@@ -179,12 +179,13 @@ const Menu = class extends Component{
 							}
 						});
 					}else{
-						let warning = document.querySelector(".warning");
-						if(warning){
-							ReactDOM.render(
-								<Warning message={data.message} />,
-								warning
-							);
+						let store = this.props.store;
+						if(store.warning){
+							store.warning.component.setState({
+								message : data.message
+							});
+						}
+						if(data.code !== 405){
 							let t = setTimeout(() => {
 								clearTimeout(t);
 								window.location.href = "/signin";

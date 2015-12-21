@@ -53,10 +53,12 @@ class Detail extends Component{
 					store.getState().warning.component.setState({
 						message : data.message
 					});
-					let t = setTimeout(() => {
-						clearTimeout(t);
-						window.location.href = "/signin";
-					}, 1000);
+					if(data.code !== 405){
+						let t = setTimeout(() => {
+							clearTimeout(t);
+							window.location.href = "/signin";
+						}, 1000);
+					}
 				}
 			}
 		});
@@ -78,10 +80,12 @@ class Detail extends Component{
 					store.getState().warning.component.setState({
 						message : data.message
 					});
-					let t = setTimeout(() => {
-						clearTimeout(t);
-						window.location.href = "/signin";
-					}, 1000);
+					if(data.code !== 405){
+						let t = setTimeout(() => {
+							clearTimeout(t);
+							window.location.href = "/signin";
+						}, 1000);
+					}
 				}
 			}
 		})
@@ -145,7 +149,7 @@ class Page extends Component{
 				<div className="warning">
 					<Warning ref="warning"/>
 				</div>
-				<Info />
+				<Info store={store.getState()} />
 				<Detail />
 				<a ref="btn" className="longBtn">安全退出</a>
 			</div>

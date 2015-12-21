@@ -1,9 +1,20 @@
 import {Component} from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
 import {PageData, QueryString} from "./util";
 import Info from "../component/info";
 import Menu from "../component/menu";
 import Warning from "../component/warning";
+let store = createStore((state = [], action) => {
+	if(state[action.type]){
+		for(let i in action){
+			state[action.type][i] = action[i];
+		}
+	}else{
+		state[action.type] = action;
+	}
+	return state;
+});
 class List extends Component{
 	constructor(props){
 		super(props);
@@ -76,6 +87,10 @@ Option.defaultProps = {
 };
 class Page extends Component{
 	componentDidMount(){
+		store.dispatch({
+			type : "warning",
+			component : this.refs.warning
+		});
 		if(QueryString("all")){
 			
 		}
@@ -84,10 +99,10 @@ class Page extends Component{
 		return (
 			<div className="page">
 				<div className="warning">
-					<Warning />
+					<Warning ref="warning" />
 				</div>
-				<Info />
-				<Menu type={4} />
+				<Info store={store.getState()} />
+				<Menu type={4} store={store.getState()} />
 				<Option />
 			</div>
 		);

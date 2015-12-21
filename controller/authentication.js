@@ -9,6 +9,16 @@ module.exports = function(request, router, md5, cookie, Util){
 			message : "您已长时间未进行操作，需要重新登录"
 		});
 	}
+	function isConnect(res, err, next){
+		if(err.code === "ENOTFOUND"){
+			res.json({
+				code : 405,
+				message : "请求数据失败，请检查您的网络设置。"
+			});
+		}else{
+			next();
+		}
+	}
 	router
 		.route("/api/getauth")
 		.get(function(req, res, next){
@@ -22,7 +32,7 @@ module.exports = function(request, router, md5, cookie, Util){
 				if(!err && response.statusCode === 200){
 					isAuth(res, JSON.parse(body).code, body);
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		})
@@ -37,7 +47,7 @@ module.exports = function(request, router, md5, cookie, Util){
 				if(!err){
 					isAuth(res, response.statusCode, body);
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		});
@@ -60,7 +70,7 @@ module.exports = function(request, router, md5, cookie, Util){
 							if(!err){
 								isAuth(res, response.statusCode, body);
 							}else{
-								next();
+								isConnect(res, err, next);
 							}
 						});
 					}
@@ -80,7 +90,7 @@ module.exports = function(request, router, md5, cookie, Util){
 					if(!err){
 						isAuth(res, response.statusCode, body);
 					}else{
-						next();
+						isConnect(res, err, next);
 					}
 				});
 			}
@@ -114,7 +124,7 @@ module.exports = function(request, router, md5, cookie, Util){
 							}
 							res.json(body);
 						}else{
-							next();
+							isConnect(res, err, next);
 						}
 					});
 				}else{
@@ -135,7 +145,7 @@ module.exports = function(request, router, md5, cookie, Util){
 				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		})
@@ -156,7 +166,7 @@ module.exports = function(request, router, md5, cookie, Util){
 				if(!err && response.statusCode === 200){
 					res.json(JSON.parse(body));
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		});

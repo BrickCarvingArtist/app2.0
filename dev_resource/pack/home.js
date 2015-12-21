@@ -156,7 +156,7 @@ class Page extends Component{
 						}
 					]
 				} />
-				<Menu type={2} />
+				<Menu type={2} store={store.getState()} />
 				<Product data={this.state.data} />
 				<Menu type={1} currentIndex={0} />
 			</div>

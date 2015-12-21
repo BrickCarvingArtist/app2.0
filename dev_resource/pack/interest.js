@@ -85,10 +85,12 @@ class Page extends Component{
 							this.refs.warning.setState({
 								message : data.message
 							});
-							let t = setTimeout(() => {
-								clearTimeout(t);
-								window.location.href = "/signin";
-							}, 1000);
+							if(data.code !== 405){
+								let t = setTimeout(() => {
+									clearTimeout(t);
+									window.location.href = "/signin";
+								}, 1000);
+							}
 						}
 					}
 				} />

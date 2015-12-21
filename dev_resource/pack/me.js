@@ -98,7 +98,7 @@ class Page extends Component{
 		return (
 			<div className="page">
 				<Info store={store.getState()} />
-				<Menu type={3} />
+				<Menu type={3} store={store.getState()} />
 				<Entrance />
 				<Menu type={1} currentIndex={2} />
 				<div className="shadow">

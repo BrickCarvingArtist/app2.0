@@ -9,6 +9,16 @@ module.exports = function(request, router, cookie){
 			message : "您已长时间未进行操作，需要重新登录"
 		});
 	}
+	function isConnect(res, err, next){
+		if(err.code === "ENOTFOUND"){
+			res.json({
+				code : 405,
+				message : "请求数据失败，请检查您的网络设置。"
+			});
+		}else{
+			next();
+		}
+	}
 	router
 		.route("/api/getinvest")
 		.post(function(req, res, next){
@@ -22,7 +32,7 @@ module.exports = function(request, router, cookie){
 				if(!err){
 					isAuth(res, response.statusCode, body);
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		});
@@ -39,7 +49,7 @@ module.exports = function(request, router, cookie){
 				if(!err){
 					isAuth(res, response.statusCode, body);
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		});
@@ -56,7 +66,7 @@ module.exports = function(request, router, cookie){
 				if(!err){
 					isAuth(res, response.statusCode, body);
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		});
@@ -73,7 +83,7 @@ module.exports = function(request, router, cookie){
 				if(!err){
 					isAuth(res, response.statusCode, body);
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		});
@@ -90,7 +100,7 @@ module.exports = function(request, router, cookie){
 				if(!err){
 					isAuth(res, response.statusCode, body);
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		});
@@ -107,7 +117,7 @@ module.exports = function(request, router, cookie){
 				if(!err){
 					isAuth(res, response.statusCode, body);
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		});
@@ -124,7 +134,7 @@ module.exports = function(request, router, cookie){
 				if(!err){
 					isAuth(res, response.statusCode, body);
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		});
@@ -141,7 +151,7 @@ module.exports = function(request, router, cookie){
 				if(!err){
 					isAuth(res, response.statusCode, body);
 				}else{
-					next();
+					isConnect(res, err, next);
 				}
 			});
 		});

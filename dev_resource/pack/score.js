@@ -1,7 +1,18 @@
 import {Component} from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
 import {PageData, QueryString} from "./util";
 import Warning from "../component/warning";
+let store = createStore((state = [], action) => {
+	if(state[action.type]){
+		for(let i in action){
+			state[action.type][i] = action[i];
+		}
+	}else{
+		state[action.type] = action;
+	}
+	return state;
+});
 class Sign extends Component{
 	constructor(){
 		super();
@@ -17,21 +28,25 @@ class Sign extends Component{
 			type : "post",
 			url : "/api/sign",
 			success : data => {
-				this.setState({
-					score : this.getScore(parseInt(data.message))
-				});
-				if(data.code === 300){
-					ReactDOM.render(
-						<Warning message="您今日已签到!" />,
-						document.querySelector(".warning")
-					);
+				if(data.code === 200){
+					this.setState({
+						score : this.getScore(parseInt(data.message))
+					});
+				}else if(data.code === 300){
+					store.getState().warning.component.setState({
+						message : "今日已签到"
+					});
+				}else if(data.code === 405){
+					store.getState().warning.component.setState({
+						message :  data.message
+					});
 				}
 			}
 		});
 	}
 	render(){
 		return (
-			<body>
+			<div className="page">
 				<div className="warning">
 					<Warning />
 				</div>
@@ -40,7 +55,7 @@ class Sign extends Component{
 						{this.state.score}
 					</b>
 				</div>
-			</body>
+			</div>
 		);
 	}
 }
@@ -148,7 +163,12 @@ class Record extends React.Component{
 class Page extends Component{
 	componentDidMount(){
 		if(QueryString("sign")){
-			this.refs.part1.refs.btnSign.click();
+			let refs = this.refs;
+			refs.part1.refs.btnSign.click();
+			store.dispatch({
+				type : "warning",
+				component : refs.warning
+			});
 		}else{
 			let refs = this.refs;
 			$.ajax({
@@ -161,12 +181,10 @@ class Page extends Component{
 							name : data.name
 						});
 					}else{
-						let warning = document.querySelector(".warning");
-						if(warning){
-							ReactDOM.render(
-								<Warning message={data.message} />,
-								warning
-							);
+						this.refs.warning.setState({
+							message : data.message
+						});
+						if(data.code !== 405){
 							let t = setTimeout(() => {
 								clearTimeout(t);
 								window.location.href = "/signin";
@@ -186,12 +204,10 @@ class Page extends Component{
 							data : data.data || []
 						});
 					}else{
-						let warning = document.querySelector(".warning");
-						if(warning){
-							ReactDOM.render(
-								<Warning message={data.message} />,
-								warning
-							);
+						this.refs.warning.setState({
+							message : data.message
+						});
+						if(data.code !== 405){
 							let t = setTimeout(() => {
 								clearTimeout(t);
 								window.location.href = "/signin";
@@ -206,7 +222,7 @@ class Page extends Component{
 		return (
 			<body>
 				<div className="warning">
-					<Warning />
+					<Warning ref="warning" />
 				</div>
 				<Part1 ref="part1" />
 				<a className="entrance" href="/activity/score"></a>
