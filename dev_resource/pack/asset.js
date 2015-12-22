@@ -5,6 +5,7 @@ import {PageData, QueryString} from "./util";
 import Info from "../component/info";
 import Menu from "../component/menu";
 import Warning from "../component/warning";
+//状态寄存器
 let store = createStore((state = [], action) => {
 	if(state[action.type]){
 		for(let i in action){
@@ -15,6 +16,7 @@ let store = createStore((state = [], action) => {
 	}
 	return state;
 });
+//列表组件
 class List extends Component{
 	constructor(props){
 		super(props);
@@ -49,6 +51,7 @@ class List extends Component{
 		);
 	}
 }
+//列表集合组件
 class Option extends Component{
 	render(){
 		let lists = [],
@@ -85,6 +88,7 @@ Option.defaultProps = {
 		}
 	]
 };
+//页面组件
 class Page extends Component{
 	componentDidMount(){
 		store.dispatch({

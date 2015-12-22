@@ -4,6 +4,7 @@ import {createStore} from "redux";
 import {PageData} from "./util";
 import Info from "../component/info";
 import Warning from "../component/warning";
+//状态寄存器
 let store = createStore((state = [], action) => {
 	if(state[action.type]){
 		for(let i in action){
@@ -14,6 +15,7 @@ let store = createStore((state = [], action) => {
 	}
 	return state;
 });
+//列表组件
 class List extends Component{
 	render(){
 		return (
@@ -30,6 +32,7 @@ class List extends Component{
 		);
 	}
 }
+//详情组件
 class Detail extends Component{
 	constructor(props){
 		super(props);
@@ -119,6 +122,7 @@ Detail.defaultProps = {
 		}
 	]
 };
+//页面组件
 class Page extends Component{
 	componentDidMount(){
 		let warning = this.refs.warning;

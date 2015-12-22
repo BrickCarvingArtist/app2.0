@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import {PageData} from "./util";
 import Banner from "../component/banner";
 import Menu from "../component/menu";
+//产品轮播列表组件
 class Info extends Component{
 	constructor(props){
 		super(props);
@@ -48,6 +49,7 @@ class Info extends Component{
 		);
 	}
 }
+//购买按钮组件
 class Button extends Component{
 	constructor(props){
 		super(props);
@@ -64,6 +66,7 @@ class Button extends Component{
 		);
 	}
 };
+//前一个、后一个按钮组件
 class Option extends Component{
 	constructor(props){
 		super(props);
@@ -89,6 +92,7 @@ class Option extends Component{
 		);
 	}
 };
+//产品展示区组件
 class Product extends Component{
 	constructor(props){
 		super(props);
@@ -122,6 +126,7 @@ class Product extends Component{
 		);
 	}
 };
+//页面组件
 class Page extends Component{
 	constructor(props){
 		super(props);

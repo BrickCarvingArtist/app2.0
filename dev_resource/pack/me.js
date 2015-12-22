@@ -5,6 +5,7 @@ import {PageData} from "./util";
 import Menu from "../component/menu";
 import Dialog from "../component/dialog";
 import Info from "../component/info";
+//状态寄存器
 let store = createStore((state = [], action) => {
 	if(state[action.type]){
 		for(let i in action){
@@ -15,6 +16,7 @@ let store = createStore((state = [], action) => {
 	}
 	return state;
 });
+//
 class Option extends Component{
 	render(){
 		return (
@@ -27,6 +29,7 @@ class Option extends Component{
 		)
 	}
 };
+
 class Entrance extends Component{
 	render(){
 		let lists = [],

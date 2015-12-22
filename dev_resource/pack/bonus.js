@@ -5,6 +5,7 @@ import {PageData, QueryString} from "./util";
 import Tab from "../component/tab";
 import Content from "../component/content";
 import Warning from "../component/warning";
+//状态寄存器
 let store = createStore((state = [], action) => {
 	if(state[action.type]){
 		for(let i in action){
@@ -15,6 +16,7 @@ let store = createStore((state = [], action) => {
 	}
 	return state;
 });
+//红包规则组件
 class Rule extends Component{
 	render(){
 		return (
@@ -24,6 +26,7 @@ class Rule extends Component{
 		);
 	}
 }
+//页面组件
 class Page extends Component{
 	constructor(){
 		super();

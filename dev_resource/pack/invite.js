@@ -6,6 +6,7 @@ import Info from "../component/info";
 import Tab from "../component/tab";
 import Dialog from "../component/dialog";
 import Warning from "../Component/warning";
+//状态寄存器
 let store = createStore((state = [], action) => {
 	if(state[action.type]){
 		for(let i in action){

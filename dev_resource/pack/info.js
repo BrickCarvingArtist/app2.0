@@ -1,6 +1,7 @@
 import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData, QueryString} from "./util";
+//消息详情组件
 class InfoDetail extends Component{
 	constructor(props){
 		super(props);
@@ -33,6 +34,7 @@ class InfoDetail extends Component{
 		);
 	}
 }
+//消息组件
 class Info extends Component{
 	constructor(props){
 		super(props);
@@ -80,6 +82,7 @@ class Info extends Component{
 		);
 	}
 }
+//页面组件
 class Page extends Component{
 	constructor(props){
 		super(props);

@@ -1,6 +1,7 @@
 import {Component} from "react";
 import ReactDOM from "react-dom";
 import {PageData} from "./util";
+//活动组件
 class List extends Component{
 	render(){
 		let data = this.props.data;
@@ -14,6 +15,7 @@ class List extends Component{
 		);
 	}
 }
+//页面组件
 class Page extends Component{
 	constructor(props){
 		super(props);
