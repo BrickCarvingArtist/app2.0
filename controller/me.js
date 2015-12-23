@@ -2,7 +2,7 @@ module.exports = function(request, router, cookie){
 	function isAuth(res, statusCode, body){
 		res.json(statusCode === 200 ? (function(){
 			var _body = JSON.parse(body);
-			_body.code = statusCode;
+			_body.code = _body.code || statusCode;
 			return _body;
 		})() : {
 			code : statusCode,

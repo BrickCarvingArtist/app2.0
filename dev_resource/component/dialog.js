@@ -12,7 +12,7 @@ const Dialog = class extends Component{
 		}
 		let domShadow = document.querySelector(".shadow");
 		domShadow.onclick = () => {
-			if(this.props.enableClose){
+			if(this.state.enableClose){
 				domShadow.style.display = "none";
 			}
 		};

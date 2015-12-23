@@ -28,14 +28,15 @@ class Sign extends Component{
 			type : "post",
 			url : "/api/sign",
 			success : data => {
-				if(data.code === 200){
+				if(data.code === 200 || data.code === 300){
 					this.setState({
 						score : this.getScore(parseInt(data.message))
 					});
-				}else if(data.code === 300){
-					store.getState().warning.component.setState({
-						message : "今日已签到"
-					});
+					if(data.code === 300){
+						store.getState().warning.component.setState({
+							message : "今日已签到"
+						});	
+					}
 				}else if(data.code === 405){
 					store.getState().warning.component.setState({
 						message :  data.message
@@ -48,7 +49,7 @@ class Sign extends Component{
 		return (
 			<div className="page">
 				<div className="warning">
-					<Warning />
+					<Warning ref="warning" />
 				</div>
 				<div className="sign">
 					<b>

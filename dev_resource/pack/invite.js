@@ -17,6 +17,7 @@ let store = createStore((state = [], action) => {
 	}
 	return state;
 });
+//被邀请人列表组件
 class List extends Component{
 	constructor(){
 		super();
@@ -53,6 +54,7 @@ class List extends Component{
 		);
 	}
 }
+//被邀请人内容组件
 class Content extends Component{
 	constructor(props){
 		super(props);
@@ -90,9 +92,10 @@ class Content extends Component{
 		);
 	}
 }
+//被邀请人详情详情
 class Detail extends Component{
-	constructor(props){
-		super(props);
+	constructor(){
+		super();
 		this.state = {
 			data : []
 		};
@@ -103,7 +106,7 @@ class Detail extends Component{
 	render(){
 		return (
 			<div className="page">
-				<Info />
+				<Info store={store.getState()} />
 				<Tab ref="tab" setting={
 					[
 						{
@@ -141,6 +144,7 @@ class Detail extends Component{
 		);
 	}
 }
+//入口按钮组件
 class Case extends Component{
 	componentDidMount(){
 		ReactDOM.findDOMNode(this).onclick = () => {
@@ -166,6 +170,7 @@ class Case extends Component{
 		);
 	}
 }
+//入口按钮组件
 class Entrance extends Component{
 	render(){
 		let lists = [],
@@ -198,6 +203,7 @@ Entrance.defaultProps = {
 		}
 	]
 };
+//邀请规则组件
 class Rule extends Component{
 	render(){
 		return (
@@ -207,6 +213,7 @@ class Rule extends Component{
 		);
 	}
 }
+//页面组件
 class Page extends Component{
 	constructor(props){
 		super(props);
@@ -239,7 +246,7 @@ class Page extends Component{
 	}
 	render(){
 		return (
-			<body>
+			<div className="page">
 				<div className="warning">
 					<Warning ref="warning" />
 				</div>
@@ -249,7 +256,7 @@ class Page extends Component{
 				<div className="shadow">
 					<Dialog ref="dialog" />
 				</div>
-			</body>
+			</div>
 		);
 	}
 }

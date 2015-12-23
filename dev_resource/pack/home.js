@@ -1,8 +1,20 @@
 import {Component} from "react";
 import ReactDOM from "react-dom";
+import {createStore} from "redux";
 import {PageData} from "./util";
 import Banner from "../component/banner";
 import Menu from "../component/menu";
+//状态寄存器
+let store = createStore((state = [], action) => {
+	if(state[action.type]){
+		for(let i in action){
+			state[action.type][i] = action[i];
+		}
+	}else{
+		state[action.type] = action;
+	}
+	return state;
+});
 //产品轮播列表组件
 class Info extends Component{
 	constructor(props){

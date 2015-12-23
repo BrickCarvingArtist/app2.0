@@ -16,7 +16,6 @@ let store = createStore((state = [], action) => {
 	}
 	return state;
 });
-//
 class Option extends Component{
 	render(){
 		return (
@@ -29,7 +28,6 @@ class Option extends Component{
 		)
 	}
 };
-
 class Entrance extends Component{
 	render(){
 		let lists = [],
