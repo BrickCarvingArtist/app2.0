@@ -12,7 +12,7 @@ module.exports = function(request, router, cookie){
 	function isConnect(res, err, next){
 		if(err.code === "ENOTFOUND"){
 			res.json({
-				code : 405,
+				code : 401,
 				message : "请求数据失败，请检查您的网络设置。"
 			});
 		}else{

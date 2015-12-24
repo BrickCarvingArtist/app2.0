@@ -78,7 +78,7 @@ const Content = class extends Component{
 						this.props.store.warning.component.setState({
 							message : data.message
 						});
-						if(data.code !== 405){
+						if(data.code !== 401){
 							let t = setTimeout(() => {
 								clearTimeout(t);
 								window.location.href = "/signin";

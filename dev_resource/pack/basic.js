@@ -56,7 +56,7 @@ class Detail extends Component{
 					store.getState().warning.component.setState({
 						message : data.message
 					});
-					if(data.code !== 405){
+					if(data.code !== 401){
 						let t = setTimeout(() => {
 							clearTimeout(t);
 							window.location.href = "/signin";
@@ -83,7 +83,7 @@ class Detail extends Component{
 					store.getState().warning.component.setState({
 						message : data.message
 					});
-					if(data.code !== 405){
+					if(data.code !== 401){
 						let t = setTimeout(() => {
 							clearTimeout(t);
 							window.location.href = "/signin";

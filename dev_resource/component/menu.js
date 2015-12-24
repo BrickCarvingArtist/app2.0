@@ -185,7 +185,7 @@ const Menu = class extends Component{
 								message : data.message
 							});
 						}
-						if(data.code !== 405){
+						if(data.code !== 401){
 							let t = setTimeout(() => {
 								clearTimeout(t);
 								window.location.href = "/signin";
