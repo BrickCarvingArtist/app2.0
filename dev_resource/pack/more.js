@@ -5,7 +5,7 @@ import Menu from "../component/menu";
 class About extends Component{
 	render(){
 		return (
-			<body>
+			<div className="page">
 				<header></header>
 				<div className="description">
 					<h1>公司简介</h1>
@@ -16,7 +16,7 @@ class About extends Component{
 					</pre>
 					<img src={this.props.imgSrc} />
 				</div>
-			</body>
+			</div>
 		);
 	}
 }
@@ -68,9 +68,9 @@ class Help extends Component{
 			);
 		});
 		return (
-			<body>
+			<div className="page">
 				{lists}
-			</body>
+			</div>
 		);
 	}
 }
@@ -117,12 +117,12 @@ class List extends Component{
 class Suggestion extends Component{
 	render(){
 		return (
-			<body>
+			<div className="page">
 				<form method="post" action="/api/getsuggestion">
 					<textarea name="suggestion" placeholder="我们很高兴能收到您反馈的意见！"></textarea>
 					<input className="longBtn" type="submit" value="确定" />
 				</form>
-			</body>
+			</div>
 		);
 	}
 }
@@ -141,7 +141,7 @@ class Contact extends Component{
 			);
 		});
 		return (
-			<body>
+			<div className="page">
 				<header></header>
 				<div className="tel">
 					<h2>400-052-5522</h2>
@@ -149,7 +149,7 @@ class Contact extends Component{
 					<a className="longBtn" href="tel:4000525522">拨打客服热线</a>
 				</div>
 				{lists}
-			</body>
+			</div>
 		);
 	}
 }
@@ -188,10 +188,10 @@ class Page extends Component{
 			);
 		});
 		return (
-			<body>
+			<div className="page">
 				{lists}
 				<Menu type={1} currentIndex={3} />
-			</body>
+			</div>
 		);
 	}
 }
